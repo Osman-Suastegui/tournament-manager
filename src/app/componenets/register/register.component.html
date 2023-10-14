@@ -1,0 +1,36 @@
+<form #form="ngForm" (ngSubmit)="register(form)">
+
+  <label for="username">Nombre de Usuario:</label>
+  <input type="text" id="username" name="usuario" [(ngModel)]="registro.usuario"/>
+
+  <label for="name">Nombre:</label>
+  <input type="text" id="name" name="nombre" [(ngModel)]="registro.nombre"/>
+
+  <label for="date">Fecha de nacimiento:</label>
+  <input type="date" id="date" name="fechaNacimiento" [(ngModel)]="registro.fechaNacimiento"/>
+
+  <label for="lastname">Apellidos:</label>
+  <input type="text" id="apellido" name="apellido" [(ngModel)]="registro.apellido"/>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" [(ngModel)]="registro.email"/>
+
+  <label for="password">Contraseña:</label>
+  <input type="password" id="password" name="password" [(ngModel)]="registro.password"/>
+
+  <label for="genero">Genero:</label>
+  <select id="genero" name="genero" [(ngModel)]="registro.genero">
+    <option value="MASCULINO">Masculino</option>
+    <option value="FEMENINO">Femenino</option>
+  </select>
+
+  <label for="user">Tipo de Usuario:</label>
+  <select id="user" name="rol" [(ngModel)]="registro.rol">
+    <option value="ADMIN_LIGA">Administrador de Liga</option>
+    <option value="JUGADOR">Jugador</option>
+    <option value="ADMIN_EQUIPO">Administrador de Equipo</option>
+    <option value="ARBITRO">Arbitro</option>
+  </select>
+
+  <button type="submit">Submit</button>
+</form>
