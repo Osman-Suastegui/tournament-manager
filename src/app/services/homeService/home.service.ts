@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '../../models/User';
 import { map } from 'rxjs/operators';
 import { TokenService } from '../tokenService/token.service';
+import { url } from '../../url-config';
 
 
 
@@ -17,8 +18,11 @@ export class HomeService {
 
   getUsers(): Observable<User[]> {
     const headers = this.tokenService.createHeaders();
-    return this.http.get<User[]>('http://localhost:8080/usuarios/getAllUsuarios', { headers });
+
+
+    return this.http.get<User[]>( url + '/usuarios/getAllUsuarios', { headers });
   }
+
 
 
 

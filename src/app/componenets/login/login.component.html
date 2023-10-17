@@ -1,13 +1,16 @@
+<form>
 
-<form #form="ngForm" (ngSubmit)="login(form)">
+  <label for="username">Nombre de Usuario:</label>
+  <input type="text" id="username" name="username" [(ngModel)]="creds.usuario" />
 
-		<label for="username">Nombre de Usuario:</label>
-    <input type="text" id="username" name="username" [(ngModel)]="creds.usuario"/>
+  <label for="password">Contraseña:</label>
+  <input type="password" id="password" name="password" [(ngModel)]="creds.password" />
 
-
-		<label for="password">Contraseña:</label>
-    <input type="password" id="password" name="password" [(ngModel)]="creds.password"/>
-
-	<button type="submit" >Submit</button>
+  <button type="submit" (click)="login()">Submit</button>
 
 </form>
+
+<div *ngIf="error">
+  <p>Error: {{ error.message }}</p>
+</div>
+
