@@ -1,8 +1,49 @@
-<button (click)="logout()">Log Out</button>
+<div>
 
-<button (click)="register()">Register</button>
+  <button (click)="goHome()">Home</button>
 
-<mat-toolbar>
-  <span>My Application</span>
-</mat-toolbar>
+  <ng-container *ngIf="tipoUsuario === 'ANONIMO'; else Logout">
+
+    <button (click)="login()">Log In</button>
+  </ng-container>
+
+  <ng-template #Logout>
+    <button (click)="logout()">Log Out</button>
+  </ng-template>
+
+  <button (click)="register()">Register</button>
+
+</div>
+
+  <mat-toolbar>
+    <span>My Application</span>
+  </mat-toolbar>
+
+
+
+
+<div>
+
+  <div *ngIf="tipoUsuario === 'ADMIN_LIGA'">
+    <app-home-admin-ligas></app-home-admin-ligas>
+  </div>
+
+  <div *ngIf="tipoUsuario === 'ADMIN_EQUIPO'">
+    <app-home-admin-equipo></app-home-admin-equipo>
+  </div>
+
+  <div *ngIf="tipoUsuario === 'JUGADOR'">
+    <app-home-jugador></app-home-jugador>
+  </div>
+
+  <div *ngIf="tipoUsuario === 'ANONIMO'">
+    <app-home></app-home>
+  </div>
+
+  <div *ngIf="tipoUsuario === 'ARBITRO'">
+    <app-home-arbitro></app-home-arbitro>
+  </div>
+
+</div>
+
 

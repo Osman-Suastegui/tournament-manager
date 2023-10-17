@@ -21,7 +21,7 @@ export class RegisterComponent {
     email: '',
     password: '',
     genero: Gender.MASCULINO,
-    rol: Role.JUGADOR
+    rol: Role.ANONIMO
   };
 
   error: any;

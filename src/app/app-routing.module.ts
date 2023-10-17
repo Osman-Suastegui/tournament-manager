@@ -3,16 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './componenets/home/home.component';
 import { LoginComponent } from './componenets/login/login.component';
 import { RegisterComponent } from './componenets/register/register.component';
+import { NavBarComponent } from './componenets/nav-bar/nav-bar.component';
 
 const routes: Routes = [
   {
-  path: 'home',
-  component: HomeComponent
-  },
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
+    path: 'home',
+    component: NavBarComponent
   },
   {
     path: 'login',

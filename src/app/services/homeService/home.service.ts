@@ -16,15 +16,6 @@ export class HomeService {
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
 
-  getUsers(): Observable<User[]> {
-    const headers = this.tokenService.createHeaders();
-
-
-    return this.http.get<User[]>( url + '/usuarios/getAllUsuarios', { headers });
-  }
-
-
-
 
 
 
