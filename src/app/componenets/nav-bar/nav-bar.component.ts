@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavbarService } from '../../services/navbarService/navbar.service';
 import { Router } from '@angular/router';
 import { authService } from '../../services/authenticateService/auth.service';
+import { OnInit } from '@angular/core';
 
 
 @Component({
@@ -9,19 +10,23 @@ import { authService } from '../../services/authenticateService/auth.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css'],
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit{
 
   constructor(
     private app: NavbarService,
     private auth: authService,
     private router: Router
   ) {}
-    role: string = '';
-    usuario: string = '';
+    usuario: string = localStorage.getItem('usuario') || '';
     tipoUsuario: string = '';
 
   logout() {
     this.app.logout();
+    this.tipoUsuario = "ANONIMO";
+    this.router.navigate(['/login']);
+  }
+
+  login(){
     this.router.navigate(['/login']);
   }
 
@@ -29,11 +34,14 @@ export class NavBarComponent {
     this.router.navigate(['/register']);
   }
 
-  goToHome() {
-
+  goHome(){
+    this.router.navigate(['/home']);
   }
 
 
+  ngOnInit(): void {
+    this.getRoleUser(this.usuario);
+  }
 
   getRoleUser(usuario: string) {
     this.auth.getTypeOfUser(usuario).subscribe({
@@ -41,7 +49,7 @@ export class NavBarComponent {
         this.tipoUsuario = tipo;
       },
       error: (error) => {
-        console.error('Error al obtener el tipo de usuario:', error);
+        this.tipoUsuario = "ANONIMO";
       }
     });
 }

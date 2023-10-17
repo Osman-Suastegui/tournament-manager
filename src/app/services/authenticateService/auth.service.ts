@@ -17,6 +17,7 @@ import { TokenService } from '../tokenService/token.service';
 })
 export class authService {
   constructor(private http: HttpClient, private tokenService: TokenService) {}
+  user: string = '';
 
   registerUser(rgr: Register): Observable<any> {
     return this.http.post(url + '/auth/register', rgr, {
@@ -26,7 +27,8 @@ export class authService {
         const token = response.body.token;
 
         localStorage.setItem('token', token);
-
+        this.user = rgr.usuario;
+        localStorage.setItem('usuario', rgr.usuario);
         return response.body;
       }),
       catchError((error) => {
@@ -45,6 +47,8 @@ export class authService {
       map((response: HttpResponse<any>) => {
         const token = response.body.token;
         localStorage.setItem('token', token);
+        this.user = creds.usuario;
+        localStorage.setItem('usuario', creds.usuario);
         return response.body;
       }),
       catchError((error) => {
@@ -57,8 +61,15 @@ export class authService {
 
 
   getTypeOfUser(usuario: string): Observable<string> {
-    const baseURL = url + '/usuarios/obtenerTipoUser?usuario=${usuario}';
-    return this.http.get<string>(baseURL);
+    // Construye la URL completa para la solicitud
+    const baseURL = `${url}/usuarios/obtenerTipoUser?usuario=${usuario}`;
+
+    // Obtiene las cabeceras
+    const headers = this.tokenService.createHeaders();
+
+    // Realiza la solicitud GET al endpoint con las cabeceras
+    return this.http.get(baseURL, { headers: headers, responseType: 'text' });
+
   }
 
 
