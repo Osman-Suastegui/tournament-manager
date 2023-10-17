@@ -4,17 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthModule } from './modulos/auth/auth.module';
 import { NavBarModule } from './modulos/nav-bar/nav-bar.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './modulos/angular-material/angular-material.module';
+import { AuthModule } from './modulos/auth/auth.module';
+
 
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,10 +23,10 @@ import { AngularMaterialModule } from './modulos/angular-material/angular-materi
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    AuthModule,
     NavBarModule,
     BrowserAnimationsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

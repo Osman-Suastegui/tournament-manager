@@ -1,38 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from '../../services/loginService/login.service';
-import { HttpClient } from '@angular/common/http';
+import { authService } from '../../services/authenticateService/auth.service';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
-import { Credential } from '../../models/Credential';
+import { Credential } from '../../models/Login/Credential';
+
 
 
 
 @Component({
   templateUrl: './login.component.html'
+  
 })
 export class LoginComponent {
   creds: Credential = {
     usuario: '',
     password: ''
   };
-
+  error: any;
 
 
   constructor(
-    private app: AppService,
-    private http: HttpClient,
+    private auth: authService,
     private router: Router
   ) {
   }
 
-  login(form: NgForm){
-    console.log('form value', form.value);
-
-    this.app.login(this.creds)
-    .subscribe(response => {
-      this.router.navigate(['/home']);
-  })
-}
-
+  login() {
+    this.auth.login(this.creds).subscribe({
+      next: () => {
+        // Manejo de respuesta exitosa
+        this.router.navigate(['/home']);
+      },
+      error: (error) => {
+        this.error = error;
+      }
+    });
+  }
 
 }

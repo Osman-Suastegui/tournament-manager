@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { Register } from '../../models/Register';
-import { RegisterService } from '../../services/registerService/register.service';
+import { Register } from '../../models/Login/Register';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { authService } from 'src/app/services/authenticateService/auth.service';
+import { Gender } from '../../models/Login/Gender';
+import { Role } from '../../models/Login/Role';
+
 
 
 @Component({
@@ -18,26 +20,34 @@ export class RegisterComponent {
     apellido: '',
     email: '',
     password: '',
-    genero: '',
-    rol: '',
+    genero: Gender.MASCULINO,
+    rol: Role.JUGADOR
   };
 
+  error: any;
+
   constructor(
-    private service: RegisterService,
+    private service: authService,
     private router: Router
   ) { }
 
 
-
-  register(form: NgForm) {
-    console.log('registro value', this.registro);
-
-    this.service.registerUser(this.registro)
-      .subscribe(response => {
+  register() {
+    this.service.registerUser(this.registro).subscribe({
+      next: () => {
+        // Manejo de respuesta exitosa
         this.router.navigate(['/home']);
-      })
+      },
+      error: (error) => {
+        this.error = error;
+      }
+    });
   }
 
 
-
 }
+
+
+
+
+
