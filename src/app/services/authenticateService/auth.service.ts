@@ -8,6 +8,7 @@ import { throwError } from 'rxjs';
 import { url } from '../../url-config';
 import { Credential } from '../../models/Login/Credential';
 import { TokenService } from '../tokenService/token.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 
@@ -18,6 +19,7 @@ import { TokenService } from '../tokenService/token.service';
 export class authService {
   constructor(private http: HttpClient, private tokenService: TokenService) {}
   user: string = '';
+  mensaje_errores: string = '';
 
   registerUser(rgr: Register): Observable<any> {
     return this.http.post(url + '/auth/register', rgr, {
@@ -32,12 +34,17 @@ export class authService {
         return response.body;
       }),
       catchError((error) => {
-        error = error.error;
-        console.error('Ocurrió un error en la solicitud:', error);
-        return throwError(() => error);
+        if (error.error && Array.isArray(error.error)) {
+          const errores = error.error;
+          for (let i = 0; i < errores.length; i++) {
+            const mensajeError = errores[i].message;
+            this.mensaje_errores += mensajeError + '. ';
+          }
 
-      })
-    );
+        }
+        return throwError(() => this.mensaje_errores);
+      }))
+
   }
 
   login(creds: Credential): Observable<any> {
@@ -51,10 +58,11 @@ export class authService {
         localStorage.setItem('usuario', creds.usuario);
         return response.body;
       }),
-      catchError((error) => {
-        error = error.error;
-        console.error('Ocurrió un error en la solicitud:', error);
-        return throwError(() => error); // Utiliza una función de fábrica en throwError
+      catchError((error: HttpErrorResponse ) => {
+
+        const errorMessage = error.error[0].message;
+
+        return throwError(() => errorMessage); // Retorna el mensaje de error
       })
     );
   }
