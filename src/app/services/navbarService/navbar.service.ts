@@ -12,7 +12,7 @@ export class NavbarService {
 
   logout() {
     const headers = this.clearAuthorizationHeader();
-
+    
     localStorage.removeItem('token');
   }
 

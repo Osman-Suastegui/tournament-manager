@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { authService } from '../../services/authenticateService/auth.service';
+import { authService } from '../../../services/authenticateService/auth.service';
 import { Router } from '@angular/router';
-import { Credential } from '../../models/Login/Credential';
+import { Credential } from '../../../models/Login/Credential';
 
 
 
 
 @Component({
   templateUrl: './login.component.html'
-  
+
 })
 export class LoginComponent {
   creds: Credential = {

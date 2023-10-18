@@ -1,0 +1,28 @@
+<div>
+
+  <button (click)="goHome()">Home</button>
+
+  <ng-container *ngIf="tipoUsuario === 'ANONIMO'; else Logout">
+
+    <button (click)="login()">Log In</button>
+  </ng-container>
+
+  <ng-template #Logout>
+    <button (click)="logout()">Log Out</button>
+  </ng-template>
+
+  <button (click)="register()">Register</button>
+
+</div>
+
+  <mat-toolbar>
+    <span>My Application</span>
+  </mat-toolbar>
+
+
+
+
+
+
+
+
