@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeArbitroComponent } from '../../componenets/home-arbitro/home-arbitro.component';
+import { HomeArbitroComponent } from './home-arbitro/home-arbitro.component';
 
 
 @NgModule({

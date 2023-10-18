@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavbarService } from '../../services/navbarService/navbar.service';
+import { NavbarService } from '../../../services/navbarService/navbar.service';
 import { Router } from '@angular/router';
-import { authService } from '../../services/authenticateService/auth.service';
 import { OnInit } from '@angular/core';
+import { authService } from '../../../services/authenticateService/auth.service';
 
 
 @Component({
@@ -14,8 +14,8 @@ export class NavBarComponent implements OnInit{
 
   constructor(
     private app: NavbarService,
-    private auth: authService,
-    private router: Router
+    private router: Router,
+    private auth: authService
   ) {}
     usuario: string = localStorage.getItem('usuario') || '';
     tipoUsuario: string = '';
@@ -23,6 +23,7 @@ export class NavBarComponent implements OnInit{
   logout() {
     this.app.logout();
     this.tipoUsuario = "ANONIMO";
+    localStorage.removeItem('usuario');
     this.router.navigate(['/login']);
   }
 
@@ -53,5 +54,10 @@ export class NavBarComponent implements OnInit{
       }
     });
 }
+
+
+
+
+
 
 }

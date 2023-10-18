@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from '../../componenets/home/home.component';
+import { HomeAnonimoComponent } from './home-anonimo/home-anonimo.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeAnonimoComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    HomeComponent
+    HomeAnonimoComponent
   ]
 })
 export class AnonimoModule { }

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Register } from '../../models/Login/Register';
+import { Register } from '../../../models/Login/Register';
 import { Router } from '@angular/router';
 import { authService } from 'src/app/services/authenticateService/auth.service';
-import { Gender } from '../../models/Login/Gender';
-import { Role } from '../../models/Login/Role';
+import { Gender } from '../../../models/Login/Gender';
+import { Role } from '../../../models/Login/Role';
 
 
 
