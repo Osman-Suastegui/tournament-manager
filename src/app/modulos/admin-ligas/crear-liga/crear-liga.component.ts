@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Liga } from '../../../models/Ligas/Ligas';
 import { LigasServiceService } from '../../../services/ligasService/ligas-service.service';
 
@@ -7,36 +7,43 @@ import { LigasServiceService } from '../../../services/ligasService/ligas-servic
   templateUrl: './crear-liga.component.html',
   styleUrls: ['./crear-liga.component.css']
 })
-export class CrearLigaComponent {
+export class CrearLigaComponent implements OnInit{
   liga: Liga = {
     nombre: ''
   }
-
-  resul: any = "";
+  usuario: any = '';
   mensaje: string = "";
-
+  idLiga: number = 0;
 
   constructor(private ligaService: LigasServiceService) {}
 
   crearLiga() {
-
     this.ligaService.createLiga(this.liga).subscribe({
-      next: () => {
-        // Manejo de respuesta exitosa
-        console.log('Liga creada exitosamente.');
-        this.mensaje = 'Liga creada exitosamente.';
+      next: (result) => {
+        this.mensaje = result.message;
+        this.idLiga = result.responseData.idLiga;
+        this.asignarLigaAdmin()
+
       },
       error: (error) => {
-        this.resul = error;
-        if(this.resul.status === 200){
-          console.log('Liga creada exitosamente.');
-          this.mensaje = 'Liga creada exitosamente.';
-        }else {
-          console.log(this.resul.error[0].message);
-          this.mensaje = this.resul.error[0].message;
-        }
+        this.mensaje = error.error[0].message;
       }
     });
   }
 
+  asignarLigaAdmin() {
+    this.ligaService.asignarLiga(this.idLiga, this.usuario).subscribe({
+      next: () => {
+        this.ligaService.emitNuevaLigaCreada();
+      }
+    });
+  }
+
+  ngOnInit(): void {
+    this.usuario = localStorage.getItem('usuario');
+  }
+
+
+
 }
+

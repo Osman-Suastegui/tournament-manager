@@ -1,6 +1,28 @@
-<p>home-admin-ligas works!</p>
-
-
 <mat-dialog-actions>
   <button mat-raised-button (click)="openDialog()">Crear Liga</button>
 </mat-dialog-actions>
+
+<div *ngIf="ligasAsignadas === 0">
+  <p>No hay ligas asignadas</p>
+</div>
+
+<div *ngIf="ligasAdministrador.length > 0">
+  <ul>
+    <li *ngFor="let liga of ligasAdministrador; let i = index">
+      {{ i }}
+      <ul>
+        <li>ID Liga: {{ liga.idLiga }}</li>
+        <li>Nombre Liga: {{ liga.nombreLiga }}</li>
+        <li>Temporadas:</li>
+        <ul>
+          <li *ngFor="let temporada of temporadasPorLiga[liga.idLiga]; let j = index">
+            {{ j }}
+            <ul>
+              <button (click)="verTemporada(liga.idLiga, temporada.idTemporada)">{{ temporada.nombreTemporada }}</button>
+            </ul>
+          </li>
+        </ul>
+      </ul>
+    </li>
+  </ul>
+</div>
