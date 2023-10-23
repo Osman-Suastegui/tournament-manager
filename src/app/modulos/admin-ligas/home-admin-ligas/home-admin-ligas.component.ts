@@ -7,7 +7,8 @@ import { LigasAdmin } from '../interfaces/Ligas'
 import { TemporadasLigas } from '../interfaces/TemporadasLigas';
 import { Router } from '@angular/router';
 import { ModificarLigaComponent } from '../modificar-liga/modificar-liga.component';
-
+import { CrearTemporadaComponent } from '../crear-temporada/crear-temporada.component';
+import { TemporadasService } from '../adminLigasService/temporadas.service';
 
 @Component({
   selector: 'app-home-admin-ligas',
@@ -22,7 +23,7 @@ export class HomeAdminLigasComponent implements OnInit{
   ligasAsignadas: number = 0;
   idLiga: number = 0;
 
-  constructor(public dialog: MatDialog, private ligaService: LigasServiceService, private router: Router) { }
+  constructor(public dialog: MatDialog, private ligaService: LigasServiceService, private router: Router, private tempService: TemporadasService) { }
 
 
   openDialog(): void {
@@ -44,6 +45,11 @@ export class HomeAdminLigasComponent implements OnInit{
 
       this.obtenerLigas();
     });
+
+    this.tempService.onNuevaTemporadaCreada().subscribe(() => {
+      this.obtenerLigas();
+    });
+
   }
 
 
@@ -82,6 +88,14 @@ export class HomeAdminLigasComponent implements OnInit{
     localStorage.setItem('nombreLiga', nombreLiga);
 
     this.dialog.open(ModificarLigaComponent,{
+      width: '250px',
+    })
+  }
+
+
+  openDialogCrearTemporada(liga: number){
+    localStorage.setItem('idLiga', liga.toString());
+    this.dialog.open(CrearTemporadaComponent,{
       width: '250px',
     })
   }

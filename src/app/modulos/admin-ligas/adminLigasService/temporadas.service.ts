@@ -8,14 +8,24 @@ import { throwError } from 'rxjs';
 import { url } from '../../../url-config';
 import { TokenService } from '../../../services/tokenService/token.service';
 import { Subject } from 'rxjs';
+import { Temporadas } from './../interfaces/Temporadas';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TemporadasService {
-
+  private nuevaTemporadaSubject = new Subject<void>();
   constructor(private http: HttpClient, private tokenService: TokenService) {}
+
+
+  onNuevaTemporadaCreada() {
+    return this.nuevaTemporadaSubject.asObservable();
+  }
+
+  emitNuevaTemporadaCreada() {
+    this.nuevaTemporadaSubject.next();
+  }
 
 
 
@@ -61,6 +71,27 @@ export class TemporadasService {
 
 
 
+  crearTemporada(temporada: Temporadas): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.post(url + '/Temporadas/crearTemporada', temporada, {
+      headers: headers
+    });
+  }
+
+
+  asignarTemporada(idTemporada: number, idLiga: number): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    const body = {
+      ligaId: idLiga,
+      temporadaId: idTemporada
+    };
+
+    return this.http.put(url + '/Temporadas/asignarLiga', body, {
+      headers: headers
+    });
+  }
 
 
 }
