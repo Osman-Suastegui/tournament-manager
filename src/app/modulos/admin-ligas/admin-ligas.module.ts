@@ -8,6 +8,7 @@ import { TemporadaCaracteriticasComponent } from './temporada-caracteriticas/tem
 import { NavBarModule } from '../nav-bar/nav-bar.module';
 import { AsignarArbitroComponent } from './asignar-arbitro/asignar-arbitro.component';
 import { ModificarLigaComponent } from './modificar-liga/modificar-liga.component';
+import { CrearTemporadaComponent } from './crear-temporada/crear-temporada.component';
 
 
 
@@ -18,7 +19,8 @@ import { ModificarLigaComponent } from './modificar-liga/modificar-liga.componen
     CrearLigaComponent,
     TemporadaCaracteriticasComponent,
     AsignarArbitroComponent,
-    ModificarLigaComponent
+    ModificarLigaComponent,
+    CrearTemporadaComponent
   ],
   imports: [
     AngularMaterialModule,

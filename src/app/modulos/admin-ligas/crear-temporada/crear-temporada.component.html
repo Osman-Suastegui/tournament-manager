@@ -1,0 +1,43 @@
+<mat-dialog-content>
+  <header>
+    <h1>Crear Temporada</h1>
+  </header>
+
+  <form>
+    <mat-form-field>
+      <label for="nombreTemporada">Nombre de la Temporada</label>
+      <input type="text" name="nombreTemporada" id="nombreTemporada" [(ngModel)]="temporada.nombreTemporada" matInput>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="fechaInicio">Fecha de Inicio</label>
+      <input type="date" name="fechaInicio" id="fechaInicio" [(ngModel)]="temporada.fechaInicio" matInput>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="fechaTermino">Fecha de Fin</label>
+      <input type="date" name="fechaTermino" id="fechaTermino" [(ngModel)]="temporada.fechaTermino" matInput>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="categoria">Categoría</label>
+      <mat-select name="categoria" id="categoria" [(ngModel)]="temporada.categoria">
+        <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="rama">Ramas</label>
+      <mat-select name="rama" id="rama" [(ngModel)]="temporada.rama">
+        <mat-option *ngFor="let rama of ramas" [value]="rama">{{rama}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+
+    <button type="submit" (click)="crearTemporada()">Crear Temporada</button>
+  </form>
+  {{this.mensaje}}
+
+</mat-dialog-content>
+
