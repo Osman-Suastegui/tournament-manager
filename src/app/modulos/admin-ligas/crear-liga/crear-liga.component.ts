@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Liga } from '../../../models/Ligas/Ligas';
-import { LigasServiceService } from '../../../services/ligasService/ligas-service.service';
+import { LigasServiceService } from '../adminLigasService/ligas-service.service';
 
 @Component({
   selector: 'app-crear-liga',
