@@ -4,23 +4,34 @@ import { HomeAdminLigasComponent } from './home-admin-ligas/home-admin-ligas.com
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { CrearLigaComponent } from './crear-liga/crear-liga.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { TemporadaCaracteriticasComponent } from './temporada-caracteriticas/temporada-caracteriticas.component';
+import { NavBarModule } from '../nav-bar/nav-bar.module';
+import { AsignarArbitroComponent } from './asignar-arbitro/asignar-arbitro.component';
+import { ModificarLigaComponent } from './modificar-liga/modificar-liga.component';
+
 
 
 
 @NgModule({
   declarations: [
     HomeAdminLigasComponent,
-    CrearLigaComponent
+    CrearLigaComponent,
+    TemporadaCaracteriticasComponent,
+    AsignarArbitroComponent,
+    ModificarLigaComponent
   ],
   imports: [
     AngularMaterialModule,
     CommonModule,
     BrowserAnimationsModule,
-
+    NavBarModule
   ],
   exports: [
     HomeAdminLigasComponent,
-    CrearLigaComponent
+    CrearLigaComponent,
+    TemporadaCaracteriticasComponent,
+    AsignarArbitroComponent,
+    ModificarLigaComponent
   ]
 })
 export class AdminLigasModule { }

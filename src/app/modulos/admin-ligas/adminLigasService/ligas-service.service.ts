@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Liga } from '../../models/Ligas/Ligas';
+import { Liga } from '../../../models/Ligas/Ligas';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { url } from '../../url-config';
-import { TokenService } from '../tokenService/token.service';
+import { url } from '../../../url-config';
+import { TokenService } from '../../../services/tokenService/token.service';
 import { Subject } from 'rxjs';
 
 
@@ -16,6 +16,7 @@ import { Subject } from 'rxjs';
 })
 export class LigasServiceService {
   private nuevaLigaSubject = new Subject<void>();
+  private nuevoAdminSubject = new Subject<void>();
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
@@ -42,6 +43,23 @@ export class LigasServiceService {
   emitNuevaLigaCreada() {
     this.nuevaLigaSubject.next();
   }
+
+  onModificarLiga() {
+    return this.nuevaLigaSubject.asObservable();
+  }
+
+  emitModificarLiga() {
+    this.nuevaLigaSubject.next();
+  }
+
+  onNuevoAdminAsignado() {
+    return this.nuevoAdminSubject.asObservable();
+  }
+
+  emitNuevoAdminAsignado() {
+    this.nuevoAdminSubject.next();
+  }
+
 
   getLigas(usuario: string): Observable<any> {
     const headers = this.tokenService.createHeaders();
@@ -78,6 +96,42 @@ export class LigasServiceService {
     });
   }
 
+
+  modificarLiga(idLiga: number, nombreLiga: string): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    const body = {
+      ligaId: idLiga,
+      nombre: nombreLiga
+    };
+
+    return this.http.put(url + '/Ligas/actualizarLiga', body, {
+      headers: headers
+    });
+  }
+
+  obtenerAdminsNoEnLiga(idLiga: number): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/Ligas/obtenerAdminsNoEnLiga', {
+      headers: headers,
+      params: {
+        idLiga: Number(idLiga)
+      }
+    });
+  }
+
+
+  obtenerAdminsDeLiga(idLiga: number): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/Ligas/obtenerAdminsDeLiga', {
+      headers: headers,
+      params: {
+        idLiga: Number(idLiga)
+      }
+    });
+  }
 
 
 }

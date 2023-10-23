@@ -1,0 +1,37 @@
+
+<mat-dialog-content>
+  <header>
+    <h1>Modificar Liga</h1>
+  </header>
+
+  <form>
+    <mat-form-field>
+      <label for="nombreLiga"></label>
+      <input type="text" name="nombreLiga" id="nombreLiga" [(ngModel)]="nombreLiga" matInput>
+    </mat-form-field>
+
+    <button type="submit" (click)="modificarNombreLiga()">Modificar Liga</button>
+  </form>
+  {{mensaje}}
+
+  <h2>Administradores de Liga</h2>
+  <form>
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedAdmin" name="usuarioAdmin">
+        <mat-option *ngFor="let admin of adminsLigas" [value]="admin">{{ admin }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button type="submit" (click)="agregarAdminLiga()">Agregar Administrador de Liga</button>
+  </form>
+  {{mensajeAdmin}}
+
+  <p>Lista de Administradores de Liga</p>
+  <ul>
+    <li *ngFor="let adminEnLiga of adminsEnLiga">{{ adminEnLiga }}</li>
+  </ul>
+
+
+
+
+</mat-dialog-content>

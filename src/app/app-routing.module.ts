@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './modulos/home/home/home.component';
 import { LoginComponent } from './modulos/auth/login/login.component';
 import { RegisterComponent } from './modulos/auth/register/register.component';
+import { TemporadaCaracteriticasComponent } from './modulos/admin-ligas/temporada-caracteriticas/temporada-caracteriticas.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,11 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
-  }
+  },
+  {
+    path: 'temporadaCaracteristicas/:idTemporada',
+    component: TemporadaCaracteriticasComponent
+  },
 ];
 
 @NgModule({
@@ -24,3 +29,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

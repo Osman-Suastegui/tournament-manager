@@ -9,16 +9,18 @@
 <div *ngIf="ligasAdministrador.length > 0">
   <ul>
     <li *ngFor="let liga of ligasAdministrador; let i = index">
-      {{ i }}
+      <p>Liga</p>
+      <!-- {{ i }} -->
       <ul>
-        <li>ID Liga: {{ liga.idLiga }}</li>
-        <li>Nombre Liga: {{ liga.nombreLiga }}</li>
+        <!-- <li>ID Liga: {{ liga.idLiga }}</li> -->
+        <button (click)="openDialogModificarLiga(liga.idLiga, liga.nombreLiga)">{{ liga.nombreLiga }}</button>
+        <!-- <li>Nombre Liga: {{ liga.nombreLiga }}</li> -->
         <li>Temporadas:</li>
         <ul>
           <li *ngFor="let temporada of temporadasPorLiga[liga.idLiga]; let j = index">
-            {{ j }}
+            <!-- {{ j }} -->
             <ul>
-              <button (click)="verTemporada(liga.idLiga, temporada.idTemporada)">{{ temporada.nombreTemporada }}</button>
+              <button (click)="verTemporada(temporada.idTemporada)">{{ temporada.nombreTemporada }}</button>
             </ul>
           </li>
         </ul>
