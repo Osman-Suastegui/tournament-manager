@@ -1,0 +1,18 @@
+<div class="contenedor">
+
+  <table mat-table [dataSource]="tableDataSource" class="contenedor-table">
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef> {{ column }} </th>
+      <td mat-cell *matCellDef="let element">
+        <button *ngIf="column == 'Jugador'" (click)="agregarPuntoDeJugador(element['jugador'], column)">-</button>
+        {{ element[column] }}
+        <!-- muestra un boton si column ==Jugador  en caso contrario muestra otro-->
+        <button *ngIf="column !== 'Jugador'" (click)="agregarPuntoDeJugador(element['jugador'], column)">+</button>
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

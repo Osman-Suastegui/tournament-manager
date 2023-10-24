@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './modulos/auth/auth.module';
 import { HomeModule } from './modulos/home/home.module';
-
+import { ArbitrosModule } from './modulos/arbitros/arbitros.module';
 
 
 
@@ -19,7 +19,8 @@ import { HomeModule } from './modulos/home/home.module';
     HttpClientModule,
     AppRoutingModule,
     AuthModule,
-    HomeModule
+    HomeModule,
+    ArbitrosModule
   ],
   providers: [],
   bootstrap: [AppComponent]
