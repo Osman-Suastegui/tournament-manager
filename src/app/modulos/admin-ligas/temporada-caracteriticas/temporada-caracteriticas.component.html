@@ -6,6 +6,27 @@
 <h2>Arbitros</h2>
 <button (click)="openDialogArbitros()">Agregar Arbitro</button>
 
+
 <div *ngFor="let arbitro of arbitrosTemp">
   <p>{{ arbitro.usuario }}</p>
 </div>
+
+<div *ngIf="arbitrosTemp.length === 0">
+  <p>{{this.mensajeArbitros}}</p>
+</div>
+
+
+
+
+
+<h2>Equipos</h2>
+<button (click)="openDialogEquipos()">Agregar Equipo</button>
+<div *ngFor="let equipo of equiposTempList">
+  <p>{{ equipo.nombreEquipo }}</p>   <button (click)="eliminarEquipoTemp(this.idTemporada, this.equipo.nombreEquipo)">-</button>
+</div>
+
+<div *ngIf="equiposTempList.length === 0">
+  <p>{{this.mensajeEquipos}}</p>
+</div>
+
+

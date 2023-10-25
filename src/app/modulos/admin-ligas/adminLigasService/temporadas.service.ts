@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Liga } from '../../../models/Ligas/Ligas';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 import { url } from '../../../url-config';
 import { TokenService } from '../../../services/tokenService/token.service';
 import { Subject } from 'rxjs';
@@ -16,6 +12,9 @@ import { Temporadas } from './../interfaces/Temporadas';
 })
 export class TemporadasService {
   private nuevaTemporadaSubject = new Subject<void>();
+  private nuevoArbitroSubject = new Subject<void>();
+  private nuevoEquipoSubject = new Subject<void>();
+
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
 
@@ -25,6 +24,22 @@ export class TemporadasService {
 
   emitNuevaTemporadaCreada() {
     this.nuevaTemporadaSubject.next();
+  }
+
+  onNuevoArbitroAsignado() {
+    return this.nuevoArbitroSubject.asObservable();
+  }
+
+  emitNuevoArbitroAsignado() {
+    this.nuevoArbitroSubject.next();
+  }
+
+  onNuevoEquipoAsignado() {
+    return this.nuevoEquipoSubject.asObservable();
+  }
+
+  emitNuevoEquipoAsignado() {
+    this.nuevoEquipoSubject.next();
   }
 
 
@@ -94,4 +109,66 @@ export class TemporadasService {
   }
 
 
+  obtenerEquiposTemporada(idTemporada: number): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/EquipoTemporada/obtenerEquiposTemporada', {
+      headers: headers,
+      params: {
+        temporadaId: idTemporada
+      }
+    });
+  }
+
+
+  asignarEquipoATemporada(temporadaId: number, nombreEquipo: string) {
+    const headers = this.tokenService.createHeaders();
+    const body = {
+      temporada: { claveTemporada: temporadaId },
+      equipo: { nombre: nombreEquipo },
+    };
+
+    return this.http.post(url + '/EquipoTemporada/crearEquipoTemporada', body,{
+      headers: headers
+    });
+  }
+
+  obtenerEquiposNoEnTemporada(idTemporada: number): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/EquipoTemporada/obtenerEquiposNoEnTemporada', {
+      headers: headers,
+      params: {
+        temporadaId: idTemporada
+      }
+    });
+  }
+
+
+
+  eliminarEquipoDeTemporada(temporadaId: number, nombreEquipo: string) {
+    const headers = this.tokenService.createHeaders();
+
+
+    const httpOptions = {
+      headers: headers,
+      body: {
+        temporada: { claveTemporada: temporadaId },
+        equipo: { nombre: nombreEquipo },
+      },
+    };
+
+    return this.http.delete(url + '/EquipoTemporada/eliminarEquipoTemporada', httpOptions);
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
