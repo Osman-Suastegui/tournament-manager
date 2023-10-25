@@ -28,6 +28,15 @@ export class AsignarArbitroComponent implements OnInit{
     this.idTemporada = +localStorage.getItem('idTemporada')!;
     this.obtenerArbitrosNoEnTemporada(this.idTemporada);
     this.selectedArbitro = this.arbitroTemp.arbitroId;
+
+    this.tempService.onNuevoArbitroAsignado().subscribe({
+      next: () => {
+        this.arbitros = [];
+        this.obtenerArbitrosNoEnTemporada(this.idTemporada);
+
+      }
+    });
+
   }
 
 
@@ -35,7 +44,12 @@ export class AsignarArbitroComponent implements OnInit{
 
     this.tempService.asignarArbitro(idTemporada, usuario).subscribe({
       next: (result) => {
-       this.mensaje = result.message;
+        this.mensaje = result.message;
+        this.tempService.emitNuevoArbitroAsignado();
+        this.selectedArbitro = '';
+      },
+      error: (error) => {
+        this.mensaje = error.error[0].message;
       }
     });
   }
@@ -50,7 +64,7 @@ export class AsignarArbitroComponent implements OnInit{
     });
   }
 
-  
+
 
 
 

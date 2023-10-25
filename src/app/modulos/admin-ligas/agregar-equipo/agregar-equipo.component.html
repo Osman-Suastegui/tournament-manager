@@ -1,0 +1,18 @@
+<mat-dialog-content>
+  <header>
+    <h1>Agregar Equipo</h1>
+  </header>
+
+  <form>
+
+    <mat-form-field>
+      <mat-label>Equipo</mat-label>
+      <mat-select [(ngModel)]="selectedEquipo" name="nombreEquipo">
+        <mat-option *ngFor="let equipo of equipos" [value]="equipo">{{ equipo }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button type="submit" (click)="agregarEquipoTemp(this.temporadaId, this.selectedEquipo)">Guardar</button>
+  </form>
+  <p>{{ mensaje }}</p>
+</mat-dialog-content>
