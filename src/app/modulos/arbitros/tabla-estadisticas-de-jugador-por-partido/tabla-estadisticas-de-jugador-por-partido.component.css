@@ -1,8 +1,83 @@
-.contenedor{
-    width: 80%;
-    height: 80%;
-    /* CENTRALO */
-    /* EL CONTENEDOR */
-    margin: 0 auto;
+.contenedor {
+  width: 70%;
+  height: 40%;
+  margin: 0 auto;
 
 }
+
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Tabla dentro del contenedor */
+.contenedor-table {
+  width: 80%; /* Ajusta el ancho según tus necesidades */
+}
+
+/* Estilo para los botones */
+.boton-estilo {
+  padding: 5px 10px; /* Ajusta el espaciado de los botones según tus necesidades */
+}
+
+#contenedor-table-estadistica-valor {
+  display: inline-block; /* Hace que los elementos se muestren en línea */
+  margin-right: 10px;
+}
+
+/* Estilo para la tabla */
+.contenedor-table {
+  width: 80%;
+  margin: 0 auto;
+  border-collapse: collapse; /* Establece los bordes de la tabla */
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Estilo para las celdas de encabezado */
+th {
+  border: 1px solid #350000;
+  background-color: #333;
+  color: #000000;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Estilo para las celdas de datos */
+td {
+  border: 1px solid #ccc;
+  padding-bottom: 0px;
+  text-align: center;
+}
+
+/* Estilo para las filas impares (opcional) */
+tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+/* Estilo para los botones */
+.boton-estilo {
+  /* padding: 5px 10px; */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.boton-estilo:hover {
+  background-color: #0056b3;
+}
+
+/* Alineación vertical de botones en celdas de datos */
+.td-contenedor button {
+  vertical-align: middle;
+}
+
+.partido-en-vivo-contenedor-nombre-equipo{
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
