@@ -59,6 +59,8 @@ export class AgregarEquipoComponent implements OnInit{
   }
 
 
+
+
 }
 
 

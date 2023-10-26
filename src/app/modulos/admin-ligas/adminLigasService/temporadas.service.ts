@@ -5,6 +5,7 @@ import { url } from '../../../url-config';
 import { TokenService } from '../../../services/tokenService/token.service';
 import { Subject } from 'rxjs';
 import { Temporadas } from './../interfaces/Temporadas';
+import { HttpParams } from '@angular/common/http';
 
 
 @Injectable({
@@ -14,6 +15,7 @@ export class TemporadasService {
   private nuevaTemporadaSubject = new Subject<void>();
   private nuevoArbitroSubject = new Subject<void>();
   private nuevoEquipoSubject = new Subject<void>();
+  private EstadoTemporadaSubject = new Subject<void>();
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
@@ -40,6 +42,14 @@ export class TemporadasService {
 
   emitNuevoEquipoAsignado() {
     this.nuevoEquipoSubject.next();
+  }
+
+  onEstadoTemporadaActualizado() {
+    return this.EstadoTemporadaSubject.asObservable();
+  }
+
+  emitEstadoTemporadaActualizado() {
+    this.EstadoTemporadaSubject.next();
   }
 
 
@@ -160,6 +170,50 @@ export class TemporadasService {
 
     return this.http.delete(url + '/EquipoTemporada/eliminarEquipoTemporada', httpOptions);
   }
+
+  eliminarArbitroDeTemporada(temporadaId: number, usuario: string) {
+    const headers = this.tokenService.createHeaders();
+
+    const httpOptions = {
+      headers: headers,
+    };
+
+    return this.http.delete(url + `/Temporadas/eliminarArbitro?temporadaId=${temporadaId}&arbitroId=${usuario}`, httpOptions);
+}
+
+
+  obtenerEstadoTemporada(idTemporada: number): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/Temporadas/obtenerEstadoTemporada', {
+      headers: headers,
+      params: {
+        idTemporada: idTemporada
+      }
+    });
+
+  }
+
+  generarPartidos(idTemporada: number): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    const body = { idTemporada: idTemporada };
+
+    return this.http.post(url + '/Partido/generarPartidosTemporada', body, { headers: headers });
+  }
+
+
+  obtenerPartidosTemporada(idTemporada: number): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/Partido/obtenerPartidosTemporada', {
+      headers: headers,
+      params: {
+        idTemporada: idTemporada
+      }
+    });
+  }
+
 
 }
 

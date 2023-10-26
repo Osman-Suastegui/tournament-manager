@@ -22,8 +22,12 @@ export class TemporadaCaracteriticasComponent implements OnInit{
   arbitrosTemp: Arbitros[] = [];
   equiposTemp: Equipos[] = [];
   equiposTempList: any[] = []; // Declaración e inicialización
+  cantidadEquipos: number = 0;
   mensajeEquipos: string = "No hay equipos Asignados";
   mensajeArbitros: string = "No hay arbitros Asignados";
+  estadoTemporada: string = "";
+  mensajePartidos: string = "";
+
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -51,6 +55,16 @@ export class TemporadaCaracteriticasComponent implements OnInit{
       }
     });
 
+    this.obtenerEstadoTemporada(this.idTemporada);
+
+    this.tempService.onEstadoTemporadaActualizado().subscribe({
+      next: () => {
+        this.obtenerEstadoTemporada(this.idTemporada);
+      }
+    });
+
+    this.obtenerPartidosTemporada();
+
   }
 
 
@@ -74,6 +88,10 @@ export class TemporadaCaracteriticasComponent implements OnInit{
       next: (data) => {
         this.equiposTemp = data;
         this.equiposTempList = Object.keys(data).map(key => ({ nombreEquipo: key, equipo: data[key] }));
+        this.cantidadEquipos = this.equiposTempList.length;
+        if (this.cantidadEquipos === 8) {
+          this.dialog.closeAll();
+        }
       }
     });
   }
@@ -86,6 +104,14 @@ export class TemporadaCaracteriticasComponent implements OnInit{
     });
   }
 
+  eliminarArbitroTemp(idTemporada: number, idArbitro: string) {
+    this.tempService.eliminarArbitroDeTemporada(idTemporada, idArbitro).subscribe({
+      next: () => {
+        this.tempService.emitNuevoArbitroAsignado();
+      }
+    });
+  }
+
 
 
 
@@ -94,6 +120,36 @@ export class TemporadaCaracteriticasComponent implements OnInit{
       width: '250px',
     })
   }
+
+  obtenerEstadoTemporada(idTemporada: number) {
+    this.tempService.obtenerEstadoTemporada(idTemporada).subscribe({
+      next: (result) => {
+        this.estadoTemporada = result.estado;
+      }
+    });
+
+  }
+
+  generarPartidos(idTemporada: number) {
+    this.tempService.generarPartidos(idTemporada).subscribe({
+      next: (result) => {
+        this.mensajePartidos = result.message;
+        this.tempService.emitEstadoTemporadaActualizado();
+      },
+      error: (err) => {
+        this.mensajePartidos = err.error[0].message;
+      }
+    });
+  }
+
+  obtenerPartidosTemporada() {
+    this.tempService.obtenerPartidosTemporada(this.idTemporada).subscribe({
+      next: (result) => {
+        console.log(result);
+      }
+    });
+  }
+
 
 
 }
