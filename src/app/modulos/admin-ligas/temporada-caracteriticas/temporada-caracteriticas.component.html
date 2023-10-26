@@ -9,6 +9,11 @@
 
 <div *ngFor="let arbitro of arbitrosTemp">
   <p>{{ arbitro.usuario }}</p>
+
+  <div *ngIf="estadoTemporada === 'INACTIVA'">
+    <button (click)="eliminarArbitroTemp(this.idTemporada, this.arbitro.usuario)">Eliminar</button>
+  </div>
+
 </div>
 
 <div *ngIf="arbitrosTemp.length === 0">
@@ -17,16 +22,35 @@
 
 
 
-
-
 <h2>Equipos</h2>
-<button (click)="openDialogEquipos()">Agregar Equipo</button>
+
+<!-- Botón para agregar equipo si hay menos de 8 equipos -->
+<div *ngIf="cantidadEquipos < 8">
+  <button (click)="openDialogEquipos()">Agregar Equipo</button>
+</div>
+
+<!-- Lista de equipos -->
 <div *ngFor="let equipo of equiposTempList">
-  <p>{{ equipo.nombreEquipo }}</p>   <button (click)="eliminarEquipoTemp(this.idTemporada, this.equipo.nombreEquipo)">-</button>
+  <p>{{ equipo.nombreEquipo }}</p>
+
+  <!-- Botón de eliminación solo si la temporada está inactiva -->
+  <div *ngIf="estadoTemporada === 'INACTIVA'">
+    <button (click)="eliminarEquipoTemp(idTemporada, equipo.nombreEquipo)">Eliminar</button>
+  </div>
 </div>
 
+<!-- Mensaje si no hay equipos en la lista -->
 <div *ngIf="equiposTempList.length === 0">
-  <p>{{this.mensajeEquipos}}</p>
+  <p>{{ mensajeEquipos }}</p>
 </div>
 
 
+<h2>Estado de la Temporada</h2>
+
+<p>Estado: {{this.estadoTemporada}}</p>
+
+
+<h2>Generar Partidos</h2>
+<button (click)="generarPartidos(this.idTemporada)">Generar Partidos</button>
+
+<p>{{this.mensajePartidos}}</p>
