@@ -21,6 +21,48 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
       asistencias: (fila: EstadisticasJugador) => fila.asistencias++,
       faltas: (fila: EstadisticasJugador) => fila.faltas++,
     };
+    datosTemporales : EstadisticasJugador[] = [{
+       "jugador": "Jugador 1",
+        "faltas": 0,
+        "tirosDe2Puntos": 0,
+        "tirosLibres": 0,
+        "tirosDe3Puntos": 0,
+        "asistencias": 0
+    },
+    {
+      "jugador": "Jugador 2",
+       "faltas": 0,
+       "tirosDe2Puntos": 0,
+       "tirosLibres": 0,
+       "tirosDe3Puntos": 0,
+       "asistencias": 0
+   },
+   {
+    "jugador": "Jugador 3",
+     "faltas": 0,
+     "tirosDe2Puntos": 0,
+     "tirosLibres": 0,
+     "tirosDe3Puntos": 0,
+     "asistencias": 0
+ },
+ {
+  "jugador": "Jugador 4",
+   "faltas": 0,
+   "tirosDe2Puntos": 0,
+   "tirosLibres": 0,
+   "tirosDe3Puntos": 0,
+   "asistencias": 0
+},
+{
+  "jugador": "Jugador 5",
+   "faltas": 0,
+   "tirosDe2Puntos": 0,
+   "tirosLibres": 0,
+   "tirosDe3Puntos": 0,
+   "asistencias": 0
+}];
+    
+
     data: EstadisticasJugador[] = [];
 
     displayedColumns: string[] = ['jugador', 'faltas', 'tirosDe2Puntos','tirosLibres', 'tirosDe3Puntos', 'asistencias'];
@@ -52,7 +94,8 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
 
     ngOnInit() {
       this.JugadoresDePartidoEquipoService.obtenerJugadoresDePartidoYEquipo(this.claveDelPartido, this.nombreEquipo, this.enBanca).subscribe((data) => {
-        this.tableDataSource = new MatTableDataSource<EstadisticasJugador>(data);
+        this.tableDataSource = new MatTableDataSource<EstadisticasJugador>([...data, ...this.datosTemporales]);
+        
       });
 
       this.RxStompService.watch('/topic/ActualizacionesDePuntos').subscribe((message: Message) => {
