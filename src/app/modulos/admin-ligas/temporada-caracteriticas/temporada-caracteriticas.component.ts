@@ -8,6 +8,9 @@ import { Arbitros } from '../interfaces/Arbitros';
 import { AsignarArbitroComponent } from '../asignar-arbitro/asignar-arbitro.component';
 import { Equipos } from '../interfaces/Equipos';
 import { AgregarEquipoComponent } from '../agregar-equipo/agregar-equipo.component';
+import { Partidos } from '../interfaces/Partidos';
+import { AgregarArbitroPartidoComponent } from '../agregar-arbitro-partido/agregar-arbitro-partido.component';
+import { AgregarFechaPartidoComponent } from '../agregar-fecha-partido/agregar-fecha-partido.component';
 
 @Component({
   selector: 'app-temporada-caracteriticas',
@@ -27,6 +30,8 @@ export class TemporadaCaracteriticasComponent implements OnInit{
   mensajeArbitros: string = "No hay arbitros Asignados";
   estadoTemporada: string = "";
   mensajePartidos: string = "";
+  partidosTemporada: Partidos[] = [];
+  idPartido: number = 0;
 
 
   ngOnInit(): void {
@@ -64,6 +69,18 @@ export class TemporadaCaracteriticasComponent implements OnInit{
     });
 
     this.obtenerPartidosTemporada();
+
+    this.tempService.onNuevoArbitroPartidoAsignado().subscribe({
+      next: () => {
+        this.obtenerPartidosTemporada();
+      }
+    });
+
+    this.tempService.onNuevaFechaPartidoAsignada().subscribe({
+      next: () => {
+        this.obtenerPartidosTemporada();
+      }
+    });
 
   }
 
@@ -145,11 +162,26 @@ export class TemporadaCaracteriticasComponent implements OnInit{
   obtenerPartidosTemporada() {
     this.tempService.obtenerPartidosTemporada(this.idTemporada).subscribe({
       next: (result) => {
-        console.log(result);
+        this.partidosTemporada = result;
       }
     });
   }
 
+  agregarArbitroPartido(idPartido: number): void {
+    localStorage.setItem('idPartido', idPartido.toString());
+    this.dialog.open(AgregarArbitroPartidoComponent,{
+      width: '250px',
+    })
+  }
+
+
+
+  agregarFechaPartido(idPartido: number): void {
+    localStorage.setItem('idPartido', idPartido.toString());
+    this.dialog.open(AgregarFechaPartidoComponent,{
+      width: '250px',
+    })
+  }
 
 
 }

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { url } from '../../../url-config';
 import { TokenService } from '../../../services/tokenService/token.service';
 import { Subject } from 'rxjs';
 import { Temporadas } from './../interfaces/Temporadas';
-import { HttpParams } from '@angular/common/http';
+
 
 
 @Injectable({
@@ -16,6 +16,8 @@ export class TemporadasService {
   private nuevoArbitroSubject = new Subject<void>();
   private nuevoEquipoSubject = new Subject<void>();
   private EstadoTemporadaSubject = new Subject<void>();
+  private nuevoArbitroPartidoSubject = new Subject<void>();
+  private nuevaFechaPartidoSubject = new Subject<void>();
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
@@ -50,6 +52,22 @@ export class TemporadasService {
 
   emitEstadoTemporadaActualizado() {
     this.EstadoTemporadaSubject.next();
+  }
+
+  onNuevoArbitroPartidoAsignado() {
+    return this.nuevoArbitroPartidoSubject.asObservable();
+  }
+
+  emitNuevoArbitroPartidoAsignado() {
+    this.nuevoArbitroPartidoSubject.next();
+  }
+
+  onNuevaFechaPartidoAsignada() {
+    return this.nuevaFechaPartidoSubject.asObservable();
+  }
+
+  emitNuevaFechaPartidoAsignada() {
+    this.nuevaFechaPartidoSubject.next();
   }
 
 
@@ -213,6 +231,37 @@ export class TemporadasService {
       }
     });
   }
+
+
+  asignarArbitroPartido(clavePartido: number, arbitro: string): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    const body = {
+      clavePartido: clavePartido,
+      arbitro: {
+        usuario: arbitro
+      }
+    };
+
+    return this.http.put(url + '/Partido/asignarArbitro', body, {
+      headers: headers
+    });
+  }
+
+  agendarPartido(clavePartido: number, fechaInicio: string): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+    console.log(fechaInicio + " en el service de angular");
+    const body = {
+      clavePartido: clavePartido,
+      fechaInicio: fechaInicio
+    };
+
+    return this.http.put(url + '/Partido/agendar', body, {
+      headers: headers
+    });
+  }
+
+
 
 
 }

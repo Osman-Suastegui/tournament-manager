@@ -4,13 +4,15 @@
 <app-nav-bar></app-nav-bar>
 
 <h2>Arbitros</h2>
-<button (click)="openDialogArbitros()">Agregar Arbitro</button>
 
+<div *ngIf="estadoTemporada === 'INACTIVA' || 'ACTIVA'  ">
+  <button (click)="openDialogArbitros()">Agregar Arbitro</button>
+</div>
 
 <div *ngFor="let arbitro of arbitrosTemp">
   <p>{{ arbitro.usuario }}</p>
 
-  <div *ngIf="estadoTemporada === 'INACTIVA'">
+  <div *ngIf="estadoTemporada == 'INACTIVA'">
     <button (click)="eliminarArbitroTemp(this.idTemporada, this.arbitro.usuario)">Eliminar</button>
   </div>
 
@@ -24,9 +26,11 @@
 
 <h2>Equipos</h2>
 
+<div *ngIf="estadoTemporada === 'INACTIVA'">
 <!-- Botón para agregar equipo si hay menos de 8 equipos -->
-<div *ngIf="cantidadEquipos < 8">
-  <button (click)="openDialogEquipos()">Agregar Equipo</button>
+  <div *ngIf="cantidadEquipos < 8">
+    <button (click)="openDialogEquipos()">Agregar Equipo</button>
+  </div>
 </div>
 
 <!-- Lista de equipos -->
@@ -34,7 +38,7 @@
   <p>{{ equipo.nombreEquipo }}</p>
 
   <!-- Botón de eliminación solo si la temporada está inactiva -->
-  <div *ngIf="estadoTemporada === 'INACTIVA'">
+  <div *ngIf="estadoTemporada == 'INACTIVA'">
     <button (click)="eliminarEquipoTemp(idTemporada, equipo.nombreEquipo)">Eliminar</button>
   </div>
 </div>
@@ -51,6 +55,39 @@
 
 
 <h2>Generar Partidos</h2>
-<button (click)="generarPartidos(this.idTemporada)">Generar Partidos</button>
+
+<div *ngIf="estadoTemporada === 'INACTIVA' || 'ACTIVA'  ">
+  <button (click)="generarPartidos(this.idTemporada)">Generar Partidos</button>
+</div>
 
 <p>{{this.mensajePartidos}}</p>
+
+<!-- muestra los partidos -->
+<table>
+  <thead>
+    <tr>
+      <th>Arbitro</th>
+      <th>Equipo 1</th>
+      <th>Equipo 2</th>
+      <th>Fecha de Inicio</th>
+      <th>Ganador</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let partidoTemporada of partidosTemporada">
+      <td>{{ partidoTemporada.arbitro }}
+        <div *ngIf="partidoTemporada.ganador === 'Sin concluir'  ">
+          <button (click)="agregarArbitroPartido(partidoTemporada.idPartido)">Agregar Arbitro</button>
+        </div>
+      </td>
+      <td>{{ partidoTemporada.equipo1 }}</td>
+      <td>{{ partidoTemporada.equipo2 }}</td>
+      <td>{{ partidoTemporada.fechaInicio | date:'dd/MM/yyyy HH:mm:ss' }}
+        <div *ngIf="partidoTemporada.ganador === 'Sin concluir'  ">
+          <button (click)="agregarFechaPartido(partidoTemporada.idPartido)">Agregar Fecha</button>
+        </div>
+      </td>
+      <td>{{ partidoTemporada.ganador }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -10,6 +10,8 @@ import { AsignarArbitroComponent } from './asignar-arbitro/asignar-arbitro.compo
 import { ModificarLigaComponent } from './modificar-liga/modificar-liga.component';
 import { CrearTemporadaComponent } from './crear-temporada/crear-temporada.component';
 import { AgregarEquipoComponent } from './agregar-equipo/agregar-equipo.component';
+import { AgregarArbitroPartidoComponent } from './agregar-arbitro-partido/agregar-arbitro-partido.component';
+import { AgregarFechaPartidoComponent } from './agregar-fecha-partido/agregar-fecha-partido.component';
 
 
 
@@ -22,7 +24,9 @@ import { AgregarEquipoComponent } from './agregar-equipo/agregar-equipo.componen
     AsignarArbitroComponent,
     ModificarLigaComponent,
     CrearTemporadaComponent,
-    AgregarEquipoComponent
+    AgregarEquipoComponent,
+    AgregarArbitroPartidoComponent,
+    AgregarFechaPartidoComponent
   ],
   imports: [
     AngularMaterialModule,
