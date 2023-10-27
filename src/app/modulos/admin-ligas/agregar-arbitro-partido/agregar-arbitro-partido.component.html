@@ -1,0 +1,19 @@
+
+<mat-dialog-content>
+  <header>
+    <h1>Agregar Arbitro</h1>
+  </header>
+
+  <form>
+
+    <mat-form-field>
+      <mat-label>Arbitro</mat-label>
+      <mat-select [(ngModel)]="selectedArbitro" name="usuarioArbitro">
+        <mat-option *ngFor="let arbitro of arbitros" [value]="arbitro">{{ arbitro }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button type="submit" (click)="asignarArbitroPartido(idPartido, selectedArbitro)">Guardar</button>
+  </form>
+  <p>{{ mensaje }}</p>
+</mat-dialog-content>

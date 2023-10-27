@@ -1,0 +1,24 @@
+
+<mat-dialog-content>
+  <header>
+    <h1>Agendar Partido</h1>
+  </header>
+
+  <form>
+
+    <mat-form-field>
+      <mat-label>Fecha</mat-label>
+      <input type="date" matInput [(ngModel)]="fechaPartido" name="fechaPartido">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Hora</mat-label>
+      <input type="time" matInput [(ngModel)]="horaPartido" name="horaPartido">
+    </mat-form-field>
+
+
+    <button type="submit" (click)="agendarPartido(idPartido, fechaPartido, horaPartido)">Guardar</button>
+  </form>
+
+  <p>{{mensaje}}</p>
+</mat-dialog-content>
