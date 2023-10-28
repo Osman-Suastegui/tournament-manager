@@ -3,7 +3,7 @@ import { NavbarService } from '../../../services/navbarService/navbar.service';
 import { Router } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { authService } from '../../../services/authenticateService/auth.service';
-
+import { HostListener, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,10 +15,28 @@ export class NavBarComponent implements OnInit{
   constructor(
     private app: NavbarService,
     private router: Router,
-    private auth: authService
+    private auth: authService,
+    private elRef: ElementRef
   ) {}
     usuario: string = localStorage.getItem('usuario') || '';
     tipoUsuario: string = '';
+    searching = false;
+    searchQuery = '';
+
+    startSearch() {
+      this.searching = true;
+    }
+
+    performSearch() {
+      this.searching = false;
+    }
+    
+    @HostListener('document:click', ['$event'])
+    clickout(event: { target: any; }) {
+      if (!this.elRef.nativeElement.contains(event.target) && event.target.tagName !== 'IMG') {
+        this.searching = false;
+      }
+    }
 
   logout() {
     this.app.logout();
@@ -37,6 +55,10 @@ export class NavBarComponent implements OnInit{
 
   goHome(){
     this.router.navigate(['/home']);
+  }
+
+  goPerfil(){
+    this.router.navigate(['/perfil']);
   }
 
 

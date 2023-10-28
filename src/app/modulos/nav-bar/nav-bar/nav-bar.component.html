@@ -1,28 +1,42 @@
-<div>
+<mat-toolbar class="navegacion">
+  <button mat-button class="app-logo-button" (click)="goHome()">
+    <img src="../../../../assets/imgs/logo_gris.jpg" alt="Logo" class="app-logo">
+  </button>
 
-  <button (click)="goHome()">Home</button>
+  <mat-menu #menu="matMenu">
+    <ng-container *ngIf="tipoUsuario === 'ANONIMO'; else LogoutMenu">
+      <button mat-menu-item class="mat-menu-item" (click)="login()">Iniciar Sesion</button>
+      <button mat-menu-item class="mat-menu-item" (click)="register()">Registrarse</button>
+    </ng-container>
 
-  <ng-container *ngIf="tipoUsuario === 'ANONIMO'; else Logout">
-
-    <button (click)="login()">Log In</button>
-  </ng-container>
-
-  <ng-template #Logout>
-    <button (click)="logout()">Log Out</button>
-  </ng-template>
-
-  <button (click)="register()">Register</button>
-
-</div>
-
-  <mat-toolbar>
-    <span>My Application</span>
-  </mat-toolbar>
+    <ng-template #LogoutMenu>
+      <button mat-menu-item class="mat-menu-item" (click)="goPerfil()">Ver Perfil</button>
+      <button mat-menu-item class="mat-menu-item" (click)="logout()">Salir</button>
+    </ng-template>
+  </mat-menu>
 
 
+    <button mat-button>Resultados</button>
+    <button mat-button>Calendario</button>
+    <button mat-button>Equipos</button>
+    <button mat-button>Estadisticas</button>
+    <button mat-button>Jugadores</button>
+
+    <div class="search-bar">
+      <button class="btn-buscar" *ngIf="!searching" (click)="startSearch()">
+        <img src="../../../../assets/imgs/lupa2.png" alt="Buscar" class="buscar">
+      </button>
+      <input *ngIf="searching" class="input-buscar" (keyup.enter)="performSearch()" placeholder="Escribe tu búsqueda aquí" [(ngModel)]="searchQuery">
+    </div>
 
 
 
+  <div class="button-container">
+    <button mat-button [matMenuTriggerFor]="menu" class="app-logo-button user-button">
+      <img src="../../../../assets/imgs/user.png" alt="Icono de menú" class="user-logo">
+    </button>
+  </div>
 
 
 
+</mat-toolbar>
