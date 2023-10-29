@@ -18,6 +18,7 @@ export class TemporadasService {
   private EstadoTemporadaSubject = new Subject<void>();
   private nuevoArbitroPartidoSubject = new Subject<void>();
   private nuevaFechaPartidoSubject = new Subject<void>();
+  private nuevosPartidosSubject = new Subject<void>();
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
 
@@ -70,6 +71,13 @@ export class TemporadasService {
     this.nuevaFechaPartidoSubject.next();
   }
 
+  onNuevosPartidosGenerados() {
+    return this.nuevosPartidosSubject.asObservable();
+  }
+
+  emitNuevosPartidosGenerados() {
+    this.nuevosPartidosSubject.next();
+  }
 
 
   obtenerArbitros(idTemporada: number): Observable<any> {

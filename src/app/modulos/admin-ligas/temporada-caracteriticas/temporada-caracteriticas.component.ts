@@ -82,6 +82,12 @@ export class TemporadaCaracteriticasComponent implements OnInit{
       }
     });
 
+    this.tempService.onNuevosPartidosGenerados().subscribe({
+      next: () => {
+        this.obtenerPartidosTemporada();
+      }
+    });
+
   }
 
 
@@ -106,9 +112,8 @@ export class TemporadaCaracteriticasComponent implements OnInit{
         this.equiposTemp = data;
         this.equiposTempList = Object.keys(data).map(key => ({ nombreEquipo: key, equipo: data[key] }));
         this.cantidadEquipos = this.equiposTempList.length;
-        if (this.cantidadEquipos === 8) {
-          this.dialog.closeAll();
-        }
+        if (this.cantidadEquipos === 8)
+            this.dialog.closeAll();
       }
     });
   }
@@ -152,6 +157,7 @@ export class TemporadaCaracteriticasComponent implements OnInit{
       next: (result) => {
         this.mensajePartidos = result.message;
         this.tempService.emitEstadoTemporadaActualizado();
+        this.tempService.emitNuevosPartidosGenerados();
       },
       error: (err) => {
         this.mensajePartidos = err.error[0].message;

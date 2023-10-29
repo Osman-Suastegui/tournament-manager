@@ -28,7 +28,7 @@ export class HomeAdminLigasComponent implements OnInit{
 
   openDialog(): void {
     this.dialog.open(CrearLigaComponent,{
-      width: '250px',
+      width: '450px',
     })
   }
 
@@ -88,7 +88,7 @@ export class HomeAdminLigasComponent implements OnInit{
     localStorage.setItem('nombreLiga', nombreLiga);
 
     this.dialog.open(ModificarLigaComponent,{
-      width: '250px',
+      width: '500px',
     })
   }
 
@@ -96,7 +96,7 @@ export class HomeAdminLigasComponent implements OnInit{
   openDialogCrearTemporada(liga: number){
     localStorage.setItem('idLiga', liga.toString());
     this.dialog.open(CrearTemporadaComponent,{
-      width: '250px',
+      width: '600px',
     })
   }
 

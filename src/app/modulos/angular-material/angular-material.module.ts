@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -26,7 +27,9 @@ import { MatMenuModule } from '@angular/material/menu';
     FormsModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   exports: [
     MatToolbarModule,
@@ -38,8 +41,9 @@ import { MatMenuModule } from '@angular/material/menu';
     FormsModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatMenuModule
-
+    MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ]
 })
 export class AngularMaterialModule { }

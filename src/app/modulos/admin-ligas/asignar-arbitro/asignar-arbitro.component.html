@@ -1,6 +1,3 @@
-<p>asignar-arbitro works!</p>
-
-
 <mat-dialog-content>
   <header>
     <h1>Agregar Arbitro</h1>
@@ -14,8 +11,8 @@
         <mat-option *ngFor="let arbitro of arbitros" [value]="arbitro">{{ arbitro }}</mat-option>
       </mat-select>
     </mat-form-field>
-
+    <span class="mensaje-estilo" *ngIf="mensaje">{{ mensaje }}</span> <!-- Muestra el mensaje si existe -->
     <button type="submit" (click)="asignarArbitroTemp(this.idTemporada, this.selectedArbitro)">Guardar</button>
   </form>
-  <p>{{ mensaje }}</p>
+
 </mat-dialog-content>

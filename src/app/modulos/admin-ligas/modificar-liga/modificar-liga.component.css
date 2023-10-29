@@ -1,0 +1,110 @@
+/* Estilos para el encabezado "Modificar Liga" */
+mat-dialog-content header h1 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #FFF8F0;
+}
+
+mat-dialog-content h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #FFF8F0;
+}
+
+
+/* Estilos para el formulario */
+mat-dialog-content form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px; /* Aumenta el espacio superior del formulario */
+  margin-bottom: 20px; /* Aumenta el espacio inferior del formulario */
+}
+
+/* Estilos para el campo de entrada */
+mat-form-field {
+  width: 100%;
+  max-width: 300px; /* Establece el ancho máximo del campo de entrada */
+  margin-bottom: 20px; /* Aumenta el espacio inferior del campo de entrada */
+}
+
+/* Estilos para los botones */
+mat-dialog-content button[type="submit"] {
+  background-color: #F26419; /* Color de fondo del botón */
+  color: #080708; /* Color de texto del botón */
+  padding: 10px 20px; /* Ajusta el espaciado interno del botón */
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 7px;
+  margin-bottom: 20px; /* Aumenta el espacio inferior del botón */
+  width: 60%;
+}
+
+/* Estilos para los títulos (H2) */
+mat-dialog-content h2 {
+  font-size: 1.25rem; /* Tamaño de fuente del título */
+  text-align: center;
+  margin-top: 20px; /* Aumenta el espacio superior del título */
+  margin-bottom: 20px; /* Aumenta el espacio inferior del título */
+}
+
+/* Estilos para el mensaje de resultado */
+mat-dialog-content p {
+  text-align: center;
+  margin-top: 20px; /* Aumenta el espacio superior del mensaje */
+}
+
+/* Estilos para la lista de administradores de Liga */
+mat-dialog-content ul {
+  list-style: none; /* Elimina los marcadores de lista */
+  padding: 0;
+}
+
+/* Estilos para los elementos de la lista */
+mat-dialog-content li {
+  font-size: 1rem; /* Tamaño de fuente de los elementos de la lista */
+  margin-bottom: 10px; /* Aumenta el espacio inferior entre elementos de la lista */
+}
+
+.mensaje-estilo {
+  color: #080708;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el texto */
+  align-items: center; /* Centra verticalmente el texto */
+  height: 40px; /* Ajusta la altura deseada */
+}
+
+mat-dialog-content {
+  background-color: #48494A;
+  border: 1px solid #48494A;
+  height: 600px; /* Establece la altura del cuadro de diálogo */
+}
+
+/* Estilos para la lista desordenada */
+ul {
+  list-style: none; /* Elimina los marcadores de lista */
+  padding: 0;
+  margin-top: 10px; /* Aumenta el espacio superior de la lista */
+}
+
+/* Estilos para los elementos de lista */
+li {
+  font-size: 1rem; /* Tamaño de fuente de los elementos de la lista */
+  margin-bottom: 10px; /* Aumenta el espacio inferior entre elementos de la lista */
+  padding-left: 20px; /* Agrega un espacio a la izquierda para el guión */
+  color: #FFF8F0;
+}
+
+/* Agrega un guión antes de cada elemento de la lista */
+ul li::before {
+  content: "- "; /* Agrega un guión antes de cada elemento de la lista */
+}

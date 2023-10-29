@@ -11,12 +11,16 @@
 
     <mat-form-field>
       <label for="fechaInicio">Fecha de Inicio</label>
-      <input type="date" name="fechaInicio" id="fechaInicio" [(ngModel)]="temporada.fechaInicio" matInput>
+      <input matInput [matDatepicker]="picker" name="fechaInicio" id="fechaInicio" [(ngModel)]="temporada.fechaInicio">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
       <label for="fechaTermino">Fecha de Fin</label>
-      <input type="date" name="fechaTermino" id="fechaTermino" [(ngModel)]="temporada.fechaTermino" matInput>
+      <input matInput [matDatepicker]="pickerFin" name="fechaTermino" id="fechaTermino" [(ngModel)]="temporada.fechaTermino" >
+      <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFin></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
@@ -33,11 +37,10 @@
       </mat-select>
     </mat-form-field>
 
-
+    <span class="mensaje-estilo" *ngIf="mensaje">{{ mensaje }}</span> <!-- Muestra el mensaje si existe -->
 
     <button type="submit" (click)="crearTemporada()">Crear Temporada</button>
   </form>
-  {{this.mensaje}}
 
 </mat-dialog-content>
 

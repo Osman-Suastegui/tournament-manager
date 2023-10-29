@@ -21,9 +21,9 @@ export class CrearLigaComponent implements OnInit{
     this.ligaService.createLiga(this.liga).subscribe({
       next: (result) => {
         this.mensaje = result.message;
+
         this.idLiga = result.responseData.idLiga;
         this.asignarLigaAdmin()
-
       },
       error: (error) => {
         this.mensaje = error.error[0].message;
