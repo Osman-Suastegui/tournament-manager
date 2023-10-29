@@ -1,0 +1,63 @@
+/* Estilos para el encabezado "Crear Liga" */
+mat-dialog-content header h1 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #FFF8F0;
+}
+
+/* Estilos para el formulario */
+mat-dialog-content form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px; /* Aumenta el espacio superior del formulario */
+  margin-bottom: 20px; /* Aumenta el espacio inferior del formulario */
+  color: #080708;
+}
+
+/* Estilos para el campo de entrada */
+mat-form-field {
+  width: 100%;
+  max-width: 300px; /* Establece el ancho máximo del campo de entrada */
+  margin-bottom: 20px; /* Aumenta el espacio inferior del campo de entrada */
+}
+
+/* Estilos para el botón "Crear Liga" */
+mat-dialog-content button[type="submit"] {
+  background-color: #F26419; /* Color de fondo del botón */
+  color: #080708; /* Color de texto del botón */
+  padding: 10px 20px; /* Ajusta el espaciado interno del botón */
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 7px;
+  margin-top: 20px; /* Aumenta el espacio superior del botón */
+  margin-bottom: 20px; /* Aumenta el espacio inferior del botón */
+  width: 60%;
+}
+
+/* Estilos para el mensaje de resultado */
+mat-dialog-content p {
+  text-align: center;
+  margin-top: 20px;
+}
+
+mat-dialog-content {
+  background-color: #48494A;
+  border: 1px solid #48494A;
+  height: 390px; /* Establece la altura del cuadro de diálogo */
+}
+
+/* Estilos para el mensaje personalizado */
+.mensaje-estilo {
+  color: #080708; /* Color del texto del mensaje */
+  font-size: 1rem; /* Tamaño de fuente del mensaje */
+  text-align: center; /* Alineación del texto */
+  margin-top: 20px; /* Espacio superior */
+  font-weight: bold;
+  text-transform: uppercase;
+
+}
+
