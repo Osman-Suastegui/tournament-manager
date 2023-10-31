@@ -12,6 +12,7 @@ import { Partidos } from '../interfaces/Partidos';
 import { AgregarArbitroPartidoComponent } from '../agregar-arbitro-partido/agregar-arbitro-partido.component';
 import { AgregarFechaPartidoComponent } from '../agregar-fecha-partido/agregar-fecha-partido.component';
 
+
 @Component({
   selector: 'app-temporada-caracteriticas',
   templateUrl: './temporada-caracteriticas.component.html',

@@ -53,3 +53,10 @@ mat-dialog-content {
 
 }
 
+mat-dialog-content form label {
+  color: #080708; /* Color del texto del input */
+}
+
+mat-dialog-content form mat-label {
+  color: #080708; /* Color del texto del input */
+}

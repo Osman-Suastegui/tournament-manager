@@ -47,7 +47,8 @@ mat-dialog-content form {
   margin-bottom: 20px; /* Aumenta el espacio inferior del formulario */
 }
 
-
-.amplio-input{
-  width: 100%;
+/* estilo a los inputs */
+mat-dialog-content form label {
+  color: #080708; /* Color del texto del input */
 }
+
