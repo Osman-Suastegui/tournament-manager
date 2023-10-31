@@ -52,3 +52,6 @@ mat-dialog-content {
   text-transform: uppercase;
 
 }
+mat-dialog-content form mat-label {
+  color: #080708; /* Color del texto del input */
+}

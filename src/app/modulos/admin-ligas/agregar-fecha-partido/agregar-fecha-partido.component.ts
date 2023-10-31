@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TemporadasService } from '../adminLigasService/temporadas.service';
-import { format, parse, addHours } from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-agregar-fecha-partido',
@@ -26,26 +25,27 @@ export class AgregarFechaPartidoComponent implements OnInit{
 
 
   agendarPartido(idPartido: number, fecha: string, hora: string) {
-
+    console.log(" id partido: " + idPartido + " fecha: " + fecha + " hora: " + hora);
     try {
-      // Formatea la fecha y hora en el formato "YYYY-MM-DDTHH:mm:ss.000Z" (UTC)
-      const fechaHoraLocal = new Date(`${fecha} ${hora}`);
-      const fechaHoraUTC = new Date(fechaHoraLocal.toISOString());
-
-      // Formatea la fecha y hora en el formato deseado: "YYYY-MM-DD HH:mm:ss"
-      const fechaHoraZonaHoraria = fechaHoraUTC.toISOString().slice(0, 19).replace('T', ' ');
+      // Formatea la fecha en el formato "YYYY-MM-DD" y la hora en "HH:mm:ss"
+      const fechaHoraFormateada = format(new Date(fecha), "yyyy-MM-dd") + " " + hora;
 
 
-      this.tempService.agendarPartido(idPartido, fechaHoraZonaHoraria).subscribe({
-          next: (result) => {
-            this.mensaje = result.message;
-            this.tempService.emitNuevaFechaPartidoAsignada();
-          }
+      console.log("fecha formateada: " + fechaHoraFormateada);
+
+      this.tempService.agendarPartido(idPartido, fechaHoraFormateada).subscribe({
+        next: (result) => {
+          this.mensaje = result.message;
+          this.tempService.emitNuevaFechaPartidoAsignada();
+        }
       });
     } catch (error) {
       this.mensaje = "Error al agendar el partido";
     }
   }
+
+
+
 
 
 
