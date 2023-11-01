@@ -1,0 +1,38 @@
+/* footer.component.css */
+
+.footer {
+  background-color: #FFF8F0; /* Color de fondo del footer */
+  color: #080708; /* Color del texto */
+  padding: 20px 0; /* Espaciado interno */
+  text-align: center;
+  border-radius: 40px;
+  margin-right: 12rem;
+  margin-left: 12rem;
+}
+
+.footer-toolbar {
+  background-color: transparent; /* Fondo transparente */
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer-text {
+  font-size: 1rem;
+  color: #080708; /* Color del texto */
+}
+
+.enlaceFooter{
+  color: #080708; /* Color del texto */
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.contenedorImagen {
+  display: flex;
+  align-items: center; /* Centra verticalmente la imagen */
+}
+
+.imagenLogo {
+  max-width: 50px; /* Tamaño máximo de la imagen */
+}

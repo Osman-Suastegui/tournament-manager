@@ -12,6 +12,7 @@ import { CrearTemporadaComponent } from './crear-temporada/crear-temporada.compo
 import { AgregarEquipoComponent } from './agregar-equipo/agregar-equipo.component';
 import { AgregarArbitroPartidoComponent } from './agregar-arbitro-partido/agregar-arbitro-partido.component';
 import { AgregarFechaPartidoComponent } from './agregar-fecha-partido/agregar-fecha-partido.component';
+import { FooterModule } from '../footer/footer.module';
 
 
 
@@ -31,7 +32,8 @@ import { AgregarFechaPartidoComponent } from './agregar-fecha-partido/agregar-fe
     AngularMaterialModule,
     CommonModule,
     BrowserAnimationsModule,
-    NavBarModule
+    NavBarModule,
+    FooterModule
   ],
   exports: [
     HomeAdminLigasComponent,
