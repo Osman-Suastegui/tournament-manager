@@ -7,6 +7,7 @@ import { ArbitrosModule } from '../arbitros/arbitros.module';
 import { JugadoresModule } from '../jugadores/jugadores.module';
 import { AnonimoModule } from '../anonimo/anonimo.module';
 import { NavBarModule } from '../nav-bar/nav-bar.module';
+import { FooterModule } from '../footer/footer.module';
 
 
 
@@ -21,7 +22,8 @@ import { NavBarModule } from '../nav-bar/nav-bar.module';
     ArbitrosModule,
     JugadoresModule,
     AnonimoModule,
-    NavBarModule
+    NavBarModule,
+    FooterModule
   ],
   exports: [
     HomeComponent
