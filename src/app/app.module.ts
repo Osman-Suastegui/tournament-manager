@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './modulos/auth/auth.module';
 import { HomeModule } from './modulos/home/home.module';
 import { ArbitrosModule } from './modulos/arbitros/arbitros.module';
+import { AdminLigasModule } from './modulos/admin-ligas/admin-ligas.module';
 
 
 
@@ -20,7 +21,8 @@ import { ArbitrosModule } from './modulos/arbitros/arbitros.module';
     AppRoutingModule,
     AuthModule,
     HomeModule,
-    ArbitrosModule
+    ArbitrosModule,
+    AdminLigasModule
   ],
   providers: [],
   bootstrap: [AppComponent]

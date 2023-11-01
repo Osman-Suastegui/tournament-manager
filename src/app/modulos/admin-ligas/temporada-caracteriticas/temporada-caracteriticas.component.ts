@@ -33,6 +33,7 @@ export class TemporadaCaracteriticasComponent implements OnInit{
   mensajePartidos: string = "";
   partidosTemporada: Partidos[] = [];
   idPartido: number = 0;
+  displayedColumns: string[] = ['equipo1', 'arbitro', 'equipo2', 'fechaInicio', 'ganador'];
 
 
   ngOnInit(): void {
@@ -70,7 +71,9 @@ export class TemporadaCaracteriticasComponent implements OnInit{
     });
 
     this.obtenerPartidosTemporada();
-
+    setTimeout(() => {
+      this.mensajePartidos = ''; // Limpiar el mensaje
+    }, 5000);
     this.tempService.onNuevoArbitroPartidoAsignado().subscribe({
       next: () => {
         this.obtenerPartidosTemporada();
@@ -86,6 +89,9 @@ export class TemporadaCaracteriticasComponent implements OnInit{
     this.tempService.onNuevosPartidosGenerados().subscribe({
       next: () => {
         this.obtenerPartidosTemporada();
+        setTimeout(() => {
+          this.mensajePartidos = ''; // Limpiar el mensaje
+        }, 5000);
       }
     });
 
@@ -159,9 +165,15 @@ export class TemporadaCaracteriticasComponent implements OnInit{
         this.mensajePartidos = result.message;
         this.tempService.emitEstadoTemporadaActualizado();
         this.tempService.emitNuevosPartidosGenerados();
+        setTimeout(() => {
+          this.mensajePartidos = ''; // Limpiar el mensaje
+        }, 5000);
       },
       error: (err) => {
         this.mensajePartidos = err.error[0].message;
+        setTimeout(() => {
+          this.mensajePartidos = ''; // Limpiar el mensaje
+        }, 5000);
       }
     });
   }
