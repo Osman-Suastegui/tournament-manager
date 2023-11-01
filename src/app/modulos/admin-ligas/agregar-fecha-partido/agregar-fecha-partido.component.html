@@ -17,7 +17,7 @@
 
     <mat-form-field>
       <label for="hora">Hora</label>
-      <input type="time" matInput [(ngModel)]="horaPartido" name="horaPartido">
+      <input matInput type="time" [(ngModel)]="horaPartido" name="horaPartido">
     </mat-form-field>
 
     <span class="mensaje-estilo" *ngIf="mensaje">{{ mensaje }}</span> <!-- Muestra el mensaje si existe -->
