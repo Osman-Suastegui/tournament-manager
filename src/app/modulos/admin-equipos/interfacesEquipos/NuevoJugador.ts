@@ -1,10 +1,13 @@
 export interface NuevoJugador {
-    equipo: {
-        nombre: string;
-    };
-    jugador: {
-        usuario: string;
-    };
-    posicion: string;
+    equipoNombre: string,
+    jugadorUsuario: string,
+    posicion: string
+}
+
+export interface Jugadores {
+  jugador: {
+    usuario: string;
+  };
+    posicion: string
 }
 

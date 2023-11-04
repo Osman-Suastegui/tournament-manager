@@ -21,4 +21,25 @@
     <button type="submit" (click)="agregarJugador(selectedJugador, jugadorNuevo.posicion)">Agregar Jugador</button>
   </form>
 
+  <h2>Jugadores en el Equipo</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Posicion</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let jugador of jugadoresEnEquipo">
+        <td>{{ jugador.usuario }}</td> <!-- Cambiado de 'nombre' a 'usuario' -->
+        <td>{{ jugador.posicion }}</td>
+        <td>
+          <button (click)="eliminarJugador(jugador.usuario)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
 </mat-dialog-content>

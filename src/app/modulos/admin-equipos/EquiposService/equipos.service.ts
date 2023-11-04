@@ -14,7 +14,7 @@ export class EquiposService {
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
   private nuevoEquipo  = new Subject<void>();
-
+  private modificacionJugadores = new Subject<void>();
 
   onNuevoEquipoCreado() {
     return this.nuevoEquipo.asObservable();
@@ -24,6 +24,15 @@ export class EquiposService {
     this.nuevoEquipo.next();
   }
 
+  onModificacionJugadores() {
+    return this.modificacionJugadores.asObservable();
+  }
+
+  emitModificacionJugadores() {
+    this.modificacionJugadores.next();
+  }
+
+  
 
 
 
@@ -69,16 +78,35 @@ export class EquiposService {
 
   agregarJugadorAEquipo(jugador: any): Observable<any> {
     const headers = this.tokenService.createHeaders();
-    console.log(jugador.equipo.nombre);
 
     const jugadorAjustado = {
-      equipo: { nombre: jugador.equipo.nombre }, // Accede a la propiedad "nombre" de "equipo"
-      jugador: { usuario: jugador.jugador.usuario }, // Accede a la propiedad "usuario" de "jugador"
+      equipoNombre: jugador.equipoNombre,
+      jugadorUsuario: jugador.jugadorUsuario,
       posicion: jugador.posicion
     };
 
     return this.http.post(url + '/Equipo/agregarJugador', jugadorAjustado, { headers });
   }
+
+
+
+
+  obtenerJugadoresdeEquipo(equipo: string) {
+    const headers = this.tokenService.createHeaders();
+    const urlWithEquipo = `${url}/Equipo/${encodeURIComponent(equipo)}/jugadores`;
+
+    return this.http.get(urlWithEquipo, { headers: headers });
+  }
+
+
+  eliminarJugadorDeEquipo(jugador: string, equipo: string) {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.delete(url + '/Equipo/eliminarJugador?nombreEquipo=' + equipo + '&nombreJugador=' + jugador, {
+      headers: headers
+    });
+  }
+
 
 
 }
