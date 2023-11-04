@@ -47,8 +47,6 @@ export class CrearTemporadaComponent implements OnInit{
       next: (result) => {
         this.mensaje = result.message;
         this.claveTemporada = result.claveTemporada;
-        console.log(this.claveTemporada);
-        console.log(this.idLiga);
         this.asignarTemporada(this.claveTemporada, this.idLiga);
       },
       error: (error) => {
@@ -60,7 +58,6 @@ export class CrearTemporadaComponent implements OnInit{
   asignarTemporada(claveTemp: number, claveLiga: number) {
     this.tempService.asignarTemporada(claveTemp, claveLiga).subscribe({
       next: () => {
-        console.log('Temporada asignada');
         this.tempService.emitNuevaTemporadaCreada();
       }
     });

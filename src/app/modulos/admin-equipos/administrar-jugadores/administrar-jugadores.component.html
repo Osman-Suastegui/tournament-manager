@@ -1,0 +1,24 @@
+<mat-dialog-content>
+  <header>
+    <h1>Jugadores</h1>
+  </header>
+
+  <form>
+
+    <mat-form-field>
+      <mat-label>Jugadores</mat-label>
+      <mat-select [(ngModel)]="selectedJugador" name="usuarioJugador">
+        <mat-option *ngFor="let jugadorUsuario of jugadoresUsuario" [value]="jugadorUsuario">{{ jugadorUsuario }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Posicion</mat-label>
+      <input type="text" name="posicion" id="posicion" [(ngModel)]="jugadorNuevo.posicion" matInput>
+    </mat-form-field>
+
+    <span class="mensaje-estilo" *ngIf="mensaje">{{ mensaje }}</span> <!-- Muestra el mensaje si existe -->
+    <button type="submit" (click)="agregarJugador(selectedJugador, jugadorNuevo.posicion)">Agregar Jugador</button>
+  </form>
+
+</mat-dialog-content>

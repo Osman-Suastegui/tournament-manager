@@ -1,1 +1,9 @@
-<p>home-admin-equipo works!</p>
+{{mensaje}}
+
+<div *ngIf="!tieneEquipo">
+  <button (click)="crearEquipo()">Crear Equipo</button>
+</div>
+
+<div *ngIf="tieneEquipo">
+  <button (click)="administrarJugadores()">Administrar Jugadores</button>
+</div>
