@@ -1,0 +1,35 @@
+<mat-dialog-content>
+  <header>
+    <h1>Crear Equipo</h1>
+  </header>
+
+  <form>
+
+
+    <mat-form-field>
+      <label for="nombre">Nombre del Equipo</label>
+      <input type="text" name="nombre" id="nombre" [(ngModel)]="equipo.nombre" matInput>
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <label for="categoria">Categoría</label>
+      <mat-select name="categoria" id="categoria" [(ngModel)]="equipo.categoria">
+        <mat-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <label for="rama">Ramas</label>
+      <mat-select name="rama" id="rama" [(ngModel)]="equipo.rama">
+        <mat-option *ngFor="let rama of ramas" [value]="rama">{{rama}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <span class="mensaje-estilo" *ngIf="mensaje">{{ mensaje }}</span> <!-- Muestra el mensaje si existe -->
+
+    <button type="submit" (click)="crearEquipo()">Crear Equipo</button>
+  </form>
+
+</mat-dialog-content>
+

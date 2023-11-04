@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Liga } from '../../../models/Ligas/Ligas';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+
 import { url } from '../../../url-config';
 import { TokenService } from '../../../services/tokenService/token.service';
 import { Subject } from 'rxjs';
