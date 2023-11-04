@@ -3,8 +3,7 @@ import { EquiposService } from '../EquiposService/equipos.service';
 import { OnInit } from '@angular/core';
 import { Jugador } from '../interfacesEquipos/Jugador';
 import { NuevoJugador } from '../interfacesEquipos/NuevoJugador';
-
-
+import { Jugadores } from '../interfacesEquipos/NuevoJugador';
 
 @Component({
   selector: 'app-administrar-jugadores',
@@ -20,19 +19,27 @@ export class AdministrarJugadoresComponent implements OnInit{
   selectedJugador: string = '';
   mensaje: string = '';
   jugadorNuevo: NuevoJugador = {
-    equipo: {
-      nombre: this.nombreEquipo
-    },
-    jugador: {
-      usuario: this.selectedJugador
-    },
+    equipoNombre: this.nombreEquipo,
+    jugadorUsuario: this.selectedJugador,
     posicion: ''
   };
+  jugadoresEnEquipo: { usuario: string, posicion: string }[] = [];
+
 
 
   ngOnInit(): void {
     this.nombreEquipo = localStorage.getItem('nombreEquipo')!;
     this.obtenerJugadoresParaEquipo(this.nombreEquipo);
+
+    this.obtenerJugadoresdeEquipo();
+
+    this.equiposService.onModificacionJugadores().subscribe({
+      next: () => {
+        this.obtenerJugadoresdeEquipo();
+        this.obtenerJugadoresParaEquipo(this.nombreEquipo)
+      }
+    });
+
   }
 
 
@@ -41,22 +48,56 @@ export class AdministrarJugadoresComponent implements OnInit{
     this.equiposService.obtenerJugadoresParaEquipo(equipo).subscribe({
       next: (result) => { // No especifica el tipo en la función next
         this.jugadoresUsuario = (result as Jugador[]).map(jugador => jugador.usuario);
-        console.log(result);
+
       }
     });
   }
 
 
   agregarJugador(jugador: string, posicion: string) {
-    this.jugadorNuevo.equipo.nombre = this.nombreEquipo;
-    this.jugadorNuevo.jugador.usuario = jugador;
+    if (posicion === '') {
+      this.mensaje = 'No se ha seleccionado una posición';
+      return;
+    }
+    this.jugadorNuevo.equipoNombre = this.nombreEquipo;
+    this.jugadorNuevo.jugadorUsuario = jugador;
     this.jugadorNuevo.posicion = posicion;
     this.equiposService.agregarJugadorAEquipo(this.jugadorNuevo).subscribe({
       next: (result) => {
-        console.log(result);
+        this.mensaje = result.message;
+        this.equiposService.emitModificacionJugadores();
+        this.selectedJugador = '';
+        this.jugadorNuevo.posicion = '';
+      },
+      error: (error) => {
+        this.mensaje = error.error[0].message;
       }
     });
+  }
 
+  obtenerJugadoresdeEquipo() {
+    this.equiposService.obtenerJugadoresdeEquipo(this.nombreEquipo).subscribe({
+      next: (result) => {
+        this.jugadoresEnEquipo = (result as Jugadores[]).map(jugador => {
+          return {
+            usuario: jugador.jugador.usuario,
+            posicion: jugador.posicion
+          };
+        });
+      }
+    });
+  }
+
+  eliminarJugador(jugador: string) {
+    this.equiposService.eliminarJugadorDeEquipo(jugador, this.nombreEquipo).subscribe({
+      next: (result: any) => {
+        this.mensaje = result.message;
+        this.equiposService.emitModificacionJugadores();
+      },
+      error: (error) => {
+        this.mensaje = error.error[0].message;
+      }
+    });
   }
 
 }
