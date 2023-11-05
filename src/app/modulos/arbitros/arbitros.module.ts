@@ -7,18 +7,23 @@ import {MatTableModule} from '@angular/material/table';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { RxStompService } from './config-rx-stomp/rx-stomp.service';
 import { rxStompServiceFactory } from './config-rx-stomp/rx-stomp-service-factory';
-
-
+import { NavBarModule } from '../nav-bar/nav-bar.module';
+import { FooterModule } from '../footer/footer.module';
+import { AngularMaterialModule } from '../angular-material/angular-material.module';
 @NgModule({
   declarations: [
     HomeArbitroComponent,
     RegistroDeEstadisticasDeJugadoresPorPartidoComponent,
     TablaEstadisticasDeJugadorPorPartidoComponent
+    
   ],
   imports: [
     CommonModule,
     MatTableModule,
-    MatGridListModule
+    MatGridListModule,
+    NavBarModule,
+    FooterModule,
+    AngularMaterialModule
   ],
   exports: [
     HomeArbitroComponent,
