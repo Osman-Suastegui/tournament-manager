@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { PartidosService } from 'src/app/services/partidosService/partidos.service';
 @Component({
   selector: 'app-registro-de-estadisticas-de-jugadores-por-partido',
   templateUrl: './registro-de-estadisticas-de-jugadores-por-partido.component.html',
@@ -8,16 +8,25 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RegistroDeEstadisticasDeJugadoresPorPartidoComponent implements OnInit {
   claveDelPartido: number | undefined;
-  nombreEquipo1 = "Equipo Aguilas del Infierno";
-  nombreEquipo2 = "Chivas";
+  nombreEquipo1 = "Miami Heat";
+  nombreEquipo2 = "Denver Nuggets";
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute,private PartidoService:PartidosService) {}
   
   ngOnInit(): void {
     this.route.params.subscribe(params => this.claveDelPartido = params['claveDelPartido']);
-  
+    this.obtenerEquiposDePartido();
   }
-  
+  obtenerEquiposDePartido(){
+    console.log("se llama")
+    this.PartidoService.obtenerPartido(this.claveDelPartido).subscribe((partido)=>{
+      console.log("equipo1 ",partido.equipo1);
+      console.log("equpo2 ",partido.equipo2);
+      this.nombreEquipo1=partido.equipo1;
+      this.nombreEquipo2=partido.equipo2;
+    });
+
+  }
 
 
 }

@@ -21,46 +21,7 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
       asistencias: (fila: EstadisticasJugador) => fila.asistencias++,
       faltas: (fila: EstadisticasJugador) => fila.faltas++,
     };
-    datosTemporales : EstadisticasJugador[] = [{
-       "jugador": "Jugador 1",
-        "faltas": 0,
-        "tirosDe2Puntos": 0,
-        "tirosLibres": 0,
-        "tirosDe3Puntos": 0,
-        "asistencias": 0
-    },
-    {
-      "jugador": "Jugador 2",
-       "faltas": 0,
-       "tirosDe2Puntos": 0,
-       "tirosLibres": 0,
-       "tirosDe3Puntos": 0,
-       "asistencias": 0
-   },
-   {
-    "jugador": "Jugador 3",
-     "faltas": 0,
-     "tirosDe2Puntos": 0,
-     "tirosLibres": 0,
-     "tirosDe3Puntos": 0,
-     "asistencias": 0
- },
- {
-  "jugador": "Jugador 4",
-   "faltas": 0,
-   "tirosDe2Puntos": 0,
-   "tirosLibres": 0,
-   "tirosDe3Puntos": 0,
-   "asistencias": 0
-},
-{
-  "jugador": "Jugador 5",
-   "faltas": 0,
-   "tirosDe2Puntos": 0,
-   "tirosLibres": 0,
-   "tirosDe3Puntos": 0,
-   "asistencias": 0
-}];
+    datosTemporales : EstadisticasJugador[] = [];
     
 
     data: EstadisticasJugador[] = [];
@@ -82,7 +43,7 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
       const message = {
         "clavePartido": this.claveDelPartido,
         "jugador" : jugador,
-        "descripcion" : columna
+        "descripcion" : columna 
       }
       this.RxStompService.publish({
         destination: '/app/agregarPunto',
@@ -94,6 +55,7 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
 
     ngOnInit() {
       this.JugadoresDePartidoEquipoService.obtenerJugadoresDePartidoYEquipo(this.claveDelPartido, this.nombreEquipo, this.enBanca).subscribe((data) => {
+        console.log(data);
         this.tableDataSource = new MatTableDataSource<EstadisticasJugador>([...data, ...this.datosTemporales]);
         
       });
