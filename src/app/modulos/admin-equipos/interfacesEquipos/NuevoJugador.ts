@@ -11,3 +11,9 @@ export interface Jugadores {
     posicion: string
 }
 
+export interface JugadoresPartido {
+  jugador: {
+    usuario: string;
+  };
+}
+

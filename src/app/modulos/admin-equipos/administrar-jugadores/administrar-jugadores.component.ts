@@ -48,7 +48,7 @@ export class AdministrarJugadoresComponent implements OnInit{
     this.equiposService.obtenerJugadoresParaEquipo(equipo).subscribe({
       next: (result) => { // No especifica el tipo en la función next
         this.jugadoresUsuario = (result as Jugador[]).map(jugador => jugador.usuario);
-
+        
       }
     });
   }

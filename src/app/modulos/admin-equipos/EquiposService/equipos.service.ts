@@ -32,7 +32,7 @@ export class EquiposService {
     this.modificacionJugadores.next();
   }
 
-  
+
 
 
 
@@ -106,6 +106,68 @@ export class EquiposService {
       headers: headers
     });
   }
+
+
+  obtenerPartidosDeEquipo(equipo: string, estatus: string) {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/Partido/obtenerPartidosEquipo', {
+      headers: headers,
+      params: {
+        idEquipo: equipo,
+        estatusPartido: estatus
+      }
+    });
+  }
+
+  //http://localhost:8080/Partido/obtenerEquipo1Equipo2?clavePartido=75
+  obtenerEquipo1Equipo2(clavePartido: string) {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/Partido/obtenerEquipo1Equipo2', {
+      headers: headers,
+      params: {
+        clavePartido: clavePartido
+      }
+    });
+  }
+
+
+  //http://localhost:8080/JugadorPartido/agregarJugadorPartido
+  agregarJugadorPartido(jugadorPartido: any): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.post(url + '/JugadorPartido/agregarJugadorPartido', jugadorPartido, { headers });
+  }
+
+  //http://localhost:8080/JugadorPartido/obtenerJugadoresNoEnPartido?clavePartido=75&nombreEquipo=prueba pls funciona
+
+  obtenerJugadoresDeEquipoNoEnPartido(equipo: string, clavePartido: string) {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/JugadorPartido/obtenerJugadoresNoEnPartido', {
+      headers: headers,
+      params: {
+        clavePartido: clavePartido,
+        nombreEquipo: equipo
+      }
+    });
+  }
+
+
+    //http://localhost:8080/JugadorPartido/obtenerJugadoresDePartidoyEquipo?clavePartido=75&nombreEquipo=prueba pls funciona
+
+    obtenerJugadoresDePartidoyEquipo(equipo: string, clavePartido: string) {
+      const headers = this.tokenService.createHeaders();
+
+      return this.http.get(url + '/JugadorPartido/obtenerJugadoresDePartidoyEquipo', {
+        headers: headers,
+        params: {
+          clavePartido: clavePartido,
+          nombreEquipo: equipo
+        }
+      });
+    }
 
 
 
