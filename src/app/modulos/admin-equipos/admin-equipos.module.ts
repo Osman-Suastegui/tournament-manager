@@ -4,6 +4,7 @@ import { HomeAdminEquipoComponent } from './home-admin-equipo/home-admin-equipo.
 import { CrearEquipoComponent } from './crear-equipo/crear-equipo.component';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { AdministrarJugadoresComponent } from './administrar-jugadores/administrar-jugadores.component';
+import { JugadoresPartidoComponent } from './jugadores-partido/jugadores-partido.component';
 
 
 
@@ -11,7 +12,8 @@ import { AdministrarJugadoresComponent } from './administrar-jugadores/administr
   declarations: [
     HomeAdminEquipoComponent,
     CrearEquipoComponent,
-    AdministrarJugadoresComponent
+    AdministrarJugadoresComponent,
+    JugadoresPartidoComponent
   ],
   imports: [
     CommonModule,

@@ -1,28 +1,29 @@
-<mat-dialog-actions class="dialog-actions">
-  <button mat-raised-button (click)="openDialog()">Crear Liga</button>
-</mat-dialog-actions>
+<div class="contenedorPag">
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-raised-button (click)="openDialog()">Crear Liga</button>
+  </mat-dialog-actions>
 
-<div *ngIf="ligasAsignadas === 0">
-  <h2 class="ng-if-message">No Tiene Ligas Asignadas</h2>
-</div>
+  <div *ngIf="ligasAsignadas === 0">
+    <h2 class="ng-if-message">No Tiene Ligas Asignadas</h2>
+  </div>
 
 
-<div *ngIf="ligasAdministrador.length > 0">
-  <div class="card-deck">
-    <div *ngFor="let liga of ligasAdministrador; let i = index" class="card">
-      <div class="card-body">
-        <a class="card-title" (click)="openDialogModificarLiga(liga.idLiga, liga.nombreLiga)">{{ liga.nombreLiga }}</a>
-        <ul class="list-group list-group-flush temporada-list">
-          <li *ngFor="let temporada of temporadasPorLiga[liga.idLiga]; let j = index" class="list-group-item">
-            <button class="temporadas" (click)="verTemporada(temporada.idTemporada)">{{ temporada.nombreTemporada }}</button>
-          </li>
-        </ul>
-      </div>
-      <div class="card-footer">
-        <button (click)="openDialogCrearTemporada(liga.idLiga)" class="btn btn-primary crearTemporada">Crear Temporada</button>
+  <div *ngIf="ligasAdministrador.length > 0">
+    <div class="card-deck">
+      <div *ngFor="let liga of ligasAdministrador; let i = index" class="card">
+        <div class="card-body">
+          <a class="card-title" (click)="openDialogModificarLiga(liga.idLiga, liga.nombreLiga)">{{ liga.nombreLiga }}</a>
+          <ul class="list-group list-group-flush temporada-list">
+            <li *ngFor="let temporada of temporadasPorLiga[liga.idLiga]; let j = index" class="list-group-item">
+              <button class="temporadas" (click)="verTemporada(temporada.idTemporada)">{{ temporada.nombreTemporada }}</button>
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <button (click)="openDialogCrearTemporada(liga.idLiga)" class="btn btn-primary crearTemporada">Crear Temporada</button>
+        </div>
       </div>
     </div>
   </div>
+
 </div>
-
-

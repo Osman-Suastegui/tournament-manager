@@ -1,0 +1,41 @@
+<p>jugadores-partido works!</p>
+<mat-dialog-content>
+
+  <header>
+    <h2>Jugadores del Partido</h2>
+    <h2>{{equipo1}} vs {{equipo2}}</h2>
+  </header>
+
+  <form>
+
+    <mat-form-field>
+      <mat-label>Jugadores</mat-label>
+      <mat-select [(ngModel)]="selectedJugador" name="usuarioJugador">
+        <mat-option *ngFor="let jugador of jugadoresDeEquipoNoEnPartido" [value]="jugador">{{ jugador }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+
+
+
+
+    <span class="mensaje-estilo" *ngIf="mensaje">{{ mensaje }}</span> <!-- Muestra el mensaje si existe -->
+    <button type="submit" (click)="agregarJugadorAlPartido(selectedJugador)">Agregar Jugador</button>
+  </form>
+
+  <h2>Jugadores Disponibles en el partido</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let jugador of jugadoresEnPartido">
+        <td>{{ jugador.jugador }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</mat-dialog-content>
