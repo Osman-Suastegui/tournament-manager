@@ -27,7 +27,6 @@
       <tr>
         <th>Nombre</th>
         <th>Posicion</th>
-        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -35,11 +34,14 @@
         <td>{{ jugador.usuario }}</td> <!-- Cambiado de 'nombre' a 'usuario' -->
         <td>{{ jugador.posicion }}</td>
         <td>
-          <button (click)="eliminarJugador(jugador.usuario)">Eliminar</button>
+          <button mat-icon-button (click)="eliminarJugador(jugador.usuario)">
+            <mat-icon>close</mat-icon>
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
 
+  <span class="mensaje-estilo" *ngIf="mensajeEliminar">{{ mensajeEliminar }}</span> <!-- Muestra el mensaje si existe -->
 
 </mat-dialog-content>

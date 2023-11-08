@@ -18,6 +18,7 @@ export class AdministrarJugadoresComponent implements OnInit{
   jugadoresUsuario: string[] = [];
   selectedJugador: string = '';
   mensaje: string = '';
+  mensajeEliminar: string = '';
   jugadorNuevo: NuevoJugador = {
     equipoNombre: this.nombreEquipo,
     jugadorUsuario: this.selectedJugador,
@@ -48,7 +49,7 @@ export class AdministrarJugadoresComponent implements OnInit{
     this.equiposService.obtenerJugadoresParaEquipo(equipo).subscribe({
       next: (result) => { // No especifica el tipo en la función next
         this.jugadoresUsuario = (result as Jugador[]).map(jugador => jugador.usuario);
-        
+
       }
     });
   }
@@ -91,11 +92,11 @@ export class AdministrarJugadoresComponent implements OnInit{
   eliminarJugador(jugador: string) {
     this.equiposService.eliminarJugadorDeEquipo(jugador, this.nombreEquipo).subscribe({
       next: (result: any) => {
-        this.mensaje = result.message;
+        this.mensajeEliminar = result.message;
         this.equiposService.emitModificacionJugadores();
       },
       error: (error) => {
-        this.mensaje = error.error[0].message;
+        this.mensajeEliminar = error.error[0].message;
       }
     });
   }
