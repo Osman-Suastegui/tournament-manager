@@ -17,10 +17,15 @@ export class JugadoresPartidoComponent implements OnInit{
 
   nombreEquipo: any = '';
   jugadoresDeEquipoNoEnPartido: string[] = [];
+  jugadorSeleccionado: string = '';
   jugadoresUsuario: string[] = [];
   selectedJugador: string = '';
-  mensaje: string = '';
-  jugadoresEnPartido: JugadoresPart[] = [];;
+  mensajeJugadorCancha: string = '';
+  mensajeJugadoresPartidos: string = '';
+  mensajeJugadorBanca: string = '';
+  jugadoresEnPartido: JugadoresPart[] = [];
+  jugadoresEnBanca: JugadoresPart[] = [];
+  jugadoresEnCancha: JugadoresPart[] = [];
   clavePartido: any = '';
   equipo1: string = '';
   equipo2: string = '';
@@ -45,6 +50,18 @@ export class JugadoresPartidoComponent implements OnInit{
 
     this.obtenerEquipo1Equipo2();
     this.obtenerJugadoresDelPartido();
+    this.obtenerJugadoresEnBanca();
+    this.obtenerJugadoresEnCancha();
+
+    this.equipoServ.onModificacionJugadoresPartido().subscribe({
+      next: () => {
+        this.obtenerJugadoresDelPartido();
+        this.obtenerJugadoresEnBanca();
+        this.obtenerJugadoresEnCancha();
+        this.obtenerJugadoresdeEquipo();
+      }
+    });
+
   }
 
 
@@ -60,9 +77,15 @@ export class JugadoresPartidoComponent implements OnInit{
     this.jugadorParaPartido.equipo = this.nombreEquipo;
     this.jugadorParaPartido.jugador.usuario = jugador;
     this.jugadorParaPartido.partido.clavePartido = this.clavePartido;
+
+    if(this.jugadorParaPartido.jugador.usuario == ''){
+      this.mensajeJugadoresPartidos = 'No se selecciono ningun jugador';
+    }
     this.equipoServ.agregarJugadorPartido(this.jugadorParaPartido).subscribe({
-      next: (result) => {
-        console.log(result);
+      next: () => {
+        this.mensajeJugadoresPartidos = 'Jugador agregado al partido';
+        this.selectedJugador = '';
+        this.equipoServ.emitModificacionJugadoresPartido();
       }
     });
   }
@@ -80,8 +103,47 @@ export class JugadoresPartidoComponent implements OnInit{
   obtenerJugadoresDelPartido() {
     this.equipoServ.obtenerJugadoresDePartidoyEquipo(this.nombreEquipo, this.clavePartido).subscribe({
       next: (result: any) => {
-        console.log(result);
         this.jugadoresEnPartido = result.map((item: any) => ({ jugador: item.jugador }));
+      }
+    });
+  }
+
+  posicionarEnCancha(jugador: string){
+    if(jugador == ''){
+      this.mensajeJugadorCancha = 'No se selecciono ningun jugador';
+    }else{
+    this.equipoServ.posicionarJugador(this.clavePartido, jugador, false).subscribe({
+      next: () => {
+        this.mensajeJugadorCancha = 'Jugador ' + jugador +  ' posicionado en cancha';
+        this.equipoServ.emitModificacionJugadoresPartido();
+        this.jugadorSeleccionado = '';
+      }
+    });
+  }
+  }
+
+  posicionarEnBanca(jugador: string){
+    this.equipoServ.posicionarJugador(this.clavePartido, jugador, true).subscribe({
+      next: () => {
+        this.mensajeJugadorBanca = 'Jugador ' + jugador + ' posicionado en banca';
+        this.equipoServ.emitModificacionJugadoresPartido();
+        this.jugadorSeleccionado = '';
+      }
+    });
+  }
+
+  obtenerJugadoresEnBanca(){
+    this.equipoServ.obtenerJugadoresDePartidoEnBanca(this.nombreEquipo, this.clavePartido, true).subscribe({
+      next: (result: any) => {
+        this.jugadoresEnBanca = result.map((item: any) => ({ jugador: item.jugador }));
+      }
+    });
+  }
+
+  obtenerJugadoresEnCancha(){
+    this.equipoServ.obtenerJugadoresDePartidoEnCancha(this.nombreEquipo, this.clavePartido, false).subscribe({
+      next: (result: any) => {
+        this.jugadoresEnCancha = result.map((item: any) => ({ jugador: item.jugador }));
       }
     });
   }

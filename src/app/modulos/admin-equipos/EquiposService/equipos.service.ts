@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { url } from '../../../url-config';
 import { TokenService } from '../../../services/tokenService/token.service';
 import { Subject } from 'rxjs';
@@ -15,6 +14,7 @@ export class EquiposService {
   constructor(private http: HttpClient, private tokenService: TokenService) {}
   private nuevoEquipo  = new Subject<void>();
   private modificacionJugadores = new Subject<void>();
+  private modificacionJugadoresPartido = new Subject<void>();
 
   onNuevoEquipoCreado() {
     return this.nuevoEquipo.asObservable();
@@ -30,6 +30,14 @@ export class EquiposService {
 
   emitModificacionJugadores() {
     this.modificacionJugadores.next();
+  }
+
+  onModificacionJugadoresPartido() {
+    return this.modificacionJugadoresPartido.asObservable();
+  }
+
+  emitModificacionJugadoresPartido() {
+    this.modificacionJugadoresPartido.next();
   }
 
 
@@ -164,10 +172,51 @@ export class EquiposService {
         headers: headers,
         params: {
           clavePartido: clavePartido,
-          nombreEquipo: equipo
+          nombreEquipo: equipo,
         }
       });
     }
+
+
+    obtenerJugadoresDePartidoEnBanca(equipo: string, clavePartido: string, enBanca: boolean) {
+      const headers = this.tokenService.createHeaders();
+
+      return this.http.get(url + '/JugadorPartido/obtenerJugadoresDePartidoyEquipo', {
+        headers: headers,
+        params: {
+          clavePartido: clavePartido,
+          nombreEquipo: equipo,
+          enBanca: enBanca
+        }
+      });
+    }
+
+
+    obtenerJugadoresDePartidoEnCancha(equipo: string, clavePartido: string, enBanca: boolean) {
+      const headers = this.tokenService.createHeaders();
+
+      return this.http.get(url + '/JugadorPartido/obtenerJugadoresDePartidoyEquipo', {
+        headers: headers,
+        params: {
+          clavePartido: clavePartido,
+          nombreEquipo: equipo,
+          enBanca: enBanca
+        }
+      });
+    }
+
+
+    //http://localhost:8080/JugadorPartido/PosicionarJugador?clavePartido=75&usuario=elpepe&enBanca=false
+
+
+    posicionarJugador(clavePartido: string, usuario: string, enBanca: boolean) {
+      const headers = this.tokenService.createHeaders();
+
+      const urlWithParams = `${url}/JugadorPartido/PosicionarJugador?clavePartido=${clavePartido}&usuario=${usuario}&enBanca=${enBanca}`;
+
+      return this.http.put(urlWithParams, null, { headers });
+    }
+
 
 
 
