@@ -15,11 +15,11 @@ import { PartidoEquipos } from '../interfacesEquipos/PartidoEquipos';
 })
 export class HomeAdminEquipoComponent implements OnInit{
   partidos:PartidoEquipos[] = [];
-  usuario: any = '';
+  usuario: any = localStorage.getItem('usuario');
   mensaje: string = '';
   tieneEquipo: boolean = false;
   estatusPartidos: EstatusPartido = EstatusPartido.TODOS;
-  nombreEquipo: any = '';
+  nombreEquipo: any = localStorage.getItem('nombreEquipo');
 
   constructor(public dialog: MatDialog, private equipoServ: EquiposService, private router: Router) { }
 
@@ -28,17 +28,23 @@ export class HomeAdminEquipoComponent implements OnInit{
 
   ngOnInit(): void {
     this.usuario = localStorage.getItem('usuario');
-    this.nombreEquipo = localStorage.getItem('nombreEquipo');
     this.obtenerEquipo();
-
+    this.nombreEquipo = localStorage.getItem('nombreEquipo');
+    
     this.equipoServ.onNuevoEquipoCreado().subscribe({
       next: () => {
         this.obtenerEquipo();
       }
     });
 
-    this.obtenerPartidos();
   }
+
+
+
+
+
+
+
 
 
   obtenerEquipo() {
@@ -47,6 +53,8 @@ export class HomeAdminEquipoComponent implements OnInit{
         this.mensaje = data.nombre;
         this.tieneEquipo = true;
         localStorage.setItem('nombreEquipo', data.nombre);
+        this.nombreEquipo = localStorage.getItem('nombreEquipo');
+        this.obtenerPartidos();
       },
       error: (error) => {
         this.mensaje = error.error[0].message;

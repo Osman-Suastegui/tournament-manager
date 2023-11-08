@@ -30,7 +30,7 @@ export class NavBarComponent implements OnInit{
     performSearch() {
       this.searching = false;
     }
-    
+
     @HostListener('document:click', ['$event'])
     clickout(event: { target: any; }) {
       if (!this.elRef.nativeElement.contains(event.target) && event.target.tagName !== 'IMG') {
@@ -42,6 +42,8 @@ export class NavBarComponent implements OnInit{
     this.app.logout();
     this.tipoUsuario = "ANONIMO";
     localStorage.removeItem('usuario');
+    localStorage.removeItem('token');
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 
