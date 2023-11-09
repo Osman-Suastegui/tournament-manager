@@ -9,11 +9,19 @@
 
           <div id="contenedor-table-estadistica-valor" >
             {{ element[column] }}
-
           </div>
-          <button *ngIf="column == 'jugador'" (click)="agregarPuntoDeJugador(element['jugador'], column)">-</button>
-          <!-- muestra un boton si column ==Jugador  en caso contrario muestra otro-->
           
+          <app-sacar-jugador-partido *ngIf="column === 'jugador' && element['jugador'] !== ''; else agregarJugadorButton"
+          [claveDelPartido]="claveDelPartido"
+          [nombreEquipo]="nombreEquipo"
+          [jugador]="element['jugador']"
+          ></app-sacar-jugador-partido>
+        
+        <ng-template #agregarJugadorButton>
+          <button *ngIf="column ==='jugador'" (click)="meterJugadorPartido()">+</button>
+          <!-- <app-agregar-jugador-partido *ngIf="column === 'jugador'" [claveDelPartido]="claveDelPartido"  [nombreEquipo]="nombreEquipo" ></app-agregar-jugador-partido> -->
+        </ng-template>
+        
           <button *ngIf="column !== 'jugador'" (click)="agregarPuntoDeJugador(element['jugador'], column)">+</button>
 
         </td>
