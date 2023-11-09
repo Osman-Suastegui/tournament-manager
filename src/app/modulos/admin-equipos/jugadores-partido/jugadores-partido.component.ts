@@ -80,10 +80,16 @@ export class JugadoresPartidoComponent implements OnInit{
 
     if(this.jugadorParaPartido.jugador.usuario == ''){
       this.mensajeJugadoresPartidos = 'No se selecciono ningun jugador';
+      setTimeout(() => {
+        this.mensajeJugadoresPartidos = ''; // Limpiar el mensaje
+      }, 2000);
     }
     this.equipoServ.agregarJugadorPartido(this.jugadorParaPartido).subscribe({
       next: () => {
         this.mensajeJugadoresPartidos = 'Jugador agregado al partido';
+        setTimeout(() => {
+          this.mensajeJugadoresPartidos = ''; // Limpiar el mensaje
+        }, 2000);
         this.selectedJugador = '';
         this.equipoServ.emitModificacionJugadoresPartido();
       }
@@ -111,10 +117,16 @@ export class JugadoresPartidoComponent implements OnInit{
   posicionarEnCancha(jugador: string){
     if(jugador == ''){
       this.mensajeJugadorCancha = 'No se selecciono ningun jugador';
+      setTimeout(() => {
+        this.mensajeJugadorCancha = ''; // Limpiar el mensaje
+      }, 2000);
     }else{
     this.equipoServ.posicionarJugador(this.clavePartido, jugador, false).subscribe({
       next: () => {
         this.mensajeJugadorCancha = 'Jugador ' + jugador +  ' posicionado en cancha';
+        setTimeout(() => {
+          this.mensajeJugadorCancha = ''; // Limpiar el mensaje
+        }, 2000);
         this.equipoServ.emitModificacionJugadoresPartido();
         this.jugadorSeleccionado = '';
       }
@@ -126,6 +138,9 @@ export class JugadoresPartidoComponent implements OnInit{
     this.equipoServ.posicionarJugador(this.clavePartido, jugador, true).subscribe({
       next: () => {
         this.mensajeJugadorBanca = 'Jugador ' + jugador + ' posicionado en banca';
+        setTimeout(() => {
+          this.mensajeJugadorBanca = ''; // Limpiar el mensaje
+        }, 2000);
         this.equipoServ.emitModificacionJugadoresPartido();
         this.jugadorSeleccionado = '';
       }

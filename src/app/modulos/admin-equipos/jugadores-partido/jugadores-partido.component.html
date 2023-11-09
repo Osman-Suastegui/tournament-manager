@@ -1,84 +1,108 @@
-<p>jugadores-partido works!</p>
+<app-nav-bar></app-nav-bar>
+
+<div class="contenedorPag">
+
+    <header>
+      <div class="cotenedorHeader">
+        <h2>Partido</h2>
+        <h2>{{equipo1}} VS {{equipo2}}</h2>
+      </div>
+    </header>
 
 
-  <header>
-    <h2>Jugadores del Partido</h2>
-    <h2>{{equipo1}} vs {{equipo2}}</h2>
-  </header>
+<div class="contenedorPrincipal">
 
-  <!-- tarjeta inicio -->
+  <div class="contenedorJugadresCampo">
 
-<!-- Tarjetas de jugadores disponibles en el partido -->
-<!-- añade una validacion si jugadoresEnCancha = 5 no muestre mas esto: -->
-<div *ngIf="jugadoresEnCancha.length < 5">
+    <div class="contenedorAgregarJugadoresCampo">
+      <div *ngIf="jugadoresEnCancha.length < 5">
 
-  <h2>Agregar Jugadores al Campo</h2>
+        <h2>Agregar Jugadores al Campo</h2>
 
-  <div class="seleccionar-jugador">
-    <mat-form-field>
-      <mat-label>Jugadores</mat-label>
-      <mat-select [(ngModel)]="jugadorSeleccionado">
-        <mat-option *ngFor="let jugador of jugadoresEnBanca" [value]="jugador.jugador">{{ jugador.jugador }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <span class="mensaje-estilo" *ngIf="mensajeJugadorCancha">{{ mensajeJugadorCancha }}</span> <!-- Muestra el mensaje si existe -->
-    <button (click)="posicionarEnCancha(jugadorSeleccionado)">Agregar Jugador</button>
+        <div class="seleccionar-jugador">
+          <mat-form-field>
+            <mat-label>Jugadores</mat-label>
+            <mat-select [(ngModel)]="jugadorSeleccionado">
+              <mat-option *ngFor="let jugador of jugadoresEnBanca" [value]="jugador.jugador">{{ jugador.jugador }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button class="btn boton" (click)="posicionarEnCancha(jugadorSeleccionado)">Agregar Jugador</button>
+        </div>
+        <span class="mensaje-estilo-JugadorCampo" *ngIf="mensajeJugadorCancha">{{ mensajeJugadorCancha }}</span> <!-- Muestra el mensaje si existe -->
+      </div>
+    </div>
+
+
+
+
+
+    <div class="contenedorMostrarJugadoresEnCampo">
+      <div *ngIf="jugadoresEnCancha.length != 0">
+        <h2>Jugadores en el Campo</h2>
+        <div class="jugadores-en-campo">
+          <mat-card *ngFor="let jugador of jugadoresEnCancha" class="jugador-card">
+            <mat-card-content>
+              <div class="jugador-en-campo__avatar">
+                <mat-icon>account_circle</mat-icon> <!-- Icono de usuario -->
+              </div>
+              <div class="jugador-en-campo__nombre">
+                <p>{{ jugador.jugador }}</p>
+              </div>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-icon-button (click)="posicionarEnBanca(jugador.jugador)">
+                <mat-icon aria-label="Eliminar">delete</mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+        <span class="mensaje-estilo" *ngIf="mensajeJugadorBanca">{{ mensajeJugadorBanca }}</span>
+      </div>
+    </div>
+
+
   </div>
 
-</div>
 
-  <!-- tarejta fin -->
-  <div *ngIf="jugadoresEnCancha.length != 0">
+<div class="ContenedorJugadoresPartidos">
 
-    <h2>Jugadores en el Campo</h2>
-    <!-- recorre el arreglo de jugadores en cancha; -->
-    <div class="jugadores-en-campo">
-      <div class="jugador-en-campo" *ngFor="let jugador of jugadoresEnCancha">
-        <div class="jugador-en-campo__nombre">
-          <p>{{ jugador.jugador }}</p>
-        </div>
-        <div class="jugador-en-campo__eliminar">
-          <button (click)="posicionarEnBanca(jugador.jugador)">Eliminar</button>
-        </div>
+    <div class="ContenedoragregarJugadoresPartido">
+      <div *ngIf="jugadoresDeEquipoNoEnPartido.length != 0">
+          <form class="cotenedorFormulario">
+
+            <mat-form-field>
+              <mat-label>Jugadores</mat-label>
+              <mat-select [(ngModel)]="selectedJugador" name="usuarioJugador">
+                <mat-option *ngFor="let jugador of jugadoresDeEquipoNoEnPartido" [value]="jugador">{{ jugador }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button class="btn boton" type="submit" (click)="agregarJugadorAlPartido(selectedJugador)">Agregar al Partido</button>
+
+          </form>
       </div>
-      <span class="mensaje-estilo" *ngIf="mensajeJugadorBanca">{{ mensajeJugadorBanca }}</span> <!-- Muestra el mensaje si existe -->
+      <span class="mensaje-estilo-JugadorPartido" *ngIf="mensajeJugadoresPartidos">{{ mensajeJugadoresPartidos }}</span> <!-- Muestra el mensaje si existe -->
+    </div>
+
+
+
+    <div class="contenedorMostrarJugadoresEnPartido">
+      <h2>Jugadores Disponibles en el partido</h2>
+      <div class="contenedorJugadores">
+        <ul>
+          <li *ngFor="let jugador of jugadoresEnPartido">
+            {{ jugador.jugador }}
+          </li>
+        </ul>
+      </div>
     </div>
 
   </div>
 
+</div>
 
 
-  <div *ngIf="jugadoresDeEquipoNoEnPartido.length != 0">
-    <h2>Agregar Jugadores del equipo al Partido</h2>
 
-      <form>
+</div>
 
-        <mat-form-field>
-          <mat-label>Jugadores</mat-label>
-          <mat-select [(ngModel)]="selectedJugador" name="usuarioJugador">
-            <mat-option *ngFor="let jugador of jugadoresDeEquipoNoEnPartido" [value]="jugador">{{ jugador }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <button type="submit" (click)="agregarJugadorAlPartido(selectedJugador)">Agregar Jugador</button>
-
-      </form>
-  </div>
-  <span class="mensaje-estilo" *ngIf="mensajeJugadoresPartidos">{{ mensajeJugadoresPartidos }}</span> <!-- Muestra el mensaje si existe -->
-
-
-  <h2>Jugadores Disponibles en el partido</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let jugador of jugadoresEnPartido">
-        <td>{{ jugador.jugador }}</td>
-      </tr>
-    </tbody>
-  </table>
-
-
+<app-footer-component></app-footer-component>
