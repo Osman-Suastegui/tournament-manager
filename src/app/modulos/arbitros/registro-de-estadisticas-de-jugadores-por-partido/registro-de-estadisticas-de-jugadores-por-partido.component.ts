@@ -18,12 +18,11 @@ export class RegistroDeEstadisticasDeJugadoresPorPartidoComponent implements OnI
     this.obtenerEquiposDePartido();
   }
   obtenerEquiposDePartido(){
-    console.log("se llama")
+
     this.PartidoService.obtenerPartido(this.claveDelPartido).subscribe((partido)=>{
-      console.log("equipo1 ",partido.equipo1);
-      console.log("equpo2 ",partido.equipo2);
       this.nombreEquipo1=partido.equipo1;
       this.nombreEquipo2=partido.equipo2;
+      
     });
 
   }

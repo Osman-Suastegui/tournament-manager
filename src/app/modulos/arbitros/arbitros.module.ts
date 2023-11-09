@@ -10,11 +10,17 @@ import { rxStompServiceFactory } from './config-rx-stomp/rx-stomp-service-factor
 import { NavBarModule } from '../nav-bar/nav-bar.module';
 import { FooterModule } from '../footer/footer.module';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
+import { AgregarJugadorPartidoComponent } from './agregar-jugador-partido/agregar-jugador-partido.component';
+import { SacarJugadorPartidoComponent } from './sacar-jugador-partido/sacar-jugador-partido.component';
+import { MeterJugarPartidoComponent } from './meter-jugar-partido/meter-jugar-partido.component';
 @NgModule({
   declarations: [
     HomeArbitroComponent,
     RegistroDeEstadisticasDeJugadoresPorPartidoComponent,
-    TablaEstadisticasDeJugadorPorPartidoComponent
+    TablaEstadisticasDeJugadorPorPartidoComponent,
+    AgregarJugadorPartidoComponent,
+    SacarJugadorPartidoComponent,
+    MeterJugarPartidoComponent
     
   ],
   imports: [
