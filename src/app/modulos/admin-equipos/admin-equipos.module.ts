@@ -5,6 +5,9 @@ import { CrearEquipoComponent } from './crear-equipo/crear-equipo.component';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { AdministrarJugadoresComponent } from './administrar-jugadores/administrar-jugadores.component';
 import { JugadoresPartidoComponent } from './jugadores-partido/jugadores-partido.component';
+import { NavBarModule } from '../nav-bar/nav-bar.module';
+import { FooterModule } from '../footer/footer.module';
+
 
 
 
@@ -17,7 +20,9 @@ import { JugadoresPartidoComponent } from './jugadores-partido/jugadores-partido
   ],
   imports: [
     CommonModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    NavBarModule,
+    FooterModule
   ],
   exports: [
     HomeAdminEquipoComponent
