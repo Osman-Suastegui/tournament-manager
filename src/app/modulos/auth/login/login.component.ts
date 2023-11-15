@@ -7,8 +7,9 @@ import { Credential } from '../../../models/Login/Credential';
 
 
 @Component({
-  templateUrl: './login.component.html'
-
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
+  selector: 'app-login',
 })
 export class LoginComponent {
   creds: Credential = {
@@ -32,7 +33,9 @@ export class LoginComponent {
       },
       error: (error) => {
         this.error = error;
-        
+        setTimeout(() => {
+          this.error = ''; // Limpiar el mensaje
+        }, 5000);
       }
     });
   }
