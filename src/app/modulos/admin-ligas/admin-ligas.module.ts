@@ -13,6 +13,7 @@ import { AgregarEquipoComponent } from './agregar-equipo/agregar-equipo.componen
 import { AgregarArbitroPartidoComponent } from './agregar-arbitro-partido/agregar-arbitro-partido.component';
 import { AgregarFechaPartidoComponent } from './agregar-fecha-partido/agregar-fecha-partido.component';
 import { FooterModule } from '../footer/footer.module';
+import { CaracteristicasPartidosComponent } from './caracteristicas-partidos/caracteristicas-partidos.component';
 
 
 
@@ -26,7 +27,8 @@ import { FooterModule } from '../footer/footer.module';
     CrearTemporadaComponent,
     AgregarEquipoComponent,
     AgregarArbitroPartidoComponent,
-    AgregarFechaPartidoComponent
+    AgregarFechaPartidoComponent,
+    CaracteristicasPartidosComponent
   ],
   imports: [
     AngularMaterialModule,

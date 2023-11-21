@@ -11,6 +11,7 @@ import { AgregarEquipoComponent } from '../agregar-equipo/agregar-equipo.compone
 import { Partidos } from '../interfaces/Partidos';
 import { AgregarArbitroPartidoComponent } from '../agregar-arbitro-partido/agregar-arbitro-partido.component';
 import { AgregarFechaPartidoComponent } from '../agregar-fecha-partido/agregar-fecha-partido.component';
+import { CaracteristicasPartidosComponent } from '../caracteristicas-partidos/caracteristicas-partidos.component';
 
 
 @Component({
@@ -34,6 +35,9 @@ export class TemporadaCaracteriticasComponent implements OnInit{
   partidosTemporada: Partidos[] = [];
   idPartido: number = 0;
   displayedColumns: string[] = ['equipo1', 'arbitro', 'equipo2', 'fechaInicio', 'ganador'];
+  equiposTemporada: number = 8;
+  enfrentaminetosEquipos: number = 1;
+  equiposPlayoff: number = 4;
 
 
   ngOnInit(): void {
@@ -199,6 +203,13 @@ export class TemporadaCaracteriticasComponent implements OnInit{
     localStorage.setItem('idPartido', idPartido.toString());
     this.dialog.open(AgregarFechaPartidoComponent,{
       width: '250px',
+    })
+  }
+
+  openDialogPartidosCaract(): void {
+    localStorage.setItem('idTemporada', this.idTemporada.toString());
+    this.dialog.open(CaracteristicasPartidosComponent,{
+      width: '450px',
     })
   }
 

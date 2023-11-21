@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Register } from '../../../models/Login/Register';
+import { Component  } from '@angular/core';
+import { Register, Password } from '../../../models/Login/Register';
 import { Router } from '@angular/router';
 import { authService } from 'src/app/services/authenticateService/auth.service';
 import { Gender } from '../../../models/Login/Gender';
@@ -23,8 +23,10 @@ export class RegisterComponent {
     genero: Gender.MASCULINO,
     rol: Role.ANONIMO
   };
-
   error: any;
+  password2: Password = {
+    password: ''
+  };
 
   constructor(
     private service: authService,
@@ -33,6 +35,15 @@ export class RegisterComponent {
 
 
   register() {
+    //valida si las 2 contraseñas son iguales
+    if (this.registro.password != this.password2.password) {
+      this.error = "Las contraseñas no coinciden";
+      setTimeout(() => {
+        this.error = ''; // Limpiar el mensaje
+      }, 5000);
+      return;
+    }
+
     this.service.registerUser(this.registro).subscribe({
       next: () => {
         // Manejo de respuesta exitosa
@@ -40,6 +51,9 @@ export class RegisterComponent {
       },
       error: (error) => {
         this.error = error;
+        setTimeout(() => {
+          this.error = ''; // Limpiar el mensaje
+        }, 5000);
       }
     });
   }

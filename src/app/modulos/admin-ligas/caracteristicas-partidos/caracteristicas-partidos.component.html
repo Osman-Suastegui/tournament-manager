@@ -1,0 +1,45 @@
+<mat-dialog-content>
+  <header>
+    <h1>Caracteristicas de los Partidos</h1>
+  </header>
+
+  <form>
+    <mat-form-field>
+      <label for="equiposTemporada">Cantidad de equipos en la Temporada</label>
+      <input type="number" name="equiposTemporada" id="equiposTemporada" [(ngModel)]="partidosCaracteristicas.numeroEquiposTemporada" matInput min="0">
+    </mat-form-field>
+
+    <div class="form-group">
+
+      <div class="contenedorLabel">
+        <label for="enfrentamientoEquipos">Cantidad de enfrentamiento por equipo</label>
+      </div>
+
+      <div class="cotenedorRadioButton">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="enfrentamientoEquipos" id="opcion1" [(ngModel)]="partidosCaracteristicas.cantidadDeEncuentros" [value]="1">
+          <label class="form-check-label" for="opcion1">1</label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="enfrentamientoEquipos" id="opcion2" [(ngModel)]="partidosCaracteristicas.cantidadDeEncuentros" [value]="2">
+          <label class="form-check-label" for="opcion2">2</label>
+        </div>
+      </div>
+
+    </div>
+
+
+    <mat-form-field>
+      <label for="equiposPlayoffs">Cantidad de equipos que pasan a playoffs</label>
+      <input type="number" name="equiposPlayoffs" id="equiposPlayoffs" [(ngModel)]="partidosCaracteristicas.cantidadEquiposPlayOff" matInput min="0">
+    </mat-form-field>
+
+
+    <span class="mensaje-estilo" *ngIf="mensaje">{{ mensaje }}</span> <!-- Muestra el mensaje si existe -->
+
+    <button type="submit" (click)="guardarDatos(partidosCaracteristicas)">Guardar</button>
+  </form>
+
+</mat-dialog-content>
+
