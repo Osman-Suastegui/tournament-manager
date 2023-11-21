@@ -7,6 +7,7 @@ import { AuthModule } from './modulos/auth/auth.module';
 import { HomeModule } from './modulos/home/home.module';
 import { ArbitrosModule } from './modulos/arbitros/arbitros.module';
 import { AdminLigasModule } from './modulos/admin-ligas/admin-ligas.module';
+import { VistasGeneralesModule } from './modulos/vistas-generales/vistas-generales.module';
 
 
 
@@ -22,7 +23,8 @@ import { AdminLigasModule } from './modulos/admin-ligas/admin-ligas.module';
     AuthModule,
     HomeModule,
     ArbitrosModule,
-    AdminLigasModule
+    AdminLigasModule,
+    VistasGeneralesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,9 +5,19 @@
 
 <div class="contenedorPag">
 
-  <h2 class="estadoContenedor">Estado de la Temporada: {{estadoTemporada}}</h2>
+  <div class="estadoContenedor">
+    <h2 class="estadoContenedor">Estado de la Temporada: {{estadoTemporada}}</h2>
+    <button (click)="openDialogPartidosCaract()" class="btnCaracteristicas ">Caracteristicas</button>
+  </div>
+
+  <div class="contenedorCaracteristicas">
+    <h3 class="contenidoCaracteristica">Cantidad de equipos en la Temporada: {{equiposTemporada}}</h3>
+    <h3 class="contenidoCaracteristica">Cantidad de enfrentamientos por equipo: {{enfrentaminetosEquipos}}</h3>
+    <h3 class="contenidoCaracteristica">Cantidad de equipos que pasan a playoffs: {{equiposPlayoff}}</h3>
+  </div>
 
   <div class="contenedorPrincipal">
+
     <div class="contenedorEquiposArbitro">
       <mat-card class="contenedorEquipos">
 

@@ -1,1 +1,54 @@
-<p>ver-perfil works!</p>
+<app-nav-bar></app-nav-bar>
+
+<div class="contenedorPag">
+
+
+  <div class="contenedorPrincipal">
+
+      <form>
+        <div class="contenedorImagen">
+          <h1>Perfil de Usuario</h1>
+        </div>
+
+        <div class="contenedorLogin">
+
+          <label for="usuario">Nombre de Usuario:</label>
+          <input type="text" id="username" name="usuario" [(ngModel)]="user.usuario" readonly/>
+
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" [(ngModel)]="user.nombre"/>
+
+          <label for="apellido">Apellidos:</label>
+          <input type="text" id="apellido" name="apellido" [(ngModel)]="user.apellido"/>
+
+          <label for="genero">Genero:</label>
+          <input type="text" id="genero" name="genero" [(ngModel)]="user.genero" readonly/>
+
+          <label for="rol">Tipo de Usuario:</label>
+          <input type="text" id="rol" name="rol" [(ngModel)]="user.rol" readonly/>
+
+          <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+          <input type="text" id="fechaNacimiento" name="fechaNacimiento" [(ngModel)]="user.fechaNacimiento" readonly/>
+
+        <button type="submit" class="boton btn" (click)="guardarDatosPerfil()">Guardar</button>
+
+            <div class="errorif" *ngIf="error">
+              <p>{{ error }}</p>
+            </div>
+
+      </div>
+      </form>
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<app-footer-component></app-footer-component>

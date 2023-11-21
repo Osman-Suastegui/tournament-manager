@@ -243,6 +243,18 @@
   justify-content: center;
 }
 
+.btnCaracteristicas{
+  background-color: #F26419; /* Color de fondo */
+  color: #080708; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px; /* Ajusta el padding para hacerlo más grande */
+  cursor: pointer;
+  font-size: 1.2rem; /* Tamaño de fuente más grande */
+  margin-top: 10px;
+}
+
+
 .mensajeArbitro {
   color: #080708; /* Color del texto */
   padding: 10px; /* Espacio alrededor del texto */
@@ -265,4 +277,21 @@ html, body {
 .contenedorPag {
   min-height: 100vh; /* Asegura que la altura sea al menos del 100% del viewport */
   background-color: #d9d9d9;
+}
+
+
+.contenedorCaracteristicas{
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+  max-width: 30%;
+}
+
+.contenidoCaracteristica{
+  /* la letra dame diseño */
+  font-size: 1rem;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  color: #080708;
+  font-weight: 500;
 }
