@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
 import { Temporadas } from './../interfaces/Temporadas';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
