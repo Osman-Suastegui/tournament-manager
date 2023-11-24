@@ -7,6 +7,7 @@ import { TemporadaCaracteriticasComponent } from './modulos/admin-ligas/temporad
 import { RegistroDeEstadisticasDeJugadoresPorPartidoComponent } from './modulos/arbitros/registro-de-estadisticas-de-jugadores-por-partido/registro-de-estadisticas-de-jugadores-por-partido.component';
 import { VerPerfilComponent } from './modulos/vistas-generales/ver-perfil/ver-perfil.component';
 import { JugadoresPartidoComponent } from './modulos/admin-equipos/jugadores-partido/jugadores-partido.component';
+import { BusquedaUsuarioComponent } from './modulos/vistas-generales/busqueda-usuario/busqueda-usuario.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'editar-jugadores-de-un-partido/:claveDelPartido',
     component: JugadoresPartidoComponent
+  },
+  {
+    path: 'buscar-basico/:texto/:filtro',
+    component: BusquedaUsuarioComponent
   }
 ];
 

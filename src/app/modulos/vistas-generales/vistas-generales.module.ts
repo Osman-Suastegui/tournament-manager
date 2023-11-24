@@ -4,12 +4,15 @@ import { VerPerfilComponent } from './ver-perfil/ver-perfil.component';
 import { FooterModule } from '../footer/footer.module';
 import { NavBarModule } from '../nav-bar/nav-bar.module';
 import { FormsModule } from '@angular/forms';
+import { BusquedaUsuarioComponent } from './busqueda-usuario/busqueda-usuario.component';
+
 
 
 
 @NgModule({
   declarations: [
-    VerPerfilComponent
+    VerPerfilComponent,
+    BusquedaUsuarioComponent
   ],
   imports: [
     FormsModule,

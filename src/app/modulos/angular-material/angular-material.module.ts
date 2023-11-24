@@ -16,6 +16,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [],
@@ -37,7 +38,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatGridListModule,
     MatTableModule,
     MatListModule,
-    MatRadioModule
+    MatRadioModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatToolbarModule,
@@ -56,7 +58,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatGridListModule,
     MatTableModule,
     MatListModule,
-    MatRadioModule
+    MatRadioModule,
+    MatAutocompleteModule
   ]
 })
 export class AngularMaterialModule { }
