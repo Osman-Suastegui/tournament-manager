@@ -5,7 +5,7 @@ import { url } from '../../../url-config';
 import { TokenService } from '../../../services/tokenService/token.service';
 import { Subject } from 'rxjs';
 import { Temporadas } from './../interfaces/Temporadas';
-
+import { PartidosCaracteristicas } from '../interfaces/PartidosCaracteristicas';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +18,17 @@ export class TemporadasService {
   private nuevoArbitroPartidoSubject = new Subject<void>();
   private nuevaFechaPartidoSubject = new Subject<void>();
   private nuevosPartidosSubject = new Subject<void>();
+  private caracteristicasTemporadaSubject = new Subject<void>();
 
   constructor(private http: HttpClient, private tokenService: TokenService) {}
+
+  onCaracteristicasTemporadaActualizadas() {
+    return this.caracteristicasTemporadaSubject.asObservable();
+  }
+
+  emitCaracteristicasTemporadaActualizadas() {
+    this.caracteristicasTemporadaSubject.next();
+  }
 
 
   onNuevaTemporadaCreada() {
@@ -267,6 +276,35 @@ export class TemporadasService {
       headers: headers
     });
   }
+
+
+
+  modificarCaracteristicasTemp(partidosCaracteristicas: PartidosCaracteristicas, idTemporada: number ){
+    const headers = this.tokenService.createHeaders();
+    const body = {
+      claveTemporada: idTemporada,
+      cantidadEquipos: partidosCaracteristicas.numeroEquiposTemporada,
+      cantidadPlayoffs: partidosCaracteristicas.cantidadEquiposPlayOff,
+      cantidadEnfrentamientosRegular: partidosCaracteristicas.cantidadDeEncuentros
+    };
+
+    return this.http.put(url + '/Temporadas/modificarCaracteristicasTemporada', body, {
+      headers: headers
+    });
+  }
+
+
+  obtenerCaracteristicasTemporada(idTemporada: number): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/Temporadas/obtenerCaracteristicasTemporada', {
+      headers: headers,
+      params: {
+        idTemporada: idTemporada
+      }
+    });
+  }
+
 
 
 

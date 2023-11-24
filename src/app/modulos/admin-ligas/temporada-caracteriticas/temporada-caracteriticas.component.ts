@@ -35,9 +35,9 @@ export class TemporadaCaracteriticasComponent implements OnInit{
   partidosTemporada: Partidos[] = [];
   idPartido: number = 0;
   displayedColumns: string[] = ['equipo1', 'arbitro', 'equipo2', 'fechaInicio', 'ganador'];
-  equiposTemporada: number = 8;
-  enfrentaminetosEquipos: number = 1;
-  equiposPlayoff: number = 4;
+  equiposTemporada: number = 0;
+  enfrentaminetosEquipos: number = 0;
+  equiposPlayoff: number = 0;
 
 
   ngOnInit(): void {
@@ -46,6 +46,14 @@ export class TemporadaCaracteriticasComponent implements OnInit{
       localStorage.setItem('idTemporada', this.idTemporada.toString());
       this.obtenerArbitrosTemp(this.idTemporada);
       this.obtenerEquiposTemp(this.idTemporada);
+    });
+
+    this.obtenerCaracteristicasTemporada();
+
+   this.tempService.onCaracteristicasTemporadaActualizadas().subscribe({
+    next: () => {
+      this.obtenerCaracteristicasTemporada();
+    }
     });
 
     this.tempService.onNuevaTemporadaCreada().subscribe({
@@ -212,6 +220,21 @@ export class TemporadaCaracteriticasComponent implements OnInit{
       width: '450px',
     })
   }
+
+  obtenerCaracteristicasTemporada(){
+    this.tempService.obtenerCaracteristicasTemporada(this.idTemporada).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.equiposTemporada = data.cantidadEquipos;
+        this.enfrentaminetosEquipos = data.cantidadEnfrentamientosRegular;
+        this.equiposPlayoff = data.cantidadPlayoffs;
+
+      }
+    });
+  }
+
+
+
 
 
 }

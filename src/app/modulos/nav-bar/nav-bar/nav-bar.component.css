@@ -89,7 +89,7 @@
 }
 
 .input-buscar {
-  width: 300px; /* Ajusta el tamaño del campo según tus preferencias */
+  width: 200px; /* Ajusta el tamaño del campo según tus preferencias */
 }
 
 .search-bar input::placeholder {
@@ -100,8 +100,29 @@
   border-color: #48494A; /* Cambia el borde al enfocar el campo */
 }
 
+.buscarOpc {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  /* Agrega cualquier otro estilo que desees */
+}
 
+/* Estilo cuando el usuario interactúa con el elemento (hover) */
+.buscarOpc:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
 
+/* Estilo cuando el usuario ha seleccionado una opción */
+.buscarOpc:focus {
+  outline: none; /* Elimina el contorno predeterminado del elemento seleccionado */
+}
 
+.search-options{
+  display: flex;
+  gap: 10px;
+}
 
 

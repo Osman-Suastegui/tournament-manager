@@ -26,7 +26,21 @@
       <button class="btn-buscar" *ngIf="!searching" (click)="startSearch()">
         <img src="../../../../assets/imgs/lupa2.png" alt="Buscar" class="buscar">
       </button>
-      <input *ngIf="searching" class="input-buscar" (keyup.enter)="performSearch()" placeholder="Escribe tu búsqueda aquí" [(ngModel)]="searchQuery">
+
+      <div *ngIf="searching" class="search-options">
+        <input class="input-buscar" (keyup)="onTyping()" (keyup.enter)="performSearch()" placeholder="Escribe tu búsqueda aquí" [(ngModel)]="searchQuery" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let result of searchResults$ | async" [value]="getValue(result)">
+            {{ getContent(result) }}
+          </mat-option>
+        </mat-autocomplete>
+        <select id="searchCategory" [(ngModel)]="selectedCategory" class="buscarOpc">
+          <option value="usuarios">Usuarios</option>
+          <option value="temporadas">Temporadas</option>
+          <option value="ligas">Ligas</option>
+          <option value="equipos">Equipos</option>
+        </select>
+      </div>
     </div>
 
 

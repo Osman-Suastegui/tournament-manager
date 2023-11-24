@@ -10,6 +10,7 @@ import { PartidosCaracteristicas } from '../interfaces/PartidosCaracteristicas';
 })
 export class CaracteristicasPartidosComponent implements OnInit{
 
+  claveTemporada: any = '';
   mensaje: string = '';
   partidosCaracteristicas: PartidosCaracteristicas = {
     numeroEquiposTemporada: 0,
@@ -22,6 +23,9 @@ export class CaracteristicasPartidosComponent implements OnInit{
 
 
   ngOnInit(): void {
+    this.claveTemporada = localStorage.getItem('idTemporada');
+
+
   }
 
 
@@ -49,7 +53,17 @@ export class CaracteristicasPartidosComponent implements OnInit{
       return;
     }
 
+    this.tempService.modificarCaracteristicasTemp(partidosCaracteristicas, this.claveTemporada).subscribe({
+      next: () => {
+        this.mensaje = 'Caracteristicas modificadas correctamente';
+        this.tempService.emitCaracteristicasTemporadaActualizadas();
+      },
+      error: (err) => {
+        this.mensaje = err.error.mensaje;
+      }
+    });
   }
+
 
 
 }

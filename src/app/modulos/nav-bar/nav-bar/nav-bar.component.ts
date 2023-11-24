@@ -1,46 +1,181 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { NavbarService } from '../../../services/navbarService/navbar.service';
 import { Router } from '@angular/router';
-import { OnInit } from '@angular/core';
 import { authService } from '../../../services/authenticateService/auth.service';
-import { HostListener, ElementRef } from '@angular/core';
+import { NavBarService } from '../../nav-bar/servicios/nav-bar.service';
+import { Subscription, Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { MatAutocomplete } from '@angular/material/autocomplete';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css'],
 })
-export class NavBarComponent implements OnInit{
+export class NavBarComponent implements OnInit {
+  myControl = new FormControl();
+  searching = false;
+  searchQuery = '';
+  selectedCategory: string = 'usuarios';
+  private searchSubscription: Subscription | undefined;
+  @ViewChild(MatAutocomplete) autocomplete!: MatAutocomplete;
+  searchResults: any[] = [];
+  searchResults$ = new BehaviorSubject<any[]>([]);
 
-  constructor(
-    private app: NavbarService,
-    private router: Router,
-    private auth: authService,
-    private elRef: ElementRef
-  ) {}
-    usuario: string = localStorage.getItem('usuario') || '';
-    tipoUsuario: string = '';
-    searching = false;
-    searchQuery = '';
+  filteredResults: Observable<any[]>;
 
-    startSearch() {
-      this.searching = true;
+  categories: string[] = ['usuarios', 'temporadas', 'ligas', 'equipos'];
+
+  usuario: string = localStorage.getItem('usuario') || '';
+  tipoUsuario: string = '';
+
+  constructor(private app: NavbarService, private router: Router, private auth: authService, private elRef: ElementRef, private searchService: NavBarService) {
+    this.filteredResults = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value))
+    );
+
+  }
+
+
+
+  startSearch() {
+    this.searching = true;
+  }
+
+  performSearch() {
+    this.searching = false;
+    console.log(this.searchQuery + ' ' +  this.selectedCategory);
+
+    if (this.selectedCategory === 'usuarios') {
+      this.router.navigate(['/buscar-basico', this.searchQuery, 'usuario']);
+    } else if (this.selectedCategory === 'temporadas') {
+      this.router.navigate(['/buscar-basico', this.searchQuery, 'temporada']);
+    } else if (this.selectedCategory === 'ligas') {
+      this.router.navigate(['/buscar-basico', this.searchQuery, 'liga']);
+    } else if (this.selectedCategory === 'equipos') {
+      this.router.navigate(['/buscar-basico', this.searchQuery, 'equipo']);
     }
 
-    performSearch() {
+
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event: { target: any }) {
+    if (!this.elRef.nativeElement.contains(event.target) && event.target.tagName !== 'IMG') {
       this.searching = false;
     }
+  }
 
-    @HostListener('document:click', ['$event'])
-    clickout(event: { target: any; }) {
-      if (!this.elRef.nativeElement.contains(event.target) && event.target.tagName !== 'IMG') {
-        this.searching = false;
+
+  onTyping(): void {
+    this.searching = true;
+    this.searchResults$.next([]); // Limpiar resultados al empezar a escribir
+
+    if (this.searchQuery.trim() !== '') {
+      if (this.selectedCategory === 'usuarios') {
+        this.searchService.searchUsersOnTyping(this.searchQuery);
+        this.searchSubscription = this.searchService.getSearchResultsUsers().subscribe({
+          next: (data) => {
+            this.searchResults$.next(data);
+            console.log(this.searchResults$);
+          },
+          error: (error) => {
+            console.error('Error al realizar la búsqueda de usuarios', error);
+            this.searchResults$.next([]);
+          },
+        });
+      } else if (this.selectedCategory === 'equipos') {
+        this.searchService.searchTeamsOnTyping(this.searchQuery);
+        this.searchSubscription = this.searchService.getSearchResultsTeams().subscribe({
+          next: (data) => {
+            this.searchResults$.next(data);
+            console.log(this.searchResults$);
+          },
+          error: (error) => {
+            console.error('Error al realizar la búsqueda de equipos', error);
+            this.searchResults$.next([]);
+          }
+        });
+      } else if (this.selectedCategory === 'temporadas') {
+        this.searchService.searchTemporadasOnTyping(this.searchQuery);
+        this.searchSubscription = this.searchService.getSearchResultsTemporadas().subscribe({
+          next: (data) => {
+            this.searchResults$.next(data);
+          },
+          error: (error) => {
+            console.error('Error al realizar la búsqueda de temporadas', error);
+            this.searchResults$.next([]);
+          }
+        });
+      } else if (this.selectedCategory === 'ligas') {
+        this.searchService.searchLigasOnTyping(this.searchQuery);
+        this.searchSubscription = this.searchService.getSearchResultsLigas().subscribe({
+          next: (data) => {
+            this.searchResults$.next(data);
+          },
+          error: (error) => {
+            console.error('Error al realizar la búsqueda de ligas', error);
+            this.searchResults$.next([]);
+          }
+        });
       }
+    } else {
+      this.searching = false;
     }
+  }
+
+  selectResult(result: any): void {
+    this.searchQuery = result.usuario;
+    this.searchResults = [];
+  }
+
+  private _filter(value: string): any[] {
+    const filterValue = value.toLowerCase();
+    return this.searchResults.filter((result) => result.usuario.toLowerCase().includes(filterValue));
+  }
+
+  displayFn(result: any): string {
+    return result ? result.usuario : '';
+  }
+
+  getValue(result: any): string {
+    switch (this.selectedCategory) {
+      case 'usuarios':
+        return result.usuario;
+      case 'temporadas':
+        return result.nombreTemporada;
+      case 'ligas':
+        return result.nombre;
+      case 'equipos':
+        return result.nombre;
+      default:
+        return '';
+    }
+  }
+
+  getContent(result: any): string {
+    switch (this.selectedCategory) {
+      case 'usuarios':
+        return result.usuario;
+      case 'temporadas':
+        return result.nombreTemporada;
+      case 'ligas':
+        return result.nombre;
+      case 'equipos':
+        return result.nombre;
+      default:
+        return '';
+    }
+  }
+
+
 
   logout() {
     this.app.logout();
-    this.tipoUsuario = "ANONIMO";
+    this.tipoUsuario = 'ANONIMO';
     localStorage.removeItem('usuario');
     localStorage.removeItem('token');
     localStorage.clear();
@@ -63,7 +198,6 @@ export class NavBarComponent implements OnInit{
     this.router.navigate(['/perfil']);
   }
 
-
   ngOnInit(): void {
     this.getRoleUser(this.usuario);
   }
@@ -74,14 +208,8 @@ export class NavBarComponent implements OnInit{
         this.tipoUsuario = tipo;
       },
       error: (error) => {
-        this.tipoUsuario = "ANONIMO";
-      }
+        this.tipoUsuario = 'ANONIMO';
+      },
     });
-}
-
-
-
-
-
-
+  }
 }
