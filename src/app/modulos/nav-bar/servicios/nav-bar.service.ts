@@ -35,6 +35,8 @@ export class NavBarService {
     this.searchLigasSubject.next(query);
   }
 
+  
+
 
   // Método para obtener resultados mientras escribes para usuarios
   getSearchResultsUsers(): Observable<any> {

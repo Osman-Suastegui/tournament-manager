@@ -1,0 +1,63 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="contenedorPag">
+
+  <div class="contenedorTitulo"  *ngIf="ExisteEquipo === true">
+    <h2 class="tituloEquipo">{{texto}}</h2>
+  </div>
+
+
+    <mat-dialog-actions class="dialog-actions"  *ngIf="ExisteEquipo === true">
+      <mat-form-field>
+        <mat-label>Ver Partidos</mat-label>
+        <mat-select placeholder="Estado"  [(ngModel)]="estatusPartidos" (selectionChange)="obtenerPartidosEquipo()">
+          <mat-option value="enCurso">En Curso</mat-option>
+          <mat-option value="finalizados">Finalizados</mat-option>
+          <mat-option value="proximos">Proximos</mat-option>
+          <mat-option value="todos">Todos</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-dialog-actions>
+
+    <div *ngIf="partidos.length === 0 && ExisteEquipo === false">
+      <h2 class="ng-if-message">No Existe el Equipo</h2>
+    </div>
+
+
+    <div *ngIf="partidos.length === 0 && ExisteEquipo === true">
+      <h2 class="ng-if-message">No Hay Partidos</h2>
+    </div>
+
+
+
+  <div class="partidosClass">
+
+    <div *ngIf="partidos.length > 0">
+      <div class="card-deck">
+        <div *ngFor="let partido of partidos; let i = index" class="card">
+          <div class="card-body">
+            <a class="card-title">{{partido.equipo1 + " vs " + partido.equipo2 }}</a>
+            <div *ngIf="partido.ganador !== ''">
+              <a class="card-title">Ganador: {{partido.ganador}}</a>
+            </div>
+            <ul class="list-group list-group-flush fecha-list">
+              <li  class="list-group-item">
+                  <h4 class="fecha"> Temporada: {{partido.temporadaId}}</h4>
+                  <h4 class="fecha" >{{  partido.fechaInicio | date:'dd/MM/yyyy HH:mm:ss' }}</h4>
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="partido.estatus === 'proximos'" class="card-footer">
+            <button class="btn entrarPartido" >Entrar</button>
+          </div>
+          <div *ngIf="partido.estatus != 'proximos'" class="card-footer">
+            <button class="btn btn-desahabilitado" >Entrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<app-footer-component></app-footer-component>

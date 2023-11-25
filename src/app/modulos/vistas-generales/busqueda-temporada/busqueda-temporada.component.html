@@ -1,0 +1,34 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="contenedorPag">
+  <div class="contenedorTitulo">
+    <h2>{{texto}}</h2>
+  </div>
+
+  <div class="contenedorTabla">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Posición</th>
+          <th>Equipo</th>
+          <th>Puntos</th>
+          <th>Estadisticas de la temporada</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipo of equiposRanking; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ equipo.nombreEquipo }}</td>
+          <td>{{ equipo.puntos }}</td>
+          <td>
+            <button class="btn entrarPartido" (click)="verEstadisticas(temporadaId, equipo.nombreEquipo)">Ver estadísticas</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+<app-footer-component></app-footer-component>
