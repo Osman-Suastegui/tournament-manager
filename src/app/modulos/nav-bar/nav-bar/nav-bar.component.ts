@@ -23,6 +23,7 @@ export class NavBarComponent implements OnInit {
   @ViewChild(MatAutocomplete) autocomplete!: MatAutocomplete;
   searchResults: any[] = [];
   searchResults$ = new BehaviorSubject<any[]>([]);
+  temporadaId: string = '';
 
   filteredResults: Observable<any[]>;
 
@@ -46,25 +47,57 @@ export class NavBarComponent implements OnInit {
   }
 
   performSearch() {
-    this.searching = false;
     console.log(this.searchQuery + ' ' +  this.selectedCategory);
 
+
     if (this.selectedCategory === 'usuarios') {
-      this.router.navigate(['/buscar-basico', this.searchQuery, 'usuario']);
+      this.router.navigate(['/buscar-usuario', this.searchQuery]);
     } else if (this.selectedCategory === 'temporadas') {
-      this.router.navigate(['/buscar-basico', this.searchQuery, 'temporada']);
+      this.obtenerTemporadaId(this.searchQuery).subscribe({
+        next: (data) => {
+          this.temporadaId = data[0].claveTemporada;
+          this.router.navigate(['/buscar-temporada', this.searchQuery, this.temporadaId]);
+        },
+        error: (error) => {
+          console.error('Error al realizar la búsqueda de temporadas', error);
+          this.searchResults$.next([]);
+        }
+      });
     } else if (this.selectedCategory === 'ligas') {
-      this.router.navigate(['/buscar-basico', this.searchQuery, 'liga']);
+      this.router.navigate(['/buscar-liga', this.searchQuery]);
     } else if (this.selectedCategory === 'equipos') {
-      this.router.navigate(['/buscar-basico', this.searchQuery, 'equipo']);
+      this.router.navigate(['/buscar-equipo', this.searchQuery]);
     }
 
 
   }
 
+
+  obtenerTemporadaId(nombreTemp: string): Observable<any> {
+    return this.searchService.searchTemporadas(this.searchQuery);
+  }
+
+
   @HostListener('document:click', ['$event'])
   clickout(event: { target: any }) {
-    if (!this.elRef.nativeElement.contains(event.target) && event.target.tagName !== 'IMG') {
+    const clickedElement = event.target;
+
+    // Check if the clicked element or its ancestors have the specified classes
+    let hasOptionClass = false;
+    let currentElement = clickedElement;
+    while (currentElement) {
+      if (currentElement.classList && currentElement.classList.contains('mat-mdc-option') && currentElement.classList.contains('mdc-list-item')) {
+        hasOptionClass = true;
+        break;
+      }
+      currentElement = currentElement.parentElement;
+    }
+
+    if (
+      !this.elRef.nativeElement.contains(clickedElement) &&
+      event.target.tagName !== 'IMG' &&
+      !hasOptionClass
+    ) {
       this.searching = false;
     }
   }
@@ -80,7 +113,6 @@ export class NavBarComponent implements OnInit {
         this.searchSubscription = this.searchService.getSearchResultsUsers().subscribe({
           next: (data) => {
             this.searchResults$.next(data);
-            console.log(this.searchResults$);
           },
           error: (error) => {
             console.error('Error al realizar la búsqueda de usuarios', error);
@@ -92,7 +124,6 @@ export class NavBarComponent implements OnInit {
         this.searchSubscription = this.searchService.getSearchResultsTeams().subscribe({
           next: (data) => {
             this.searchResults$.next(data);
-            console.log(this.searchResults$);
           },
           error: (error) => {
             console.error('Error al realizar la búsqueda de equipos', error);
@@ -104,6 +135,7 @@ export class NavBarComponent implements OnInit {
         this.searchSubscription = this.searchService.getSearchResultsTemporadas().subscribe({
           next: (data) => {
             this.searchResults$.next(data);
+
           },
           error: (error) => {
             console.error('Error al realizar la búsqueda de temporadas', error);
@@ -122,8 +154,6 @@ export class NavBarComponent implements OnInit {
           }
         });
       }
-    } else {
-      this.searching = false;
     }
   }
 

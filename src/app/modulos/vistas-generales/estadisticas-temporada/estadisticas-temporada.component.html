@@ -1,0 +1,33 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="contenedorPag">
+  <div class="contenedorPrincipal">
+    <h2>Estadísticas Del Equipo</h2>
+  </div>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Jugador</th>
+          <th>Asistencias</th>
+          <th>Faltas</th>
+          <th>Tiros de 2 Puntos</th>
+          <th>Tiros de 3 Puntos</th>
+          <th>Tiros Libres</th>
+          <th>Total Puntos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let jugadorEstadisticas of estadisticasArray">
+          <td>{{ jugadorEstadisticas.key }}</td>
+          <td *ngFor="let estadistica of jugadorEstadisticas.value | keyvalue">
+            {{ estadistica.value }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+</div>
+
+<app-footer-component></app-footer-component>

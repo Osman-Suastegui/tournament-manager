@@ -6,13 +6,12 @@ import { VistasGralService } from '../services/vistas-gral.service';
 import { NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
-
 @Component({
-  selector: 'app-busqueda-usuario',
-  templateUrl: './busqueda-usuario.component.html',
-  styleUrls: ['./busqueda-usuario.component.css']
+  selector: 'app-busqueda-liga',
+  templateUrl: './busqueda-liga.component.html',
+  styleUrls: ['./busqueda-liga.component.css']
 })
-export class BusquedaUsuarioComponent implements OnInit {
+export class BusquedaLigaComponent implements OnInit {
 
   constructor(private vistasService: VistasGralService, private router: Router, private route: ActivatedRoute) { }
 

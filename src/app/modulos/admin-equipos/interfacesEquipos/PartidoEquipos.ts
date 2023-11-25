@@ -5,4 +5,5 @@ export interface PartidoEquipos {
   idPartido: string;
   temporadaId: number;
   estatus: string;
+  ganador: string;
 }
