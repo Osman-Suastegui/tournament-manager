@@ -25,5 +25,9 @@ export class JugadoresDePartidoEquipoService {
     obtenerTipoUsuario(usuario:string | undefined):Observable<string>{
       return this.http.get<string>(url + "/usuarios/obtenerTipoUser?usuario="+usuario)
     }
+    // http://localhost:8080/JugadorPartido/obtenerPuntosEquipo?nombreEquipo=Denver Nuggets&clavePartido=17
+    obtenerPuntosEquipo(nombreEquipo:string | undefined,clavePartido:number | undefined){
+      return this.http.get<any>(url + "/JugadorPartido/obtenerPuntosEquipo?nombreEquipo="+nombreEquipo+"&clavePartido="+clavePartido)
+    }
 
 }

@@ -1,0 +1,23 @@
+.marcador-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding-top: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+
+  }
+  
+  .equipo {
+    text-align: center;
+  }
+  
+  .versus {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+  /* You can add more styling based on your requirements */
+  

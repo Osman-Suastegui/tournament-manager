@@ -7,6 +7,9 @@ import {Message} from '@stomp/stompjs';
 import { SacarJugador } from '../interfaces/SacarJugador';
 import { MatDialog } from '@angular/material/dialog';
 import { MeterJugarPartidoComponent } from '../meter-jugar-partido/meter-jugar-partido.component';
+import { MarcadorService } from '../servicios/marcador.service';
+import { Subject, Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tabla-estadisticas-de-jugador-por-partido',
@@ -18,6 +21,8 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
     @Input() nombreEquipo: string | undefined;
     @Input() claveDelPartido: number | undefined;
     @Input() enBanca: number | null;
+    private puntosEquipo: number | undefined;
+
     statDescriptionHandlers: { [key: string]: (fila: EstadisticasJugador) => void } = {
       tirosDe2Puntos: (fila: EstadisticasJugador) => fila.tirosDe2Puntos++,
       tirosLibres: (fila: EstadisticasJugador) => fila.tirosLibres++,
@@ -43,7 +48,8 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
     displayedColumns: string[] = ['jugador', 'faltas', 'tirosDe2Puntos','tirosLibres', 'tirosDe3Puntos', 'asistencias'];
     tableDataSource: MatTableDataSource<EstadisticasJugador>;
 
-    constructor(private JugadoresDePartidoEquipoService: JugadoresDePartidoEquipoService,private RxStompService: RxStompService,public dialog: MatDialog ) {
+    constructor(private JugadoresDePartidoEquipoService: JugadoresDePartidoEquipoService,private RxStompService: RxStompService
+      ,public dialog: MatDialog,private marcadorServ: MarcadorService ) {
       this.tableDataSource = new MatTableDataSource<EstadisticasJugador>();
       this.enBanca = null;
     }
@@ -83,6 +89,9 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
       this.onSacarJugador();
       this.onMeterJugadorPartido();
       this.onActualizacionesDePuntos();
+      this.marcadorServ.getPuntosEquipo(this.nombreEquipo,this.claveDelPartido).subscribe((puntos)=>{
+        this.puntosEquipo=puntos;
+      });
       this.usuario = localStorage.getItem('usuario');
       this.JugadoresDePartidoEquipoService.obtenerTipoUsuario(this.usuario).subscribe((data: any) => {
         this.rol = data.Rol;
@@ -97,7 +106,16 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
     this.tableDataSource.data.forEach((fila: EstadisticasJugador) => {
         if (fila.jugador === response.jugador && response.descripcion in this.statDescriptionHandlers) {
           this.statDescriptionHandlers[response.descripcion](fila);
+
+          if(response.descripcion === 'tirosDe2Puntos' || response.descripcion === 'tirosDe3Puntos' || response.descripcion === 'tirosLibres'){
+            let puntosAgregar = 0
+            if(response.descripcion === 'tirosDe2Puntos') puntosAgregar = 2;
+            if(response.descripcion === 'tirosDe3Puntos') puntosAgregar = 3;
+            if(response.descripcion === 'tirosLibres') puntosAgregar = 1;
+            this.marcadorServ.actualizarPuntosEquipo(this.nombreEquipo, this.claveDelPartido, this.puntosEquipo && this.puntosEquipo + puntosAgregar);
+          }
         }
+        
       });
 
     })

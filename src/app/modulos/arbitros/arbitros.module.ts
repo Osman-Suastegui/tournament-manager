@@ -13,6 +13,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { AgregarJugadorPartidoComponent } from './agregar-jugador-partido/agregar-jugador-partido.component';
 import { SacarJugadorPartidoComponent } from './sacar-jugador-partido/sacar-jugador-partido.component';
 import { MeterJugarPartidoComponent } from './meter-jugar-partido/meter-jugar-partido.component';
+import { MarcadorPartidoComponent } from './marcador-partido/marcador-partido.component';
 @NgModule({
   declarations: [
     HomeArbitroComponent,
@@ -20,7 +21,8 @@ import { MeterJugarPartidoComponent } from './meter-jugar-partido/meter-jugar-pa
     TablaEstadisticasDeJugadorPorPartidoComponent,
     AgregarJugadorPartidoComponent,
     SacarJugadorPartidoComponent,
-    MeterJugarPartidoComponent
+    MeterJugarPartidoComponent,
+    MarcadorPartidoComponent
     
   ],
   imports: [
