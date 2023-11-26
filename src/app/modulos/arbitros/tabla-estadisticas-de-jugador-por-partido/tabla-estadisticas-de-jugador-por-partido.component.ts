@@ -14,7 +14,7 @@ import { MeterJugarPartidoComponent } from '../meter-jugar-partido/meter-jugar-p
   styleUrls: ['./tabla-estadisticas-de-jugador-por-partido.component.css']
 })
 export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
-  
+
     @Input() nombreEquipo: string | undefined;
     @Input() claveDelPartido: number | undefined;
     @Input() enBanca: number | null;
@@ -34,8 +34,9 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
       asistencias: 0,
     };
     datosTemporales : EstadisticasJugador[] = []
+    usuario: any = '';
+    rol: any = '';
 
-    
 
     data: EstadisticasJugador[] = [];
 
@@ -46,17 +47,17 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
       this.tableDataSource = new MatTableDataSource<EstadisticasJugador>();
       this.enBanca = null;
     }
-    
+
     ngOnDestroy() {
       this.RxStompService.deactivate();
     }
 
     agregarPuntoDeJugador(jugador: string, columna: string) {
-      
+
       const message = {
         "clavePartido": this.claveDelPartido,
         "jugador" : jugador,
-        "descripcion" : columna 
+        "descripcion" : columna
       }
       this.RxStompService.publish({
         destination: `/app/agregarPunto/${this.claveDelPartido}`,
@@ -68,7 +69,7 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
 
     ngOnInit() {
       this.JugadoresDePartidoEquipoService.obtenerJugadoresDePartidoYEquipo(this.claveDelPartido, this.nombreEquipo, this.enBanca).subscribe((data) => {
-        
+
         // sort by a.jugador
         data.sort((a, b) => a.jugador.localeCompare(b.jugador));
         if (data.length !== 5) {
@@ -76,25 +77,29 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
         }
 
         this.tableDataSource = new MatTableDataSource<EstadisticasJugador>([...data, ...this.datosTemporales]);
-        
+
       });
 
       this.onSacarJugador();
       this.onMeterJugadorPartido();
       this.onActualizacionesDePuntos();
+      this.usuario = localStorage.getItem('usuario');
+      this.JugadoresDePartidoEquipoService.obtenerTipoUsuario(this.usuario).subscribe((data: any) => {
+        this.rol = data.Rol;
+      });
 
-   
+
   }
   onActualizacionesDePuntos(){
     this.RxStompService.watch(`/topic/ActualizacionesDePuntos/${this.claveDelPartido}`).subscribe((message: Message) => {
       const response = JSON.parse(message.body);
-      
+
     this.tableDataSource.data.forEach((fila: EstadisticasJugador) => {
         if (fila.jugador === response.jugador && response.descripcion in this.statDescriptionHandlers) {
           this.statDescriptionHandlers[response.descripcion](fila);
         }
       });
-    
+
     })
   }
   onSacarJugador(){
@@ -116,9 +121,9 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
       }
       if(jugadorEncontrado){
         newData.push(this.jugadorBase);
-        this.tableDataSource.data = newData; 
+        this.tableDataSource.data = newData;
       }
-    
+
    });
 
   }

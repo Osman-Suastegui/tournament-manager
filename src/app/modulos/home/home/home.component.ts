@@ -15,21 +15,25 @@ export class HomeComponent implements OnInit{
     private auth: authService
   ) {}
   usuario: string = localStorage.getItem('usuario') || '';
-  tipoUsuario: string = '';
+  tipoUsuario: any = '';
 
 
   ngOnInit(): void {
+
     this.getRoleUser(this.usuario);
+
   }
 
   getRoleUser(usuario: string) {
-    this.auth.getTypeOfUser(usuario).subscribe({
-      next: (tipo) => {
-        this.tipoUsuario = tipo;
-      },
-      error: (error) => {
-        this.tipoUsuario = "ANONIMO";
-      }
+    this.auth.obtenerTipoUsuario(usuario).subscribe({
+        next: (tipo: any) => {
+            console.log(tipo); // Imprime el objeto completo en la consola
+            this.tipoUsuario = tipo.Rol;
+            console.log(this.tipoUsuario);
+          },
+        error: (error) => {
+            this.tipoUsuario = "ANONIMO";
+        }
     });
 }
 

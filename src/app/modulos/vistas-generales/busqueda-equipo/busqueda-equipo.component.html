@@ -47,11 +47,8 @@
               </li>
             </ul>
           </div>
-          <div *ngIf="partido.estatus === 'proximos'" class="card-footer">
-            <button class="btn entrarPartido" >Entrar</button>
-          </div>
-          <div *ngIf="partido.estatus != 'proximos'" class="card-footer">
-            <button class="btn btn-desahabilitado" >Entrar</button>
+          <div *ngIf="partido.estatus === 'enCurso'" class="card-footer">
+            <button class="btn entrarPartido" (click)="verPartido(partido.idPartido)" >Entrar</button>
           </div>
         </div>
       </div>

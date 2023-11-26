@@ -68,17 +68,11 @@ export class authService {
   }
 
 
-  getTypeOfUser(usuario: string): Observable<string> {
-    // Construye la URL completa para la solicitud
-    const baseURL = `${url}/usuarios/obtenerTipoUser?usuario=${usuario}`;
-
-    // Obtiene las cabeceras
-    const headers = this.tokenService.createHeaders();
-
-    // Realiza la solicitud GET al endpoint con las cabeceras
-    return this.http.get(baseURL, { headers: headers, responseType: 'text' });
-
+  obtenerTipoUsuario(usuario:string | undefined):Observable<string>{
+    return this.http.get<string>(url + "/usuarios/obtenerTipoUser?usuario="+usuario)
   }
+
+
 
 
 

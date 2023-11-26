@@ -66,6 +66,7 @@
   justify-content: center;
   cursor: pointer;
   padding: 0;
+  margin-left: 1200px;
 }
 
 .btn-buscar img.buscar {
@@ -78,6 +79,7 @@
 .search-bar {
   display: flex;
   align-items: center;
+  margin-left: 100px;
 }
 
 .search-bar input {
@@ -89,7 +91,8 @@
 }
 
 .input-buscar {
-  width: 200px; /* Ajusta el tamaño del campo según tus preferencias */
+  width: 350px; /* Ajusta el tamaño del campo según tus preferencias */
+  margin-left: 650px;
 }
 
 .search-bar input::placeholder {

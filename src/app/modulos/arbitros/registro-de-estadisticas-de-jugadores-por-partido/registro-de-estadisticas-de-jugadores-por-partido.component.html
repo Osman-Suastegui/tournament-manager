@@ -1,13 +1,18 @@
 <app-nav-bar></app-nav-bar>
 
-<div id="partido-en-vivo-contenedor">
+<div class="contenedorPag">
 
-  <section id="partido-en-vivo-contenedor-tables">
+  <div id="partido-en-vivo-contenedor">
 
-    <app-tabla-estadisticas-de-jugador-por-partido  [nombreEquipo]="nombreEquipo1" [claveDelPartido]="claveDelPartido" [enBanca]="0"></app-tabla-estadisticas-de-jugador-por-partido>
-    <app-tabla-estadisticas-de-jugador-por-partido [nombreEquipo]="nombreEquipo2" [claveDelPartido]="claveDelPartido" [enBanca]="0"></app-tabla-estadisticas-de-jugador-por-partido>
-  </section>
+    <section id="partido-en-vivo-contenedor-tables">
+
+      <app-tabla-estadisticas-de-jugador-por-partido  [nombreEquipo]="nombreEquipo1" [claveDelPartido]="claveDelPartido" [enBanca]="0"></app-tabla-estadisticas-de-jugador-por-partido>
+      <app-tabla-estadisticas-de-jugador-por-partido [nombreEquipo]="nombreEquipo2" [claveDelPartido]="claveDelPartido" [enBanca]="0"></app-tabla-estadisticas-de-jugador-por-partido>
+    </section>
+
+  </div>
+
+
 </div>
 
 <app-footer-component></app-footer-component>
-  

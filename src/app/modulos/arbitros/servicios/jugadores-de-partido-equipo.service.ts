@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { TokenService } from 'src/app/services/tokenService/token.service';
 import { url } from 'src/app/url-config';
 import { EstadisticasJugador } from '../interfaces/EstadisticasJugador';
+import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,4 +19,11 @@ export class JugadoresDePartidoEquipoService {
     return this.http.get<EstadisticasJugador[]>( url + `/JugadorPartido/obtenerJugadoresDePartidoyEquipo?clavePartido=${idPartido}&nombreEquipo=${nombreEquipo}&enBanca=${enBanca} `, {
     headers: this.tokenService.createHeaders()});
   }
+
+
+    //http://localhost:8080/usuarios/obtenerTipoUser?usuario=arbitro13
+    obtenerTipoUsuario(usuario:string | undefined):Observable<string>{
+      return this.http.get<string>(url + "/usuarios/obtenerTipoUser?usuario="+usuario)
+    }
+
 }

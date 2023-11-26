@@ -18,6 +18,13 @@ export class ArbitroService {
       estatusPartido = null;
     }
     return this.http.get<any>(url + "/Partido/obtenerPartidosArbitro?idArbitro="+usuarioArbitro+"&estatusPartido="+estatusPartido)
-    
+
   }
+
+  //http://localhost:8080/usuarios/obtenerTipoUser?usuario=arbitro13
+  obtenerTipoUsuario(usuario:string | undefined):Observable<string>{
+    return this.http.get<string>(url + "/usuarios/obtenerTipoUser?usuario="+usuario)
+  }
+
+
 }

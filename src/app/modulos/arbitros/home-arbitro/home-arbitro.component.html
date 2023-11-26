@@ -1,38 +1,38 @@
-<mat-dialog-actions class="dialog-actions">
-  <mat-form-field>
-    <mat-select placeholder="Estado" [(value)]="estatusPartidos" (selectionChange)="obtenerPartidos()">
-      <mat-option value="enCurso">En Curso</mat-option>
-      <mat-option value="finalizados">Finalizados</mat-option>
-      <mat-option value="proximos">Proximos</mat-option>
-      <mat-option value="todos">Todos</mat-option>
-    </mat-select>
-  </mat-form-field>
-  
-</mat-dialog-actions>
-  
-  <div *ngIf="partidos.length === 0">
-    <h2 class="ng-if-message">No Tienes partidos Asignados</h2>
-  </div>
-  
-  
-  <div *ngIf="partidos.length > 0">
-    <div class="card-deck">
-      <div *ngFor="let partido of partidos; let i = index" class="card">
-        <div class="card-body">
-          <a class="card-title">{{partido.equipo1 + " vs " + partido.equipo2 }}</a>
-          <ul class="list-group list-group-flush fecha-list">
-            <li  class="list-group-item">
-                <h4 class="fecha" >{{ partido.fechaInicio | date:'dd/MM/yyyy HH:mm:ss' }}</h4>
-            </li>
-          </ul>
+<div class="contenedorPag">
+  <mat-dialog-actions class="dialog-actions">
+    <mat-form-field>
+      <mat-select placeholder="Estado" [(value)]="estatusPartidos" (selectionChange)="obtenerPartidos()">
+        <mat-option value="enCurso">En Curso</mat-option>
+        <mat-option value="finalizados">Finalizados</mat-option>
+        <mat-option value="proximos">Proximos</mat-option>
+        <mat-option value="todos">Todos</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </mat-dialog-actions>
+
+    <div *ngIf="partidos.length === 0">
+      <h2 class="ng-if-message">No Tienes partidos Asignados</h2>
+    </div>
+
+
+    <div *ngIf="partidos.length > 0">
+      <div class="card-deck">
+        <div *ngFor="let partido of partidos; let i = index" class="card">
+          <div class="card-body">
+            <a class="card-title">{{partido.equipo1 + " vs " + partido.equipo2 }}</a>
+            <ul class="list-group list-group-flush fecha-list">
+              <li  class="list-group-item">
+                  <h4 class="fecha" >{{ partido.fechaInicio | date:'dd/MM/yyyy HH:mm:ss' }}</h4>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-primary entrarPartido" (click)="verPartido(partido.idPartido)" >Entrar</button>
+          </div>
+
         </div>
-        <div class="card-footer">
-          <button class="btn btn-primary entrarPartido" (click)="verPartido(partido.idPartido)" >Entrar</button>
-        </div>
-        
       </div>
     </div>
-  </div>
-  
-  
-  
+</div>
+

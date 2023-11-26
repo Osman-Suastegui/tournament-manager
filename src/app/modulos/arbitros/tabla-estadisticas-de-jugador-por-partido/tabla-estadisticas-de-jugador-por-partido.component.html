@@ -1,33 +1,33 @@
 <div class="contenedor">
-    <h3 class="partido-en-vivo-contenedor-nombre-equipo">{{nombreEquipo}}</h3>
+  <h3 class="partido-en-vivo-contenedor-nombre-equipo">{{nombreEquipo}}</h3>
 
-    
-    <table mat-table [dataSource]="tableDataSource" class="contenedor-table">
+  <table mat-table [dataSource]="tableDataSource" class="contenedor-table">
       <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-        <th mat-header-cell *matHeaderCellDef> {{ column }} </th>
-        <td mat-cell *matCellDef="let element">
+          <th mat-header-cell *matHeaderCellDef> {{ column }} </th>
+          <td mat-cell *matCellDef="let element">
 
-          <div id="contenedor-table-estadistica-valor" >
-            {{ element[column] }}
-          </div>
-          
-          <app-sacar-jugador-partido *ngIf="column === 'jugador' && element['jugador'] !== ''; else agregarJugadorButton"
-          [claveDelPartido]="claveDelPartido"
-          [nombreEquipo]="nombreEquipo"
-          [jugador]="element['jugador']"
-          ></app-sacar-jugador-partido>
-        
-        <ng-template #agregarJugadorButton>
-          <button *ngIf="column ==='jugador'" (click)="meterJugadorPartido()">+</button>
-          <!-- <app-agregar-jugador-partido *ngIf="column === 'jugador'" [claveDelPartido]="claveDelPartido"  [nombreEquipo]="nombreEquipo" ></app-agregar-jugador-partido> -->
-        </ng-template>
-        
-          <button *ngIf="column !== 'jugador'" (click)="agregarPuntoDeJugador(element['jugador'], column)">+</button>
+              <div id="contenedor-table-estadistica-valor">
+                  {{ element[column] }}
+              </div>
 
-        </td>
+              <app-sacar-jugador-partido
+                  *ngIf="column === 'jugador' && element['jugador'] !== ''; else agregarJugadorButton"
+                  [claveDelPartido]="claveDelPartido"
+                  [nombreEquipo]="nombreEquipo"
+                  [jugador]="element['jugador']"
+              ></app-sacar-jugador-partido>
+
+              <ng-template #agregarJugadorButton>
+                  <button *ngIf="column === 'jugador' && rol === 'ARBITRO'" (click)="meterJugadorPartido()">+</button>
+                  <!-- <app-agregar-jugador-partido *ngIf="column === 'jugador'" [claveDelPartido]="claveDelPartido" [nombreEquipo]="nombreEquipo"></app-agregar-jugador-partido> -->
+              </ng-template>
+
+              <button *ngIf="column !== 'jugador' && rol === 'ARBITRO'" (click)="agregarPuntoDeJugador(element['jugador'], column)">+</button>
+
+          </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </div>
+  </table>
+</div>

@@ -12,6 +12,8 @@ import { BusquedaLigaComponent } from './modulos/vistas-generales/busqueda-liga/
 import { BusquedaTemporadaComponent } from './modulos/vistas-generales/busqueda-temporada/busqueda-temporada.component';
 import { BusquedaUsuarioComponent } from './modulos/vistas-generales/busqueda-usuario/busqueda-usuario.component';
 import { EstadisticasTemporadaComponent } from './modulos/vistas-generales/estadisticas-temporada/estadisticas-temporada.component';
+import { CondicionesUsoComponent } from './modulos/vistas-generales/condiciones-uso/condiciones-uso.component';
+import { PoliticiasPrivacidadComponent } from './modulos/vistas-generales/politicias-privacidad/politicias-privacidad.component';
 
 const routes: Routes = [
   {
@@ -60,6 +62,14 @@ const routes: Routes = [
   {
     path: 'estadisticas-temporada/:temporadaId/:nombreEquipo',
     component: EstadisticasTemporadaComponent
+  },
+  {
+    path: 'condiciones-uso',
+    component: CondicionesUsoComponent
+  },
+  {
+    path: 'politica-privacidad',
+    component: PoliticiasPrivacidadComponent
   }
 ];
 

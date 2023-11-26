@@ -248,9 +248,9 @@ export class NavBarComponent implements OnInit {
   }
 
   getRoleUser(usuario: string) {
-    this.auth.getTypeOfUser(usuario).subscribe({
-      next: (tipo) => {
-        this.tipoUsuario = tipo;
+    this.auth.obtenerTipoUsuario(usuario).subscribe({
+      next: (tipo: any) => {
+        this.tipoUsuario = tipo.Rol;
       },
       error: (error) => {
         this.tipoUsuario = 'ANONIMO';
