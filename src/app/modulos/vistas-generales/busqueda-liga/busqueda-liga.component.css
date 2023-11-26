@@ -2,3 +2,19 @@
   min-height: 100vh; /* Asegura que la altura sea al menos del 100% del viewport */
   background-color: #d9d9d9;
 }
+
+.perzo {
+  width: 60%;
+  margin: 0 auto;
+
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+}
+
+.centrado{
+  text-align: center;
+
+}

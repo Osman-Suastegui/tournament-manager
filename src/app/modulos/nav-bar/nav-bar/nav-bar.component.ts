@@ -24,6 +24,7 @@ export class NavBarComponent implements OnInit {
   searchResults: any[] = [];
   searchResults$ = new BehaviorSubject<any[]>([]);
   temporadaId: string = '';
+  ligaId: string = '';
 
   filteredResults: Observable<any[]>;
 
@@ -64,7 +65,16 @@ export class NavBarComponent implements OnInit {
         }
       });
     } else if (this.selectedCategory === 'ligas') {
-      this.router.navigate(['/buscar-liga', this.searchQuery]);
+      this.obtenerLigaId(this.searchQuery).subscribe({
+        next: (data) => {
+          this.ligaId = data[0].idLiga;
+          this.router.navigate(['/buscar-liga', this.searchQuery, this.ligaId]);
+        },
+        error: (error) => {
+          console.error('Error al realizar la búsqueda de ligas', error);
+          this.searchResults$.next([]);
+        }
+      });
     } else if (this.selectedCategory === 'equipos') {
       this.router.navigate(['/buscar-equipo', this.searchQuery]);
     }
@@ -76,6 +86,11 @@ export class NavBarComponent implements OnInit {
   obtenerTemporadaId(nombreTemp: string): Observable<any> {
     return this.searchService.searchTemporadas(this.searchQuery);
   }
+
+  obtenerLigaId(nombreLiga: string): Observable<any> {
+    return this.searchService.searchLigas(this.searchQuery);
+  }
+
 
 
   @HostListener('document:click', ['$event'])
