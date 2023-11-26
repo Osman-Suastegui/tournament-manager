@@ -133,6 +133,9 @@ html, body {
 .contenedorPag {
   min-height: 100vh; /* Asegura que la altura sea al menos del 100% del viewport */
   background-color: #d9d9d9;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 
@@ -170,3 +173,50 @@ html, body {
 
 
 
+.centrar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%; /* Asegura que el botón ocupe todo el ancho disponible */
+  padding: 10px 0; /* Agrega un poco de espacio alrededor del texto */
+  border-radius: 10px;
+  color: #080708;
+  background-color: #F26419;
+}
+
+.titulo {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.subtitulo {
+  font-size: 24px;
+  color: #555;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.parrafo {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.contenedorTodo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%; /* Asegura que el botón ocupe todo el ancho disponible */
+  padding: 10px 0; /* Agrega un poco de espacio alrededor del texto */
+  border-radius: 10px;
+  color: #080708;
+
+}

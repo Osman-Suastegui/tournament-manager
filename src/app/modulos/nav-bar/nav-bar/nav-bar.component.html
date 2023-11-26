@@ -16,11 +16,11 @@
   </mat-menu>
 
 
-    <button mat-button>Resultados</button>
+    <!-- <button mat-button>Resultados</button>
     <button mat-button>Calendario</button>
     <button mat-button>Equipos</button>
     <button mat-button>Estadisticas</button>
-    <button mat-button>Jugadores</button>
+    <button mat-button>Jugadores</button> -->
 
     <div class="search-bar">
       <button class="btn-buscar" *ngIf="!searching" (click)="startSearch()">
@@ -28,7 +28,7 @@
       </button>
 
       <div *ngIf="searching" class="search-options">
-        <input class="input-buscar" (keyup)="onTyping()" (keyup.enter)="performSearch()" placeholder="Escribe tu búsqueda aquí" [(ngModel)]="searchQuery" [matAutocomplete]="auto">
+        <input class="input-buscar" (keyup)="onTyping()" (keyup.enter)="performSearch()" placeholder="Escribe tu búsqueda aquí ..." [(ngModel)]="searchQuery" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let result of searchResults$ | async" [value]="getValue(result)">
             {{ getContent(result) }}

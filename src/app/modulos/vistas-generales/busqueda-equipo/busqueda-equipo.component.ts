@@ -66,6 +66,9 @@ export class BusquedaEquipoComponent implements OnInit {
       }
     });
   }
-
+  
+  verPartido(idPartido:string){
+    this.router.navigate(['/ver-estadisticas-de-jugador-por-partido',idPartido]);
+  }
 
 }

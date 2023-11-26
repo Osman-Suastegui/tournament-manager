@@ -10,6 +10,8 @@ import { BusquedaUsuarioComponent } from './busqueda-usuario/busqueda-usuario.co
 import { BusquedaLigaComponent } from './busqueda-liga/busqueda-liga.component';
 import { BusquedaTemporadaComponent } from './busqueda-temporada/busqueda-temporada.component';
 import { EstadisticasTemporadaComponent } from './estadisticas-temporada/estadisticas-temporada.component';
+import { PoliticiasPrivacidadComponent } from './politicias-privacidad/politicias-privacidad.component';
+import { CondicionesUsoComponent } from './condiciones-uso/condiciones-uso.component';
 
 
 
@@ -21,7 +23,9 @@ import { EstadisticasTemporadaComponent } from './estadisticas-temporada/estadis
     BusquedaUsuarioComponent,
     BusquedaLigaComponent,
     BusquedaTemporadaComponent,
-    EstadisticasTemporadaComponent
+    EstadisticasTemporadaComponent,
+    PoliticiasPrivacidadComponent,
+    CondicionesUsoComponent
   ],
   imports: [
     FormsModule,

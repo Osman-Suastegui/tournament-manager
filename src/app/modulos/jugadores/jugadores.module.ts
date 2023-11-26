@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeJugadorComponent } from 'src/app/modulos/jugadores/home-jugador/home-jugador.component';
+import { AngularMaterialModule } from '../angular-material/angular-material.module';
 
 
 
@@ -9,7 +10,8 @@ import { HomeJugadorComponent } from 'src/app/modulos/jugadores/home-jugador/hom
     HomeJugadorComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    AngularMaterialModule
   ],
   exports: [
     HomeJugadorComponent
