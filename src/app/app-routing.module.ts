@@ -46,7 +46,7 @@ const routes: Routes = [
     component: BusquedaEquipoComponent
   },
   {
-    path: 'buscar-liga/:texto',
+    path: 'buscar-liga/:texto/:ligaId',
     component: BusquedaLigaComponent
   },
   {

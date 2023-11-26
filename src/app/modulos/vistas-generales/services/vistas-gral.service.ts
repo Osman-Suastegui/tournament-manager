@@ -79,6 +79,30 @@ export class VistasGralService {
     });
   }
 
+  //http://localhost:8080/Ligas/obtenerTemporadas?idLiga=1
+  obtenerTemporadasDeLiga(liga: string) {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/Ligas/obtenerTemporadas', {
+      headers: headers,
+      params: {
+        idLiga: liga
+      }
+    });
+  }
+
+  //http://localhost:8080/usuarios/obtenerUsuario?usuario=juanpa02
+  obtenerUsuario(user: string) {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/usuarios/obtenerUsuario', {
+      headers: headers,
+      params: {
+        usuario: user
+      }
+    });
+  }
+
 
 
 

@@ -1,8 +1,22 @@
 <app-nav-bar></app-nav-bar>
 
-<div class="contenedorPag">
+<div class="contenedorPag d-flex align-items-center justify-content-center perzo">
+  <div>
+    <h2 class="text-center mb-4">Liga {{ nombreLiga }}</h2>
 
-
+    <div class="row">
+      <div class="col-md-4" *ngFor="let temporada of temporadas">
+        <div class="card mb-4">
+          <div class="card-body centrado">
+            <h5 class="card-title btn" (click)="irATemporada(temporada.nombreTemporada)">{{ temporada.nombreTemporada }}</h5>
+            <p class="card-text">Categoría: {{ temporada.categoria }}</p>
+            <p class="card-text">Estado: {{ temporada.estado }}</p>
+            <!-- Agrega más detalles según tus necesidades -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <app-footer-component></app-footer-component>
