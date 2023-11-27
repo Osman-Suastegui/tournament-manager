@@ -61,6 +61,8 @@ export class BusquedaTemporadaComponent implements OnInit {
             nombreEquipo: key,
             puntos: data[key]
           }));
+          // sort by puntos
+          this.equiposRanking.sort((a, b) => b.puntos - a.puntos);
 
           console.log(this.equiposRanking);
         },
