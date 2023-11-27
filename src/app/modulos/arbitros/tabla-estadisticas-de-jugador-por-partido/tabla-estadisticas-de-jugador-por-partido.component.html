@@ -23,6 +23,7 @@
               </ng-template>
 
               <button *ngIf="column !== 'jugador' && rol === 'ARBITRO'" (click)="agregarPuntoDeJugador(element['jugador'], column)">+</button>
+              <button *ngIf="column !== 'jugador' && rol === 'ARBITRO'" (click)="quitarPuntoDeJugador(element['jugador'], column)">-</button>
 
           </td>
       </ng-container>

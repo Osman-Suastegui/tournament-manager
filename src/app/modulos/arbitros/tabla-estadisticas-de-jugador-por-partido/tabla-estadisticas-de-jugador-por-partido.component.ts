@@ -23,13 +23,21 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
     @Input() enBanca: number | null;
     private puntosEquipo: number | undefined;
 
-    statDescriptionHandlers: { [key: string]: (fila: EstadisticasJugador) => void } = {
+    statDescriptionHandlersPositivos: { [key: string]: (fila: EstadisticasJugador) => void } = {
       tirosDe2Puntos: (fila: EstadisticasJugador) => fila.tirosDe2Puntos++,
       tirosLibres: (fila: EstadisticasJugador) => fila.tirosLibres++,
       tirosDe3Puntos: (fila: EstadisticasJugador) => fila.tirosDe3Puntos++,
       asistencias: (fila: EstadisticasJugador) => fila.asistencias++,
       faltas: (fila: EstadisticasJugador) => fila.faltas++,
     };
+    statDescriptionHandlersNegativos: { [key: string]: (fila: EstadisticasJugador) => void } = {
+      tirosDe2Puntos: (fila: EstadisticasJugador) => fila.tirosDe2Puntos--,
+      tirosLibres: (fila: EstadisticasJugador) => fila.tirosLibres--,
+      tirosDe3Puntos: (fila: EstadisticasJugador) => fila.tirosDe3Puntos--,
+      asistencias: (fila: EstadisticasJugador) => fila.asistencias--,
+      faltas: (fila: EstadisticasJugador) => fila.faltas--,
+    };
+
     jugadorBase = {
       jugador: '',
       faltas: 0,
@@ -63,15 +71,30 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
       const message = {
         "clavePartido": this.claveDelPartido,
         "jugador" : jugador,
-        "descripcion" : columna
+        "descripcion" : columna,
+        "puntoPositivo": true
       }
       this.RxStompService.publish({
-        destination: `/app/agregarPunto/${this.claveDelPartido}`,
+        destination: `/app/actualizarPunto/${this.claveDelPartido}`,
         body: JSON.stringify(message)
       });
 
 
     }
+    quitarPuntoDeJugador(jugador: string, columna: string) {
+        
+        const message = {
+          "clavePartido": this.claveDelPartido,
+          "jugador" : jugador,
+          "descripcion" : columna,
+          "puntoPositivo": false
+        }
+        this.RxStompService.publish({
+          destination: `/app/actualizarPunto/${this.claveDelPartido}`,
+          body: JSON.stringify(message)
+        });
+    }
+      
 
     ngOnInit() {
       this.JugadoresDePartidoEquipoService.obtenerJugadoresDePartidoYEquipo(this.claveDelPartido, this.nombreEquipo, this.enBanca).subscribe((data) => {
@@ -104,15 +127,22 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
       const response = JSON.parse(message.body);
 
     this.tableDataSource.data.forEach((fila: EstadisticasJugador) => {
-        if (fila.jugador === response.jugador && response.descripcion in this.statDescriptionHandlers) {
-          this.statDescriptionHandlers[response.descripcion](fila);
+        if (fila.jugador === response.jugador && response.descripcion in this.statDescriptionHandlersPositivos) {
+          if(response.puntoPositivo)this.statDescriptionHandlersPositivos[response.descripcion](fila);
+          else this.statDescriptionHandlersNegativos[response.descripcion](fila);
 
           if(response.descripcion === 'tirosDe2Puntos' || response.descripcion === 'tirosDe3Puntos' || response.descripcion === 'tirosLibres'){
-            let puntosAgregar = 0
-            if(response.descripcion === 'tirosDe2Puntos') puntosAgregar = 2;
-            if(response.descripcion === 'tirosDe3Puntos') puntosAgregar = 3;
-            if(response.descripcion === 'tirosLibres') puntosAgregar = 1;
-            this.marcadorServ.actualizarPuntosEquipo(this.nombreEquipo, this.claveDelPartido, this.puntosEquipo && this.puntosEquipo + puntosAgregar);
+            let puntosActualizar = 0
+            if(response.puntoPositivo){
+              if(response.descripcion === 'tirosDe2Puntos') puntosActualizar = 2;
+              if(response.descripcion === 'tirosDe3Puntos') puntosActualizar = 3;
+              if(response.descripcion === 'tirosLibres') puntosActualizar = 1;
+            }else{
+              if(response.descripcion === 'tirosDe2Puntos') puntosActualizar = -2;
+              if(response.descripcion === 'tirosDe3Puntos') puntosActualizar = -3;
+              if(response.descripcion === 'tirosLibres') puntosActualizar = -1;
+            }
+            this.marcadorServ.actualizarPuntosEquipo(this.nombreEquipo, this.claveDelPartido, this.puntosEquipo && this.puntosEquipo + puntosActualizar);
           }
         }
         
