@@ -18,6 +18,8 @@ export class CaracteristicasPartidosComponent implements OnInit{
     cantidadEquiposPlayOff: 0
   };
 
+  cantidadEquiposPlayOff = [2, 4, 8, 16, 32];
+
 
   constructor(private tempService: TemporadasService) {}
 

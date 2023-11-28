@@ -237,6 +237,46 @@ export class TemporadasService {
   }
 
 
+
+
+  crearPartidosTemporadaRegular(idTemporada: number, cantidadEnfrentamientosRegular: number): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    const body = {
+      idTemporada: idTemporada,
+      cantidadEnfrentamientosRegular: cantidadEnfrentamientosRegular
+    };
+
+    return this.http.post(url + '/Partido/crearPartidosTemporadaRegular', body, { headers: headers });
+  }
+
+
+  //http://localhost:8080/Partido/crearPartidosEliminatorias
+//   {
+//     "idTemporada":1
+// }
+
+  crearPartidosEliminatorias(idTemporada: number): Observable<any> {
+    const headers = this.tokenService.createHeaders();
+
+    const body = {
+      idTemporada: idTemporada
+    };
+
+    return this.http.post(url + '/Partido/crearPartidosEliminatorias', body, { headers: headers });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
   obtenerPartidosTemporada(idTemporada: number): Observable<any> {
     const headers = this.tokenService.createHeaders();
 

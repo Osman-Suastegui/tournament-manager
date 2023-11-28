@@ -3,18 +3,24 @@
 
 <app-nav-bar></app-nav-bar>
 
-<div class="contenedorPag">
+  <div class="contenedorPag">
 
-  <div class="estadoContenedor">
-    <h2 class="estadoContenedor">Estado de la Temporada: {{estadoTemporada}}</h2>
-    <button (click)="openDialogPartidosCaract()" class="btnCaracteristicas ">Caracteristicas</button>
-  </div>
 
-  <div class="contenedorCaracteristicas">
-    <h3 class="contenidoCaracteristica">Cantidad de equipos en la Temporada: {{equiposTemporada}}</h3>
-    <h3 class="contenidoCaracteristica">Cantidad de enfrentamientos por equipo: {{enfrentaminetosEquipos}}</h3>
-    <h3 class="contenidoCaracteristica">Cantidad de equipos que pasan a playoffs: {{equiposPlayoff}}</h3>
-  </div>
+      <div class="estadoContenedor">
+        <h2 class="estadoContenedor">Estado de la Temporada: {{estadoTemporada}}</h2>
+          <div *ngIf="equiposTemporada === 0">
+            <button (click)="openDialogPartidosCaract()" class="btnCaracteristicas ">Caracteristicas</button>
+          </div>
+      </div>
+
+
+      <div class="contenedorCaracteristicas">
+        <h3 class="contenidoCaracteristica">Cantidad de equipos en la Temporada: {{equiposTemporada}}</h3>
+        <h3 class="contenidoCaracteristica">Cantidad de enfrentamientos por equipo: {{enfrentaminetosEquipos}}</h3>
+        <h3 class="contenidoCaracteristica">Cantidad de equipos que pasan a playoffs: {{equiposPlayoff}}</h3>
+      </div>
+
+
 
   <div class="contenedorPrincipal">
 
@@ -24,7 +30,7 @@
         <div class="contenedorTituloEquipo">
           <mat-card-title class="titulo">Equipos</mat-card-title>
           <!-- Botón para agregar equipo si hay menos de 8 equipos -->
-          <div *ngIf="estadoTemporada === 'INACTIVA' && cantidadEquipos < 8">
+          <div *ngIf="estadoTemporada === 'INACTIVA' && cantidadEquipos < equiposTemporada">
             <button (click)="openDialogEquipos()" class="btnMas">
               <mat-icon aria-hidden="false" aria-label="Add">add</mat-icon>
             </button>
@@ -86,9 +92,13 @@
       <div>
         <h2 class="centrarPartidos tituloPartidos">Partidos</h2>
 
-        <div class="centrarPartidos" *ngIf="estadoTemporada === 'INACTIVA' || 'ACTIVA'  ">
-          <button class="botonPartidos" (click)="generarPartidos(this.idTemporada)">Generar Partidos</button>
-        </div>
+      <div *ngIf="equiposTempList.length === equiposTemporada">
+          <div *ngIf="equiposPlayoff !== 0">
+            <div class="centrarPartidos" *ngIf="estadoTemporada === 'INACTIVA' || estadoTemporada === 'ACTIVA'">
+              <button class="botonPartidos" (click)="generarPartidos(idTemporada)">Generar Partidos</button>
+            </div>
+          </div>
+      </div>
 
         <p class="mensajeArbitro">{{this.mensajePartidos}}</p>
       </div>
