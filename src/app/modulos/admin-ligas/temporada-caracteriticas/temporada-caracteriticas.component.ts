@@ -47,7 +47,6 @@ export class TemporadaCaracteriticasComponent implements OnInit{
       this.obtenerArbitrosTemp(this.idTemporada);
       this.obtenerEquiposTemp(this.idTemporada);
     });
-
     this.obtenerCaracteristicasTemporada();
 
    this.tempService.onCaracteristicasTemporadaActualizadas().subscribe({
@@ -131,8 +130,9 @@ export class TemporadaCaracteriticasComponent implements OnInit{
         this.equiposTemp = data;
         this.equiposTempList = Object.keys(data).map(key => ({ nombreEquipo: key, equipo: data[key] }));
         this.cantidadEquipos = this.equiposTempList.length;
-        if (this.cantidadEquipos === 8)
+        if (this.cantidadEquipos === this.equiposTemporada)
             this.dialog.closeAll();
+            console.log(this.equiposTempList.length);
       }
     });
   }
@@ -172,23 +172,57 @@ export class TemporadaCaracteriticasComponent implements OnInit{
   }
 
   generarPartidos(idTemporada: number) {
-    this.tempService.generarPartidos(idTemporada).subscribe({
-      next: (result) => {
-        this.mensajePartidos = result.message;
-        this.tempService.emitEstadoTemporadaActualizado();
-        this.tempService.emitNuevosPartidosGenerados();
-        setTimeout(() => {
-          this.mensajePartidos = ''; // Limpiar el mensaje
-        }, 5000);
-      },
-      error: (err) => {
-        this.mensajePartidos = err.error[0].message;
-        setTimeout(() => {
-          this.mensajePartidos = ''; // Limpiar el mensaje
-        }, 5000);
-      }
-    });
+
+    if(this.partidosTemporada.length > 0){
+      this.tempService.crearPartidosEliminatorias(idTemporada).subscribe({
+        next: (result) => {
+          this.mensajePartidos = 'Partidos Generados Exitosamente'
+          this.tempService.emitNuevosPartidosGenerados();
+          setTimeout(() => {
+            this.mensajePartidos = ''; // Limpiar el mensaje
+          }, 5000);
+        },
+        error: (err) => {
+          this.mensajePartidos = err.error[0].message
+          setTimeout(() => {
+            this.mensajePartidos = ''; // Limpiar el mensaje
+          }, 5000);
+        }
+      });
+    }else if (this.partidosTemporada.length <= 0){
+      console.log(this.partidosTemporada.length);
+      console.log(idTemporada);
+      console.log(this.enfrentaminetosEquipos);
+      this.tempService.crearPartidosTemporadaRegular(idTemporada, this.enfrentaminetosEquipos).subscribe({
+        next: (result) => {
+          this.mensajePartidos = 'Partidos Generados Exitosamente'
+          this.tempService.emitEstadoTemporadaActualizado();
+          this.tempService.emitNuevosPartidosGenerados();
+          setTimeout(() => {
+            this.mensajePartidos = ''; // Limpiar el mensaje
+          }, 5000);
+        },
+        error: (err) => {
+          this.mensajePartidos = err.error[0].message;
+          setTimeout(() => {
+            this.mensajePartidos = ''; // Limpiar el mensaje
+          }, 5000);
+        }
+      });
+    }
+
+
+
+
+
   }
+
+
+
+
+
+
+
 
   obtenerPartidosTemporada() {
     this.tempService.obtenerPartidosTemporada(this.idTemporada).subscribe({

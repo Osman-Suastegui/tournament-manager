@@ -30,10 +30,21 @@
     </div>
 
 
-    <mat-form-field>
+    <!-- <mat-form-field>
       <label for="equiposPlayoffs">Cantidad de equipos que pasan a playoffs</label>
       <input type="number" name="equiposPlayoffs" id="equiposPlayoffs" [(ngModel)]="partidosCaracteristicas.cantidadEquiposPlayOff" matInput min="0">
+    </mat-form-field> -->
+
+    <mat-form-field>
+      <label for="equiposPlayoffs">Cantidad de equipos que pasan a playoffs</label>
+      <mat-select name="equiposPlayoffs" id="equiposPlayoffs" [(ngModel)]="partidosCaracteristicas.cantidadEquiposPlayOff">
+        <mat-option *ngFor="let cantidadEquipoPlayOff of cantidadEquiposPlayOff" [value]="cantidadEquipoPlayOff">{{cantidadEquipoPlayOff}}</mat-option>
+      </mat-select>
     </mat-form-field>
+
+
+
+
 
 
     <span class="mensaje-estilo" *ngIf="mensaje">{{ mensaje }}</span> <!-- Muestra el mensaje si existe -->
