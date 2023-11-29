@@ -6,4 +6,5 @@ export interface Partidos {
   idPartido: number;
   temporadaId: number;
   ganador: string;
+  fase: string;
 }
