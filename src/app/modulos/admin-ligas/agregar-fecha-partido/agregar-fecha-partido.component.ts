@@ -37,6 +37,15 @@ export class AgregarFechaPartidoComponent implements OnInit{
         next: (result) => {
           this.mensaje = result.message;
           this.tempService.emitNuevaFechaPartidoAsignada();
+          this.tempService.asignarArbitroPartido(idPartido, '').subscribe({
+            next: (result) => {
+              console.log(result);
+              this.tempService.emitNuevoArbitroPartidoAsignado();
+            }
+          });
+        },
+        error: (error: any) => {
+          this.mensaje = error.error[0].message;
         }
       });
     } catch (error) {

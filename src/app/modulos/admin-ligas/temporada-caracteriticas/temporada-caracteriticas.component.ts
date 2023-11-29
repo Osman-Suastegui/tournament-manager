@@ -34,7 +34,7 @@ export class TemporadaCaracteriticasComponent implements OnInit{
   mensajePartidos: string = "";
   partidosTemporada: Partidos[] = [];
   idPartido: number = 0;
-  displayedColumns: string[] = ['equipo1', 'arbitro', 'equipo2', 'fechaInicio', 'ganador'];
+  displayedColumns: string[] = ['equipo1', 'arbitro', 'equipo2','fase', 'fechaInicio', 'ganador'];
   equiposTemporada: number = 0;
   enfrentaminetosEquipos: number = 0;
   equiposPlayoff: number = 0;

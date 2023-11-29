@@ -109,9 +109,11 @@
           <mat-cell *matCellDef="let partidoTemporada" class="celCentradoArbitros">
             {{ partidoTemporada.arbitro }}
             <div *ngIf="partidoTemporada.ganador === 'Sin concluir'" class="botonCentradoArbitros">
-              <button mat-button (click)="agregarArbitroPartido(partidoTemporada.idPartido)">
-                <mat-icon>person_add</mat-icon>
-              </button>
+              <div *ngIf="partidoTemporada.fechaInicio !== null">
+                <button mat-button (click)="agregarArbitroPartido(partidoTemporada.idPartido)">
+                  <mat-icon>person_add</mat-icon>
+                </button>
+              </div>
             </div>
           </mat-cell>
         </ng-container>
@@ -125,6 +127,11 @@
         <ng-container matColumnDef="equipo2">
           <mat-header-cell class="headerCelCentrado" *matHeaderCellDef>Equipo 2</mat-header-cell>
           <mat-cell class="celCentradoGeneral" *matCellDef="let partidoTemporada">{{ partidoTemporada.equipo2 }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fase">
+          <mat-header-cell class="headerCelCentrado" *matHeaderCellDef>Fase</mat-header-cell>
+          <mat-cell class="celCentradoGeneral" *matCellDef="let partidoTemporada">{{ partidoTemporada.fase }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="fechaInicio">
