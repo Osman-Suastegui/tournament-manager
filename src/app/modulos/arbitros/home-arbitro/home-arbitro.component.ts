@@ -24,7 +24,8 @@ export class HomeArbitroComponent implements OnInit {
   obtenerPartidos(){
     this.arbitroService.obtenerPartidos(this.usuarioArbitro,this.estatusPartidos).subscribe((data)=>{
       this.partidos = data;      
-    })
+
+    });
   }
   verPartido(idPartido:string){
     this.router.navigate(['/ver-estadisticas-de-jugador-por-partido',idPartido]);

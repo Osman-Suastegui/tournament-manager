@@ -14,4 +14,20 @@ export class PartidosService {
    return this.http.get<Partido>(`${url}/Partido/obtenerPartido?clavePartido=${clavePartido}`);
   }
 
+  obtenerFechaInicio(clavePartido:number |undefined ):Observable<String> {
+    return this.http.get<String>(`${url}/Partido/obtenerFechaInicio?clavePartido=${clavePartido}`);
+   }
+
+   obtenerGanador(clavePartido:number | undefined):Observable<String>{
+    return this.http.get<String>(`${url}/Partido/obtenerGanador?clavePartido=${clavePartido}`);
+   }
+
+   finalizarPartido(claveDelPartido:number | undefined):Observable<String>{
+    // return this.http.get<String>(`${url}/Partido/finalizarPartido?clavePartido=${claveDelPartido}`);
+    // put
+    return this.http.put<String>(`${url}/Partido/finalizarPartido`,{clavePartido:claveDelPartido});
+   }
+   obtenerUsuarioArbitroAsignado(clavePartido:number | undefined):Observable<String>{
+    return this.http.get<String>(`${url}/Partido/obtenerUsuarioArbitroAsignado?clavePartido=${clavePartido}`);
+   }
 }

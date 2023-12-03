@@ -21,6 +21,8 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
     @Input() nombreEquipo: string | undefined;
     @Input() claveDelPartido: number | undefined;
     @Input() enBanca: number | null;
+    @Input() partidoFinalizado: boolean = false;
+    @Input() usuarioArbitroAsignado:String = "";
     private puntosEquipo: number | undefined;
 
     statDescriptionHandlersPositivos: { [key: string]: (fila: EstadisticasJugador) => void } = {
