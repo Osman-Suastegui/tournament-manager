@@ -10,20 +10,20 @@
                   {{ element[column] }}
               </div>
 
-              <app-sacar-jugador-partido
-                  *ngIf="column === 'jugador' && element['jugador'] !== ''; else agregarJugadorButton"
+              <app-sacar-jugador-partido 
+                  *ngIf="partidoFinalizado !== true && column === 'jugador' && element['jugador'] !== '' && usuario === usuarioArbitroAsignado; else agregarJugadorButton "
                   [claveDelPartido]="claveDelPartido"
                   [nombreEquipo]="nombreEquipo"
                   [jugador]="element['jugador']"
               ></app-sacar-jugador-partido>
 
               <ng-template #agregarJugadorButton>
-                  <button *ngIf="column === 'jugador' && rol === 'ARBITRO'" (click)="meterJugadorPartido()">+</button>
+                  <button *ngIf="partidoFinalizado!==true && column === 'jugador' && rol === 'ARBITRO' && usuario === usuarioArbitroAsignado" (click)="meterJugadorPartido()">+</button>
                   <!-- <app-agregar-jugador-partido *ngIf="column === 'jugador'" [claveDelPartido]="claveDelPartido" [nombreEquipo]="nombreEquipo"></app-agregar-jugador-partido> -->
               </ng-template>
 
-              <button *ngIf="column !== 'jugador' && rol === 'ARBITRO'" (click)="agregarPuntoDeJugador(element['jugador'], column)">+</button>
-              <button *ngIf="column !== 'jugador' && rol === 'ARBITRO'" (click)="quitarPuntoDeJugador(element['jugador'], column)">-</button>
+              <button *ngIf="partidoFinalizado!==true && column !== 'jugador' && rol === 'ARBITRO' && usuario === usuarioArbitroAsignado" (click)="agregarPuntoDeJugador(element['jugador'], column)">+</button>
+              <button *ngIf="partidoFinalizado!==true && column !== 'jugador' && rol === 'ARBITRO' && usuario === usuarioArbitroAsignado" (click)="quitarPuntoDeJugador(element['jugador'], column)">-</button>
 
           </td>
       </ng-container>

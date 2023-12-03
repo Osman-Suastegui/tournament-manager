@@ -14,6 +14,7 @@ import { AgregarJugadorPartidoComponent } from './agregar-jugador-partido/agrega
 import { SacarJugadorPartidoComponent } from './sacar-jugador-partido/sacar-jugador-partido.component';
 import { MeterJugarPartidoComponent } from './meter-jugar-partido/meter-jugar-partido.component';
 import { MarcadorPartidoComponent } from './marcador-partido/marcador-partido.component';
+import { FinalizarPartidoComponent } from './finalizar-partido/finalizar-partido.component';
 @NgModule({
   declarations: [
     HomeArbitroComponent,
@@ -22,7 +23,8 @@ import { MarcadorPartidoComponent } from './marcador-partido/marcador-partido.co
     AgregarJugadorPartidoComponent,
     SacarJugadorPartidoComponent,
     MeterJugarPartidoComponent,
-    MarcadorPartidoComponent
+    MarcadorPartidoComponent,
+    FinalizarPartidoComponent
     
   ],
   imports: [

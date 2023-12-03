@@ -3,11 +3,17 @@
 <div class="contenedorPag">
 
   <div id="partido-en-vivo-contenedor">
+   
     <app-marcador-partido [nombreEquipo1]="nombreEquipo1" [nombreEquipo2]="nombreEquipo2" [claveDelPartido]="claveDelPartido" ></app-marcador-partido>
     <section id="partido-en-vivo-contenedor-tables">
-
-      <app-tabla-estadisticas-de-jugador-por-partido  [nombreEquipo]="nombreEquipo1" [claveDelPartido]="claveDelPartido" [enBanca]="0"></app-tabla-estadisticas-de-jugador-por-partido>
-      <app-tabla-estadisticas-de-jugador-por-partido [nombreEquipo]="nombreEquipo2" [claveDelPartido]="claveDelPartido" [enBanca]="0"></app-tabla-estadisticas-de-jugador-por-partido>
+      <div class="cronometro">
+        <p id="tiempo">Tiempo transcurrido: {{tiempoTranscurrido}}</p>
+        <p>{{mensajeTiempos}}</p>
+      </div>
+      <app-finalizar-partido *ngIf="partidoFinalizado !== true && rol =='ARBITRO' && usuario === usuarioArbitroAsignado " [clavePartido]="claveDelPartido"></app-finalizar-partido>
+      <app-tabla-estadisticas-de-jugador-por-partido [partidoFinalizado]="partidoFinalizado" [usuarioArbitroAsignado]="usuarioArbitroAsignado"  [nombreEquipo]="nombreEquipo1" [claveDelPartido]="claveDelPartido" [enBanca]="0"></app-tabla-estadisticas-de-jugador-por-partido>
+      <app-tabla-estadisticas-de-jugador-por-partido [partidoFinalizado]="partidoFinalizado" [usuarioArbitroAsignado]="usuarioArbitroAsignado" [nombreEquipo]="nombreEquipo2" [claveDelPartido]="claveDelPartido" [enBanca]="0"></app-tabla-estadisticas-de-jugador-por-partido>
+      
     </section>
 
   </div>
