@@ -18,14 +18,14 @@ export class MeterJugarPartidoComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,private equipoServ:EquiposService,private RxStompService: RxStompService,
   public dialogRef: MatDialogRef<MeterJugarPartidoComponent>
-  
+
   ){}
 
   ngOnInit(): void {
     this.clavePartido = this.data.clavePartido;
     this.nombreEquipo = this.data.nombreEquipo;
     this.obtenerJugadores();
-    
+
   }
   obtenerJugadores(){
     this.equipoServ.obtenerJugadoresDePartidoEnBanca(this.nombreEquipo,this.clavePartido,true).subscribe((data:any)=>{

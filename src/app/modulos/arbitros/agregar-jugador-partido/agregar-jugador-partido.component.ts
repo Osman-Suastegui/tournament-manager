@@ -1,4 +1,5 @@
 import { Component,Input } from '@angular/core';
+import { JugadoresDePartidoEquipoService } from '../../arbitros/servicios/jugadores-de-partido-equipo.service';
 
 @Component({
   selector: 'app-agregar-jugador-partido',
@@ -9,7 +10,7 @@ export class AgregarJugadorPartidoComponent {
   @Input() claveDelPartido: number | undefined;
   @Input() nombreEquipo: string | undefined;
 
-  constructor() { }
+  constructor(private jugadorPartidoServ:JugadoresDePartidoEquipoService) { }
 
 
   agregarJugadorAPartido(){

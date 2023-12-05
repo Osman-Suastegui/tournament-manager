@@ -1,0 +1,13 @@
+.btn{
+  background-color: #F26419; /* Color de fondo del botón */
+  color: #080708; /* Color de texto del botón */
+  padding: 10px 20px; /* Ajusta el espaciado interno del botón */
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 7px;
+  margin-top: 20px; /* Aumenta el espacio superior del botón */
+  margin-bottom: 20px; /* Aumenta el espacio inferior del botón */
+  width: 15%;
+}
