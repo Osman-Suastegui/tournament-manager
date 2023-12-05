@@ -12,8 +12,8 @@ import { JugadoresDePartidoEquipoService } from '../servicios/jugadores-de-parti
 })
 export class RegistroDeEstadisticasDeJugadoresPorPartidoComponent implements OnInit {
   claveDelPartido: number | undefined;
-  nombreEquipo1 = "Miami Heat";
-  nombreEquipo2 = "Denver Nuggets";
+  nombreEquipo1 = "";
+  nombreEquipo2 = "";
   fechaInicioPartido: any ;
   tiempoTranscurrido:String = "00:00:00";
   partidoFinalizado:boolean = false;
