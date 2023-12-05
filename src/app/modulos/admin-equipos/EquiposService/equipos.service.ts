@@ -98,6 +98,7 @@ export class EquiposService {
 
 
 
+  //este
 
   obtenerJugadoresdeEquipo(equipo: string) {
     const headers = this.tokenService.createHeaders();

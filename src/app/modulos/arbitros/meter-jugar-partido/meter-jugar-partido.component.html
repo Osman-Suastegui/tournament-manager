@@ -1,18 +1,21 @@
 <mat-dialog-content>
-    <header>
-      <h1>Jugadores en Banca</h1>
+    <header class="tituloCentrado">
+      <h1 class="titulo">Jugadores en Banca</h1>
     </header>
-  
+
     <form>
-  
+
+  <div class="centradoFlex">
       <mat-form-field>
         <mat-label>Jugadores</mat-label>
         <mat-select [(ngModel)]="selectedJugador" name="usuarioJugador">
           <mat-option *ngFor="let jugadorUsuario of jugadoresEnBanca" [value]="jugadorUsuario">{{ jugadorUsuario.jugador }}</mat-option>
         </mat-select>
       </mat-form-field>
-  
-      <span class="mensaje-estilo" *ngIf="mensajeError">{{ mensajeError }}</span> 
-      <button type="submit" (click)="agregarJugador()">Agregar Jugador</button>
+
+      <span class="mensaje-estilo" *ngIf="mensajeError">{{ mensajeError }}</span>
+      <button type="submit" (click)="agregarJugador()" class="boton">Agregar Jugador</button>
+  </div>
+
     </form>
 </mat-dialog-content>

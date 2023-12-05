@@ -20,6 +20,13 @@ export class JugadoresDePartidoEquipoService {
     headers: this.tokenService.createHeaders()});
   }
 
+  obtenerJugadoresdeEquipo(equipo: string) {
+    const headers = this.tokenService.createHeaders();
+    const urlWithEquipo = `${url}/Equipo/${encodeURIComponent(equipo)}/jugadores`;
+
+    return this.http.get(urlWithEquipo, { headers: headers });
+  }
+
 
     //http://localhost:8080/usuarios/obtenerTipoUser?usuario=arbitro13
     obtenerTipoUsuario(usuario:string | undefined):Observable<string>{
