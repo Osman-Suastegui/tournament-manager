@@ -58,13 +58,18 @@ export class RegistroDeEstadisticasDeJugadoresPorPartidoComponent implements OnI
               let horas = Math.floor(segundosTranscurridos / 3600);
               let minutos:any = Math.floor((segundosTranscurridos % 3600) / 60);
               let segundos:any = segundosTranscurridos % 60;
-              if(minutos == 10){
+              if(minutos < 10){
+                this.mensajeTiempos = "Tiempo 1";
+              }else if(minutos < 20){
                 this.mensajeTiempos = "Tiempo 2";
-              }else if(minutos == 20){
+              }
+              else if(minutos < 30){
                 this.mensajeTiempos = "Tiempo 3";
               }
-              else if(minutos == 30){
+              else if(minutos < 40){
                 this.mensajeTiempos = "Tiempo 4";
+              }else{
+                this.mensajeTiempos = "Tiempo extra";
               }
               if (segundos < 10) {
                 segundos = "0" + segundos;
