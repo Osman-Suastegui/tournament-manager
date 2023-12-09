@@ -104,6 +104,69 @@ export class VistasGralService {
   }
 
 
+  //http://localhost:8080/estadisticas/top-jugadores-tiros-libres?temporadaId=12
+  obtenerTopJugadoresTirosLibres(temporada: string) {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/estadisticas/top-jugadores-tiros-libres', {
+      headers: headers,
+      params: {
+        temporadaId: temporada
+      }
+    });
+  }
+
+
+  //http://localhost:8080/estadisticas/top-jugadores-tiros-de-2-puntos?temporadaId=12
+  obtenerTopJugadoresTirosDe2Puntos(temporada: string) {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/estadisticas/top-jugadores-tiros-de-2-puntos', {
+      headers: headers,
+      params: {
+        temporadaId: temporada
+      }
+    });
+  }
+
+  //http://localhost:8080/estadisticas/top-jugadores-tiros-de-3-puntos?temporadaId=12
+  obtenerTopJugadoresTirosDe3Puntos(temporada: string) {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/estadisticas/top-jugadores-tiros-de-3-puntos', {
+      headers: headers,
+      params: {
+        temporadaId: temporada
+      }
+    });
+  }
+
+
+  //http://localhost:8080/estadisticas/top-jugadores-asistencias?temporadaId=12
+  obtenerTopJugadoresAsistencias(temporada: string) {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/estadisticas/top-jugadores-asistencias', {
+      headers: headers,
+      params: {
+        temporadaId: temporada
+      }
+    });
+  }
+
+  //http://localhost:8080/Partido/obtenerPartidosTemporadaRegular?idTemporada=12
+  obtenerPartidosTemporadaRegular(temporada: string) {
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.get(url + '/Partido/obtenerPartidosTemporadaRegular', {
+      headers: headers,
+      params: {
+        idTemporada: temporada
+      }
+    });
+  }
+
+
 
 
 

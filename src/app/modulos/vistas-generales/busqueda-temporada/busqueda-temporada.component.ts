@@ -52,30 +52,67 @@ export class BusquedaTemporadaComponent implements OnInit {
 
 
     obtenerRankingEquipos() {
-      this.vistasService.ObtenerRanking(this.temporadaId).subscribe({
+      this.vistasService.obtenerPartidosTemporadaRegular(this.temporadaId).subscribe({
         next: (data: any) => {
           console.log(data);
 
-          // Convert the object into an array of objects
+          // Convertir el objeto en un array de objetos
           this.equiposRanking = Object.keys(data).map(key => ({
             nombreEquipo: key,
-            puntos: data[key]
-          }));
-          // sort by puntos
-          this.equiposRanking.sort((a, b) => b.puntos - a.puntos);
+            perdidos: data[key].perdidos,
+            jugados: data[key].jugados,
+            ganados: data[key].ganados,
+            puntosTemporada: data[key].puntosTemporada,
+            puntosJugador: data[key].puntosJugador,
+            rango: 0  // Inicializar la propiedad rango
+          } as equiposRanking));  // Asegúrate de que cada objeto sea del tipo EquiposRanking
+
+          // Ordenar por cantidad de partidos ganados, perdidos, jugados y puntosJugador
+          this.equiposRanking.sort((a, b) => {
+            const compareGanados = b.ganados - a.ganados;
+            const comparePerdidos = a.perdidos - b.perdidos;
+            const compareJugados = a.jugados - b.jugados;
+
+            // Si hay empate en partidos ganados, perdidos y jugados, verifica puntos del jugador
+            if (compareGanados === 0 && comparePerdidos === 0 && compareJugados === 0) {
+              return b.puntosJugador - a.puntosJugador;
+            }
+
+            // Si no hay empate en partidos ganados, perdidos y jugados, ordena según esos criterios
+            if (compareGanados !== 0) {
+              return compareGanados;
+            }
+
+            if (comparePerdidos !== 0) {
+              return comparePerdidos;
+            }
+
+            return compareJugados;
+          });
+
+          // Asignar rangos a los equipos
+          this.equiposRanking.forEach((equipo, index) => {
+            equipo.rango = index + 1;  // Agregar el rango a cada equipo
+          });
 
           console.log(this.equiposRanking);
         },
         error: (error: any) => {
-          console.log(error);
+          console.error('Error al obtener el ranking de equipos:', error);
         }
       });
     }
+
+
     verEstadisticas(temporadaId: string, nombreEquipo: string) {
       this.router.navigate(['/estadisticas-temporada', temporadaId, nombreEquipo]);
     }
 
-
+    verRanking(temporadaId: string) {
+      this.router.navigate(['/ranking-jugadores-temporada', temporadaId]);
 
     }
+
+
+  }
 

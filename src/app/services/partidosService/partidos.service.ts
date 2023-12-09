@@ -25,6 +25,7 @@ export class PartidosService {
    finalizarPartido(claveDelPartido:number | undefined):Observable<String>{
     // return this.http.get<String>(`${url}/Partido/finalizarPartido?clavePartido=${claveDelPartido}`);
     // put
+    console.log("partiodo " , claveDelPartido)
     return this.http.put<String>(`${url}/Partido/finalizarPartido`,{clavePartido:claveDelPartido});
    }
    obtenerUsuarioArbitroAsignado(clavePartido:number | undefined):Observable<String>{

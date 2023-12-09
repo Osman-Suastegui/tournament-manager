@@ -14,6 +14,7 @@ import { BusquedaUsuarioComponent } from './modulos/vistas-generales/busqueda-us
 import { EstadisticasTemporadaComponent } from './modulos/vistas-generales/estadisticas-temporada/estadisticas-temporada.component';
 import { CondicionesUsoComponent } from './modulos/vistas-generales/condiciones-uso/condiciones-uso.component';
 import { PoliticiasPrivacidadComponent } from './modulos/vistas-generales/politicias-privacidad/politicias-privacidad.component';
+import { RankingJugadoresTemporadaComponent } from './modulos/vistas-generales/ranking-jugadores-temporada/ranking-jugadores-temporada.component';
 
 const routes: Routes = [
   {
@@ -70,6 +71,10 @@ const routes: Routes = [
   {
     path: 'politica-privacidad',
     component: PoliticiasPrivacidadComponent
+  },
+  {
+    path: 'ranking-jugadores-temporada/:temporadaId',
+    component: RankingJugadoresTemporadaComponent
   }
 ];
 

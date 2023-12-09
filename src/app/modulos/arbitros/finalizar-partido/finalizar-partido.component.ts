@@ -15,11 +15,14 @@ export class FinalizarPartidoComponent  {
   finalizarPartido(){
     this.partidoServ.finalizarPartido(this.clavePartido).subscribe({
       next: (data: any) => {
+        console.log(this.clavePartido);
         // recargar la pagina
         location.reload();
-          
+
       },
       error: (errores: any) => {
+        console.log("errores " , errores.error)
+
         setTimeout(() => {
           this.mensaje = errores.error[0].message;
           setTimeout(()=>{
@@ -28,7 +31,7 @@ export class FinalizarPartidoComponent  {
         }, 2000);
       },
     });
-    
+
 
   }
 

@@ -1,0 +1,122 @@
+<app-nav-bar></app-nav-bar>
+
+  <div class="contenedorPag">
+
+
+
+<div class="cotnenedor-titulo">
+    <h2>Top 5 Mejores Jugadores de Tiros Libres</h2>
+</div>
+
+
+<div class="contenedorTabla">
+  <table class="table">
+  <thead>
+    <tr>
+      <th>Posición</th>
+      <th>Nombre</th>
+      <th>Cantidad de Tiros Libres</th>
+      <th>Equipo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let jugador of tirosLibres">
+      <!-- Corrección aquí -->
+      <td>{{ jugador.posicion }}</td>
+      <td>{{ jugador.nombre }}</td>
+      <td>{{ jugador.tirosLibres }}</td>
+      <td>{{ jugador.equipo }}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+  </div>
+
+  <div class="cotnenedor-titulo">
+<h2>Top 5 Mejores Jugadores de Tiros de 2 Puntos</h2>
+</div>
+
+<div class="contenedorTabla">
+  <table class="table">
+  <thead>
+    <tr>
+      <th>Posición</th>
+      <th>Nombre</th>
+      <th>Cantidad de Tiros de 2 Puntos</th>
+      <th>Equipo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let jugador of tiros2Puntos">
+      <!-- Corrección aquí -->
+      <td>{{ jugador.posicion }}</td>
+      <td>{{ jugador.nombre }}</td>
+      <td>{{ jugador.tiros2Puntos }}</td>
+      <td>{{ jugador.equipo }}</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+  <div class="cotnenedor-titulo">
+<h2>Top 5 Mejores Jugadores de Tiros de 3 Puntos</h2>
+</div>
+
+<div class="contenedorTabla">
+  <table class="table">
+  <thead>
+    <tr>
+      <th>Posición</th>
+      <th>Nombre</th>
+      <th>Cantidad de Tiros de 3 Puntos</th>
+      <th>Equipo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let jugador of tiros3Puntos">
+      <!-- Corrección aquí -->
+      <td>{{ jugador.posicion }}</td>
+      <td>{{ jugador.nombre }}</td>
+      <td>{{ jugador.tiros3Puntos }}</td>
+      <td>{{ jugador.equipo }}</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+  
+  <div class="cotnenedor-titulo">
+<h2>Top 5 Mejores Jugadores en Asistencias</h2>
+</div>
+
+
+<div class="contenedorTabla">
+  <table class="table">
+  <thead>
+    <tr>
+      <th>Posición</th>
+      <th>Nombre</th>
+      <th>Cantidad de Asistencias</th>
+      <th>Equipo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let jugador of asistencias">
+      <!-- Corrección aquí -->
+      <td>{{ jugador.posicion }}</td>
+      <td>{{ jugador.nombre }}</td>
+      <td>{{ jugador.asistencias }}</td>
+      <td>{{ jugador.equipo }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+
+  </div>
+
+<app-footer-component></app-footer-component>
