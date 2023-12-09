@@ -38,6 +38,10 @@ export class MeterJugarPartidoComponent {
       this.mensajeError = "Selecciona un jugador";
       return;
     }
+    if(this.selectedJugador.faltas >= 5){
+      this.mensajeError = "El jugador tiene 5 faltas no puede entrar al partido";
+      return;
+    }
 
     const message  = {
       clavePartido: this.clavePartido,
