@@ -14,10 +14,10 @@
 
             <input type="text" id="name" name="nombre" placeholder="Nombre" [(ngModel)]="registro.nombre"/>
 
+            <input type="text" id="apellido" name="apellido" placeholder="Apellidos"[(ngModel)]="registro.apellido"/>
+
             <label for="fechaNacimiento">Fecha de Nacimiento:</label>
             <input type="date" id="date" name="fechaNacimiento" [(ngModel)]="registro.fechaNacimiento"/>
-
-            <input type="text" id="apellido" name="apellido" placeholder="Apellidos"[(ngModel)]="registro.apellido"/>
 
 
             <input type="email" id="email" name="email" placeholder="Email" [(ngModel)]="registro.email"/>
@@ -25,7 +25,7 @@
 
             <input type="password" id="password" name="password" placeholder="Contraseña" [(ngModel)]="registro.password"/>
 
-            <input type="password2" id="password2" name="password2" placeholder="Repetir Contraseña" [(ngModel)]="password2.password" />
+            <input type="password" id="password2" name="password2" placeholder="Repetir Contraseña" [(ngModel)]="password2.password" />
 
 
             <label for="genero">Genero:</label>

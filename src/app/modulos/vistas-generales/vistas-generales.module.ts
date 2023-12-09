@@ -12,6 +12,7 @@ import { BusquedaTemporadaComponent } from './busqueda-temporada/busqueda-tempor
 import { EstadisticasTemporadaComponent } from './estadisticas-temporada/estadisticas-temporada.component';
 import { PoliticiasPrivacidadComponent } from './politicias-privacidad/politicias-privacidad.component';
 import { CondicionesUsoComponent } from './condiciones-uso/condiciones-uso.component';
+import { RankingJugadoresTemporadaComponent } from './ranking-jugadores-temporada/ranking-jugadores-temporada.component';
 
 
 
@@ -25,7 +26,8 @@ import { CondicionesUsoComponent } from './condiciones-uso/condiciones-uso.compo
     BusquedaTemporadaComponent,
     EstadisticasTemporadaComponent,
     PoliticiasPrivacidadComponent,
-    CondicionesUsoComponent
+    CondicionesUsoComponent,
+    RankingJugadoresTemporadaComponent
   ],
   imports: [
     FormsModule,

@@ -100,8 +100,7 @@ html, body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 80%; /* Asegura que el botón ocupe todo el ancho disponible */
-  padding: 10px 0; /* Agrega un poco de espacio alrededor del texto */
+  width: 70%; /* Asegura que el botón ocupe todo el ancho disponible */
   border-radius: 10px;
   color: #080708;
   background-color: #F26419;
@@ -230,4 +229,16 @@ html, body {
   text-align: center;
   margin: 0 auto;
   margin-bottom: 20px;
+}
+
+
+.cotnenedor-titulo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  padding-bottom: 0px;
+  margin-top: 10px;
 }
