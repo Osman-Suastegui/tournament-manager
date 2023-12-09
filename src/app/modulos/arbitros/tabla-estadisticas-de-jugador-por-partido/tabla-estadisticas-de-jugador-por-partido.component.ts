@@ -132,6 +132,16 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
         if (fila.jugador === response.jugador && response.descripcion in this.statDescriptionHandlersPositivos) {
           if(response.puntoPositivo)this.statDescriptionHandlersPositivos[response.descripcion](fila);
           else this.statDescriptionHandlersNegativos[response.descripcion](fila);
+          if(response.descripcion === 'faltas' && fila.faltas === 5){
+            this.RxStompService.publish({
+              destination: `/app/sacarJugador/${this.claveDelPartido}`,
+              body: JSON.stringify({
+                "clavePartido": this.claveDelPartido,
+                "jugador" : fila.jugador,
+                "nombreEquipo": this.nombreEquipo
+              })
+            });
+          }
 
           if(response.descripcion === 'tirosDe2Puntos' || response.descripcion === 'tirosDe3Puntos' || response.descripcion === 'tirosLibres'){
             let puntosActualizar = 0
