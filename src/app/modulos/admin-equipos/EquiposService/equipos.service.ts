@@ -151,14 +151,15 @@ export class EquiposService {
 
   //http://localhost:8080/JugadorPartido/obtenerJugadoresNoEnPartido?clavePartido=75&nombreEquipo=prueba pls funciona
 
-  obtenerJugadoresDeEquipoNoEnPartido(equipo: string, clavePartido: string) {
+  obtenerJugadoresDeEquipoNoEnPartido(equipo: string, clavePartido: string, equipo2: string) {
     const headers = this.tokenService.createHeaders();
 
     return this.http.get(url + '/JugadorPartido/obtenerJugadoresNoEnPartido', {
       headers: headers,
       params: {
         clavePartido: clavePartido,
-        nombreEquipo: equipo
+        nombreEquipo: equipo,
+        otroEquipo: equipo2
       }
     });
   }
