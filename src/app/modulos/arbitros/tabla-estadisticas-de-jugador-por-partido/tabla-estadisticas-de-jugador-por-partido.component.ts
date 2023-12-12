@@ -84,7 +84,7 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
 
     }
     quitarPuntoDeJugador(jugador: string, columna: string) {
-        
+
         const message = {
           "clavePartido": this.claveDelPartido,
           "jugador" : jugador,
@@ -96,16 +96,28 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
           body: JSON.stringify(message)
         });
     }
-      
+
 
     ngOnInit() {
-      this.JugadoresDePartidoEquipoService.obtenerJugadoresDePartidoYEquipo(this.claveDelPartido, this.nombreEquipo, this.enBanca).subscribe((data) => {
+      this.JugadoresDePartidoEquipoService.obtenerJugadoresDePartidoYEquipo(this.claveDelPartido, this.nombreEquipo).subscribe((data) => {
 
-        // sort by a.jugador
+        data = data.filter((fila) => fila.faltas < 5);
+
+        // Ordenar por nombre de jugador
         data.sort((a, b) => a.jugador.localeCompare(b.jugador));
-        if (data.length !== 5) {
-          this.datosTemporales = Array(5 - data.length).fill(this.jugadorBase);
-        }
+
+        // Filtrar jugadores base
+        this.datosTemporales = data.filter((fila) => fila.jugador === '');
+
+        // Quitar jugadores duplicados
+        let jugadores: string[] = [];
+        data = data.filter((fila) => {
+          if (!jugadores.includes(fila.jugador)) {
+            jugadores.push(fila.jugador);
+            return true;
+          }
+          return false;
+        });
 
         this.tableDataSource = new MatTableDataSource<EstadisticasJugador>([...data, ...this.datosTemporales]);
 
@@ -157,7 +169,7 @@ export class TablaEstadisticasDeJugadorPorPartidoComponent implements OnInit {
             this.marcadorServ.actualizarPuntosEquipo(this.nombreEquipo, this.claveDelPartido, this.puntosEquipo && this.puntosEquipo + puntosActualizar);
           }
         }
-        
+
       });
 
     })
