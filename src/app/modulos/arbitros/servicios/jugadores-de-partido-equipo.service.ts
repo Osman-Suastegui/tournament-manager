@@ -14,9 +14,9 @@ export class JugadoresDePartidoEquipoService {
 
   // GET /JugadorPartido/obtenerJugadoresDePartidoyEquipo?clavePartido=9&nombreEquipo=chivas&enBanca=0
 
-  obtenerJugadoresDePartidoYEquipo(idPartido: number | undefined, nombreEquipo: string | undefined,enBanca: number | null) {
+  obtenerJugadoresDePartidoYEquipo(idPartido: number | undefined, nombreEquipo: string | undefined) {
     // va a retornar una lista
-    return this.http.get<EstadisticasJugador[]>( url + `/JugadorPartido/obtenerJugadoresDePartidoyEquipo?clavePartido=${idPartido}&nombreEquipo=${nombreEquipo}&enBanca=${enBanca} `, {
+    return this.http.get<EstadisticasJugador[]>( url + `/JugadorPartido/obtenerJugadoresDePartidoyEquipo?clavePartido=${idPartido}&nombreEquipo=${nombreEquipo}`, {
     headers: this.tokenService.createHeaders()});
   }
 
