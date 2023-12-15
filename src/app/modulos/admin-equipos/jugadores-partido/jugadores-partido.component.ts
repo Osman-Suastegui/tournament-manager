@@ -45,13 +45,18 @@ export class JugadoresPartidoComponent implements OnInit{
     this.route.params.subscribe(params => {
       this.clavePartido = params['claveDelPartido'];
     });
-    this.obtenerJugadoresdeEquipo();
+
     //obten el valor de clabe partido de la url
 
     this.obtenerEquipo1Equipo2();
     this.obtenerJugadoresDelPartido();
     this.obtenerJugadoresEnBanca();
     this.obtenerJugadoresEnCancha();
+
+    //espera 2 segs y ejecuta la funcion
+    setTimeout(() => {
+      this.obtenerJugadoresdeEquipo();
+    }, 2000);
 
     this.equipoServ.onModificacionJugadoresPartido().subscribe({
       next: () => {
@@ -66,9 +71,11 @@ export class JugadoresPartidoComponent implements OnInit{
 
 
   obtenerJugadoresdeEquipo() {
-    this.equipoServ.obtenerJugadoresDeEquipoNoEnPartido(this.nombreEquipo, this.clavePartido).subscribe({
+    console.log(this.equipo2);
+    this.equipoServ.obtenerJugadoresDeEquipoNoEnPartido(this.nombreEquipo, this.clavePartido, this.equipo2).subscribe({
       next: (result: any) => {
         this.jugadoresDeEquipoNoEnPartido = result;
+
       }
     });
   }
