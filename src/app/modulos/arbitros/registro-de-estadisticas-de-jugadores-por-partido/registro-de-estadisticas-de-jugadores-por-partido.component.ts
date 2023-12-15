@@ -15,12 +15,14 @@ export class RegistroDeEstadisticasDeJugadoresPorPartidoComponent implements OnI
   nombreEquipo1 = "";
   nombreEquipo2 = "";
   fechaInicioPartido: any ;
+  fechaIniciPartidoArbitro: any = null;
   tiempoTranscurrido:String = "00:00:00";
   partidoFinalizado:boolean = false;
   mensajeTiempos:String = "Tiempo 1";
   usuarioArbitroAsignado = ""; // esta variable nos dice cual es el usuario del arbitro que esta asignado al partido
   rol:String = "";
   usuario:any;
+  aribitroPuedeIniciarPartido = false; // esta varibale nos dice cuando va a poder iniciar el partido el arbitro media hora antes y media hora despues de la hora de inicio
   constructor(private route: ActivatedRoute,private PartidoService:PartidosService,private jugadorPartidoServ:JugadoresDePartidoEquipoService) {}
   
   ngOnInit(): void {
@@ -42,45 +44,64 @@ export class RegistroDeEstadisticasDeJugadoresPorPartidoComponent implements OnI
           this.tiempoTranscurrido = "El partido ha finalizado";
           return;
         }
-        this.PartidoService.obtenerFechaInicio(this.claveDelPartido).subscribe((data:any) => {
-          this.fechaInicioPartido = data.fechaInicio;
-          let fechaInicio = new Date(this.fechaInicioPartido);
-          let fechaActual = new Date();
-          if(fechaInicio.getTime() > fechaActual.getTime()){
+        this.PartidoService.obtenerFecharArbitroIniciaPartido(this.claveDelPartido).subscribe((data:any) => {
+          if(data.fechaInicio !== null){
+            this.fechaIniciPartidoArbitro = data.fechaInicio;
+            this.aribitroPuedeIniciarPartido = false;
+            let fechaInicio = new Date(this.fechaIniciPartidoArbitro);
+            let fechaActual = new Date();
+            if(fechaInicio.getTime() > fechaActual.getTime()){
             this.partidoFinalizado = false;
             this.tiempoTranscurrido = "El partido no ha iniciado";
             return;
-          }else{
-            setInterval(() => {
-              fechaActual = new Date();
-              let tiempoTranscurrido = fechaActual.getTime() - fechaInicio.getTime();
-              let segundosTranscurridos = Math.floor(tiempoTranscurrido / 1000);
-              let horas = Math.floor(segundosTranscurridos / 3600);
-              let minutos:any = Math.floor((segundosTranscurridos % 3600) / 60);
-              let segundos:any = segundosTranscurridos % 60;
-              if(minutos < 10 && horas < 1){
-                this.mensajeTiempos = "Tiempo 1";
-              }else if(minutos < 20 && horas < 1){
-                this.mensajeTiempos = "Tiempo 2";
+            }else{
+              setInterval(() => {
+                fechaActual = new Date();
+                let tiempoTranscurrido = fechaActual.getTime() - fechaInicio.getTime();
+                let segundosTranscurridos = Math.floor(tiempoTranscurrido / 1000);
+                let horas = Math.floor(segundosTranscurridos / 3600);
+                let minutos:any = Math.floor((segundosTranscurridos % 3600) / 60);
+                let segundos:any = segundosTranscurridos % 60;
+                if(minutos < 10 && horas < 1){
+                  this.mensajeTiempos = "Tiempo 1";
+                }else if(minutos < 20 && horas < 1){
+                  this.mensajeTiempos = "Tiempo 2";
+                }
+                else if(minutos < 30 && horas < 1){
+                  this.mensajeTiempos = "Tiempo 3";
+                }
+                else if(minutos < 40 && horas < 1){
+                  this.mensajeTiempos = "Tiempo 4";
+                }else{
+                  this.mensajeTiempos = "Tiempo extra";
+                }
+                if (segundos < 10) {
+                  segundos = "0" + segundos;
               }
-              else if(minutos < 30 && horas < 1){
-                this.mensajeTiempos = "Tiempo 3";
-              }
-              else if(minutos < 40 && horas < 1){
-                this.mensajeTiempos = "Tiempo 4";
-              }else{
-                this.mensajeTiempos = "Tiempo extra";
-              }
-              if (segundos < 10) {
-                segundos = "0" + segundos;
-             }
-             if (minutos < 10) {
-                minutos = "0" + minutos;
-              }
-        
-              this.tiempoTranscurrido = `${horas}:${minutos}:${segundos}`;
-            }, 1000);
+              if (minutos < 10) {
+                  minutos = "0" + minutos;
+                }
+          
+                this.tiempoTranscurrido = `${horas}:${minutos}:${segundos}`;
+              }, 1000);
+            }
           }
+        });
+        this.PartidoService.obtenerFechaInicio(this.claveDelPartido).subscribe((data:any) => {
+          if(this.fechaIniciPartidoArbitro !== null)return;
+
+          this.fechaInicioPartido = data.fechaInicio;
+          let fechaInicio = new Date(this.fechaInicioPartido);
+          let fechaActual = new Date();
+          
+          // checa si la hora actual esta entre 30 minutos antes y 30 minutos despues de la hora de inicio del partido
+          if(fechaActual.getTime() > fechaInicio.getTime() - 1800000 && fechaActual.getTime() < fechaInicio.getTime() + 1800000){
+            this.aribitroPuedeIniciarPartido = true;
+          }else{
+            this.aribitroPuedeIniciarPartido = false;
+          }
+        
+          
         });
       })
       

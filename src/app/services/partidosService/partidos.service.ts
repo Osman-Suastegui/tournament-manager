@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { url } from 'src/app/url-config';
 import { Partido } from './interfaces/Partido';
 import {Observable} from 'rxjs';
+import { format } from 'date-fns-tz';
 @Injectable({
   providedIn: 'root'
 })
@@ -31,4 +32,15 @@ export class PartidosService {
    obtenerUsuarioArbitroAsignado(clavePartido:number | undefined):Observable<String>{
     return this.http.get<String>(`${url}/Partido/obtenerUsuarioArbitroAsignado?clavePartido=${clavePartido}`);
    }
+
+   arbitroIniciaPartidoFecha(clavePartido:number | undefined):Observable<String>{
+    
+    return this.http.put<String>(`${url}/Partido/arbitroIniciaPartidoFecha`,{
+      clavePartido:clavePartido,
+      fechaInicio: format(new Date(), 'yyyy-MM-dd HH:mm:ss')
+    });
+  }
+  obtenerFecharArbitroIniciaPartido(clavePartido:number | undefined):Observable<String>{
+    return this.http.get<String>(`${url}/Partido/obtenerArbitroIniciaPartidoFecha?clavePartido=${clavePartido}`);
+  }
 }
