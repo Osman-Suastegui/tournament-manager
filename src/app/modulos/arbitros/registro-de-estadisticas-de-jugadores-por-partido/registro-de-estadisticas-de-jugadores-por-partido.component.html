@@ -7,7 +7,10 @@
     <app-marcador-partido *ngIf="nombreEquipo1 && nombreEquipo2"  [nombreEquipo1]="nombreEquipo1" [nombreEquipo2]="nombreEquipo2" [claveDelPartido]="claveDelPartido" ></app-marcador-partido>
     <section id="partido-en-vivo-contenedor-tables">
       <div class="cronometro">
+
         <p id="tiempo">
+        <app-btn-iniciar-partido *ngIf="aribitroPuedeIniciarPartido && partidoFinalizado !== true && rol =='ARBITRO' && usuario === usuarioArbitroAsignado" [clavePartido]="claveDelPartido" ></app-btn-iniciar-partido>
+
           {{ tiempoTranscurrido }} <mat-icon>schedule</mat-icon>
         </p>
       </div>
