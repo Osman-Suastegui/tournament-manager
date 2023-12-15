@@ -23,6 +23,7 @@ export class RegistroDeEstadisticasDeJugadoresPorPartidoComponent implements OnI
   rol:String = "";
   usuario:any;
   aribitroPuedeIniciarPartido = false; // esta varibale nos dice cuando va a poder iniciar el partido el arbitro media hora antes y media hora despues de la hora de inicio
+  tiempoDetenido = false;
   constructor(private route: ActivatedRoute,private PartidoService:PartidosService,private jugadorPartidoServ:JugadoresDePartidoEquipoService) {}
   
   ngOnInit(): void {
@@ -55,9 +56,10 @@ export class RegistroDeEstadisticasDeJugadoresPorPartidoComponent implements OnI
             this.tiempoTranscurrido = "El partido no ha iniciado";
             return;
             }else{
+              fechaActual = new Date();
+              let tiempoTranscurrido = fechaActual.getTime() - fechaInicio.getTime();
               setInterval(() => {
-                fechaActual = new Date();
-                let tiempoTranscurrido = fechaActual.getTime() - fechaInicio.getTime();
+                if(this.tiempoDetenido === true)return;
                 let segundosTranscurridos = Math.floor(tiempoTranscurrido / 1000);
                 let horas = Math.floor(segundosTranscurridos / 3600);
                 let minutos:any = Math.floor((segundosTranscurridos % 3600) / 60);
@@ -83,6 +85,8 @@ export class RegistroDeEstadisticasDeJugadoresPorPartidoComponent implements OnI
                 }
           
                 this.tiempoTranscurrido = `${horas}:${minutos}:${segundos}`;
+                tiempoTranscurrido += 1000;
+
               }, 1000);
             }
           }
@@ -107,6 +111,10 @@ export class RegistroDeEstadisticasDeJugadoresPorPartidoComponent implements OnI
       
   
        
+  }
+
+  detenerTiempo(){
+    this.tiempoDetenido = !this.tiempoDetenido;
   }
   obtenerEquiposDePartido(){
 
