@@ -20,7 +20,7 @@
 
 
 
-              <app-sacar-jugador-partido
+              <!-- <app-sacar-jugador-partido
                   *ngIf="partidoFinalizado !== true && column === 'jugador' && element['jugador'] !== '' && usuario === usuarioArbitroAsignado; else agregarJugadorButton "
                   [claveDelPartido]="claveDelPartido"
                   [nombreEquipo]="nombreEquipo"
@@ -31,8 +31,8 @@
 
               <ng-template #agregarJugadorButton>
                   <button class="btnTabla"  *ngIf="partidoFinalizado!==true && column === 'jugador' && rol === 'ARBITRO' && usuario === usuarioArbitroAsignado" (click)="meterJugadorPartido()">+</button>
-                  <!-- <app-agregar-jugador-partido *ngIf="column === 'jugador'" [claveDelPartido]="claveDelPartido" [nombreEquipo]="nombreEquipo"></app-agregar-jugador-partido> -->
-              </ng-template>
+                  <app-agregar-jugador-partido *ngIf="column === 'jugador'" [claveDelPartido]="claveDelPartido" [nombreEquipo]="nombreEquipo"></app-agregar-jugador-partido> -->
+              <!-- </ng-template> -->
 
             </div>
 
