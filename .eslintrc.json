@@ -33,7 +33,11 @@
         ],
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/type-annotation-spacing": ["error", { "before": false, "after": true }],
-        "no-multiple-empty-lines": ["error", { "max": 1 }]
+        "no-multiple-empty-lines": ["error", { "max": 1 }],
+        // enforce double quotes
+        "quotes": ["error", "double"],
+        // Enforce semicolons at the end of statements
+        "semi": ["error", "always"]
       }
     },
     {
