@@ -13,9 +13,9 @@ import {FormGroup, FormControl} from "@angular/forms";
 export class RegisterComponent {
 
   signupForm = new FormGroup({
-    user:new FormControl<string>(""),
-    name: new FormControl<string>(""),
-    lastname: new FormControl<string>(""),
+    usuario: new FormControl<string>(""),
+    nombre: new FormControl<string>(""),
+    apellido: new FormControl<string>(""),
     email: new FormControl<string>(""),
     password: new FormControl<string>(""),
     rol: new FormControl<Role>(Role.ANONIMO),

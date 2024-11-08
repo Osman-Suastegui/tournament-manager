@@ -10,6 +10,7 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
 .contenedorPag {
   display: flex;
   justify-content: center; /* Centra horizontalmente */
@@ -19,15 +20,11 @@
   /* min-height: 100vh; Asegura que el contenedor ocupe al menos el 100% de la altura de la ventana */
 }
 
-
-
-
 .contenedorLogin{
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 5px;
-  width: 300px;
   margin: 0 auto;
 }
 
@@ -76,8 +73,6 @@ img{
   width: 90%;
 }
 
-
-
 .registrarse {
   text-align: center;
   margin-top: 20px;
@@ -106,8 +101,6 @@ img{
   margin-bottom: 5px;
   font-weight: bold;
 }
-
-
 
 /* INPUTS */
 
@@ -147,4 +140,14 @@ select {
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #d9d9d9;
+}
+
+@media (max-width: 425px) {
+  /* Your CSS rules for screens less than 425px */
+  .contenedorPrincipal{
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
+
+  }
 }
