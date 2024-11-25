@@ -1,5 +1,13 @@
 .sidenav-container {
-    height: 100vh;
+    height: 93vh;
+}
+.add-team{
+    z-index: 2;
+    cursor: pointer;
+}
+.team-header{
+    display: flex;
+    align-items: center;
 }
 
 .sidenav {
@@ -41,7 +49,14 @@
     padding-top: 0;
     padding-bottom: 0;
 }
-
+.container-list-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+.container-list-item > .nav-icon {
+    margin-right: 0;
+} 
 /* Optional hover effects */
 .nav-item:hover {
     cursor: pointer;
