@@ -5,19 +5,23 @@ import { ContestRoutingModule } from './contest-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { ContestManagementComponent } from './contest-management/contest-management.component';
+import { SideNavContestManagementComponent } from './side-nav-contest-management/side-nav-contest-management.component';
 
 
 
 @NgModule({
   declarations: [
-    CreateContestComponent
+    CreateContestComponent,
+    ContestManagementComponent,
+    SideNavContestManagementComponent,
   ],
   imports: [
     CommonModule,
     ContestRoutingModule, // ROUTES
     ReactiveFormsModule,
     AngularMaterialModule,
-    GoogleMapsModule
+    GoogleMapsModule,
   ],
   exports:[
     CreateContestComponent

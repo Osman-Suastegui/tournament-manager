@@ -62,6 +62,9 @@
 .nav-item:hover {
     cursor: pointer;
 }
+.nav-item.active{
+  background-color: #d0d0ce;
+}
 
 span {
     font-size: 14px;

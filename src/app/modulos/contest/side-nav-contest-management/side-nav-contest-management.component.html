@@ -2,7 +2,7 @@
     <mat-sidenav mode="side" opened class="sidenav">
       <mat-toolbar color="primary" class="sidenav-toolbar">Navigation</mat-toolbar>
       <mat-nav-list>
-        <mat-list-item class="nav-item">
+        <mat-list-item class="nav-item" [routerLink]="'overview'" routerLinkActive="active">
           <mat-icon class="nav-icon">dashboard</mat-icon>
           <span>Overview</span>
         </mat-list-item>
@@ -82,7 +82,7 @@
           <span>Calendar</span>
         </mat-list-item>
 
-        <mat-list-item class="nav-item">
+        <mat-list-item class="nav-item" [routerLink]="'matches'" routerLinkActive="active">
           <mat-icon class="nav-icon">sports_soccer</mat-icon>
           <span>Matches</span>
         </mat-list-item>
