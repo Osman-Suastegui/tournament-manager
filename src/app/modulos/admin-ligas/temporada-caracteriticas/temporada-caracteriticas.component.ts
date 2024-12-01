@@ -40,7 +40,9 @@ export class TemporadaCaracteriticasComponent implements OnInit{
   equiposPlayoff: number = 0;
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.parent?.params.subscribe(params => {
+      console.log(params);
+
       this.idTemporada = +params["idTemporada"];
       localStorage.setItem("idTemporada", this.idTemporada.toString());
       this.obtenerArbitrosTemp(this.idTemporada);
