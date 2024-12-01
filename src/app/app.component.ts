@@ -7,6 +7,7 @@ import { NavigationEnd, Router } from "@angular/router";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
+  title:string = ""
   constructor(private router: Router) { }
   public showNavBar: boolean = true;
 
