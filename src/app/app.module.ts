@@ -1,3 +1,4 @@
+import { ContestModule } from './modulos/contest/contest.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,7 +25,8 @@ import { NavBarModule } from "./modulos/nav-bar/nav-bar.module";
     AdminLigasModule,
     VistasGeneralesModule,
     NavBarModule
-],
+  ],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent]
 })
