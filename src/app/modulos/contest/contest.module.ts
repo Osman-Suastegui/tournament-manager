@@ -7,6 +7,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ContestManagementComponent } from './contest-management/contest-management.component';
 import { SideNavContestManagementComponent } from './side-nav-contest-management/side-nav-contest-management.component';
+import { DirectiveModule } from 'src/app/directives/directive.module';
 
 
 
@@ -22,6 +23,7 @@ import { SideNavContestManagementComponent } from './side-nav-contest-management
     ReactiveFormsModule,
     AngularMaterialModule,
     GoogleMapsModule,
+    DirectiveModule
   ],
   exports:[
     CreateContestComponent
