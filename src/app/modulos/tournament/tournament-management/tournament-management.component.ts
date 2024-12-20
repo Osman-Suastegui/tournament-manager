@@ -5,11 +5,11 @@ import { Referee, Team } from "../../admin-ligas/temporada-caracteriticas/interf
 import { ActivatedRoute, Params } from "@angular/router";
 
 @Component({
-  selector: "app-contest-management",
-  templateUrl: "./contest-management.component.html",
-  styleUrls: ["./contest-management.component.css"]
+  selector: "app-tournament-management",
+  templateUrl: "./tournament-management.component.html",
+  styleUrls: ["./tournament-management.component.css"]
 })
-export class ContestManagementComponent implements OnInit {
+export class TournamentManagementComponent implements OnInit {
   constructor(private tempService: TemporadasService, private ligaService: LigasServiceService, private route: ActivatedRoute) { }
   // PUBLIC
   public teams: Team[] = [];

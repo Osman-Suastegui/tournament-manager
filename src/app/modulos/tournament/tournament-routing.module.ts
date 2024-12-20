@@ -1,16 +1,16 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { CreateContestComponent } from "./create-contest/create-contest.component";
-import { ContestManagementComponent } from "./contest-management/contest-management.component";
+import { CreateTournamentComponent } from "./create-tournament/create-tournament.component";
 import { TemporadaCaracteriticasComponent } from "../admin-ligas/temporada-caracteriticas/temporada-caracteriticas.component";
+import { TournamentManagementComponent } from "./tournament-management/tournament-management.component";
 
 const routes: Routes = [
-  { path: "", component: CreateContestComponent },
+  { path: "", component: CreateTournamentComponent },
   {
     path: ":idTemporada/:idLiga",
-    component: ContestManagementComponent,
+    component: TournamentManagementComponent,
     children: [
-      { path: "overview", component: CreateContestComponent },
+      { path: "overview", component: CreateTournamentComponent },
       { path: "matches", component: TemporadaCaracteriticasComponent },
       { path: "", redirectTo: "overview", pathMatch: "full" }
     ],
@@ -23,4 +23,4 @@ const routes: Routes = [
   exports: [RouterModule],
 
 })
-export class ContestRoutingModule { }
+export class TournamentRoutingModule { }
