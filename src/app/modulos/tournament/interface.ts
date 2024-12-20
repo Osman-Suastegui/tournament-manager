@@ -1,4 +1,4 @@
-export enum ContestType { // No need to call it ContestTypeEnum
+export enum TournamentType {
   SingleElimination = 'SingleElimination',
   DoubleElimination = 'DoubleElimination'
 }

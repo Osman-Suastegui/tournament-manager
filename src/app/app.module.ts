@@ -1,4 +1,4 @@
-import { ContestModule } from './modulos/contest/contest.module';
+import { TournamentModule } from './modulos/contest/tournament.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
