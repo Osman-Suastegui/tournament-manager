@@ -18,4 +18,7 @@ describe('CreateTournamentComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should be 4',() => {
+    expect(2 + 2).toBe(4)
+  })
 });

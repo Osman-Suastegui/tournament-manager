@@ -5,12 +5,12 @@
 
     <form [formGroup]="createTournament" (ngSubmit)="onSubmit()">
       <div class="container-form-fields">
-        <!-- Tournament Name -->
+        <!-- TOURNAMENT NAME -->
         <div class="form-field">
           <label for="name">Tournament Name:</label>
           <div class="input-wrapper">
             <input type="text" id="name" formControlName="name" placeholder="Enter tournament name" />
-            <div class="errors" id="name-errors">
+            <div *ngIf="name.touched && name.errors" class="errors" id="name-errors">
               <small *ngIf="name.touched && name.errors?.['required']">name is required.</small>
               <small *ngIf="name.touched && name.errors?.['minlength']">name must be at least 1 character long.</small>
             </div>
@@ -84,6 +84,7 @@
         </div>
       </div>
 
+      <!-- RULES -->
       <div class="container-form-fields">
         <div class="form-field">
           <label for="">Rules:</label>

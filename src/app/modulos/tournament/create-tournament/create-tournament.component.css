@@ -46,7 +46,9 @@ select {
 .form-field .input-wrapper {
   flex-grow: 1;
 }
-
+label{
+  width: 122px
+}
 .errors {
   min-height: 1.5rem;
   /* Adjust height to fit your small error messages */
@@ -97,10 +99,19 @@ header{
   font-size: 20px;
   margin-bottom: 10px;
 }
-@media (max-width: 425px) {
+
+@media (max-width: 576px) {
   .form-field{
     padding-top: 5px;
-    padding-bottom: 5px;
+    flex-direction: column
   }
-
+  .input-wrapper{
+    width: 100%
+  }
+  .container-form-fields{
+    gap: 0
+  }
+  label{
+    width: 100%;
+  }
 }
