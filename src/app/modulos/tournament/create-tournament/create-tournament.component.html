@@ -1,7 +1,7 @@
 <div class="create-contest-container">
 
   <main class="main">
-    <header>Create contest</header>
+    <header>Create Tournament</header>
 
     <form [formGroup]="createTournament" (ngSubmit)="onSubmit()">
       <div class="container-form-fields">
@@ -22,7 +22,7 @@
           <label for="sport">Sport:</label>
           <div class="input-wrapper">
             <select id="sport" formControlName="sport">
-              <option  [value]="'football'">Football</option>
+              <option [value]="'football'">Football</option>
             </select>
           </div>
         </div>
@@ -35,7 +35,8 @@
           <label for="contest-type">Contest Type:</label>
           <div class="input-wrapper">
             <select id="contest-type" formControlName="contestType">
-              <option  [value]="contestType" *ngFor="let contestType of contestTypes">{{getContestTypeName(contestType)}}</option>
+              <option [value]="contestType" *ngFor="let contestType of contestTypes">{{getContestTypeName(contestType)}}
+              </option>
             </select>
           </div>
         </div>
@@ -45,10 +46,7 @@
           <label for="sport">Start date:</label>
           <div class="input-wrapper">
             <input type="date" id="startDate" formControlName="startDate" placeholder="Enter start date" />
-            <div class="errors" id="name-errors">
-              <!-- <small *ngIf="name.touched && name.errors?.['required']">name is required.</small>
-              <small *ngIf="name.touched && name.errors?.['minlength']">name must be at least 1 character long.</small> -->
-            </div>
+
           </div>
         </div>
 
@@ -60,10 +58,7 @@
           <label for="sport">End date:</label>
           <div class="input-wrapper">
             <input type="date" id="startDate" formControlName="startDate" placeholder="Enter start date" />
-            <div class="errors" id="name-errors">
-              <!-- <small *ngIf="name.touched && name.errors?.['required']">name is required.</small>
-              <small *ngIf="name.touched && name.errors?.['minlength']">name must be at least 1 character long.</small> -->
-            </div>
+
           </div>
         </div>
 
@@ -76,10 +71,7 @@
           <label for="">About the Tournament:</label>
           <div class="input-wrapper">
             <textarea class="about-tournament" name="" id=""></textarea>
-            <div class="errors" id="name-errors">
-              <!-- <small *ngIf="name.touched && name.errors?.['required']">name is required.</small>
-               <small *ngIf="name.touched && name.errors?.['minlength']">name must be at least 1 character long.</small> -->
-            </div>
+
           </div>
         </div>
       </div>
@@ -90,10 +82,6 @@
           <label for="">Rules:</label>
           <div class="input-wrapper">
             <textarea class="rules" name="" id=""></textarea>
-            <div class="errors" id="name-errors">
-              <!-- <small *ngIf="name.touched && name.errors?.['required']">name is required.</small>
-               <small *ngIf="name.touched && name.errors?.['minlength']">name must be at least 1 character long.</small> -->
-            </div>
           </div>
         </div>
       </div>
