@@ -36,6 +36,7 @@ select,textarea {
   gap: 8px;
   padding-top: 1.5rem;
   align-items: baseline;
+  padding-bottom: 1.5rem;
 }
 
 .form-field .input-wrapper input,
@@ -64,7 +65,6 @@ label{
 .container-form-fields {
   display: flex;
   gap: 8px;
-  border-bottom: 0.5px solid #f1ebeb;
   border-top: 0.5px solid #f1ebeb;
   flex-wrap: wrap;
 }
@@ -102,8 +102,13 @@ header{
 
 @media (max-width: 576px) {
   .form-field{
+    flex-direction: column;
     padding-top: 5px;
-    flex-direction: column
+    padding-bottom: 5px;
+  }
+  .container-form-fields{
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
   .input-wrapper{
     width: 100%

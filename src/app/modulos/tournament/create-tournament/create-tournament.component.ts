@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { TournamentType } from "../interface";
+import { Tournament, TournamentType } from "../interface";
 import { CreateTournamentService } from "./create-tournament.service";
 import { getContestTypeName } from "../utils";
+import { TournamentService } from "../tournament.service";
 
 @Component({
   selector: "app-create-tournament",
@@ -14,7 +15,8 @@ export class CreateTournamentComponent implements OnInit {
   contestTypes = Object.values(TournamentType); // Extract enum values
   public createTournament!: FormGroup;
 
-  constructor(public createTournamentServ: CreateTournamentService) { }
+
+  constructor(private createTournamentServ: CreateTournamentService,private tournamentServ:TournamentService) { }
 
   ngOnInit(): void {
     this.createTournament = this.createTournamentServ.createTournamentForm();
@@ -44,13 +46,24 @@ export class CreateTournamentComponent implements OnInit {
     return getContestTypeName(tournamentType);
   }
 
-
   onSubmit() {
     if (this.createTournament.invalid) {
       this.createTournament.markAllAsTouched();
     }
+    const newTournament:Tournament = {
+      ...this.createTournament.value,
+      userId:"1"
+    }
+    this.tournamentServ.addTournament(newTournament).subscribe(
+      (res) => {
+        console.log("Response:", res);
+        console.log("create tournament", newTournament)
+      },
+      ({error}) => {
+        console.error("Error adding tournament:", error);
+      }
+    );
 
-    console.log("create tournament", this.createTournament.value);
   }
 
 }
