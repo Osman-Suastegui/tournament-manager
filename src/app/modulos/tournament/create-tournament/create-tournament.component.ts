@@ -44,26 +44,6 @@ export class CreateTournamentComponent implements OnInit {
     return getContestTypeName(tournamentType);
   }
 
-  display: any;
-
-  center: google.maps.LatLngLiteral = {
-    lat: 25.79302,
-    lng: -108.99808
-  };
-
-  zoom = 13;
-
-  moveMap(event: google.maps.MapMouseEvent) {
-
-    if (event.latLng != null) this.center = (event.latLng.toJSON());
-
-  }
-
-  move(event: google.maps.MapMouseEvent) {
-
-    if (event.latLng != null) this.display = event.latLng.toJSON();
-
-  }
 
   onSubmit() {
     if (this.createTournament.invalid) {
