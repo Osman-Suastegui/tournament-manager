@@ -1,17 +1,22 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Tournament } from './interface';
-
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { AddTournament, AddTournamentResponse, Tournament } from "./interface";
+import { Observable } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class TournamentService {
-  baseUrl:string = "http://localhost:8080"
-  constructor(private http:HttpClient) { }
+  baseUrl: string = "http://localhost:8080";
+  constructor(private http: HttpClient) { }
 
-  addTournament(tournament:Tournament){
-    return this.http.post(`${this.baseUrl}/tournaments/createTournament`, tournament); // Send a POST request
+  addTournament(tournament: AddTournament): Observable<AddTournamentResponse> {
+    return this.http.post<AddTournamentResponse>(`${this.baseUrl}/tournaments/createTournament`, tournament);
+  }
+
+  getTournamentById(id: string): Observable<Tournament> {
+
+    return this.http.get<Tournament>(`${this.baseUrl}/tournaments/getTournament?tournamentId=${id}`);
   }
 
 }

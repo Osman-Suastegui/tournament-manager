@@ -3,9 +3,29 @@ export enum TournamentType {
   DoubleElimination = 'DoubleElimination'
 }
 
-export interface Tournament{
+export interface Tournament {
+  id:     string;
+  name:   string;
+  sport:  string;
+  estado: string;
+  users:  User[];
+}
 
-  name:string;
-  userId:string;
-  sport:string;
+export interface User {
+  id:       number;
+  username: string;
+  role:     string;
+  name:     string;
+  lastName: string;
+}
+
+
+
+export interface AddTournament {
+  tournament: Tournament
+  userId: string
+}
+export interface AddTournamentResponse{
+  message:string;
+  tournament:Tournament
 }
