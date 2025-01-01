@@ -7,7 +7,7 @@ import { TournamentManagementComponent } from "./tournament-management/tournamen
 const routes: Routes = [
   { path: "", component: CreateTournamentComponent },
   {
-    path: ":idTemporada/:idLiga",
+    path: ":tournamentId",
     component: TournamentManagementComponent,
     children: [
       { path: "overview", component: CreateTournamentComponent },

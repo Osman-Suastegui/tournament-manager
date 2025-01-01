@@ -1,9 +1,11 @@
+import { AddTournamentResponse } from './../interface';
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { Tournament, TournamentType } from "../interface";
+import { AddTournament, Tournament, TournamentType } from "../interface";
 import { CreateTournamentService } from "./create-tournament.service";
 import { getContestTypeName } from "../utils";
 import { TournamentService } from "../tournament.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-create-tournament",
@@ -15,8 +17,7 @@ export class CreateTournamentComponent implements OnInit {
   contestTypes = Object.values(TournamentType); // Extract enum values
   public createTournament!: FormGroup;
 
-
-  constructor(private createTournamentServ: CreateTournamentService,private tournamentServ:TournamentService) { }
+  constructor(private createTournamentServ: CreateTournamentService, private tournamentServ: TournamentService, private router: Router) { }
 
   ngOnInit(): void {
     this.createTournament = this.createTournamentServ.createTournamentForm();
@@ -24,22 +25,6 @@ export class CreateTournamentComponent implements OnInit {
 
   get name() {
     return this.createTournament.get("name")!;
-  }
-
-  get sport() {
-    return this.createTournament.get("sport")!;
-  }
-
-  get location() {
-    return this.createTournament.get("location")!;
-  }
-
-  get description() {
-    return this.createTournament.get("description");
-  }
-
-  get rules() {
-    return this.createTournament.get("rules")!;
   }
 
   getContestTypeName(tournamentType: TournamentType) {
@@ -50,20 +35,27 @@ export class CreateTournamentComponent implements OnInit {
     if (this.createTournament.invalid) {
       this.createTournament.markAllAsTouched();
     }
-    const newTournament:Tournament = {
-      ...this.createTournament.value,
-      userId:"1"
-    }
-    this.tournamentServ.addTournament(newTournament).subscribe(
-      (res) => {
-        console.log("Response:", res);
-        console.log("create tournament", newTournament)
+
+    const newTournament: AddTournament = {
+      tournament: this.createTournament.value,
+      userId: "1"
+    };
+
+    this.addTournament(newTournament);
+  }
+
+  addTournament(newTournament: AddTournament) {
+
+    this.tournamentServ.addTournament(newTournament).subscribe({
+      next: (response: AddTournamentResponse) => {
+        console.log("Response:", response);
+        const { tournament } = response
+        this.router.navigate(["/tournament", tournament.id])
       },
-      ({error}) => {
+      error: ({ error }) => {
         console.error("Error adding tournament:", error);
       }
-    );
-
+    })
   }
 
 }
