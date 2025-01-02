@@ -1,6 +1,6 @@
 export enum TournamentType {
-  SingleElimination = 'SingleElimination',
-  DoubleElimination = 'DoubleElimination'
+  SingleElimination = "SingleElimination",
+  DoubleElimination = "DoubleElimination"
 }
 
 export interface Tournament {
@@ -11,6 +11,14 @@ export interface Tournament {
   users:  User[];
 }
 
+export const emptyTournament: Tournament = {
+  id:     "",
+  name:   "",
+  sport:  "",
+  estado: "",
+  users:  [], // Empty array for users
+};
+
 export interface User {
   id:       number;
   username: string;
@@ -19,13 +27,12 @@ export interface User {
   lastName: string;
 }
 
-
-
 export interface AddTournament {
   tournament: Tournament
   userId: string
 }
+
 export interface AddTournamentResponse{
-  message:string;
-  tournament:Tournament
+  message: string;
+  tournament: Tournament
 }
