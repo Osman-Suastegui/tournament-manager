@@ -4,7 +4,7 @@ import { LigasServiceService } from "../../admin-ligas/adminLigasService/ligas-s
 import { Referee, Team } from "../../admin-ligas/temporada-caracteriticas/interfaces";
 import { ActivatedRoute } from "@angular/router";
 import { TournamentService } from "../tournament.service";
-import { emptyTournament, Tournament } from "../interface";
+import { emptyTournament, Tournament, User } from "../interface";
 
 @Component({
   selector: "app-tournament-management",
@@ -26,16 +26,21 @@ export class TournamentManagementComponent implements OnInit {
   // PRIVATE
 
   ngOnInit(): void {
-    this.tournament = this.route.snapshot.data['tournamentData'];
-    this.updateTournamentUI(this.tournament)
+    this.tournament = this.route.snapshot.data["tournamentData"];
+    this.updateTournamentUI(this.tournament);
   }
 
   updateTournamentUI(tournament: Tournament) {
-    this.organizers = this.filterOrganizers(tournament)
+    this.organizers = this.filterOrganizers(tournament);
+    this.referees = this.filterReferees(tournament);
   }
 
   filterOrganizers(tournament: Tournament): string[] {
     return tournament.users.filter(user => user.role === "ORGANIZER").map(user => user.name + " " + user.lastName);
+  }
+
+  filterReferees(tournament: Tournament): Referee[] {
+    return tournament.users.filter(user => user.role === "REFEREE").map((user: User) => user as Referee);
   }
 
   // getTeams(seasonId: number) {

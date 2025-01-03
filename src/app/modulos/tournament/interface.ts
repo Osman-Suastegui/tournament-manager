@@ -4,19 +4,24 @@ export enum TournamentType {
 }
 
 export interface Tournament {
-  id:     string;
-  name:   string;
-  sport:  string;
-  estado: string;
-  users:  User[];
+  id:          string;
+  name:        string;
+  sport:       string;
+  estado:      string;
+  description: string;
+  rules:       string;
+  users:       User[];
+
 }
 
 export const emptyTournament: Tournament = {
-  id:     "",
-  name:   "",
-  sport:  "",
-  estado: "",
-  users:  [], // Empty array for users
+  id:          "",
+  name:        "",
+  sport:       "",
+  estado:      "",
+  description: "",
+  rules:       "",
+  users: [],
 };
 
 export interface User {

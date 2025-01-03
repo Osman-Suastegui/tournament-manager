@@ -9,7 +9,7 @@
         <div class="form-field">
           <label for="name">Tournament Name:</label>
           <div class="input-wrapper">
-            <input type="text" id="name" formControlName="name" placeholder="Enter tournament name" />
+            <input [readOnly]="true" type="text" id="name" formControlName="name" placeholder="Enter tournament name" />
             <div *ngIf="name.touched && name.errors" class="errors" id="name-errors">
               <small *ngIf="name.touched && name.errors?.['required']">name is required.</small>
               <small *ngIf="name.touched && name.errors?.['minlength']">name must be at least 1 character long.</small>
@@ -32,10 +32,10 @@
       <div class="container-form-fields">
         <!-- CONTEST TYPE -->
         <div class="form-field">
-          <label for="contest-type">Contest Type:</label>
+          <label for="contest-type">Tournament Type:</label>
           <div class="input-wrapper">
-            <select id="contest-type" formControlName="contestType">
-              <option [value]="contestType" *ngFor="let contestType of contestTypes">{{getContestTypeName(contestType)}}
+            <select id="contest-type" formControlName="tournamentType">
+              <option [value]="type" *ngFor="let type of tournamentTypes">{{getTournamentTypeName(type)}}
               </option>
             </select>
           </div>
@@ -70,7 +70,7 @@
         <div class="form-field">
           <label for="">About the Tournament:</label>
           <div class="input-wrapper">
-            <textarea class="about-tournament" name="" id=""></textarea>
+            <textarea formControlName="description" class="about-tournament" name="" id=""></textarea>
 
           </div>
         </div>
@@ -81,7 +81,7 @@
         <div class="form-field">
           <label for="">Rules:</label>
           <div class="input-wrapper">
-            <textarea class="rules" name="" id=""></textarea>
+            <textarea formControlName="rules" class="rules" name="" id=""></textarea>
           </div>
         </div>
       </div>

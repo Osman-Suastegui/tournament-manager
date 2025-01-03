@@ -6,7 +6,7 @@ import { TournamentType } from '../interface';
   providedIn: 'root'
 })
 export class CreateTournamentService {
-  
+
   createTournamentForm(): FormGroup {
     return new FormGroup({
       name: new FormControl<string>("", [
@@ -16,7 +16,7 @@ export class CreateTournamentService {
       sport: new FormControl('football', [
         Validators.required
       ]),
-      contestType: new FormControl<TournamentType>(TournamentType.SingleElimination, [
+      tournamentType: new FormControl<TournamentType>(TournamentType.SingleElimination, [
         Validators.required // Reglas obligatorias
       ]),
       description: new FormControl<string>('', [
