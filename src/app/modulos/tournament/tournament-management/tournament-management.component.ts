@@ -1,9 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { TemporadasService } from "../../admin-ligas/adminLigasService/temporadas.service";
-import { LigasServiceService } from "../../admin-ligas/adminLigasService/ligas-service.service";
 import { Referee, Team } from "../../admin-ligas/temporada-caracteriticas/interfaces";
 import { ActivatedRoute } from "@angular/router";
-import { TournamentService } from "../tournament.service";
 import { emptyTournament, Tournament, User } from "../interface";
 
 @Component({
@@ -15,7 +13,7 @@ export class TournamentManagementComponent implements OnInit {
 
   constructor(
     private tempService: TemporadasService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) { }
 
   // PUBLIC
@@ -23,6 +21,7 @@ export class TournamentManagementComponent implements OnInit {
   public referees: Referee[] = [];
   public organizers: string[] = [];
   public tournament: Tournament = emptyTournament;
+  public userCanEdit: boolean = false;
   // PRIVATE
 
   ngOnInit(): void {
@@ -30,16 +29,16 @@ export class TournamentManagementComponent implements OnInit {
     this.updateTournamentUI(this.tournament);
   }
 
-  updateTournamentUI(tournament: Tournament) {
+  private updateTournamentUI(tournament: Tournament) {
     this.organizers = this.filterOrganizers(tournament);
     this.referees = this.filterReferees(tournament);
   }
 
-  filterOrganizers(tournament: Tournament): string[] {
+  private filterOrganizers(tournament: Tournament): string[] {
     return tournament.users.filter(user => user.role === "ORGANIZER").map(user => user.name + " " + user.lastName);
   }
 
-  filterReferees(tournament: Tournament): Referee[] {
+  private filterReferees(tournament: Tournament): Referee[] {
     return tournament.users.filter(user => user.role === "REFEREE").map((user: User) => user as Referee);
   }
 

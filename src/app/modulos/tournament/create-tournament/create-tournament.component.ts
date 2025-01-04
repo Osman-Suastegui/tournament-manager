@@ -1,11 +1,11 @@
-import { AddTournamentResponse, emptyTournament } from "./../interface";
+import { AddTournamentResponse } from "./../interface";
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { AddTournament, Tournament, TournamentType } from "../interface";
-import { CreateTournamentService } from "./create-tournament.service";
 import { getContestTypeName } from "../utils";
 import { TournamentService } from "../tournament.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { authService } from "src/app/services/authenticateService/auth.service";
 
 @Component({
   selector: "app-create-tournament",
@@ -17,10 +17,18 @@ export class CreateTournamentComponent implements OnInit {
   // IF UNDEFINED, IT INDICATES A NEW TOURNAMENT; OTHERWISE, IT'S FOR EDITING.
   @Input() tournament?: Tournament;
 
+  // PUBLIC
   tournamentTypes = Object.values(TournamentType); // Extract enum values
   public createTournament!: FormGroup;
+  public isReadOnly: boolean = false;
+  // PRIVATE
 
-  constructor(private createTournamentServ: CreateTournamentService, private tournamentServ: TournamentService, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private tournamentServ: TournamentService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authServ:authService
+  ) { }
 
   ngOnInit(): void {
 
@@ -29,8 +37,9 @@ export class CreateTournamentComponent implements OnInit {
       this.tournament = tournament;
     }
 
-    this.createTournament = this.createTournamentServ.createTournamentForm();
+    this.createTournament = this.tournamentServ.createTournamentForm();
     if (this.isEditing()) {
+      this.isReadOnly = !this.tournamentServ.canEditCreateTournamentComponent(this.authServ.getUserId(),this.tournament!)
       this.patchTournament();
     }
   }

@@ -25,7 +25,7 @@ export const emptyTournament: Tournament = {
 };
 
 export interface User {
-  id:       number;
+  id:       string;
   username: string;
   role:     string;
   name:     string;
