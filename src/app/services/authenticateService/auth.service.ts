@@ -69,7 +69,7 @@ export class authService {
   }
 
   getUserId():string{
-    return "3"
+    return "1"
   }
 
 }
