@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { RouterModule, Routes, withComponentInputBinding } from "@angular/router";
 import { CreateTournamentComponent } from "./create-tournament/create-tournament.component";
 import { TemporadaCaracteriticasComponent } from "../admin-ligas/temporada-caracteriticas/temporada-caracteriticas.component";
 import { TournamentManagementComponent } from "./tournament-management/tournament-management.component";
@@ -11,7 +11,7 @@ const routes: Routes = [
     path: ":tournamentId",
     component: TournamentManagementComponent,
     resolve: {
-      tournamentData: tournamentResolver
+      tournament: tournamentResolver
     },
     children: [
       { path: "overview", component: CreateTournamentComponent },

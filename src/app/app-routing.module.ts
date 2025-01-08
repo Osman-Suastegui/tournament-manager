@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { provideRouter, RouterModule, Routes, withComponentInputBinding } from "@angular/router";
 import { HomeComponent } from "./modulos/home/home/home.component";
 import { LoginComponent } from "./modulos/auth/login/login.component";
 import { RegisterComponent } from "./modulos/auth/register/register.component";
@@ -83,7 +83,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { bindToComponentInputs: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

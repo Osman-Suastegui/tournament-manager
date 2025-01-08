@@ -32,16 +32,20 @@ export class CreateTournamentComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const tournament: Tournament = this.route.snapshot.parent?.data["tournamentData"];
-    if (tournament) {
-      this.tournament = tournament;
-    }
+    this.route.parent?.data.subscribe((tournamentObj:any) => {
 
-    this.createTournament = this.tournamentServ.createTournamentForm();
-    if (this.isEditing()) {
-      this.isReadOnly = !this.tournamentServ.canEditCreateTournamentComponent(this.authServ.getUserId(),this.tournament!)
-      this.patchTournament();
-    }
+      const tournament: Tournament =  tournamentObj.tournament
+      if (tournament) {
+        this.tournament = tournament;
+      }
+
+      this.createTournament = this.tournamentServ.createTournamentForm();
+      if (this.isEditing()) {
+        this.isReadOnly = !this.tournamentServ.canEditCreateTournamentComponent(this.authServ.getUserId(),this.tournament!)
+        this.patchTournament();
+      }
+    })
+
   }
 
   // IF THE INPUT TOURNAMENT IT'S NOT UNDEFINED THEN IT'S EDITING
@@ -57,11 +61,12 @@ export class CreateTournamentComponent implements OnInit {
   onSubmit(): void {
     if (this.createTournament.invalid) {
       this.createTournament.markAllAsTouched();
+      return;
     }
 
     const newTournament: AddTournament = {
       tournament: this.createTournament.value,
-      userId: "1"
+      userId: this.authServ.getUserId()
     };
 
     if (this.isEditing()) {

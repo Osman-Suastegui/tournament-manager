@@ -1,7 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { TemporadasService } from "../../admin-ligas/adminLigasService/temporadas.service";
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import { Referee, Team } from "../../admin-ligas/temporada-caracteriticas/interfaces";
-import { ActivatedRoute } from "@angular/router";
 import { emptyTournament, Tournament, User } from "../interface";
 
 @Component({
@@ -9,23 +7,24 @@ import { emptyTournament, Tournament, User } from "../interface";
   templateUrl: "./tournament-management.component.html",
   styleUrls: ["./tournament-management.component.css"]
 })
-export class TournamentManagementComponent implements OnInit {
+export class TournamentManagementComponent implements OnInit,OnChanges {
 
-  constructor(
-    private tempService: TemporadasService,
-    private route: ActivatedRoute,
-  ) { }
+  constructor() { }
 
   // PUBLIC
   public teams: Team[] = [];
   public referees: Referee[] = [];
   public organizers: string[] = [];
-  public tournament: Tournament = emptyTournament;
-  public userCanEdit: boolean = false;
+  @Input() tournament: Tournament = emptyTournament;
   // PRIVATE
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['tournament']){
+      this.updateTournamentUI(this.tournament)
+    }
+  }
+
   ngOnInit(): void {
-    this.tournament = this.route.snapshot.data["tournamentData"];
     this.updateTournamentUI(this.tournament);
   }
 

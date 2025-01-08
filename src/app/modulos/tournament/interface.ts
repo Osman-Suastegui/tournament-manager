@@ -27,7 +27,7 @@ export const emptyTournament: Tournament = {
 export interface User {
   id:       string;
   username: string;
-  role:     string;
+  role:     "ORGANIZER" | "REFEREE";
   name:     string;
   lastName: string;
 }

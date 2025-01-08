@@ -19,7 +19,6 @@ export class TournamentService {
 
   }
 
-
   addTournament(tournament: AddTournament): Observable<AddTournamentResponse> {
     return this.http.post<AddTournamentResponse>(`${this.baseUrl}/tournaments/createTournament`, tournament);
   }
@@ -27,6 +26,10 @@ export class TournamentService {
   getTournamentById(id: string): Observable<Tournament> {
 
     return this.http.get<Tournament>(`${this.baseUrl}/tournaments/getTournament?tournamentId=${id}`);
+  }
+
+  getTournaments(userId: string, page: number = 0, size: number = 10):Observable<Tournament[]> {
+    return this.http.get<Tournament[]>(`${this.baseUrl}/tournaments/getTournaments?userId=${userId}&page=${page}&size=${size}`);
   }
 
   createTournamentForm(): FormGroup {
