@@ -5,12 +5,29 @@
 
   <form>
 
-    <mat-form-field>
-      <mat-label>Equipo</mat-label>
-      <mat-select [(ngModel)]="selectedEquipo" name="nombreEquipo">
-        <mat-option *ngFor="let equipo of equipos" [value]="equipo">{{ equipo }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="form-field">
+      <label for="name">Name:</label>
+      <div class="input-wrapper">
+        <input  type="text" id="name" placeholder="Enter  name" />
+        <!-- <div *ngIf="name.touched && name.errors" class="errors" id="name-errors">
+          <small *ngIf="name.touched && name.errors?.['required']">name is required.</small>
+          <small *ngIf="name.touched && name.errors?.['minlength']">name must be at least 1 character long.</small>
+        </div> -->
+      </div>
+    </div>
+
+
+    <div class="form-field">
+      <label for="name">Email:</label>
+      <div class="input-wrapper">
+        <input  type="text" id="name" placeholder="Enter email" />
+        <!-- <div *ngIf="name.touched && name.errors" class="errors" id="name-errors">
+          <small *ngIf="name.touched && name.errors?.['required']">name is required.</small>
+          <small *ngIf="name.touched && name.errors?.['minlength']">name must be at least 1 character long.</small>
+        </div> -->
+      </div>
+    </div>
+
     <span class="mensaje-estilo" *ngIf="mensaje">{{ mensaje }}</span> <!-- Muestra el mensaje si existe -->
     <button type="submit" (click)="agregarEquipoTemp(this.temporadaId, this.selectedEquipo)">Guardar</button>
   </form>

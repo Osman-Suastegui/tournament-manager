@@ -23,9 +23,9 @@
               <div class="container-list-item">
                 <div class="team-name">
                   <mat-icon class="nav-icon">groups</mat-icon>
-                  <span>{{ team.nombreEquipo }}</span>
+                  <span>{{ team.name }}</span>
                 </div>
-                <mat-icon class="nav-icon" (click)="removeTeam($event,seasonId,team.nombreEquipo)">delete</mat-icon>
+                <mat-icon class="nav-icon" (click)="removeTeam($event,seasonId,team.name)">delete</mat-icon>
               </div>
             </mat-list-item>
           </mat-nav-list>

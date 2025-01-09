@@ -1,9 +1,10 @@
-import { Referee, Team } from "./../../admin-ligas/temporada-caracteriticas/interfaces";
+import { Referee } from "./../../admin-ligas/temporada-caracteriticas/interfaces";
 import { TemporadasService } from "./../../admin-ligas/adminLigasService/temporadas.service";
 import { AgregarEquipoComponent } from "./../../admin-ligas/agregar-equipo/agregar-equipo.component";
 import { AsignarArbitroComponent } from "./../../admin-ligas/asignar-arbitro/asignar-arbitro.component";
 import { Component, Input } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { Team } from "../interface";
 
 @Component({
   selector: "app-side-nav-contest-management",
@@ -20,7 +21,7 @@ export class SideNavContestManagementComponent {
 
   addTeam($event: Event): void {
     this.dialog.open(AgregarEquipoComponent, {
-      width: "250px",
+      panelClass:"add-team-dialog",
     });
     $event.stopPropagation();
   }
@@ -29,7 +30,7 @@ export class SideNavContestManagementComponent {
     // eliminarEquipoTemp(idTemporada: number, nombreEquipo: string) {
     this.tempService.eliminarEquipoDeTemporada(seasonId, teamToRemove).subscribe({
       next: () => {
-        this.teams = this.teams.filter(team => team.nombreEquipo !== teamToRemove);
+        this.teams = this.teams.filter(team => team.name !== teamToRemove);
       },
       error: (e) => {
         alert(e);
