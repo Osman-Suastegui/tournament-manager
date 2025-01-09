@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
-import { Referee, Team } from "../../admin-ligas/temporada-caracteriticas/interfaces";
-import { emptyTournament, Tournament, User } from "../interface";
+import { Referee } from "../../admin-ligas/temporada-caracteriticas/interfaces";
+import { emptyTournament, Team, Tournament, User } from "../interface";
 
 @Component({
   selector: "app-tournament-management",
@@ -31,6 +31,7 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
   private updateTournamentUI(tournament: Tournament) {
     this.organizers = this.filterOrganizers(tournament);
     this.referees = this.filterReferees(tournament);
+    this.teams = tournament.teams;
   }
 
   private filterOrganizers(tournament: Tournament): string[] {

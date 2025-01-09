@@ -18,3 +18,8 @@ mat-icon {
 .mat-expansion-indicator{
     display: flex;
 }
+
+/* add team dialog */
+.add-team-dialog {
+  width: 50%;
+}
