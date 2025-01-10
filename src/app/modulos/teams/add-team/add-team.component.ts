@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
-import { TemporadasService } from '../adminLigasService/temporadas.service';
-
+import { TemporadasService } from '../../admin-ligas/adminLigasService/temporadas.service';
+// MODAL FOR ADDING A TEAM TO A TOURNAMENT
 @Component({
-  selector: 'app-agregar-equipo',
-  templateUrl: './agregar-equipo.component.html',
-  styleUrls: ['./agregar-equipo.component.css']
+  selector: 'app-add-team',
+  templateUrl: './add-team.component.html',
+  styleUrls: ['./add-team.component.css']
 })
-export class AgregarEquipoComponent implements OnInit{
+export class AddTeamComponent implements OnInit{
 
   constructor(private tempService: TemporadasService) {}
 
@@ -27,6 +27,9 @@ export class AgregarEquipoComponent implements OnInit{
         this.obtenerEquiposSinTemporada(this.temporadaId);
       }
     });
+
+  }
+  addTeam():void {
 
   }
 

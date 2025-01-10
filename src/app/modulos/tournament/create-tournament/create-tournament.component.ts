@@ -27,24 +27,24 @@ export class CreateTournamentComponent implements OnInit {
     private tournamentServ: TournamentService,
     private route: ActivatedRoute,
     private router: Router,
-    private authServ:authService
+    private authServ: authService
   ) { }
 
   ngOnInit(): void {
 
-    this.route.parent?.data.subscribe((tournamentObj:any) => {
+    this.route.parent?.data.subscribe((tournamentObj: any) => {
 
-      const tournament: Tournament =  tournamentObj.tournament
+      const tournament: Tournament =  tournamentObj.tournament;
       if (tournament) {
         this.tournament = tournament;
       }
 
       this.createTournament = this.tournamentServ.createTournamentForm();
       if (this.isEditing()) {
-        this.isReadOnly = !this.tournamentServ.canEditCreateTournamentComponent(this.authServ.getUserId(),this.tournament!)
+        this.isReadOnly = !this.tournamentServ.canEditCreateTournamentComponent(this.authServ.getUserId(),this.tournament!);
         this.patchTournament();
       }
-    })
+    });
 
   }
 
