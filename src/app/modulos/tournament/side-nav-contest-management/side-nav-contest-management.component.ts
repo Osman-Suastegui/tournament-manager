@@ -1,6 +1,6 @@
 import { Referee } from "./../../admin-ligas/temporada-caracteriticas/interfaces";
 import { TemporadasService } from "./../../admin-ligas/adminLigasService/temporadas.service";
-import { AgregarEquipoComponent } from "./../../admin-ligas/agregar-equipo/agregar-equipo.component";
+import { AddTeamComponent } from "../../teams/add-team/add-team.component";
 import { AsignarArbitroComponent } from "./../../admin-ligas/asignar-arbitro/asignar-arbitro.component";
 import { Component, Input } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
@@ -20,7 +20,7 @@ export class SideNavContestManagementComponent {
   @Input() organizers: string[] = [];
 
   addTeam($event: Event): void {
-    this.dialog.open(AgregarEquipoComponent, {
+    this.dialog.open(AddTeamComponent, {
       panelClass:"add-team-dialog",
     });
     $event.stopPropagation();

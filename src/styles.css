@@ -22,4 +22,18 @@ mat-icon {
 /* add team dialog */
 .add-team-dialog {
   width: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+@media screen and (max-width: 1025px) {
+  .add-team-dialog{
+    width: 90%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .add-team-dialog{
+    max-width: 90% !important;
+    width: 100%;
+  }
+}
+
+
