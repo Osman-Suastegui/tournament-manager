@@ -9,7 +9,6 @@ import { ArbitrosModule } from './modulos/arbitros/arbitros.module';
 import { AdminLigasModule } from './modulos/admin-ligas/admin-ligas.module';
 import { VistasGeneralesModule } from './modulos/vistas-generales/vistas-generales.module';
 import { NavBarModule } from "./modulos/nav-bar/nav-bar.module";
-import { withComponentInputBinding } from '@angular/router';
 import { TeamsModule } from './modulos/teams/teams.module';
 
 @NgModule({

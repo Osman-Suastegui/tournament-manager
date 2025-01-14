@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { TeamService } from './../../teams/teamService/team.service';
+import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import { Referee } from "../../admin-ligas/temporada-caracteriticas/interfaces";
 import { emptyTournament, Team, Tournament, User } from "../interface";
 
@@ -8,8 +9,7 @@ import { emptyTournament, Team, Tournament, User } from "../interface";
   styleUrls: ["./tournament-management.component.css"]
 })
 export class TournamentManagementComponent implements OnInit,OnChanges {
-
-  constructor() { }
+  private teamServ = inject(TeamService)
 
   // PUBLIC
   public teams: Team[] = [];
@@ -26,6 +26,7 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
 
   ngOnInit(): void {
     this.updateTournamentUI(this.tournament);
+    this.setListeners()
   }
 
   private updateTournamentUI(tournament: Tournament) {
@@ -59,6 +60,9 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
   // }
 
   setListeners() {
+    this.teamServ.newTeam$.subscribe({
+      next:(newTeam:Team) => this.teams.push(newTeam)
+    })
     // this.tempService.onNuevoEquipoAsignado().subscribe(() => {
     //   this.getTeams(this.tournamentId);
     // });

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddTeamComponent } from './add-team/add-team.component';
 
 
@@ -10,6 +10,7 @@ import { AddTeamComponent } from './add-team/add-team.component';
   imports: [
     CommonModule,
     AngularMaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class TeamsModule { }

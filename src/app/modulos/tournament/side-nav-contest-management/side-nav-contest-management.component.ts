@@ -2,9 +2,10 @@ import { Referee } from "./../../admin-ligas/temporada-caracteriticas/interfaces
 import { TemporadasService } from "./../../admin-ligas/adminLigasService/temporadas.service";
 import { AddTeamComponent } from "../../teams/add-team/add-team.component";
 import { AsignarArbitroComponent } from "./../../admin-ligas/asignar-arbitro/asignar-arbitro.component";
-import { Component, Input } from "@angular/core";
+import { Component, inject, Input } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Team } from "../interface";
+import { LinkService } from "src/app/services/linkService/link.service";
 
 @Component({
   selector: "app-side-nav-contest-management",
@@ -12,16 +13,22 @@ import { Team } from "../interface";
   styleUrls: ["./side-nav-contest-management.component.css"]
 })
 export class SideNavContestManagementComponent {
-  constructor(public dialog: MatDialog, public tempService: TemporadasService) { }
+
+  constructor(
+          private dialog: MatDialog,
+          private tempService: TemporadasService,
+          private LinkService:LinkService
+        ) { }
 
   @Input() teams: Team[] = [];
   @Input() referees: Referee[] = [];
-  @Input() seasonId: string = "";
+  @Input() tournamentId: string = "";
   @Input() organizers: string[] = [];
 
   addTeam($event: Event): void {
     this.dialog.open(AddTeamComponent, {
-      panelClass:"add-team-dialog",
+      panelClass: "add-team-dialog",
+      data: { tournamentId: this.tournamentId }
     });
     $event.stopPropagation();
   }
@@ -56,6 +63,13 @@ export class SideNavContestManagementComponent {
       }
     });
     $event.stopPropagation();
+  }
+
+  copyLink($event:Event,teamId:string,tournamentId:string){
+    this.LinkService.getLink(teamId,tournamentId).subscribe({
+      next:(link:string) => console.log("link",link)
+    })
+    $event.stopPropagation()
   }
 
 }
