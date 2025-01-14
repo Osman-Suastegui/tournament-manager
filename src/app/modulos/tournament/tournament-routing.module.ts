@@ -4,6 +4,7 @@ import { CreateTournamentComponent } from "./create-tournament/create-tournament
 import { TemporadaCaracteriticasComponent } from "../admin-ligas/temporada-caracteriticas/temporada-caracteriticas.component";
 import { TournamentManagementComponent } from "./tournament-management/tournament-management.component";
 import { tournamentResolver } from "./resolvers/tournament.resolver";
+import { AddTeamComponent } from "../teams/add-team/add-team.component";
 
 const routes: Routes = [
   { path: "", component: CreateTournamentComponent },
