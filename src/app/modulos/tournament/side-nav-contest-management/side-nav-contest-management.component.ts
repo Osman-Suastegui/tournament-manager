@@ -6,6 +6,7 @@ import { Component, inject, Input } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Team } from "../interface";
 import { LinkService } from "src/app/services/linkService/link.service";
+import { AddPlayersToTeamLinkComponent } from "../../teams/add-players-to-team-link/add-players-to-team-link.component";
 
 @Component({
   selector: "app-side-nav-contest-management",
@@ -15,10 +16,10 @@ import { LinkService } from "src/app/services/linkService/link.service";
 export class SideNavContestManagementComponent {
 
   constructor(
-          private dialog: MatDialog,
-          private tempService: TemporadasService,
-          private LinkService:LinkService
-        ) { }
+    private dialog: MatDialog,
+    private tempService: TemporadasService,
+    private LinkService: LinkService
+  ) { }
 
   @Input() teams: Team[] = [];
   @Input() referees: Referee[] = [];
@@ -65,10 +66,12 @@ export class SideNavContestManagementComponent {
     $event.stopPropagation();
   }
 
-  copyLink($event:Event,teamId:string,tournamentId:string){
-    this.LinkService.getLink(teamId,tournamentId).subscribe({
-      next:(link:string) => console.log("link",link)
-    })
+  copyLink($event: Event, teamId: string, tournamentId: string) {
+    this.dialog.open(AddPlayersToTeamLinkComponent, {
+      panelClass: "add-team-dialog",
+      data: { teamId, tournamentId }
+    });
+
     $event.stopPropagation()
   }
 
