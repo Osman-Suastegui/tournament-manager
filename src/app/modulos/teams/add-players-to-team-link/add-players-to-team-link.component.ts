@@ -1,9 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { authService } from 'src/app/services/authenticateService/auth.service';
-import { TeamService } from '../teamService/team.service';
-import { LinkService } from 'src/app/services/linkService/link.service';
-
+import { LinkResponse, LinkService } from 'src/app/services/linkService/link.service';
+import { url } from 'src/app/url-config';
 @Component({
   selector: 'app-add-players-to-team-link',
   templateUrl: './add-players-to-team-link.component.html',
@@ -23,14 +21,13 @@ export class AddPlayersToTeamLinkComponent implements OnInit {
   }
 
   copyLink(){
-    console.log("link copy -> ",this.link)
+    navigator.clipboard.writeText(this.link)
   }
 
   getLink(teamId:string,tournamentId:string){
     this.linkServ.getLink(teamId,tournamentId).subscribe({
-      next:(link:string) =>{
-        this.link = link
-        console.log("link",link)
+      next:(link:LinkResponse) =>{
+        this.link = `${url}/${link.token}` ;
       }
     })
   }
