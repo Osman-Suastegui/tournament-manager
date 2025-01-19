@@ -4,7 +4,9 @@ import { CreateTournamentComponent } from "./create-tournament/create-tournament
 import { TemporadaCaracteriticasComponent } from "../admin-ligas/temporada-caracteriticas/temporada-caracteriticas.component";
 import { TournamentManagementComponent } from "./tournament-management/tournament-management.component";
 import { tournamentResolver } from "./resolvers/tournament.resolver";
-import { AddTeamComponent } from "../teams/add-team/add-team.component";
+import { TeamPlayersComponent } from "../teams/team-players/team-players.component";
+import { AddPlayerTokenGuard } from "src/app/guards/add-player-token.guard";
+import { ErrorMessageComponent } from "src/app/shared/error-message/error-message.component";
 
 const routes: Routes = [
   { path: "", component: CreateTournamentComponent },
@@ -17,6 +19,9 @@ const routes: Routes = [
     children: [
       { path: "overview", component: CreateTournamentComponent },
       { path: "matches", component: TemporadaCaracteriticasComponent },
+      {path : "team/:teamId/:token", component: TeamPlayersComponent, canActivate: [AddPlayerTokenGuard] },
+      {path : "team/:teamId", component: TeamPlayersComponent},
+      {path: "invalid", component:ErrorMessageComponent},
       { path: "", redirectTo: "overview", pathMatch: "full" }
     ],
   },

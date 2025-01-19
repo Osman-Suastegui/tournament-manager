@@ -1,0 +1,22 @@
+<!-- player-table.component.html -->
+<div class="player-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let player of players">
+        <td>{{ player.name }}</td>
+        <td>{{ player.position }}</td>
+        <td>
+          <button (click)="editPlayer(player)">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
