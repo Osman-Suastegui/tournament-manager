@@ -15,6 +15,7 @@ import { EstadisticasTemporadaComponent } from "./modulos/vistas-generales/estad
 import { CondicionesUsoComponent } from "./modulos/vistas-generales/condiciones-uso/condiciones-uso.component";
 import { PoliticiasPrivacidadComponent } from "./modulos/vistas-generales/politicias-privacidad/politicias-privacidad.component";
 import { RankingJugadoresTemporadaComponent } from "./modulos/vistas-generales/ranking-jugadores-temporada/ranking-jugadores-temporada.component";
+import { ErrorMessageComponent } from "./shared/error-message/error-message.component";
 
 const routes: Routes = [
   {
@@ -79,6 +80,10 @@ const routes: Routes = [
   {
     path: "ranking-jugadores-temporada/:temporadaId",
     component: RankingJugadoresTemporadaComponent
+  },
+  {
+    path: "invalid",
+    component: ErrorMessageComponent
   }
 ];
 

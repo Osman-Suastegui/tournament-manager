@@ -16,4 +16,9 @@ export class LinkService {
     return this.http.get<LinkResponse>(`${url}/team-tournament-links/getLink/${teamId}/${tournamentId}`);
   }
 
+  validateLink(teamId: string, tournamentId: string, token: string): Observable<any> {
+    return this.http.get(`${url}/team-tournament-links/validate/${teamId}/${tournamentId}/${token}`);
+  }
+
+
 }

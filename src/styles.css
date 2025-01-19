@@ -10,6 +10,7 @@ mat-icon {
 *{
     font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
 }
+
 .mat-expansion-panel-body{
     padding-right: 0 !important;
     padding-bottom: 0 !important;
@@ -23,6 +24,7 @@ mat-icon {
   width: 50%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 @media screen and (max-width: 1025px) {
   .add-team-dialog{
     width: 90%;

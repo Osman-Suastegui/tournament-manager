@@ -4,14 +4,23 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddTeamComponent } from './add-team/add-team.component';
 import { AddPlayersToTeamLinkComponent } from './add-players-to-team-link/add-players-to-team-link.component';
+import { TeamPlayersComponent } from './team-players/team-players.component';
+import { PlayerTableComponent } from './player-table/player-table.component';
+import { ButtonComponent } from 'src/app/shared/button/button.component';
 
 
 @NgModule({
-  declarations: [AddTeamComponent, AddPlayersToTeamLinkComponent],
+  declarations: [
+    AddTeamComponent,
+    AddPlayersToTeamLinkComponent,
+    TeamPlayersComponent,
+    PlayerTableComponent
+  ],
   imports: [
     CommonModule,
     AngularMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ButtonComponent
   ]
 })
 export class TeamsModule { }
