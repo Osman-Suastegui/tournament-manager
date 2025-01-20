@@ -1,22 +1,20 @@
-<!-- player-table.component.html -->
-<div class="player-table">
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Position</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let player of players">
-        <td>{{ player.name }}</td>
-        <td>{{ player.position }}</td>
-        <td>
-          <button (click)="editPlayer(player)">Edit</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
+<!-- player-card.component.html -->
+<div class="player-cards">
+  <div *ngFor="let player of players" class="player-card">
+    <div class="player-info">
+      <div class="player-name">
+        <span>{{ player.name }}</span>
+      </div>
+      <div class="player-status">
+        <span class="status authorized">{{ player.status }}</span>
+      </div>
+      <div class="player-date">
+        <span>{{ player.date }}</span>
+      </div>
+    </div>
+    <div class="player-actions">
+      <button class="edit-btn" (click)="editPlayer(player)">✏️</button>
+      <button class="delete-btn" (click)="deletePlayer(player)">🗑️</button>
+    </div>
+  </div>
 </div>

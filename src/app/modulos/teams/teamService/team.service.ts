@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Team } from '../../tournament/interface';
 import { Observable, Subject, tap } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AddTeamForm } from '../interfaces';
+import { AddPlayerToTeamForm, AddTeamForm } from '../interfaces';
+import { Player } from '../../jugadores/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,12 @@ import { AddTeamForm } from '../interfaces';
 export class TeamService {
 
   private newTeamSubject = new Subject<Team>();
+  private newPlayer = new Subject<Player>();
+
   public newTeam$ = this.newTeamSubject.asObservable();
-  baseUrl: string = "http://localhost:8080";
+  public newPlayer$ = this.newPlayer.asObservable();
+
+  private baseUrl: string = "http://localhost:8080";
 
   constructor(private http: HttpClient) { }
 
@@ -27,10 +32,33 @@ export class TeamService {
     )
   }
 
-  createAddTeamForm(): FormGroup {
+  addPlayerToTeamInTournament(tournamentId:string,teamId:string,playerName:string):Observable<Player> {
+    return this.http.post<Player>(`${this.baseUrl}/players/createPlayerInTournamentTeam`,{
+      tournamentId,
+      teamId,
+      playerName
+    }).pipe(tap((newPlayerRes:Player) => {
+      this.newPlayer.next(newPlayerRes)
+    }))
+  }
+
+  getPlayersInTournamentTeam(tournamentId:string,teamId:string):Observable<Player[]> {
+    return this.http.get<Player[]>(`${this.baseUrl}/players/getPlayersInTournamentTeam?tournamentId=${tournamentId}&teamId=${teamId}`)
+  }
+
+  createAddTeamForm(): FormGroup<AddTeamForm> {
     return new FormGroup<AddTeamForm>({
       name: new FormControl("", { validators: [Validators.required], nonNullable: true }),
       email: new FormControl("", { validators: [Validators.required], nonNullable: true }),
+    });
+  }
+
+
+  createAddPlayerToTeamForm(): FormGroup<AddPlayerToTeamForm> {
+    return new FormGroup<AddPlayerToTeamForm>({
+      name: new FormControl("", { validators: [Validators.required], nonNullable: true }),
+      email: new FormControl("", { nonNullable: true }),
+      position: new FormControl("", { nonNullable: true }),
     });
   }
 

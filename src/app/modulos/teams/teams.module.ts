@@ -7,6 +7,8 @@ import { AddPlayersToTeamLinkComponent } from './add-players-to-team-link/add-pl
 import { TeamPlayersComponent } from './team-players/team-players.component';
 import { PlayerTableComponent } from './player-table/player-table.component';
 import { ButtonComponent } from 'src/app/shared/button/button.component';
+import { AddPlayerToTeamComponent } from './add-player-to-team/add-player-to-team.component';
+import { InputComponent } from 'src/app/shared/input/input.component';
 
 
 @NgModule({
@@ -14,13 +16,15 @@ import { ButtonComponent } from 'src/app/shared/button/button.component';
     AddTeamComponent,
     AddPlayersToTeamLinkComponent,
     TeamPlayersComponent,
-    PlayerTableComponent
+    PlayerTableComponent,
+    AddPlayerToTeamComponent
   ],
   imports: [
     CommonModule,
     AngularMaterialModule,
     ReactiveFormsModule,
-    ButtonComponent
+    ButtonComponent,
+    InputComponent
   ]
 })
 export class TeamsModule { }
