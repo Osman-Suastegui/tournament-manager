@@ -1,4 +1,30 @@
 /*  */
+.add-player-to-team-container{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+.add-player-form{
+  display: flex;
+  flex-direction: column;
+  border-top: 0.5px solid #e7e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex: 0.4;
+  margin-right: 10px;
+  padding: 10px;
+
+
+}
+.player-table-container{
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex: 0.6;
+}
+
+.add-player-form, .player-table-container{
+  max-height: 600px;
+}
 header{
   display: flex;
   justify-content: space-between;
@@ -11,19 +37,12 @@ header h1{
   margin: 0;
 }
 /* Estilos para el encabezado "Agregar Árbitro" */
-mat-dialog-content header h1 {
+.add-player-to-team-container header h1 {
   font-size: 1.5rem;
   /* text-align: center; */
   color: #000000; /* Color del texto del encabezado */
 }
 
-/* Estilos para el formulario */
-mat-dialog-content form {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px; /* Aumenta el espacio inferior del formulario */
-  border-top: 0.5px solid #e7e0e0;
-}
 
 form > * {
   margin-top: 13px;
@@ -36,7 +55,7 @@ label {
 }
 
 /* Estilos para el fondo y borde del componente */
-mat-dialog-content {
+.add-player-to-team-container {
   background-color: #f7f7f5; /* Color de fondo del componente */
 }
 
@@ -49,12 +68,13 @@ mat-dialog-content {
   text-transform: uppercase;
 
 }
-mat-dialog-content form mat-label {
+.add-player-to-team-container form mat-label {
   color: #080708; /* Color del texto del input */
 }
 
 .btn-save{
   margin-left: auto;
+  margin-top: auto;
 }
 
 .body{
