@@ -1,11 +1,11 @@
-<mat-dialog-content>
+<div class="add-player-to-team-container">
   <header>
     <h1>Add player</h1>
     <mat-icon (click)="closeModal()" class="close-icon">close</mat-icon>
   </header>
   <div class="body">
 
-  <form [formGroup]="addPlayerToTeamForm" (ngSubmit)="addPlayerToTeam(data.teamId,data.tournamentId)">
+  <form class="add-player-form" [formGroup]="addPlayerToTeamForm" (ngSubmit)="addPlayerToTeam(data.teamId,data.tournamentId)">
 
     <app-input
       label="Name"
@@ -28,9 +28,11 @@
     <app-button [className]="'btn-save'" [text]="'Save'" />
   </form>
 
-  <app-player-table ></app-player-table>
+  <div class="player-table-container">
+    <app-player-table [players]="players"/>
+  </div>
 
 </div>
 
 
-</mat-dialog-content>
+</div>

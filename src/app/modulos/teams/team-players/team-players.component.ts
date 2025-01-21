@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { AddPlayerToTeamComponent } from '../add-player-to-team/add-player-to-team.component';
 import { TeamService } from '../teamService/team.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,18 +13,18 @@ import { Player } from '../../jugadores/interface';
 export class TeamPlayersComponent implements OnInit {
   @Input() teamId: string = '';
   public tournamentId: string = '';
-  public players:Player[] = []
+  public players: Player[] = []
   // injcet dialog
   constructor(
     private dialog: MatDialog,
-    private teamServ:TeamService,
-    private router:ActivatedRoute
-  ) { }
+    private teamServ: TeamService,
+    private router: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.setListenerRoutesParams()
-    this.teamServ.getPlayersInTournamentTeam(this.tournamentId,this.teamId).subscribe({
-      next: (players:Player[]) => {
+    this.setListenerNewPlayerAdded()
+    this.teamServ.getPlayersInTournamentTeam(this.tournamentId, this.teamId).subscribe({
+      next: (players: Player[]) => {
         this.players = players
       }
     })
@@ -37,20 +37,21 @@ export class TeamPlayersComponent implements OnInit {
     });
   }
 
-  setListenerRoutesParams(){
+  setListenerRoutesParams() {
     this.router.parent?.params.subscribe({
       next: (params) => {
+        console.log("params", params)
         this.tournamentId = params['tournamentId']
       },
       error: (err) => {
-        console.log("err",err)
+        console.log("err", err)
       }
     })
   }
 
-  setListenerNewPlayerAdded(){
+  setListenerNewPlayerAdded() {
     this.teamServ.newPlayer$.subscribe({
-      next: (player:Player) => {
+      next: (player: Player) => {
         this.players.push(player)
       }
     })
