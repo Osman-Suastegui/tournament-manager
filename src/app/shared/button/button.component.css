@@ -7,5 +7,7 @@ button {
   font-size: 1rem;
   font-weight: 500;
   border-radius: 7px;
-  min-width: 100px;
+  max-width: 150px;
+  white-space: nowrap;
+  min-width: 100px; 
 }

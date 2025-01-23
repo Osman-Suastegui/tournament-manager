@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { AddPlayerToTeamComponent } from '../add-player-to-team/add-player-to-team.component';
 import { TeamService } from '../teamService/team.service';
@@ -10,7 +10,7 @@ import { Player } from '../../jugadores/interface';
   templateUrl: './team-players.component.html',
   styleUrls: ['./team-players.component.css']
 })
-export class TeamPlayersComponent implements OnInit {
+export class TeamPlayersComponent implements OnInit,OnChanges {
   @Input() teamId: string = '';
   public tournamentId: string = '';
   public players: Player[] = []
@@ -18,16 +18,20 @@ export class TeamPlayersComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private teamServ: TeamService,
-    private router: ActivatedRoute) {}
+    private router: ActivatedRoute) {
+      this.setListenerRoutesParams()
+
+    }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['teamId']){
+      this.getPlayersInTournamentTeam(this.tournamentId, this.teamId)
+    }
+  }
 
   ngOnInit(): void {
-    this.setListenerRoutesParams()
     this.setListenerNewPlayerAdded()
-    this.teamServ.getPlayersInTournamentTeam(this.tournamentId, this.teamId).subscribe({
-      next: (players: Player[]) => {
-        this.players = players
-      }
-    })
+
   }
 
   openAddPlayerModal() {
@@ -37,10 +41,21 @@ export class TeamPlayersComponent implements OnInit {
     });
   }
 
+  private getPlayersInTournamentTeam(tournamentId:string, teamId:string) {
+    console.log("tournamentId",tournamentId)
+    this.teamServ.getPlayersInTournamentTeam(tournamentId,teamId).subscribe({
+      next: (players: Player[]) => {
+        this.players = players
+      },
+      error: (err) => {
+        console.log("err", err)
+      }
+    })
+  }
+
   setListenerRoutesParams() {
     this.router.parent?.params.subscribe({
       next: (params) => {
-        console.log("params", params)
         this.tournamentId = params['tournamentId']
       },
       error: (err) => {
