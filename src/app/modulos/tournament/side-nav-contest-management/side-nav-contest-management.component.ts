@@ -7,6 +7,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { Team } from "../interface";
 import { LinkService } from "src/app/services/linkService/link.service";
 import { AddPlayersToTeamLinkComponent } from "../../teams/add-players-to-team-link/add-players-to-team-link.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-side-nav-contest-management",
@@ -18,7 +19,8 @@ export class SideNavContestManagementComponent {
   constructor(
     private dialog: MatDialog,
     private tempService: TemporadasService,
-    private LinkService: LinkService
+    private LinkService: LinkService,
+    private router: Router
   ) { }
 
   @Input() teams: Team[] = [];
@@ -65,6 +67,12 @@ export class SideNavContestManagementComponent {
     });
     $event.stopPropagation();
   }
+
+  showPlayersTeam($event: MouseEvent,teamId: string) {
+    console.log("teamId", teamId);
+      this.router.navigate([`tournament/${this.tournamentId}/team/${teamId}`]);
+  }
+
 
   copyLink($event: Event, teamId: string, tournamentId: string) {
     this.dialog.open(AddPlayersToTeamLinkComponent, {

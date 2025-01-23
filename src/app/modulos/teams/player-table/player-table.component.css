@@ -68,3 +68,15 @@
 .delete-btn:hover {
   background-color: #c82333;
 }
+
+@media (max-width: 768px) {
+
+  .player-card{
+    padding: 8px;
+  }
+
+  .edit-btn,.delete-btn{
+    padding: 4px 7px;
+  }
+
+}

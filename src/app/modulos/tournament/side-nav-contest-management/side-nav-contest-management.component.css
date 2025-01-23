@@ -62,7 +62,7 @@
 .nav-item:hover {
     cursor: pointer;
 }
-.nav-item.active{
+.nav-item.active, .nested-nav-item.active{
   background-color: #d0d0ce;
 }
 
