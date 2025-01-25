@@ -30,3 +30,29 @@ jobs:
     # Step 4: Push the Docker image to Docker Hub
     - name: Push the Docker image
       run: docker push ${{ secrets.DOCKER_USERNAME }}/tournament-management-front:latest
+  deploy-to-ec2:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+     # Step 1: Set up SSH access
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets_EC2_SSH_KEY }}
+    # Step 2: Deploy to AWS EC2
+    - name: Deploy to EC2
+      run: |
+        ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+          # Pull the latest Docker image
+          docker pull $DOCKER_USERNAME/tournament-management-front:latest
+          
+          # Stop and remove any existing container
+          docker rm -f tournament-management-front || true
+          
+          # Run the new container
+          docker run -d --name tournament-management-front -p 80:80 $DOCKER_USERNAME/tournament-management-front:latest
+        EOF
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  
