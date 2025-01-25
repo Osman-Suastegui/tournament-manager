@@ -3,6 +3,8 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - '.github/workflows/**'
   pull_request:
     branches: [ "main" ]
 
@@ -43,15 +45,15 @@ jobs:
     # Step 2: Deploy to AWS EC2
     - name: Deploy to EC2
       run: |
-        ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+        ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
           # Pull the latest Docker image
-          sudo docker pull $DOCKER_USERNAME/tournament-management-front:latest
-          
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/tournament-management-front:latest
+
           # Stop and remove any existing container
           sudo docker rm -f tournament-management-front || true
-          
+
           # Run the new container
-          sudo docker run -d --name tournament-management-front -p 80:80 $DOCKER_USERNAME/tournament-management-front:latest
+          sudo docker run -d --name tournament-management-front -p 80:80 ${{ secrets.DOCKER_USERNAME }}/tournament-management-front:latest
         EOF
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
