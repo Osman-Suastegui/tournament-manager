@@ -29,4 +29,4 @@ jobs:
 
     # Step 4: Push the Docker image to Docker Hub
     - name: Push the Docker image
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/my-image-name:latest
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/tournament-management-front:latest
