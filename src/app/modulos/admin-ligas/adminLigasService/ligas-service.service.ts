@@ -4,7 +4,7 @@ import { Liga } from '../../../models/Ligas/Ligas';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { url } from '../../../url-config';
+import { url } from '../../../../enviroments/environment.local';
 import { TokenService } from '../../../services/tokenService/token.service';
 import { Subject } from 'rxjs';
 
