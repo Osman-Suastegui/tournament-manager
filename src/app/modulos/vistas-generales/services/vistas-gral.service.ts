@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { url } from '../../../url-config';
+import { url } from '../../../../enviroments/environment.local';
 import { TokenService } from '../../../services/tokenService/token.service';
 import { Subject } from 'rxjs';
 import { equiposRanking } from '../interfaces/equiposRanking';

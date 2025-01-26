@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LinkResponse, LinkService } from 'src/app/services/linkService/link.service';
-import { urlFront } from 'src/app/url-config';
+import { urlFront } from 'src/enviroments/environment.local';
 @Component({
   selector: 'app-add-players-to-team-link',
   templateUrl: './add-players-to-team-link.component.html',
