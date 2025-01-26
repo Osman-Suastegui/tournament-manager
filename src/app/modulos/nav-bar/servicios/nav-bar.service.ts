@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { url } from '../../../url-config';
+import { url } from '../../../../enviroments/environment.local';
 import { TokenService } from '../../../services/tokenService/token.service';
 
 @Injectable({

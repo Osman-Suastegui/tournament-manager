@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { url } from 'src/app/url-config';
+import { url } from 'src/enviroments/environment.local';
 import { Partido } from './interfaces/Partido';
 import {Observable} from 'rxjs';
 import { format } from 'date-fns-tz';
@@ -34,7 +34,7 @@ export class PartidosService {
    }
 
    arbitroIniciaPartidoFecha(clavePartido: number | undefined): Observable<string>{
-    
+
     return this.http.put<string>(`${url}/Partido/arbitroIniciaPartidoFecha`,{
       clavePartido:clavePartido,
       fechaInicio: format(new Date(), 'yyyy-MM-dd HH:mm:ss')

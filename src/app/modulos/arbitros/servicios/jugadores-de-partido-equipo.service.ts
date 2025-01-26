@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TokenService } from 'src/app/services/tokenService/token.service';
-import { url } from 'src/app/url-config';
+import { url } from 'src/enviroments/environment.local';
 import { EstadisticasJugador } from '../interfaces/EstadisticasJugador';
 import { Observable } from 'rxjs';
 

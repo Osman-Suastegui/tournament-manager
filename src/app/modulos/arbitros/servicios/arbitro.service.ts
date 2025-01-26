@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { TokenService } from 'src/app/services/tokenService/token.service';
 import { EstatusPartido } from '../interfaces/EstatusPartido';
 import { Observable } from 'rxjs';
-import { url } from 'src/app/url-config';
+import { url } from 'src/enviroments/environment.local';
 import { PartidoArbitroHome } from '../interfaces/PartidosArbitroHome';
 
 @Injectable({

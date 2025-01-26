@@ -4,11 +4,12 @@ import { AddTournament, AddTournamentResponse, Tournament } from "./interface";
 import { Observable } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { TournamentType } from "./interface";
+import { url } from "src/enviroments/environment.local";
 @Injectable({
   providedIn: "root"
 })
 export class TournamentService {
-  baseUrl: string = "http://localhost:8080";
+
   constructor(private http: HttpClient) { }
 
   public canEditCreateTournamentComponent(userId: string, tournament: Tournament): boolean {
@@ -20,16 +21,16 @@ export class TournamentService {
   }
 
   addTournament(tournament: AddTournament): Observable<AddTournamentResponse> {
-    return this.http.post<AddTournamentResponse>(`${this.baseUrl}/tournaments/createTournament`, tournament);
+    return this.http.post<AddTournamentResponse>(`${url}/tournaments/createTournament`, tournament);
   }
 
   getTournamentById(id: string): Observable<Tournament> {
 
-    return this.http.get<Tournament>(`${this.baseUrl}/tournaments/getTournament?tournamentId=${id}`);
+    return this.http.get<Tournament>(`${url}/tournaments/getTournament?tournamentId=${id}`);
   }
 
   getTournaments(userId: string, page: number = 0, size: number = 10):Observable<Tournament[]> {
-    return this.http.get<Tournament[]>(`${this.baseUrl}/tournaments/getTournaments?userId=${userId}&page=${page}&size=${size}`);
+    return this.http.get<Tournament[]>(`${url}/tournaments/getTournaments?userId=${userId}&page=${page}&size=${size}`);
   }
 
   createTournamentForm(): FormGroup {

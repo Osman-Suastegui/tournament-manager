@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { url } from '../../url-config';
+import { url } from '../../../enviroments/environment.local';
 import { Credential } from '../../models/Login/Credential';
 import { TokenService } from '../tokenService/token.service';
 import { HttpErrorResponse } from '@angular/common/http';
