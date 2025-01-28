@@ -52,10 +52,8 @@ export class TournamentService {
         Validators.maxLength(500)
       ]),
       startDate: new FormControl('', [
-        Validators.required // Reglas obligatorias
       ]),
       endDate: new FormControl('', [
-        Validators.required // Reglas obligatorias
       ]),
     });
   }
