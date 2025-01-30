@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { AddPlayerToTeamComponent } from '../add-player-to-team/add-player-to-team.component';
+import { AddPlayerToTeamComponent } from './add-player-to-team/add-player-to-team.component';
 import { TeamService } from '../teamService/team.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Player } from '../../jugadores/interface';

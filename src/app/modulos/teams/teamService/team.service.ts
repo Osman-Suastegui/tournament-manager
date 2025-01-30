@@ -18,32 +18,36 @@ export class TeamService {
   public newTeam$ = this.newTeamSubject.asObservable();
   public newPlayer$ = this.newPlayer.asObservable();
 
-
   constructor(private http: HttpClient) { }
 
   // THIS ENDPOINT ADD A TEAM IN A TOURNAMENT
-  addTeam(team: Omit<Team, 'id'>, tournamentId: string,createdById:string): Observable<Team> {
+  addTeam(team: Omit<Team, 'id'>, tournamentId: string, createdById: string): Observable<Team> {
     return this.http.post<Team>(`${url}/teams/createTeamInTournament`, {
-      name:team.name,
+      name: team.name,
       tournamentId,
       createdById
     }).pipe(
-      tap((createdTeam:Team) => this.newTeamSubject.next(createdTeam) )
+      tap((createdTeam: Team) => this.newTeamSubject.next(createdTeam))
     )
   }
 
-  addPlayerToTeamInTournament(tournamentId:string,teamId:string,playerName:string):Observable<Player> {
-    return this.http.post<Player>(`${url}/players/createPlayerInTournamentTeam`,{
+  addPlayerToTeamInTournament(tournamentId: string, teamId: string, playerName: string): Observable<Player> {
+    return this.http.post<Player>(`${url}/players/createPlayerInTournamentTeam`, {
       tournamentId,
       teamId,
       playerName
-    }).pipe(tap((newPlayerRes:Player) => {
+    }).pipe(tap((newPlayerRes: Player) => {
       this.newPlayer.next(newPlayerRes)
     }))
   }
 
-  getPlayersInTournamentTeam(tournamentId:string,teamId:string):Observable<Player[]> {
+  getPlayersInTournamentTeam(tournamentId: string, teamId: string): Observable<Player[]> {
     return this.http.get<Player[]>(`${url}/players/getPlayersInTournamentTeam?tournamentId=${tournamentId}&teamId=${teamId}`)
+  }
+
+  // deletePlayerFromTeamTournament
+  deletePlayerFromTeamTournament(tournamentId: string, teamId: string, playerId: string): Observable<any> {
+    return this.http.delete(`${url}/players/deletePlayerFromTeamTournament?tournamentId=${tournamentId}&teamId=${teamId}&playerId=${playerId}`)
   }
 
   createAddTeamForm(): FormGroup<AddTeamForm> {
