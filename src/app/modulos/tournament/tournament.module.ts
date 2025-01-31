@@ -8,6 +8,7 @@ import { GoogleMapsModule } from "@angular/google-maps";
 import { SideNavContestManagementComponent } from "./side-nav-contest-management/side-nav-contest-management.component";
 import { DirectiveModule } from "src/app/directives/directive.module";
 import { TournamentManagementComponent } from "./tournament-management/tournament-management.component";
+import { TreeDiagramsModule } from "../tree-diagrams/tree-diagrams.module";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TournamentManagementComponent } from "./tournament-management/tournamen
     ReactiveFormsModule,
     AngularMaterialModule,
     GoogleMapsModule,
-    DirectiveModule
+    DirectiveModule,
+    TreeDiagramsModule
   ],
   exports:[
     CreateTournamentComponent
