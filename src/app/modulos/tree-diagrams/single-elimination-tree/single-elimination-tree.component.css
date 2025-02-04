@@ -3,6 +3,10 @@
   padding: 5px;
   text-align: center;
   position:absolute;
+  cursor: pointer;
+}
+.tree-node-team:hover {
+  background-color: #ada7a7;
 }
 
 .tree {
@@ -15,4 +19,7 @@
   position: absolute;
 }
 
+.active {
+  background-color: #ada7a7;
+}
 
