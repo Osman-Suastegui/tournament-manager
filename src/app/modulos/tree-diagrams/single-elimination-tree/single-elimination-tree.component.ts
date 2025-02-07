@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild, Renderer2, ElementRef } from "@angular/core";
+import { Match, matches } from "./test";
 class TreeTeamNode {
   public winner: "left" | "right" | null = null;
   constructor(public teamName1: string = "", public teamName2: string = "", public left?: TreeTeamNode, public right?: TreeTeamNode) {
@@ -22,6 +23,39 @@ class Tree {
     if (!node) return 0;
     return 1 + this.getDepth(node.left);
   }
+
+  static createFullBinaryTree(depth: number): TreeTeamNode | undefined {
+    if (depth <= 0) return undefined;
+    return new TreeTeamNode("", "", this.createFullBinaryTree(depth - 1), this.createFullBinaryTree(depth - 1));
+  }
+
+  static createFullBinaryTreeWithMatches(matches: Match[], depth: number): TreeTeamNode | undefined {
+    const tree: TreeTeamNode | undefined = this.createFullBinaryTree(depth); // skeleton tree
+    if (!tree || matches.length === 0) return undefined;
+    this.fillTreeWithMatches(tree, matches);
+    this.inorder(tree);
+    return tree;
+  }
+  // use bfs to fill the tree with matches and create a hashamp use round as level
+
+  static fillTreeWithMatches(node: TreeTeamNode, matches: Match[]) {
+    const queue: TreeTeamNode[] = [node];
+    let currRound = 1;
+    while (queue.length > 0) {
+      const l = queue.length;
+      const matchesLevel = matches.filter(match => match.round === currRound);
+      for (let i = 0; i < l; i++) {
+        const node = queue.shift()!
+        node.teamName1 = matchesLevel[i].team1.name;
+        node.teamName2 = matchesLevel[i].team2.name;
+        if (node.left) queue.push(node.left);
+        if (node.right) queue.push(node.right);
+      }
+      currRound++;
+    }
+
+  }
+
 }
 
 @Component({
@@ -31,7 +65,7 @@ class Tree {
 
 })
 export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
-  @ViewChild("tree", { static: false }) tree!: ElementRef;
+  @ViewChild("tree") tree!: ElementRef;
   constructor(private renderer: Renderer2) { }
 
   private WIDTH_NODE = 153;
@@ -40,51 +74,9 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const tree1 = new TreeTeamNode(
-      "", "",
-      new TreeTeamNode(
-        "", "",
-        new TreeTeamNode("Team A", "Team B"),
-        new TreeTeamNode("Team C", "Team D")
-      ),
-      new TreeTeamNode(
-        "", "",
-        new TreeTeamNode("Team E", "Team F"),
-        new TreeTeamNode("Team G", "Team H")
-      )
-    );
-    const tree2 = new TreeTeamNode(
-      '', '',
-      new TreeTeamNode(
-        'Team C', 'Team G',
-        new TreeTeamNode(
-          'Team A', 'Team C',
-          new TreeTeamNode('Team A', 'Team B'),
-          new TreeTeamNode('Team C', 'Team D')
-        ),
-        new TreeTeamNode(
-          'Team E', 'Team G',
-          new TreeTeamNode('Team E', 'Team F'),
-          new TreeTeamNode('Team G', 'Team H')
-        )
-      ),
-      new TreeTeamNode(
-        '', '',
-        new TreeTeamNode(
-          '', '',
-          new TreeTeamNode('Team I', 'Team J'),
-          new TreeTeamNode('Team K', 'Team L')
-        ),
-        new TreeTeamNode(
-          '', '',
-          new TreeTeamNode('Team M', 'Team N'),
-          new TreeTeamNode('Team O', 'Team P')
-        )
-      )
-    );
 
-    Tree.inorder(tree1);
-    this.createTreeHtml(tree2);
+    const root: TreeTeamNode | undefined = Tree.createFullBinaryTreeWithMatches(matches, 3);
+    this.createTreeHtml(root);
   }
 
   onHover(teamName: string, isHovering: boolean) {
@@ -100,7 +92,7 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
   }
 
 
-  createTreeHtml(root: TreeTeamNode | undefined, x: number = window.innerWidth / 2 , y: number = 400): void {
+  createTreeHtml(root: TreeTeamNode | undefined, x: number = window.innerWidth / 2, y: number = 400): void {
     if (!root) return;
     const TREE_DEPTH = Tree.getDepth(root);
     // espacio entre nodos horizontal
