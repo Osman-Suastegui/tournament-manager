@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { TeamService } from '../teamService/team.service';
+import { TeamService } from '../../teamService/team.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
-import { AddPlayerToTeamForm } from '../interfaces';
+import { AddPlayerToTeamForm } from '../../interfaces';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Player } from '../../jugadores/interface';
+import { Player } from '../../../jugadores/interface';
 
 @Component({
   selector: 'app-add-player-to-team',

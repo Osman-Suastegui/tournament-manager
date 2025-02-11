@@ -1,0 +1,9 @@
+<div class="matches-container">
+
+  <div class="btn-generate-matches">
+    <app-button  (click)="generateMatches()" [text]="'generate matches'"/>
+  </div>
+
+  <app-single-elimination-tree *ngIf="matches.length > 0" [matches]="matches"/>
+
+</div>
