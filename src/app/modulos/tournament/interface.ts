@@ -9,14 +9,15 @@ export interface Team {
 }
 
 export interface Tournament {
-  id:          string;
-  name:        string;
-  sport:       string;
-  estado:      string;
-  description: string;
-  rules:       string;
-  users:       User[];
-  teams:       Team[];
+  id:             string;
+  name:           string;
+  sport:          string;
+  estado:         string;
+  description:    string;
+  rules:          string;
+  users:          User[];
+  teams:          Team[];
+  tournamentType: TournamentType
 }
 
 export const emptyTournament: Tournament = {
@@ -27,7 +28,8 @@ export const emptyTournament: Tournament = {
   description: "",
   rules:       "",
   users:       [],
-  teams:       []
+  teams:       [],
+  tournamentType: TournamentType.SingleElimination
 };
 
 export interface User {

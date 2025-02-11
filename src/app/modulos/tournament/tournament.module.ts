@@ -9,12 +9,15 @@ import { SideNavContestManagementComponent } from "./side-nav-contest-management
 import { DirectiveModule } from "src/app/directives/directive.module";
 import { TournamentManagementComponent } from "./tournament-management/tournament-management.component";
 import { TreeDiagramsModule } from "../tree-diagrams/tree-diagrams.module";
+import { MatchesComponent } from './matches/matches.component';
+import { ButtonComponent } from "../../shared/button/button.component";
 
 @NgModule({
   declarations: [
     CreateTournamentComponent,
     TournamentManagementComponent,
     SideNavContestManagementComponent,
+    MatchesComponent,
   ],
   imports: [
     CommonModule,
@@ -23,8 +26,9 @@ import { TreeDiagramsModule } from "../tree-diagrams/tree-diagrams.module";
     AngularMaterialModule,
     GoogleMapsModule,
     DirectiveModule,
-    TreeDiagramsModule
-  ],
+    TreeDiagramsModule,
+    ButtonComponent
+],
   exports:[
     CreateTournamentComponent
   ]

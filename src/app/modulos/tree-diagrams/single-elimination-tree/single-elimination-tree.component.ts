@@ -1,12 +1,15 @@
-import { AfterViewInit, Component, OnInit, ViewChild, Renderer2, ElementRef } from "@angular/core";
-import { Match, matches } from "./test";
+import { AfterViewInit, Component, OnInit, ViewChild, Renderer2, ElementRef, Input } from "@angular/core";
+import { Match } from "./test";
+import { MatchService } from "src/app/services/match.service";
 class TreeTeamNode {
   public winner: "left" | "right" | null = null;
-  constructor(public teamName1: string = "", public teamName2: string = "", public left?: TreeTeamNode, public right?: TreeTeamNode) {
+  constructor(public teamName1: string = "", public teamName2: string = "", public left?: TreeTeamNode, public right?: TreeTeamNode, public idParent?: string, public id?: string) {
     this.teamName1 = teamName1;
     this.teamName2 = teamName2;
     this.left = left;
     this.right = right;
+    this.idParent = idParent
+    this.id = id;
   }
 
 }
@@ -24,35 +27,31 @@ class Tree {
     return 1 + this.getDepth(node.left);
   }
 
-  static createFullBinaryTree(depth: number): TreeTeamNode | undefined {
-    if (depth <= 0) return undefined;
-    return new TreeTeamNode("", "", this.createFullBinaryTree(depth - 1), this.createFullBinaryTree(depth - 1));
+  static createFullBinaryTree(depth: number, prev: string | null, matches: Match[]): TreeTeamNode | undefined {
+    if (depth <= 0 || !prev) return undefined;
+
+    // Find the match at the current level
+    const match = matches.find(m => m.id === prev);
+    if (!match) return undefined;
+
+    // Find previous matches that lead to this one
+    const matchesLevel = matches.filter(m => m.next === match.id);
+
+    // Left and right children (from previous round)
+    const leftChild = matchesLevel.length > 0 ? this.createFullBinaryTree(depth - 1, matchesLevel[0].id, matches) : undefined;
+    const rightChild = matchesLevel.length > 1 ? this.createFullBinaryTree(depth - 1, matchesLevel[1].id, matches) : undefined;
+
+    return new TreeTeamNode(match.team1?.name,match.team2?.name, leftChild, rightChild);
   }
 
   static createFullBinaryTreeWithMatches(matches: Match[], depth: number): TreeTeamNode | undefined {
-    const tree: TreeTeamNode | undefined = this.createFullBinaryTree(depth); // skeleton tree
-    if (!tree || matches.length === 0) return undefined;
-    this.fillTreeWithMatches(tree, matches);
-    this.inorder(tree);
-    return tree;
-  }
-  // use bfs to fill the tree with matches and create a hashamp use round as level
-
-  static fillTreeWithMatches(node: TreeTeamNode, matches: Match[]) {
-    const queue: TreeTeamNode[] = [node];
-    let currRound = 1;
-    while (queue.length > 0) {
-      const l = queue.length;
-      const matchesLevel = matches.filter(match => match.round === currRound);
-      for (let i = 0; i < l; i++) {
-        const node = queue.shift()!
-        node.teamName1 = matchesLevel[i].team1.name;
-        node.teamName2 = matchesLevel[i].team2.name;
-        if (node.left) queue.push(node.left);
-        if (node.right) queue.push(node.right);
-      }
-      currRound++;
+    const rootMatch = matches.find(m => m.round === 1); // Find the final match
+    if (rootMatch) {
+      const tree = this.createFullBinaryTree(depth, rootMatch.id, matches);
+      console.log("Binary Tree:", tree);
+      return tree;
     }
+    return undefined
 
   }
 
@@ -66,17 +65,30 @@ class Tree {
 })
 export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
   @ViewChild("tree") tree!: ElementRef;
-  constructor(private renderer: Renderer2) { }
+  @Input() matches:Match[] = []
+
+  constructor(private renderer: Renderer2, private matchService: MatchService) { }
 
   private WIDTH_NODE = 153;
   private HEIGHT_NODE = 32;
   ngOnInit(): void {
+    console.log(this.matches);
   }
 
   ngAfterViewInit(): void {
-
-    const root: TreeTeamNode | undefined = Tree.createFullBinaryTreeWithMatches(matches, 3);
+    const TREE_DEPTH = this.getMaxNumberRounds(this.matches);
+    const root: TreeTeamNode | undefined = Tree.createFullBinaryTreeWithMatches(this.matches, TREE_DEPTH);
     this.createTreeHtml(root);
+  }
+
+  getMaxNumberRounds(matches: Match[]): number {
+    let maxRound = 0;
+    matches.forEach(match => {
+      if (!match.round) return
+      maxRound = Math.max(maxRound, match.round);
+
+    });
+    return maxRound;
   }
 
   onHover(teamName: string, isHovering: boolean) {
