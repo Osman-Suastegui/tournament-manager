@@ -35,14 +35,11 @@ jobs:
       with:
         context: .
         file: .dockerfile
-        push: false
+        push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/tournament-management-front:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
-    # Step 4: Push the Docker image to Docker Hub
-    - name: Push the Docker image
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/tournament-management-front:latest
   deploy-to-ec2:
     needs: build-and-push
     runs-on: ubuntu-latest
