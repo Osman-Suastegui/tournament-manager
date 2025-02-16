@@ -22,11 +22,6 @@ class Tree {
     this.inorder(node.right);
   }
 
-  static getDepth(node: TreeTeamNode | undefined): number {
-    if (!node) return 0;
-    return 1 + this.getDepth(node.left);
-  }
-
   static createFullBinaryTree(depth: number, prev: string | null, matches: Match[]): TreeTeamNode | undefined {
     if (depth <= 0 || !prev) return undefined;
 
@@ -36,12 +31,56 @@ class Tree {
 
     // Find previous matches that lead to this one
     const matchesLevel = matches.filter(m => m.next === match.id);
+    matchesLevel.sort((a, b) => parseInt(a.id) - parseInt(b.id))
 
     // Left and right children (from previous round)
     const leftChild = matchesLevel.length > 0 ? this.createFullBinaryTree(depth - 1, matchesLevel[0].id, matches) : undefined;
     const rightChild = matchesLevel.length > 1 ? this.createFullBinaryTree(depth - 1, matchesLevel[1].id, matches) : undefined;
+    let newNode: TreeTeamNode = new TreeTeamNode()
+    console.log("MATCH ", match)
+    console.log(leftChild)
+    console.log(rightChild)
+    if (leftChild != undefined) {
+      if (leftChild.teamName1 == match.team1?.name) {
+        newNode.teamName1 = match.team1?.name
+      }
+      if (leftChild.teamName1 == match.team2?.name) {
+        newNode.teamName1 = match.team2?.name
+      }
+      if (leftChild.teamName2 == match.team2?.name) {
+        newNode.teamName1 = match.team2?.name
+      }
 
-    return new TreeTeamNode(match.team1?.name,match.team2?.name, leftChild, rightChild);
+      if (leftChild.teamName2 == match.team1?.name) {
+        newNode.teamName1 = match.team1?.name
+      }
+    } else {
+      newNode.teamName1 = match.team1?.name
+    }
+    if (rightChild != undefined) {
+      if (rightChild.teamName1 == match.team1?.name) {
+        newNode.teamName2 = match.team1?.name
+      }
+      if (rightChild.teamName1 == match.team2?.name) {
+        newNode.teamName2 = match.team2?.name
+      }
+      if (rightChild.teamName2 == match.team2?.name) {
+        newNode.teamName2 = match.team2?.name
+      }
+
+      if (rightChild.teamName2 == match.team1?.name) {
+        newNode.teamName2 = match.team1?.name
+      }
+    } else {
+      newNode.teamName2 = match.team2?.name
+    }
+    if (!leftChild && !rightChild) {
+      return new TreeTeamNode(match.team1?.name, match.team2?.name, leftChild, rightChild);
+
+    }
+    newNode.left = leftChild;
+    newNode.right = rightChild
+    return newNode
   }
 
   static createFullBinaryTreeWithMatches(matches: Match[], depth: number): TreeTeamNode | undefined {
@@ -65,12 +104,13 @@ class Tree {
 })
 export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
   @ViewChild("tree") tree!: ElementRef;
-  @Input() matches:Match[] = []
+  @Input() matches: Match[] = []
 
   constructor(private renderer: Renderer2, private matchService: MatchService) { }
 
-  private WIDTH_NODE = 153;
-  private HEIGHT_NODE = 32;
+  private WIDTH_NODE = 147;
+  private HEIGHT_NODE = 22;
+  private SPACE_BETWEEN_NODES = 200;
   ngOnInit(): void {
     console.log(this.matches);
   }
@@ -78,7 +118,8 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     const TREE_DEPTH = this.getMaxNumberRounds(this.matches);
     const root: TreeTeamNode | undefined = Tree.createFullBinaryTreeWithMatches(this.matches, TREE_DEPTH);
-    this.createTreeHtml(root);
+    const x = (TREE_DEPTH - 1) * 147 + ((TREE_DEPTH - 1) * (this.SPACE_BETWEEN_NODES - this.WIDTH_NODE)) + 30
+    this.createTreeHtml(root, TREE_DEPTH, x);
   }
 
   getMaxNumberRounds(matches: Match[]): number {
@@ -104,38 +145,41 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
   }
 
 
-  createTreeHtml(root: TreeTeamNode | undefined, x: number = window.innerWidth / 2, y: number = 400): void {
+  createTreeHtml(root: TreeTeamNode | undefined, TREE_DEPTH: number, x: number = 1000, y: number = 350): void {
     if (!root) return;
-    const TREE_DEPTH = Tree.getDepth(root);
     // espacio entre nodos horizontal
-    const SPACE_BETWEEN_NODES = 200;
     let currLevel = 1;
-    const queue: { node: TreeTeamNode, isLeft: boolean | null, x: number, y: number, diffY: number }[] = [
-      { node: root, isLeft: null, x, y, diffY: 0 }
+    const queue: { node: TreeTeamNode, isLeft: boolean | null, x: number, y: number, diffY: number, hasSibling: boolean }[] = [
+      { node: root, isLeft: null, x, y, diffY: 0, hasSibling: false }
     ];
 
     while (queue.length > 0) {
       const l = queue.length;
 
       for (let i = 0; i < l; i++) {
-        const { node, isLeft, x, y, diffY } = queue.shift()!;
+        let { node, isLeft, x, y, diffY,hasSibling } = queue.shift()!;
 
+        if(hasSibling){
+          y += 15
+          diffY -= 30
+        }
         const divTeam1 = this.createTreeNodeHtml(node.teamName1 || " vs ", x, y, true);
         const divTeam2 = this.createTreeNodeHtml(node.teamName2 || " vs ", x, y + this.HEIGHT_NODE, false);
 
         const line = this.renderer.createElement("div");
         line.classList.add("line");
         line.style.top = `${100}%`;
-        const lineWidth = Math.round((SPACE_BETWEEN_NODES - this.WIDTH_NODE) / 2);
+        const lineWidth = Math.round((this.SPACE_BETWEEN_NODES - this.WIDTH_NODE) / 2);
         line.style.width = `${lineWidth}px`;
         line.style.left = `${-lineWidth}px`;
         this.renderer.appendChild(this.tree.nativeElement, divTeam1);
 
-        // IF WE ARE NOT IN THE LAST LEVEL
-        if (TREE_DEPTH !== currLevel) {
+        if (node.left || node.right) {
           this.renderer.appendChild(divTeam1, line);
         }
-
+        // if(hasSibling){
+        //   lineWidth -=
+        // }
         const line2 = this.renderer.createElement("div");
         line2.classList.add("line");
         line2.style.top = `${100}%`;
@@ -146,7 +190,12 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
         this.renderer.appendChild(this.tree.nativeElement, divTeam2);
 
         if (isLeft) {
-          line2.style.height = `${diffY}px`;
+          line2.style.height = `${diffY / 2  }px`;
+        } else {
+          line2.style.borderTop = 'none'
+          line2.style.borderBottom = '1px solid #ccc'
+          line2.style.top = `-${diffY / 2 - this.HEIGHT_NODE}px`
+          line2.style.height = `${diffY / 2}px`;
         }
 
         // IF WE ARE NOT IN THE FIRST LEVEL WE ADD THE LINE
@@ -154,7 +203,7 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
           this.renderer.appendChild(divTeam1, line2);
         }
 
-        const containerHeight = window.innerHeight;           // total height of the browser
+        const containerHeight = 900           // total height of the browser
         const drawingHeight = containerHeight * 0.8;            // use 80% of the height for the tree
         const availableSpace = drawingHeight / Math.pow(2, currLevel); // space available for this level's subtree
         const offset = availableSpace / 2;                      // half the space for positioning children
@@ -164,10 +213,10 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
 
         // Add children to the queue
         if (node.left) {
-          queue.push({ node: node.left, isLeft: true, x: x - SPACE_BETWEEN_NODES, y: leftPosYNode, diffY: diff });
+          queue.push({ node: node.left, isLeft: true, x: x - this.SPACE_BETWEEN_NODES, y: leftPosYNode, diffY: diff, hasSibling: !node.right });
         }
         if (node.right) {
-          queue.push({ node: node.right, isLeft: false, x: x - SPACE_BETWEEN_NODES, y: rightPosYNode, diffY: diff });
+          queue.push({ node: node.right, isLeft: false, x: x - this.SPACE_BETWEEN_NODES, y: rightPosYNode, diffY: diff, hasSibling: !node.left });
         }
       }
       currLevel++;
@@ -183,6 +232,9 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
     div.style.top = `${y}px`;
     div.style.left = `${x}px`;
     div.style.width = `${this.WIDTH_NODE}px`;
+    div.style.height = `${this.HEIGHT_NODE}px`;
+    div.style.fontSize = `12px`;
+
     if (!hasBorders) {
       div.style.borderTop = "none";
     }
