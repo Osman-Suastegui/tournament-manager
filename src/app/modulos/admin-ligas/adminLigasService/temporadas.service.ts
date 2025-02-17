@@ -170,25 +170,23 @@ export class TemporadasService {
     const headers = this.tokenService.createHeaders();
 
     return this.http.get(url + '/EquipoTemporada/obtenerEquiposNoEnTemporada', {
-      headers: headers,
       params: {
         temporadaId: idTemporada
       }
     });
   }
 
-  eliminarEquipoDeTemporada(temporadaId: string, nombreEquipo: string) {
+  deleteTeamInTournament(tournamentId: string, teamId: string) {
     const headers = this.tokenService.createHeaders();
 
     const httpOptions = {
-      headers: headers,
       body: {
-        temporada: { claveTemporada: temporadaId },
-        equipo: { nombre: nombreEquipo },
+        tournament: { id: tournamentId },
+        team: { id: teamId },
       },
     };
 
-    return this.http.delete(url + '/EquipoTemporada/eliminarEquipoTemporada', httpOptions);
+    return this.http.delete(url + '/TeamTournament/deleteTeamInTournament', httpOptions);
   }
 
   eliminarArbitroDeTemporada(temporadaId: string, usuario: string) {
