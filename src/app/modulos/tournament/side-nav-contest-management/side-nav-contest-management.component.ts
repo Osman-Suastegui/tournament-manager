@@ -2,12 +2,13 @@ import { Referee } from "./../../admin-ligas/temporada-caracteriticas/interfaces
 import { TemporadasService } from "./../../admin-ligas/adminLigasService/temporadas.service";
 import { AddTeamComponent } from "../../teams/add-team/add-team.component";
 import { AsignarArbitroComponent } from "./../../admin-ligas/asignar-arbitro/asignar-arbitro.component";
-import { Component, inject, Input } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Team } from "../interface";
 import { LinkService } from "src/app/services/linkService/link.service";
 import { AddPlayersToTeamLinkComponent } from "../../teams/add-players-to-team-link/add-players-to-team-link.component";
 import { Router } from "@angular/router";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: "app-side-nav-contest-management",
@@ -36,14 +37,20 @@ export class SideNavContestManagementComponent {
     $event.stopPropagation();
   }
 
-  removeTeam($event: Event, seasonId: string, teamToRemove: string) {
-    // eliminarEquipoTemp(idTemporada: number, nombreEquipo: string) {
-    this.tempService.eliminarEquipoDeTemporada(seasonId, teamToRemove).subscribe({
+  removeTeam($event: Event, tournamentId: string, teamId: string) {
+    console.log("tournamentId",tournamentId);
+    console.log("teamId",teamId);
+
+    this.tempService.deleteTeamInTournament(tournamentId, teamId).subscribe({
       next: () => {
-        this.teams = this.teams.filter(team => team.name !== teamToRemove);
+        this.teams = this.teams.filter(team => team.id !== teamId);
       },
-      error: (e) => {
-        alert(e);
+      error: (e: HttpErrorResponse) => {
+        if(e.status === 404){
+          console.log(e);
+        }else{
+          alert(e);
+        }
       }
     });
     $event.stopPropagation();
@@ -73,14 +80,13 @@ export class SideNavContestManagementComponent {
       this.router.navigate([`tournament/${this.tournamentId}/team/${teamId}`]);
   }
 
-
   copyLink($event: Event, teamId: string, tournamentId: string) {
     this.dialog.open(AddPlayersToTeamLinkComponent, {
       panelClass: "add-team-dialog",
       data: { teamId, tournamentId }
     });
 
-    $event.stopPropagation()
+    $event.stopPropagation();
   }
 
 }
