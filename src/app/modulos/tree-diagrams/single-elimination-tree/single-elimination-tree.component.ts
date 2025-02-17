@@ -1,100 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild, Renderer2, ElementRef, Input } from "@angular/core";
 import { Match } from "./test";
-import { MatchService } from "src/app/services/match.service";
-class TreeTeamNode {
-  public winner: "left" | "right" | null = null;
-  constructor(public teamName1: string = "", public teamName2: string = "", public left?: TreeTeamNode, public right?: TreeTeamNode, public idParent?: string, public id?: string) {
-    this.teamName1 = teamName1;
-    this.teamName2 = teamName2;
-    this.left = left;
-    this.right = right;
-    this.idParent = idParent
-    this.id = id;
-  }
-
-}
-
-class Tree {
-  static inorder(node?: TreeTeamNode) {
-    if (!node) return;
-    console.log(node.teamName1 + " vs " + node.teamName2);
-    this.inorder(node.left);
-    this.inorder(node.right);
-  }
-
-  static createFullBinaryTree(depth: number, prev: string | null, matches: Match[]): TreeTeamNode | undefined {
-    if (depth <= 0 || !prev) return undefined;
-
-    // Find the match at the current level
-    const match = matches.find(m => m.id === prev);
-    if (!match) return undefined;
-
-    // Find previous matches that lead to this one
-    const matchesLevel = matches.filter(m => m.next === match.id);
-    matchesLevel.sort((a, b) => parseInt(a.id) - parseInt(b.id))
-
-    // Left and right children (from previous round)
-    const leftChild = matchesLevel.length > 0 ? this.createFullBinaryTree(depth - 1, matchesLevel[0].id, matches) : undefined;
-    const rightChild = matchesLevel.length > 1 ? this.createFullBinaryTree(depth - 1, matchesLevel[1].id, matches) : undefined;
-    let newNode: TreeTeamNode = new TreeTeamNode()
-    console.log("MATCH ", match)
-    console.log(leftChild)
-    console.log(rightChild)
-    if (leftChild != undefined) {
-      if (leftChild.teamName1 == match.team1?.name) {
-        newNode.teamName1 = match.team1?.name
-      }
-      if (leftChild.teamName1 == match.team2?.name) {
-        newNode.teamName1 = match.team2?.name
-      }
-      if (leftChild.teamName2 == match.team2?.name) {
-        newNode.teamName1 = match.team2?.name
-      }
-
-      if (leftChild.teamName2 == match.team1?.name) {
-        newNode.teamName1 = match.team1?.name
-      }
-    } else {
-      newNode.teamName1 = match.team1?.name
-    }
-    if (rightChild != undefined) {
-      if (rightChild.teamName1 == match.team1?.name) {
-        newNode.teamName2 = match.team1?.name
-      }
-      if (rightChild.teamName1 == match.team2?.name) {
-        newNode.teamName2 = match.team2?.name
-      }
-      if (rightChild.teamName2 == match.team2?.name) {
-        newNode.teamName2 = match.team2?.name
-      }
-
-      if (rightChild.teamName2 == match.team1?.name) {
-        newNode.teamName2 = match.team1?.name
-      }
-    } else {
-      newNode.teamName2 = match.team2?.name
-    }
-    if (!leftChild && !rightChild) {
-      return new TreeTeamNode(match.team1?.name, match.team2?.name, leftChild, rightChild);
-
-    }
-    newNode.left = leftChild;
-    newNode.right = rightChild
-    return newNode
-  }
-
-  static createFullBinaryTreeWithMatches(matches: Match[], depth: number): TreeTeamNode | undefined {
-    const rootMatch = matches.find(m => m.round === 1); // Find the final match
-    if (rootMatch) {
-      const tree = this.createFullBinaryTree(depth, rootMatch.id, matches);
-      console.log("Binary Tree:", tree);
-      return tree;
-    }
-    return undefined
-
-  }
-
-}
+import { SingleEliminationTreeService } from "../tree-services/single-elimination-tree.service";
+import { TreeTeamNode } from "../tree.model";
 
 @Component({
   selector: "app-single-elimination-tree",
@@ -104,9 +11,11 @@ class Tree {
 })
 export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
   @ViewChild("tree") tree!: ElementRef;
-  @Input() matches: Match[] = []
+  @Input() matches: Match[] = [];
 
-  constructor(private renderer: Renderer2, private matchService: MatchService) { }
+  constructor(private renderer: Renderer2,
+    private treeSingleElimination: SingleEliminationTreeService
+  ) { }
 
   private WIDTH_NODE = 147;
   private HEIGHT_NODE = 22;
@@ -117,15 +26,15 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     const TREE_DEPTH = this.getMaxNumberRounds(this.matches);
-    const root: TreeTeamNode | undefined = Tree.createFullBinaryTreeWithMatches(this.matches, TREE_DEPTH);
-    const x = (TREE_DEPTH - 1) * 147 + ((TREE_DEPTH - 1) * (this.SPACE_BETWEEN_NODES - this.WIDTH_NODE)) + 30
-    this.createTreeHtml(root, TREE_DEPTH, x);
+    const root: TreeTeamNode | undefined = this.treeSingleElimination.createBinaryTreeWithMatches(this.matches, TREE_DEPTH);
+    const x = (TREE_DEPTH - 1) * 147 + ((TREE_DEPTH - 1) * (this.SPACE_BETWEEN_NODES - this.WIDTH_NODE)) + 30;
+    this.createTreeHtml(root, x);
   }
 
   getMaxNumberRounds(matches: Match[]): number {
     let maxRound = 0;
     matches.forEach(match => {
-      if (!match.round) return
+      if (!match.round) return;
       maxRound = Math.max(maxRound, match.round);
 
     });
@@ -144,8 +53,7 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
     });
   }
 
-
-  createTreeHtml(root: TreeTeamNode | undefined, TREE_DEPTH: number, x: number = 1000, y: number = 350): void {
+  createTreeHtml(root: TreeTeamNode | undefined, x: number = 1000, y: number = 350): void {
     if (!root) return;
     // espacio entre nodos horizontal
     let currLevel = 1;
@@ -157,14 +65,14 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
       const l = queue.length;
 
       for (let i = 0; i < l; i++) {
-        let { node, isLeft, x, y, diffY,hasSibling } = queue.shift()!;
+        let { node, isLeft, x, y, diffY, hasSibling } = queue.shift()!;
 
-        if(hasSibling){
-          y += 15
-          diffY -= 30
+        if (hasSibling) {
+          y += 15;
+          diffY -= 30;
         }
-        const divTeam1 = this.createTreeNodeHtml(node.teamName1 || " vs ", x, y, true);
-        const divTeam2 = this.createTreeNodeHtml(node.teamName2 || " vs ", x, y + this.HEIGHT_NODE, false);
+        const divTeam1 = this.createTreeNodeHtml(node.match?.team1.id || "vs", node.match?.team1.name || "vs", x, y, true);
+        const divTeam2 = this.createTreeNodeHtml(node.match?.team2.id || "vs", node.match?.team2.name || "vs", x, y + this.HEIGHT_NODE, false);
 
         const line = this.renderer.createElement("div");
         line.classList.add("line");
@@ -177,9 +85,7 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
         if (node.left || node.right) {
           this.renderer.appendChild(divTeam1, line);
         }
-        // if(hasSibling){
-        //   lineWidth -=
-        // }
+
         const line2 = this.renderer.createElement("div");
         line2.classList.add("line");
         line2.style.top = `${100}%`;
@@ -190,11 +96,11 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
         this.renderer.appendChild(this.tree.nativeElement, divTeam2);
 
         if (isLeft) {
-          line2.style.height = `${diffY / 2  }px`;
+          line2.style.height = `${diffY / 2}px`;
         } else {
-          line2.style.borderTop = 'none'
-          line2.style.borderBottom = '1px solid #ccc'
-          line2.style.top = `-${diffY / 2 - this.HEIGHT_NODE}px`
+          line2.style.borderTop = "none";
+          line2.style.borderBottom = "1px solid #ccc";
+          line2.style.top = `-${diffY / 2 - this.HEIGHT_NODE}px`;
           line2.style.height = `${diffY / 2}px`;
         }
 
@@ -203,7 +109,7 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
           this.renderer.appendChild(divTeam1, line2);
         }
 
-        const containerHeight = 900           // total height of the browser
+        const containerHeight = 900;           // total height of the browser
         const drawingHeight = containerHeight * 0.8;            // use 80% of the height for the tree
         const availableSpace = drawingHeight / Math.pow(2, currLevel); // space available for this level's subtree
         const offset = availableSpace / 2;                      // half the space for positioning children
@@ -223,24 +129,23 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  createTreeNodeHtml(teamName: string, x: number, y: number, hasBorders: boolean): HTMLDivElement {
-    // remove spaces teamnAMNE
-    teamName = teamName.replace(/\s/g, "");
+  createTreeNodeHtml(id: string, teamName: string, x: number, y: number, hasBorders: boolean): HTMLDivElement {
+
     const div = this.renderer.createElement("div");
-    div.classList.add("tree-node-team", `tree-node-team-${teamName}`);
+    div.classList.add("tree-node-team", `tree-node-team-${id}`);
 
     div.style.top = `${y}px`;
     div.style.left = `${x}px`;
     div.style.width = `${this.WIDTH_NODE}px`;
     div.style.height = `${this.HEIGHT_NODE}px`;
-    div.style.fontSize = `12px`;
+    div.style.fontSize = "12px";
 
     if (!hasBorders) {
       div.style.borderTop = "none";
     }
     div.innerHTML = teamName;
-    this.renderer.listen(div, 'mouseover', () => this.onHover(teamName, true));  // Mouse enters
-    this.renderer.listen(div, 'mouseout', () => this.onHover(teamName, false));  // Mouse leaves
+    this.renderer.listen(div, "mouseover", () => this.onHover(id, true));  // Mouse enters
+    this.renderer.listen(div, "mouseout", () => this.onHover(id, false));  // Mouse leaves
     return div;
 
   }
