@@ -36,6 +36,17 @@ export const matches: Match[] = [
   { id: "M7", team1: teams[0], team2: {} as Team, round: 1, next: null }, // Winner M5 vs M6
 ];
 
+export const createEmptyMatch = (): Match  => {
+  return {
+    id: "",
+    team1: { id: "", name: "TBD" },
+    team2: { id: "", name: "TBD" },
+    winner: undefined,
+    round: 0,
+    next: null
+  };
+}
+
 
 
 

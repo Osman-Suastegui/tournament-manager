@@ -1,6 +1,5 @@
 .tree-node-team {
   border: 1px solid #ccc;
-  padding: 5px;
   text-align: center;
   position:absolute;
   cursor: pointer;
@@ -11,6 +10,12 @@
 
 .tree {
   position: relative;
+    width: 100%;  /* Adjust width as needed */
+    height: 500px; /* Set a fixed height */
+    overflow-x: auto; /* Enables horizontal scrolling */
+    overflow-y: scroll; /* Hides vertical scroll */
+    border: 1px solid black; /* Just to visualize the container */
+
 }
 
 .line {
