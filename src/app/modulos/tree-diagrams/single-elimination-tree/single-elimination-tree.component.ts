@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild, Renderer2, ElementRef, Inp
 import { Match } from "./test";
 import { SingleEliminationTreeService } from "../tree-services/single-elimination-tree.service";
 import { TreeTeamNode } from "../tree.model";
+import { Team } from "../../tournament/interface";
 
 @Component({
   selector: "app-single-elimination-tree",
@@ -71,8 +72,8 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
           y += 15;
           diffY -= 30;
         }
-        const divTeam1 = this.createTreeNodeHtml(node.match?.team1.id || "vs", node.match?.team1.name || "vs", x, y, true);
-        const divTeam2 = this.createTreeNodeHtml(node.match?.team2.id || "vs", node.match?.team2.name || "vs", x, y + this.HEIGHT_NODE, false);
+        const divTeam1 = this.createTreeNodeHtml(node.match?.team1.id || "vs", node.match?.team1.name || "vs", x, y, true,node.match?.winner);
+        const divTeam2 = this.createTreeNodeHtml(node.match?.team2.id || "vs", node.match?.team2.name || "vs", x, y + this.HEIGHT_NODE, false,node.match?.winner);
 
         const line = this.renderer.createElement("div");
         line.classList.add("line");
@@ -129,8 +130,7 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  createTreeNodeHtml(id: string, teamName: string, x: number, y: number, hasBorders: boolean): HTMLDivElement {
-
+  createTreeNodeHtml(id: string, teamName: string, x: number, y: number, hasBorders: boolean,winner?:Team ): HTMLDivElement {
     const div = this.renderer.createElement("div");
     div.classList.add("tree-node-team", `tree-node-team-${id}`);
 
@@ -139,11 +139,18 @@ export class SingleEliminationTreeComponent implements OnInit, AfterViewInit {
     div.style.width = `${this.WIDTH_NODE}px`;
     div.style.height = `${this.HEIGHT_NODE}px`;
     div.style.fontSize = "12px";
-
     if (!hasBorders) {
       div.style.borderTop = "none";
     }
     div.innerHTML = teamName;
+    if(winner?.id === id){
+      div.style.fontWeight = "500";
+      div.style.background = "#B0EACD";
+    }
+    if(winner && winner.id !== id){
+      div.style.fontWeight = "500";
+      div.style.background = "#FD877F";
+    }
     this.renderer.listen(div, "mouseover", () => this.onHover(id, true));  // Mouse enters
     this.renderer.listen(div, "mouseout", () => this.onHover(id, false));  // Mouse leaves
     return div;
