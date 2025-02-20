@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { url } from '../../../url-config';
+import { url } from '../../../../enviroments/environment.local';
 import { TokenService } from '../../../services/tokenService/token.service';
 import { Subject } from 'rxjs';
 import { Temporadas } from './../interfaces/Temporadas';
@@ -170,25 +170,23 @@ export class TemporadasService {
     const headers = this.tokenService.createHeaders();
 
     return this.http.get(url + '/EquipoTemporada/obtenerEquiposNoEnTemporada', {
-      headers: headers,
       params: {
         temporadaId: idTemporada
       }
     });
   }
 
-  eliminarEquipoDeTemporada(temporadaId: string, nombreEquipo: string) {
+  deleteTeamInTournament(tournamentId: string, teamId: string) {
     const headers = this.tokenService.createHeaders();
 
     const httpOptions = {
-      headers: headers,
       body: {
-        temporada: { claveTemporada: temporadaId },
-        equipo: { nombre: nombreEquipo },
+        tournament: { id: tournamentId },
+        team: { id: teamId },
       },
     };
 
-    return this.http.delete(url + '/EquipoTemporada/eliminarEquipoTemporada', httpOptions);
+    return this.http.delete(url + '/TeamTournament/deleteTeamInTournament', httpOptions);
   }
 
   eliminarArbitroDeTemporada(temporadaId: string, usuario: string) {

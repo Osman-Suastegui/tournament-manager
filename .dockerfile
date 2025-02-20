@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Build the application
-RUN npm run build -- --output-path=dist
+RUN npm run build -- --configuration=production --output-path=dist
 
 # Stage 2: Serve the Angular app with a lightweight web server
 FROM nginx:alpine

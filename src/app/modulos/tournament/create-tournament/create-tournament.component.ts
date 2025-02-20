@@ -63,12 +63,12 @@ export class CreateTournamentComponent implements OnInit {
       this.createTournament.markAllAsTouched();
       return;
     }
+    console.log("New tournament:");
 
     const newTournament: AddTournament = {
       tournament: this.createTournament.value,
       userId: this.authServ.getUserId()
     };
-
     if (this.isEditing()) {
       this.editTournament();
     } else {
@@ -78,7 +78,7 @@ export class CreateTournamentComponent implements OnInit {
   }
 
   addTournament(tournament: AddTournament): void {
-
+    console.log("Adding tournament:", tournament);
     this.tournamentServ.addTournament(tournament).subscribe({
       next: (response: AddTournamentResponse) => {
         console.log("Response:", response);

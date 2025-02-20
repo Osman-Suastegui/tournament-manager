@@ -5,6 +5,7 @@ import { Observable, Subject, tap } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddPlayerToTeamForm, AddTeamForm } from '../interfaces';
 import { Player } from '../../jugadores/interface';
+import { url } from 'src/enviroments/environment.local';
 
 @Injectable({
   providedIn: 'root'
@@ -17,33 +18,36 @@ export class TeamService {
   public newTeam$ = this.newTeamSubject.asObservable();
   public newPlayer$ = this.newPlayer.asObservable();
 
-  private baseUrl: string = "http://localhost:8080";
-
   constructor(private http: HttpClient) { }
 
   // THIS ENDPOINT ADD A TEAM IN A TOURNAMENT
-  addTeam(team: Omit<Team, 'id'>, tournamentId: string,createdById:string): Observable<Team> {
-    return this.http.post<Team>(`${this.baseUrl}/teams/createTeamInTournament`, {
-      name:team.name,
+  addTeam(team: Omit<Team, 'id'>, tournamentId: string, createdById: string): Observable<Team> {
+    return this.http.post<Team>(`${url}/teams/createTeamInTournament`, {
+      name: team.name,
       tournamentId,
       createdById
     }).pipe(
-      tap((createdTeam:Team) => this.newTeamSubject.next(createdTeam) )
+      tap((createdTeam: Team) => this.newTeamSubject.next(createdTeam))
     )
   }
 
-  addPlayerToTeamInTournament(tournamentId:string,teamId:string,playerName:string):Observable<Player> {
-    return this.http.post<Player>(`${this.baseUrl}/players/createPlayerInTournamentTeam`,{
+  addPlayerToTeamInTournament(tournamentId: string, teamId: string, playerName: string): Observable<Player> {
+    return this.http.post<Player>(`${url}/players/createPlayerInTournamentTeam`, {
       tournamentId,
       teamId,
       playerName
-    }).pipe(tap((newPlayerRes:Player) => {
+    }).pipe(tap((newPlayerRes: Player) => {
       this.newPlayer.next(newPlayerRes)
     }))
   }
 
-  getPlayersInTournamentTeam(tournamentId:string,teamId:string):Observable<Player[]> {
-    return this.http.get<Player[]>(`${this.baseUrl}/players/getPlayersInTournamentTeam?tournamentId=${tournamentId}&teamId=${teamId}`)
+  getPlayersInTournamentTeam(tournamentId: string, teamId: string): Observable<Player[]> {
+    return this.http.get<Player[]>(`${url}/players/getPlayersInTournamentTeam?tournamentId=${tournamentId}&teamId=${teamId}`)
+  }
+
+  // deletePlayerFromTeamTournament
+  deletePlayerFromTeamTournament(tournamentId: string, teamId: string, playerId: string): Observable<any> {
+    return this.http.delete(`${url}/players/deletePlayerFromTeamTournament?tournamentId=${tournamentId}&teamId=${teamId}&playerId=${playerId}`)
   }
 
   createAddTeamForm(): FormGroup<AddTeamForm> {
