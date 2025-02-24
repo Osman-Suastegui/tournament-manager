@@ -1,7 +1,7 @@
 import { AddTournamentResponse } from "./../interface";
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { AddTournament, Tournament, TournamentType } from "../interface";
+import {  Tournament, TournamentType } from "../interface";
 import { getContestTypeName } from "../utils";
 import { TournamentService } from "../tournament.service";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -65,10 +65,8 @@ export class CreateTournamentComponent implements OnInit {
     }
     console.log("New tournament:");
 
-    const newTournament: AddTournament = {
-      tournament: this.createTournament.value,
-      userId: this.authServ.getUserId()
-    };
+    const newTournament: Tournament = this.createTournament.value
+
     if (this.isEditing()) {
       this.editTournament();
     } else {
@@ -77,7 +75,7 @@ export class CreateTournamentComponent implements OnInit {
 
   }
 
-  addTournament(tournament: AddTournament): void {
+  addTournament(tournament: Tournament): void {
     console.log("Adding tournament:", tournament);
     this.tournamentServ.addTournament(tournament).subscribe({
       next: (response: AddTournamentResponse) => {

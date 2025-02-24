@@ -1,0 +1,196 @@
+.contenedorPrincipal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FFF8F0;
+  width: 40%;
+  border-radius: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
+}
+.contenedorPag {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% de la altura de la ventana */
+}
+
+
+
+
+.contenedorLogin{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+input{
+  margin-top: 10px;
+}
+
+.contenedorImagen{
+  display: flex;
+  flex-direction: column;
+  background-color: #FFF8F0;
+  align-items: center;
+  border-radius: 5px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+img{
+  color: #FFF8F0;
+}
+
+.page-container {
+  background-color: #d9d9d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.registrarse{
+  display: flex;
+  margin-top: 20px;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.boton{
+  margin-top: 15px;
+  background-color: #F26419; /* Color de fondo */
+  color: #080708; /* Color del texto */
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px; /* Ajusta el padding para hacerlo más grande */
+  cursor: pointer;
+  height: 45px;
+  font-size: 1rem; /* Tamaño de fuente más grande */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+}
+
+
+
+
+
+.inputLogin{
+  border-radius: 10px;
+  background-color: #d9d9d9;
+  padding: 10px;
+  width: 90%;
+  height: 50px;
+  border: none;
+}
+
+.errorif{
+  color: 080708;
+  font-size: 1rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* 🔹 Page Container */
+.page-container {
+
+}
+
+/* 🔹 Authentication Form */
+.auth-form {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 🔹 Logo Section */
+.auth-form__logo {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.auth-form__logo-img {
+  max-width: 150px;
+  height: auto;
+}
+
+/* 🔹 Input Fields */
+.auth-form__input {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* 🔹 Submit Button */
+.auth-form__button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #F26419;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.auth-form__button:hover {
+  background: #d95d0e;
+}
+
+.auth-form__button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+/* 🔹 Register Section */
+.auth-form__register {
+  margin-top: 1rem;
+  font-size: 14px;
+  text-align: center;
+}
+
+.auth-form__register-text {
+  color: #333;
+}
+
+.auth-form__register-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-form__register-link:hover {
+  text-decoration: underline;
+}
+app-button{
+  width: 100%;
+}
+.error-message {
+  color: red;
+  font-size: 14px;
+}
+
+/* 🔹 Responsive Design */
+@media (max-width: 480px) {
+  .auth-form {
+    padding: 1.5rem;
+    width: 100%;
+    height: 100%;
+    box-shadow: none;
+  }
+  .page-container{
+    background-color: #fff;
+  }
+}

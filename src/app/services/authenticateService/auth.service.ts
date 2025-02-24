@@ -54,12 +54,6 @@ export class authService {
         this.user = creds.usuario;
         localStorage.setItem('usuario', creds.usuario);
         return response.body;
-      }),
-      catchError((error: HttpErrorResponse ) => {
-
-        const errorMessage = error.error[0].message;
-
-        return throwError(() => errorMessage); // Retorna el mensaje de error
       })
     );
   }

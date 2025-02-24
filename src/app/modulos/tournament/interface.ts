@@ -40,10 +40,6 @@ export interface User {
   lastName: string;
 }
 
-export interface AddTournament {
-  tournament: Tournament
-  userId: string
-}
 
 export interface AddTournamentResponse{
   message: string;
