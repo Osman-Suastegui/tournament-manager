@@ -1,4 +1,4 @@
-import { TeamService } from './../../teams/teamService/team.service';
+import { TeamService } from "./../../teams/teamService/team.service";
 import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import { Referee } from "../../admin-ligas/temporada-caracteriticas/interfaces";
 import { emptyTournament, Team, Tournament, User } from "../interface";
@@ -9,7 +9,8 @@ import { emptyTournament, Team, Tournament, User } from "../interface";
   styleUrls: ["./tournament-management.component.css"]
 })
 export class TournamentManagementComponent implements OnInit,OnChanges {
-  private teamServ = inject(TeamService)
+  private teamServ = inject(TeamService);
+  public isOpen: boolean = false;
 
   // PUBLIC
   public teams: Team[] = [];
@@ -19,14 +20,14 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
   // PRIVATE
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['tournament']){
-      this.updateTournamentUI(this.tournament)
+    if(changes["tournament"]){
+      this.updateTournamentUI(this.tournament);
     }
   }
 
   ngOnInit(): void {
     this.updateTournamentUI(this.tournament);
-    this.setListeners()
+    this.setListeners();
   }
 
   private updateTournamentUI(tournament: Tournament) {
@@ -41,6 +42,10 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
 
   private filterReferees(tournament: Tournament): Referee[] {
     return tournament.users.filter(user => user.role === "REFEREE").map((user: User) => user as Referee);
+  }
+
+  toggleSideNav() {
+    this.isOpen = !this.isOpen;
   }
 
   // getTeams(seasonId: number) {
@@ -61,8 +66,8 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
 
   setListeners() {
     this.teamServ.newTeam$.subscribe({
-      next:(newTeam:Team) => this.teams.push(newTeam)
-    })
+      next:(newTeam: Team) => this.teams.push(newTeam)
+    });
     // this.tempService.onNuevoEquipoAsignado().subscribe(() => {
     //   this.getTeams(this.tournamentId);
     // });

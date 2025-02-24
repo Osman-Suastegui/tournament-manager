@@ -3,6 +3,6 @@
   background-color: #ffffff;
   width: 100%;
 }
-.content {
-  flex: 1;
+app-side-nav-contest-management {
+  width: 100%;
 }

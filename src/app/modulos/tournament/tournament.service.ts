@@ -1,27 +1,35 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { AddTournament, AddTournamentResponse, Tournament } from "./interface";
+import { AddTournamentResponse, Tournament } from "./interface";
 import { Observable } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { TournamentType } from "./interface";
 import { url } from "src/enviroments/environment.local";
+import { TokenService } from "src/app/services/tokenService/token.service";
 @Injectable({
   providedIn: "root"
 })
 export class TournamentService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private tokenService: TokenService
+  ) { }
 
   public canEditCreateTournamentComponent(userId: string, tournament: Tournament): boolean {
 
     return tournament.users.some(user => {
-      return user.id == userId && user.role === 'ORGANIZER'
-    })
+      return user.id == userId && user.role === "ORGANIZER";
+    });
 
   }
 
-  addTournament(tournament: AddTournament): Observable<AddTournamentResponse> {
-    return this.http.post<AddTournamentResponse>(`${url}/tournaments/createTournament`, tournament);
+  addTournament(tournament: Tournament): Observable<AddTournamentResponse> {
+
+    const headers = this.tokenService.createHeaders();
+
+    return this.http.post<AddTournamentResponse>(`${url}/tournaments/createTournament`,
+       tournament, {headers}
+    );
   }
 
   getTournamentById(id: string): Observable<Tournament> {
@@ -29,7 +37,7 @@ export class TournamentService {
     return this.http.get<Tournament>(`${url}/tournaments/getTournament?tournamentId=${id}`);
   }
 
-  getTournaments(userId: string, page: number = 0, size: number = 10):Observable<Tournament[]> {
+  getTournaments(userId: string, page: number = 0, size: number = 10): Observable<Tournament[]> {
     return this.http.get<Tournament[]>(`${url}/tournaments/getTournaments?userId=${userId}&page=${page}&size=${size}`);
   }
 
@@ -39,21 +47,21 @@ export class TournamentService {
         Validators.required,
         Validators.minLength(1)
       ]),
-      sport: new FormControl('football', [
+      sport: new FormControl("football", [
         Validators.required
       ]),
       tournamentType: new FormControl<TournamentType>(TournamentType.SingleElimination, [
         Validators.required // Reglas obligatorias
       ]),
-      description: new FormControl<string>('', [
+      description: new FormControl<string>("", [
         Validators.maxLength(500)
       ]),
-      rules: new FormControl('', [
+      rules: new FormControl("", [
         Validators.maxLength(500)
       ]),
-      startDate: new FormControl('', [
+      startDate: new FormControl("", [
       ]),
-      endDate: new FormControl('', [
+      endDate: new FormControl("", [
       ]),
     });
   }

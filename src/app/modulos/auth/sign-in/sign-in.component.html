@@ -1,0 +1,34 @@
+<div class="page-container">
+  <form class="auth-form" [formGroup]="signInForm" (ngSubmit)="login()">
+
+    <!-- Logo Section -->
+    <div class="auth-form__logo">
+      <img class="auth-form__logo-img" src="assets/imgs/blanco.png" alt="Company Logo">
+    </div>
+
+    <!-- Input Fields -->
+    <app-input [control]="signInForm.controls.usuario" class="auth-form__input"
+      [label]="'Username'" [placeholder]="'Enter your username'">
+    </app-input>
+
+    <app-input [control]="signInForm.controls.password" class="auth-form__input"
+      [label]="'Password'" [placeholder]="'Enter your password'" type="password"/>
+
+      <span *ngIf="signInForm.errors?.['invalidCredentials']" class="full-width mb-2 error-message">
+        Invalid credentials. Please try again.
+      </span>
+
+    <!-- Submit Button -->
+    <app-button [type]="'submit'" [text]="'Sign In'" [isFullWidth]="true" />
+
+    <!-- Register Section -->
+    <div class="auth-form__register">
+      <p class="auth-form__register-text">Don’t have an account?</p>
+      <a routerLink="/register" class="auth-form__register-link">Create Account</a>
+    </div>
+
+  </form>
+</div>
+
+<!-- Footer Component -->
+<app-footer-component></app-footer-component>

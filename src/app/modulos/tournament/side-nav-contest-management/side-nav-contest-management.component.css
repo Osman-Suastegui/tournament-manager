@@ -1,5 +1,6 @@
 .sidenav-container {
     height: 93vh;
+    width: 100%;
 }
 .add-team{
     z-index: 2;

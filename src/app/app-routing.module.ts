@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { provideRouter, RouterModule, Routes, withComponentInputBinding } from "@angular/router";
 import { HomeComponent } from "./modulos/home/home/home.component";
-import { LoginComponent } from "./modulos/auth/login/login.component";
-import { RegisterComponent } from "./modulos/auth/register/register.component";
+import { SignInComponent } from "./modulos/auth/sign-in/sign-in.component";
+import { SignUpComponent } from "./modulos/auth/sign-up/sign-up.component";
 import { TemporadaCaracteriticasComponent } from "./modulos/admin-ligas/temporada-caracteriticas/temporada-caracteriticas.component";
 import { RegistroDeEstadisticasDeJugadoresPorPartidoComponent } from "./modulos/arbitros/registro-de-estadisticas-de-jugadores-por-partido/registro-de-estadisticas-de-jugadores-por-partido.component";
 import { VerPerfilComponent } from "./modulos/vistas-generales/ver-perfil/ver-perfil.component";
@@ -23,12 +23,12 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: "login",
-    component: LoginComponent
+    path: "signin",
+    component: SignInComponent
   },
   {
-    path: "register",
-    component: RegisterComponent
+    path: "signup",
+    component: SignUpComponent
   },
   {
     path: "temporadaCaracteristicas/:idTemporada/:idLiga",
