@@ -13,6 +13,7 @@ export class InputComponent {
   @Input() label: string = '';
   @Input() placeholder: string = '';
   @Input() control: FormControl = new FormControl();
-  @Input() type: string = 'text';  // Default input type is text
-
+  @Input() type: "text" | "select" | "textTarea" | "password" | "date" = 'text';  // Default input type is text
+  @Input() options: { label: string; value: string }[] = [];  // For select dropdown
+  @Input() textTareaRows: number = 4;
 }

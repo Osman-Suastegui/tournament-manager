@@ -11,6 +11,9 @@ import { TournamentManagementComponent } from "./tournament-management/tournamen
 import { TreeDiagramsModule } from "../tree-diagrams/tree-diagrams.module";
 import { MatchesComponent } from './matches/matches.component';
 import { ButtonComponent } from "../../shared/button/button.component";
+import { StepperComponent } from './stepper/stepper.component';
+import { InputComponent } from "../../shared/input/input.component";
+import { TournamentTypeSelectionComponent } from './create-tournament/tournament-type-selection/tournament-type-selection.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,8 @@ import { ButtonComponent } from "../../shared/button/button.component";
     TournamentManagementComponent,
     SideNavContestManagementComponent,
     MatchesComponent,
+    StepperComponent,
+    TournamentTypeSelectionComponent,
   ],
   imports: [
     CommonModule,
@@ -27,7 +32,8 @@ import { ButtonComponent } from "../../shared/button/button.component";
     GoogleMapsModule,
     DirectiveModule,
     TreeDiagramsModule,
-    ButtonComponent
+    ButtonComponent,
+    InputComponent
 ],
   exports:[
     CreateTournamentComponent

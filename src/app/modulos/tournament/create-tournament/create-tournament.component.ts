@@ -1,4 +1,4 @@
-import { AddTournamentResponse } from "./../interface";
+import { AddTournamentResponse, TournamentForm } from "./../interface";
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import {  Tournament, TournamentType } from "../interface";
@@ -19,10 +19,14 @@ export class CreateTournamentComponent implements OnInit {
 
   // PUBLIC
   tournamentTypes = Object.values(TournamentType); // Extract enum values
-  public createTournament!: FormGroup;
+  public createTournament: FormGroup<TournamentForm> = this.tournamentServ.createTournamentForm()
   public isReadOnly: boolean = false;
   // PRIVATE
-
+  options = [
+    { label: "Liga", value: "Liga" },
+    { label: "Liga", value: "Liga" },
+    { label: "Liga", value: "Liga" },
+  ]
   constructor(
     private tournamentServ: TournamentService,
     private route: ActivatedRoute,
@@ -39,7 +43,6 @@ export class CreateTournamentComponent implements OnInit {
         this.tournament = tournament;
       }
 
-      this.createTournament = this.tournamentServ.createTournamentForm();
       if (this.isEditing()) {
         this.isReadOnly = !this.tournamentServ.canEditCreateTournamentComponent(this.authServ.getUserId(),this.tournament!);
         this.patchTournament();
@@ -65,7 +68,7 @@ export class CreateTournamentComponent implements OnInit {
     }
     console.log("New tournament:");
 
-    const newTournament: Tournament = this.createTournament.value
+    const newTournament: Tournament = this.createTournament.value as Tournament
 
     if (this.isEditing()) {
       this.editTournament();

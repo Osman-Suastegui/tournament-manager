@@ -1,11 +1,45 @@
 <div class="form-field">
-  <label for="{{label}}">{{ label }}:</label>
+  <label for="{{ label }}">
+    {{ label }}<span *ngIf="control.errors?.['required']" class="required-asterisk">*</span>
+  </label>
+
   <div class="input-wrapper">
-    <input
-      [type]="type"
-      [formControl]="control"
-      [placeholder]="placeholder"
+    <!-- Handle different input types -->
+    <ng-container [ngSwitch]="type">
+
+      <!-- Text Input -->
+      <input
+        *ngSwitchCase="'text'"
+        [type]="type"
+        [formControl]="control"
+        [placeholder]="placeholder"
       />
+      <input
+        *ngSwitchCase="'date'"
+        [type]="type"
+        [formControl]="control"
+        [placeholder]="placeholder"
+      />
+
+      <textarea
+        *ngSwitchCase="'textTarea'"
+        [formControl]="control"
+        [placeholder]="placeholder"
+        [rows]="textTareaRows"
+      ></textarea>
+
+      <!-- Select Input -->
+      <select *ngSwitchCase="'select'" [formControl]="control">
+        <option *ngFor="let option of options" [value]="option.value">
+          <span class="option">
+            {{ option.label }}
+          </span>
+        </option>
+      </select>
+
+    </ng-container>
+
+    <!-- Error Messages -->
     <div *ngIf="control.touched && control.errors" class="errors">
       <small *ngIf="control.errors?.['required']">This field is required.</small>
       <small *ngIf="control.errors?.['minlength']">Minimum length is 1 character.</small>

@@ -3,12 +3,12 @@
   margin-top: 3px;
 }
 
-input {
+input,select,textarea {
   display: block;
-  padding: 7px;
+  padding: 10px 14px 10px 14px;
   width: 100%;
   font-size: 14px;
-  border-radius: 6px;
+  border-radius: 8px;
   box-shadow: rgba(15, 15, 15, 0.1) 0px 0px 0px 1px inset;
   background: rgba(242, 241, 238, 0.6);
   cursor: text;
@@ -20,4 +20,11 @@ input {
 .errors {
   color: red;
   font-size: 12px;
+}
+.required-asterisk{
+  color: red;
+  margin-left: 3px;
+}
+label{
+  font-weight: 600;
 }

@@ -1,0 +1,32 @@
+.asterisc{
+  color:red
+}
+.title-tournament-type{
+  font-weight: 500;
+  font-size: 16px;
+}
+.type{
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 15px 15px 0px 15px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.description-tournament-type{
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+}
+.types-container{
+  display: flex;
+  gap: 20px;
+}
+
+.type:hover{
+  border: 1px solid #3182ce;
+}
+
+.type.selected-type {
+  border: 2px solid #3182ce;
+}

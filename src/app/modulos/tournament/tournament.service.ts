@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { AddTournamentResponse, Tournament } from "./interface";
+import { AddTournamentResponse, Tournament, TournamentForm } from "./interface";
 import { Observable } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { TournamentType } from "./interface";
@@ -12,7 +12,7 @@ import { TokenService } from "src/app/services/tokenService/token.service";
 export class TournamentService {
 
   constructor(private http: HttpClient,
-              private tokenService: TokenService
+    private tokenService: TokenService
   ) { }
 
   public canEditCreateTournamentComponent(userId: string, tournament: Tournament): boolean {
@@ -28,7 +28,7 @@ export class TournamentService {
     const headers = this.tokenService.createHeaders();
 
     return this.http.post<AddTournamentResponse>(`${url}/tournaments/createTournament`,
-       tournament, {headers}
+      tournament, { headers }
     );
   }
 
@@ -41,29 +41,51 @@ export class TournamentService {
     return this.http.get<Tournament[]>(`${url}/tournaments/getTournaments?userId=${userId}&page=${page}&size=${size}`);
   }
 
-  createTournamentForm(): FormGroup {
-    return new FormGroup({
-      name: new FormControl<string>("", [
-        Validators.required,
-        Validators.minLength(1)
-      ]),
-      sport: new FormControl("football", [
-        Validators.required
-      ]),
-      tournamentType: new FormControl<TournamentType>(TournamentType.SingleElimination, [
-        Validators.required // Reglas obligatorias
-      ]),
-      description: new FormControl<string>("", [
-        Validators.maxLength(500)
-      ]),
-      rules: new FormControl("", [
-        Validators.maxLength(500)
-      ]),
-      startDate: new FormControl("", [
-      ]),
-      endDate: new FormControl("", [
-      ]),
+  createTournamentForm(): FormGroup<TournamentForm> {
+    return new FormGroup<TournamentForm>({
+      name: new FormControl<string>("", {
+        nonNullable: true,
+        validators: [Validators.required, Validators.minLength(1)],
+      }),
+      sport: new FormControl<string>("football", {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+      tournamentType: new FormControl<TournamentType>(TournamentType.SingleElimination, {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
+      description: new FormControl<string>("", {
+        nonNullable: true,
+        validators: [Validators.maxLength(500)],
+      }),
+      location: new FormControl<string | null>("", {
+        nonNullable: true,
+        validators: [Validators.maxLength(500)],
+      }),
+      rules: new FormControl<string>("", {
+        nonNullable: false,
+        validators: [Validators.maxLength(500)],
+      }),
+      startDate: new FormControl<string | null>(null),
+      endDate: new FormControl<string | null>(null),
     });
   }
+
+  getContestTypeName = (type: TournamentType): string => {
+
+    if (type === TournamentType.SingleElimination) return "Single Elimination";
+    if (type === TournamentType.DoubleElimination) return "Double Elimination";
+
+    return "No Match";
+  };
+  getContestTypeDescription = (type: TournamentType): string => {
+
+    if (type === TournamentType.SingleElimination) return "Teams are eliminated after a single loss";
+    if (type === TournamentType.DoubleElimination) return "Teams must lose twice to be eliminated";
+
+    return "No Match";
+  }
+
 
 }

@@ -1,0 +1,11 @@
+<div class="tournament-type-container">
+  <header>
+    <h2>Tournament Type <span class="asterisc">*</span></h2>
+  </header>
+  <div class="types-container">
+    <div class="type" [ngClass]="{'selected-type': tournamentTypeSelected === type}" *ngFor="let type of tournamentTypes" (click)="onSelectTypeTournament(type)">
+      <p class="title-tournament-type">{{tournamentServ.getContestTypeName(type)}}</p>
+      <p class="description-tournament-type">{{tournamentServ.getContestTypeDescription(type)}}</p>
+    </div>
+  </div>
+</div>

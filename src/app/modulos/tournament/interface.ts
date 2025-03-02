@@ -1,3 +1,5 @@
+import { FormControl } from "@angular/forms";
+
 export enum TournamentType {
   SingleElimination = "SingleElimination",
   DoubleElimination = "DoubleElimination"
@@ -18,6 +20,17 @@ export interface Tournament {
   users:          User[];
   teams:          Team[];
   tournamentType: TournamentType
+}
+
+export interface TournamentForm {
+  name: FormControl<string>;
+  sport: FormControl<string>;
+  tournamentType: FormControl<TournamentType>;
+  description: FormControl<string>;
+  location: FormControl<string | null>;
+  rules: FormControl<string | null>;
+  startDate: FormControl<string | null>;
+  endDate: FormControl<string | null>;
 }
 
 export const emptyTournament: Tournament = {
