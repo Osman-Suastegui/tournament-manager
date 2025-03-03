@@ -1,0 +1,60 @@
+<div class="select-teams-container">
+  <header class="header">
+    <div class="title">
+      <h2>Select teams</h2>
+      <span>Add teams to your tournament. You can invite new teams or select from existing ones.</span>
+    </div>
+    <div class="actions">action1</div>
+  </header>
+  <div class="search-container">
+    <app-input class="search-input" [control]="search" placeholder="Search teams..." />
+    <app-button (click)="addTeam()" text="New team" />
+  </div>
+
+  <section class="teams">
+    <div class="team-card-container">
+      <img src="https://i.pravatar.cc/150?u=team1" class="team-image" width="56px" height="56px"/>
+      <div class="team-info">
+        <p class="team-name">Phoenix Fire</p>
+        <span class="team-members">12 members</span>
+      </div>
+    </div>
+    <div class="team-card-container">
+      <img src="https://i.pravatar.cc/150?u=team1" class="team-image" width="56px" height="56px"/>
+      <div class="team-info">
+        <p class="team-name">Phoenix Fire</p>
+        <span class="team-members">12 members</span>
+      </div>
+    </div>
+    <div class="team-card-container">
+      <img src="https://i.pravatar.cc/150?u=team1" class="team-image" width="56px" height="56px"/>
+      <div class="team-info">
+        <p class="team-name">Phoenix Fire</p>
+        <span class="team-members">12 members</span>
+      </div>
+    </div>
+    <div class="team-card-container">
+      <img src="https://i.pravatar.cc/150?u=team1" class="team-image" width="56px" height="56px"/>
+      <div class="team-info">
+        <p class="team-name">Phoenix Fire</p>
+        <span class="team-members">12 members</span>
+        <section class="stats-container">
+          <div class="stat">
+            <span>Wins</span>
+            <p>8</p>
+          </div>
+          <div class="stat">
+            <span>Losses</span>
+            <p>2</p>
+          </div>
+          <div class="stat">
+            <span>Win Rate</span>
+            <p>80%</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+
+</div>

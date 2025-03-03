@@ -5,49 +5,17 @@
     <span class="btn-back"><mat-icon>chevron_left</mat-icon> Back</span>
     <header>
       <h1>
-        {{ isReadOnly ? createTournament.value.name : "Create tournament" }}
+        {{ isReadOnly ? basicInformation.value.name : "Create tournament" }}
       </h1>
-      <span class *ngIf="!isReadOnly"> Set up your tournament details, add teams, and customize settings</span>
+      <span *ngIf="!isReadOnly"> Set up your tournament details, add teams, and customize settings</span>
     </header>
 
-    <app-stepper class="stepper"></app-stepper>
-
-    <form [formGroup]="createTournament" (ngSubmit)="onSubmit()" class="create-tournament-form">
-      <div class="container-form-fields">
-        <!-- Name -->
-        <app-input label="Tournament Name" [placeholder]="'Enter tournament name'"
-          [control]="createTournament.controls.name" />
-        <!-- Category -->
-          <app-input label="Category" [placeholder]="'Category'" [control]="createTournament.controls.sport" type="select"
-          [options]="options" />
-      </div>
-
-      <div class="container-form-fields">
-        <!-- Description -->
-        <app-input [textTareaRows]="4" type="textTarea" label="Description" placeholder="Enter tournament desription"
-          [control]="createTournament.controls.description" />
-      </div>
-      <div class="container-form-fields">
-        <!-- start date -->
-        <app-input label="Start Date" [placeholder]="'Enter start date'" [control]="createTournament.controls.startDate"
-          type="date" />
-        <!-- end date -->
-        <app-input label="End Date" [placeholder]="'Enter end date'" [control]="createTournament.controls.endDate"
-          type="date" />
-      </div>
-      <div class="container-form-fields">
-        <!-- Location -->
-        <app-input label="Location" [placeholder]="'Enter location'" [control]="createTournament.controls.location" />
-      </div>
-
-      <div class="container-form-fields flex-column">
-        <hr>
-        <app-tournament-type-selection/>
-      </div>
-
-      <!-- SAVE BUTTON -->
-      <button class="save" type="submit" *ngIf="!isReadOnly">{{isEditing() ? "EDIT" : "SAVE"}}</button>
-    </form>
+    <app-stepper class="stepper" [(selected)]="stepperOption"></app-stepper>
+    <div class="tournament-forms">
+      <app-create-tournament-basic-information *ngIf="stepperOption === 1" [basicInformation]="basicInformation" />
+      <app-create-tournament-select-teams *ngIf="stepperOption === 2" [selectTeams]="selectTeams"/>
+      <app-button  text="continue"/>
+    </div>
   </main>
 </div>
 

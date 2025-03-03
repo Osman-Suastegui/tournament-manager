@@ -14,6 +14,10 @@ import { ButtonComponent } from "../../shared/button/button.component";
 import { StepperComponent } from './stepper/stepper.component';
 import { InputComponent } from "../../shared/input/input.component";
 import { TournamentTypeSelectionComponent } from './create-tournament/tournament-type-selection/tournament-type-selection.component';
+import { CreateTournamentBasicInformationComponent } from './create-tournament/create-tournament-basic-information/create-tournament-basic-information.component';
+import { CreateTournamentSelectTeamsComponent } from './create-tournament/create-tournament-select-teams/create-tournament-select-teams.component';
+import { CreateTournamentAdminPermissionsComponent } from './create-tournament/create-tournament-admin-permissions/create-tournament-admin-permissions.component';
+import { CreateTournamentReviewCreateComponent } from './create-tournament/create-tournament-review-create/create-tournament-review-create.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,10 @@ import { TournamentTypeSelectionComponent } from './create-tournament/tournament
     MatchesComponent,
     StepperComponent,
     TournamentTypeSelectionComponent,
+    CreateTournamentBasicInformationComponent,
+    CreateTournamentSelectTeamsComponent,
+    CreateTournamentAdminPermissionsComponent,
+    CreateTournamentReviewCreateComponent,
   ],
   imports: [
     CommonModule,

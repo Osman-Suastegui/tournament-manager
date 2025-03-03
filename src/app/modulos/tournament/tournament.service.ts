@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { AddTournamentResponse, Tournament, TournamentForm } from "./interface";
+import { AddTournamentResponse, Tournament, BasicInformationTournament, SelectTeamsTournament } from "./interface";
 import { Observable } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { TournamentType } from "./interface";
@@ -41,8 +41,8 @@ export class TournamentService {
     return this.http.get<Tournament[]>(`${url}/tournaments/getTournaments?userId=${userId}&page=${page}&size=${size}`);
   }
 
-  createTournamentForm(): FormGroup<TournamentForm> {
-    return new FormGroup<TournamentForm>({
+  createBasicInformationTournamentForm(): FormGroup<BasicInformationTournament> {
+    return new FormGroup<BasicInformationTournament>({
       name: new FormControl<string>("", {
         nonNullable: true,
         validators: [Validators.required, Validators.minLength(1)],
@@ -70,6 +70,11 @@ export class TournamentService {
       startDate: new FormControl<string | null>(null),
       endDate: new FormControl<string | null>(null),
     });
+  }
+  createSelectTeamsTournamentForm(): FormGroup<SelectTeamsTournament> {
+    return new FormGroup<SelectTeamsTournament>({
+      name: new FormControl<string>("", { nonNullable: true, validators: [Validators.required] })
+    })
   }
 
   getContestTypeName = (type: TournamentType): string => {

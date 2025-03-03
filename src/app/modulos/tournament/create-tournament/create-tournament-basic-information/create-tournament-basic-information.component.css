@@ -1,0 +1,44 @@
+.create-tournament-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container-form-fields {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.container-form-fields>* {
+  flex-grow: 1;
+  flex-basis: 0;
+  min-width: 300px;
+}
+
+.save {
+  display: block;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.save:hover {
+  background-color: #45a049;
+}
+
+@media (max-width: 576px) {
+
+  .container-form-fields {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .container-form-fields {
+    gap: 0
+  }
+}

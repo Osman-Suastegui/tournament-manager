@@ -31,6 +31,10 @@ export class TeamService {
     )
   }
 
+  getTeams(name: string) {
+     
+  }
+
   addPlayerToTeamInTournament(tournamentId: string, teamId: string, playerName: string): Observable<Player> {
     return this.http.post<Player>(`${url}/players/createPlayerInTournamentTeam`, {
       tournamentId,
@@ -57,7 +61,6 @@ export class TeamService {
     });
   }
 
-
   createAddPlayerToTeamForm(): FormGroup<AddPlayerToTeamForm> {
     return new FormGroup<AddPlayerToTeamForm>({
       name: new FormControl("", { validators: [Validators.required], nonNullable: true }),
@@ -65,5 +68,6 @@ export class TeamService {
       position: new FormControl("", { nonNullable: true }),
     });
   }
+
 
 }

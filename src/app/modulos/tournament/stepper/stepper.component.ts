@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { EventEmitter, Input, Output } from '@angular/core';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./stepper.component.css']
 })
 export class StepperComponent {
-  @Input() selected: 1 | 2 | 3 | 4 = 1;
+
+  @Input() selected: number = 1;
+  @Output() selectedChange = new EventEmitter<number>();
+  onSelectOption(option: number): void {
+    this.selected = option;
+    this.selectedChange.emit(option);
+  }
 }
