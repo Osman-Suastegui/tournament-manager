@@ -16,8 +16,8 @@
 }
 
 .header .title h2 {
-  margin-bottom: 0;
-  font-weight: 500;
+  margin-bottom: 0px !important;
+  /* font-weight: 500; */
 }
 
 span {
@@ -31,10 +31,11 @@ span {
   align-items: center;
   gap: 10px;
 }
+
 .teams{
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Max 3 columns */
+  gap: 1rem; /* Optional spacing */
 }
 .search-container .search-input {
   flex-grow: 1;
@@ -43,7 +44,6 @@ span {
   padding: 20px;
   border: 1px solid #e2e8f0;
   display: flex;
-  min-width: 300px;
   border-radius: 10px;
   gap: 10px;
   align-items: center;

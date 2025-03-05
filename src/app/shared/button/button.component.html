@@ -1,7 +1,8 @@
 <button
 [type]="type"
-class="default-styles"
+class="default-styles d-flex align-items-center "
 [ngClass]="{ 'full-width': isFullWidth }"
 >
+<mat-icon *ngIf="matIcon" class="mat-icon">{{ matIcon }}</mat-icon>
   {{ text }}
 </button>

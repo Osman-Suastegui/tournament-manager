@@ -4,11 +4,10 @@
       <h2>Select teams</h2>
       <span>Add teams to your tournament. You can invite new teams or select from existing ones.</span>
     </div>
-    <div class="actions">action1</div>
   </header>
   <div class="search-container">
     <app-input class="search-input" [control]="search" placeholder="Search teams..." />
-    <app-button (click)="addTeam()" text="New team" />
+    <app-button matIcon="add" (click)="addTeam()" text="New Team" />
   </div>
 
   <section class="teams">

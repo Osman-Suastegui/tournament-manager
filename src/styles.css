@@ -24,6 +24,14 @@ mat-icon {
 .mat-expansion-indicator{
     display: flex;
 }
+.mat-mdc-dialog-container .mdc-dialog__content{
+  color: #000000  !important; /* Color del texto del contenido */
+}
+
+h1,h2,h3,h4,h5{
+  color: #000000; /* Color del texto del encabezado */
+}
+
 
 /* add team dialog */
 .add-team-dialog {

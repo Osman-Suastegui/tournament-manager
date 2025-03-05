@@ -1,6 +1,6 @@
 .default-styles {
-  background-color: #F26419;
-  color: #080708;
+  background-color: hsl(210 40% 25%);
+  color: hsl(0deg 0% 100%);
   padding: 10px 20px;
   border: none;
   cursor: pointer;
@@ -12,4 +12,10 @@
 }
 .full-width {
   width: 100%;
+}
+.mat-icon{
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  margin-right: 6px;
 }

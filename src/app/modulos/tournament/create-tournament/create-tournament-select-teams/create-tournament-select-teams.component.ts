@@ -16,7 +16,9 @@ export class CreateTournamentSelectTeamsComponent {
   constructor(public dialog: MatDialog) {}
 
   addTeam() {
-    this.dialog.open(AddTeamComponent)
+    this.dialog.open(AddTeamComponent,{
+      autoFocus:false
+    })
   }
 
 }

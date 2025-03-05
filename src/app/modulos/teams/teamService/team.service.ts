@@ -32,7 +32,7 @@ export class TeamService {
   }
 
   getTeams(name: string) {
-     
+
   }
 
   addPlayerToTeamInTournament(tournamentId: string, teamId: string, playerName: string): Observable<Player> {
@@ -57,7 +57,9 @@ export class TeamService {
   createAddTeamForm(): FormGroup<AddTeamForm> {
     return new FormGroup<AddTeamForm>({
       name: new FormControl("", { validators: [Validators.required], nonNullable: true }),
+
       email: new FormControl("", { validators: [Validators.required], nonNullable: true }),
+      logo: new FormControl(""),
     });
   }
 

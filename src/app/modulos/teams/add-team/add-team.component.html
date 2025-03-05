@@ -1,36 +1,22 @@
-<mat-dialog-content >
-  <header>
-    <h1>Team</h1>
-    <mat-icon (click)="closeModal()" class="close-icon">close</mat-icon>
+<mat-dialog-content>
+  <header class="header">
+    <div class="title">
+      <h2>Create New Team </h2>
+      <mat-icon class="close-icon" mat-dialog-close>close</mat-icon>
+    </div>
+    <span>Fill in the details to create a new team for your tournament.</span>
   </header>
 
   <form [formGroup]="addTeamForm" (ngSubmit)="addTeam()">
 
-    <div class="form-field">
-      <label for="name">Name:</label>
-      <div class="input-wrapper">
-        <input  type="text" id="name" formControlName="name" placeholder="Enter  name" />
-        <!-- <div *ngIf="name.touched && name.errors" class="errors" id="name-errors">
-          <small *ngIf="name.touched && name.errors?.['required']">name is required.</small>
-          <small *ngIf="name.touched && name.errors?.['minlength']">name must be at least 1 character long.</small>
-        </div> -->
-      </div>
+    <app-input [control]="addTeamForm.controls.name" placeholder="Enter name" label="Team Name"></app-input>
+    <app-input [control]="addTeamForm.controls.logo" placeholder="https://example.com/logo.png"
+      label="Team Logo URL"></app-input>
+
+    <div class="buttons mt-4 d-flex justify-content-end gap-2">
+      <app-button type="submit" (click)="addTeam()" text="Cancel" />
+      <app-button type="submit" (click)="addTeam()" text="Create Team" />
     </div>
-
-
-    <div class="form-field">
-      <label for="name">Email:</label>
-      <div class="input-wrapper">
-        <input  type="text" id="name" formControlName="email" placeholder="Enter email" />
-        <!-- <div *ngIf="name.touched && name.errors" class="errors" id="name-errors">
-          <small *ngIf="name.touched && name.errors?.['required']">name is required.</small>
-          <small *ngIf="name.touched && name.errors?.['minlength']">name must be at least 1 character long.</small>
-        </div> -->
-      </div>
-    </div>
-
-    <span class="mensaje-estilo" *ngIf="mensaje">{{ mensaje }}</span> <!-- Muestra el mensaje si existe -->
-    <button type="submit">Guardar</button>
   </form>
 
 </mat-dialog-content>
