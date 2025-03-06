@@ -15,4 +15,5 @@ export class ButtonComponent {
   @Input() customClass: string = '';
   @Input() isFullWidth: boolean = false;
   @Input() matIcon: string = '';
+  @Input() isDisabled:boolean = false;
 }

@@ -38,10 +38,10 @@
 
 .selected-step{
   background-color: #f8fafc;
-  color:#888d95;
+  color: black;
 }
 .selected-step .stepper-container-number{
   background-color: #8b9aa9;
-  color: #e9edf2;
+  color: #ecf0f4;
 
 }

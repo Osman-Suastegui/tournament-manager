@@ -35,7 +35,6 @@ span {
 mat-dialog-content form {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
   font-size: 0.9rem;
   /* Aumenta el espacio inferior del formulario */
 }

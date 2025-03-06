@@ -22,7 +22,7 @@
 
 span {
   font-size: 14px;
-  color: #949faf;
+  color: #64748b;
   font-weight: 400;
 }
 
@@ -34,7 +34,7 @@ span {
 
 .teams{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Max 3 columns */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Max 3 columns */
   gap: 1rem; /* Optional spacing */
 }
 .search-container .search-input {
@@ -70,4 +70,18 @@ span {
 }
 p{
   margin: 0;
+}
+.selected-teams{
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #f9fbfd;
+  border-radius: 10px;
+}
+.selected-team-tag{
+  background-color: #f7f7f5;
+  padding: 5px 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

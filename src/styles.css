@@ -32,6 +32,23 @@ h1,h2,h3,h4,h5{
   color: #000000; /* Color del texto del encabezado */
 }
 
+.cancel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 8px;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 9px;
+  white-space: nowrap;
+  min-width: 80px;
+  font-size: 0.9rem;
+  background-color: #f7f7f5;
+}
+.cancel-btn:hover{
+  background-color: #eaf0f6;
+}
 
 /* add team dialog */
 .add-team-dialog {
@@ -49,6 +66,9 @@ h1,h2,h3,h4,h5{
     max-width: 90% !important;
     width: 100%;
   }
+}
+.custom-dark-backdrop {
+  background-color: rgba(0, 0, 0, 0.80) !important; /* Darker overlay */
 }
 
 

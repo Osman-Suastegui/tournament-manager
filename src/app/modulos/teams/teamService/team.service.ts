@@ -12,13 +12,14 @@ import { url } from 'src/enviroments/environment.local';
 })
 export class TeamService {
 
-  private newTeamSubject = new Subject<Team>();
+  public newTeamSubject = new Subject<Team>();
   private newPlayer = new Subject<Player>();
 
   public newTeam$ = this.newTeamSubject.asObservable();
   public newPlayer$ = this.newPlayer.asObservable();
 
   constructor(private http: HttpClient) { }
+
 
   // THIS ENDPOINT ADD A TEAM IN A TOURNAMENT
   addTeam(team: Omit<Team, 'id'>, tournamentId: string, createdById: string): Observable<Team> {
@@ -58,7 +59,7 @@ export class TeamService {
     return new FormGroup<AddTeamForm>({
       name: new FormControl("", { validators: [Validators.required], nonNullable: true }),
 
-      email: new FormControl("", { validators: [Validators.required], nonNullable: true }),
+      // email: new FormControl("", { validators: [Validators.required], nonNullable: true }),
       logo: new FormControl(""),
     });
   }

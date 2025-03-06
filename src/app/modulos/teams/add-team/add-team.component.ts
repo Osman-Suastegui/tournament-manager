@@ -1,10 +1,8 @@
-import { Component, Inject, Input } from "@angular/core";
+import { Component, Inject } from "@angular/core";
 import { OnInit } from "@angular/core";
-import { TemporadasService } from "../../admin-ligas/adminLigasService/temporadas.service";
 import { TeamService } from "../teamService/team.service";
-import { ActivatedRoute } from "@angular/router";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 import { AddTeamForm } from "../interfaces";
 import { Team } from "../../tournament/interface";
 import { authService } from "src/app/services/authenticateService/auth.service";
@@ -15,57 +13,32 @@ import { authService } from "src/app/services/authenticateService/auth.service";
   templateUrl: "./add-team.component.html",
   styleUrls: ["./add-team.component.css"]
 })
-export class AddTeamComponent implements OnInit {
+export class AddTeamComponent {
 
   constructor(
     private teamServ: TeamService,
-    private authServ: authService,
     @Inject(MAT_DIALOG_DATA) public data: { tournamentId: string },
-    private dialogRef: MatDialogRef<AddTeamComponent>
   ) { }
 
-  equipos: string[] = [];
-  selectedEquipo: string = "";
-  public addTeamForm: FormGroup<AddTeamForm> = this.teamServ.createAddTeamForm()
-
-
-  ngOnInit(): void {
-
-    this.addTeamForm.valueChanges.subscribe({
-      next: (value) => {
-        if (this.addTeamForm.valid) {
-          console.log("form is valid")
-        }
-      }
-    })
-
-    // this.obtenerEquiposSinTemporada(this.temporadaId);
-
-    // this.tempService.onNuevoEquipoAsignado().subscribe({
-    //   next: () => {
-    //     this.equipos = [];
-    //     this.obtenerEquiposSinTemporada(this.temporadaId);
-    //   }
-    // });
-
-  }
+  public addTeamForm: FormGroup<AddTeamForm> = this.teamServ.createAddTeamForm();
 
   addTeam(): void {
-    const teamToAdd: Team = this.mapAddTeamFormToTeam(this.addTeamForm)
-    this.teamServ.addTeam(teamToAdd, this.data.tournamentId, this.authServ.getUserId()).subscribe({
-      next: (res) => console.log("res", res)
-    })
-    console.log(this.addTeamForm.value)
+    if(this.addTeamForm.invalid) return;
+    const teamToAdd: Team = this.mapAddTeamFormToTeam(this.addTeamForm);
+    this.teamServ.newTeamSubject.next(teamToAdd);
+    this.addTeamForm.reset();
+    console.log(this.addTeamForm.value);
   }
 
   mapAddTeamFormToTeam(addTeamForm: FormGroup<AddTeamForm>): Team {
-    const { name, email } = addTeamForm.value
+    const { name } = addTeamForm.value;
     const team: Team = {
       id: "",
       name: name ?? "",
-    }
-    return team
+    };
+    return team;
   }
+
   // agregarEquipoTemp(tempId: number, nombreEquipo: string) {
 
   //   this.tempService.asignarEquipoATemporada(tempId, nombreEquipo).subscribe({

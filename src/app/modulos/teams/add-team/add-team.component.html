@@ -14,8 +14,8 @@
       label="Team Logo URL"></app-input>
 
     <div class="buttons mt-4 d-flex justify-content-end gap-2">
-      <app-button type="submit" (click)="addTeam()" text="Cancel" />
-      <app-button type="submit" (click)="addTeam()" text="Create Team" />
+      <button type="button" class="cancel-btn" mat-dialog-close>Cancel</button>
+      <app-button  [isDisabled]="addTeamForm.invalid"  type="submit" (click)="addTeam()" text="Create Team" />
     </div>
   </form>
 
