@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { AddTournamentResponse, Tournament, BasicInformationTournament, SelectTeamsTournament } from "./interface";
+import { AddTournamentResponse, Tournament, BasicInformationTournament, SelectTeamsTournament, Team } from "./interface";
 import { Observable } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { TournamentType } from "./interface";
@@ -73,7 +73,9 @@ export class TournamentService {
   }
   createSelectTeamsTournamentForm(): FormGroup<SelectTeamsTournament> {
     return new FormGroup<SelectTeamsTournament>({
-      name: new FormControl<string>("", { nonNullable: true, validators: [Validators.required] })
+      teams: new FormControl<Team[]>([],{
+        nonNullable: true,
+      })
     })
   }
 

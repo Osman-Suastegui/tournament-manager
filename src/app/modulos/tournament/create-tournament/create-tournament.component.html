@@ -14,7 +14,14 @@
     <div class="tournament-forms">
       <app-create-tournament-basic-information *ngIf="stepperOption === 1" [basicInformation]="basicInformation" />
       <app-create-tournament-select-teams *ngIf="stepperOption === 2" [selectTeams]="selectTeams"/>
-      <app-button class="btn-continue" text="continue"/>
+
+      <div class="buttons d-flex justify-content-between mt-5">
+        <button type="button" class="cancel-btn" (click)="back()">
+        <mat-icon class="close-icon d-flex align-items">chevron_left</mat-icon>
+          Back
+        </button>
+        <app-button  (click)="continue()" text="continue"/>
+      </div>
     </div>
   </main>
 </div>

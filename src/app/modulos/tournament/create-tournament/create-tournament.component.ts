@@ -61,11 +61,29 @@ export class CreateTournamentComponent implements OnInit {
     this.basicInformation.patchValue(this.tournament);
   }
 
-  onSubmit(): void {
-    if (this.basicInformation.invalid) {
+  back(){
+    if(this.stepperOption === 1) return;
+    this.stepperOption--;
+  }
+
+  continue(){
+    // Basic information Component step 1
+    if(this.stepperOption === 1 && this.basicInformation.invalid){
       this.basicInformation.markAllAsTouched();
       return;
     }
+    // Select teams Component step 2
+    if(this.stepperOption === 2 && this.selectTeams.invalid){
+      this.selectTeams.markAllAsTouched();
+      return;
+    }
+
+    this.stepperOption++;
+
+  }
+
+  onSubmit(): void {
+
     console.log("New tournament:");
 
     const newTournament: Tournament = this.basicInformation.value as Tournament

@@ -78,10 +78,20 @@ p{
   border-radius: 10px;
 }
 .selected-team-tag{
-  background-color: #f7f7f5;
+  width: max-content;
+  min-width: 80px;
+  background-color: #ffffff;
   padding: 5px 10px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   gap: 5px;
+  justify-content: space-between;
 }
+
+.tags-container{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+

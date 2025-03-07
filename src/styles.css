@@ -44,7 +44,7 @@ h1,h2,h3,h4,h5{
   white-space: nowrap;
   min-width: 80px;
   font-size: 0.9rem;
-  background-color: #f7f7f5;
+  background-color: #fff;
 }
 .cancel-btn:hover{
   background-color: #eaf0f6;
@@ -52,8 +52,7 @@ h1,h2,h3,h4,h5{
 
 /* add team dialog */
 .add-team-dialog {
-  width: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
 @media screen and (max-width: 1025px) {
@@ -70,5 +69,16 @@ h1,h2,h3,h4,h5{
 .custom-dark-backdrop {
   background-color: rgba(0, 0, 0, 0.80) !important; /* Darker overlay */
 }
+
+.close-icon {
+  display: flex !important;
+  align-items: center;
+  cursor: pointer;
+  color: #020817;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
 
 

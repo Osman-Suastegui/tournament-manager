@@ -11,31 +11,10 @@
   </div>
 
   <section class="teams">
-    <div class="team-card-container">
+    <div class="team-card-container" *ngFor="let team of selectTeams.value.teams">
       <img src="https://i.pravatar.cc/150?u=team1" class="team-image" width="56px" height="56px" />
       <div class="team-info">
-        <p class="team-name">Phoenix Fire</p>
-        <span class="team-members">12 members</span>
-      </div>
-    </div>
-    <div class="team-card-container">
-      <img src="https://i.pravatar.cc/150?u=team1" class="team-image" width="56px" height="56px" />
-      <div class="team-info">
-        <p class="team-name">Phoenix Fire</p>
-        <span class="team-members">12 members</span>
-      </div>
-    </div>
-    <div class="team-card-container">
-      <img src="https://i.pravatar.cc/150?u=team1" class="team-image" width="56px" height="56px" />
-      <div class="team-info">
-        <p class="team-name">Phoenix Fire</p>
-        <span class="team-members">12 members</span>
-      </div>
-    </div>
-    <div class="team-card-container">
-      <img src="https://i.pravatar.cc/150?u=team1" class="team-image" width="56px" height="56px" />
-      <div class="team-info">
-        <p class="team-name">Phoenix Fire</p>
+        <p class="team-name">{{team.name}}</p>
         <span class="team-members">12 members</span>
         <section class="stats-container">
           <div class="stat">
@@ -60,10 +39,13 @@
       <mat-icon>people_alt</mat-icon>
       <h3>Selected Teams</h3>
     </header>
-    <span *ngIf="teamsSelected.length === 0" >No teams selected. Please select at least 2 teams to continue.</span>
-    <div class="selected-team-tag" *ngFor="let team of teamsSelected">
-      <span>{{ team.name }}</span>
-      <mat-icon (click)="removeTeam(team)">close</mat-icon>
+    <span *ngIf="selectTeams.value.teams?.length === 0">No teams selected. Please select at least 2 teams to
+      continue.</span>
+    <div class="tags-container">
+      <div class="selected-team-tag" *ngFor="let team of selectTeams.value.teams">
+        <p>{{ team.name }}</p>
+        <mat-icon class="close-icon" (click)="removeTeam(team)">close</mat-icon>
+      </div>
     </div>
   </div>
 

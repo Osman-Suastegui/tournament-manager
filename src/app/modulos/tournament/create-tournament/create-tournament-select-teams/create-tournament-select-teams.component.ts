@@ -13,13 +13,12 @@ import { TeamService } from "src/app/modulos/teams/teamService/team.service";
 export class CreateTournamentSelectTeamsComponent implements OnInit {
   @Input() selectTeams!: FormGroup<SelectTeamsTournament>;
   search: FormControl<string | null> = new FormControl("");
-  teamsSelected: Team[] = [];
 
   constructor(public dialog: MatDialog, private teamServ: TeamService) { }
 
   ngOnInit(): void {
     this.teamServ.newTeam$.subscribe((newTeam: Team) => {
-      this.teamsSelected.push(newTeam);
+      this.selectTeams.value.teams?.push(newTeam);
     }
     );
   }
@@ -27,16 +26,18 @@ export class CreateTournamentSelectTeamsComponent implements OnInit {
   addTeam() {
     this.dialog.open(AddTeamComponent, {
       autoFocus: false,
+      panelClass: "add-team-dialog",
       backdropClass: "custom-dark-backdrop"
-
     });
   }
 
   removeTeam(team: Team) {
-    this.teamsSelected = this.teamsSelected.filter(t => {
-      if(team.id) return t.id !== team.id;
+
+    this.selectTeams.get("teams")?.setValue(this.selectTeams.value.teams?.filter(t => {
+      if (team.id) return t.id !== team.id;
       return t.name !== team.name;
-    });
+    }) || []);
+
   }
 
 }

@@ -34,7 +34,7 @@ export interface BasicInformationTournament {
 }
 
 export interface SelectTeamsTournament {
-  name: FormControl<string>;
+  teams: FormControl<Team[]>;
 }
 
 export const emptyTournament: Tournament = {
