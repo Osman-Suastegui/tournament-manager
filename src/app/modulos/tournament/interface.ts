@@ -8,6 +8,7 @@ export enum TournamentType {
 export interface Team {
   id:   string;
   name: string;
+  leaderEmail?: string;
 }
 
 export interface Tournament {
@@ -35,6 +36,22 @@ export interface BasicInformationTournament {
 
 export interface SelectTeamsTournament {
   teams: FormControl<Team[]>;
+}
+
+
+export interface BasicInformationTournament {
+  name: FormControl<string>;
+  sport: FormControl<string>;
+  tournamentType: FormControl<TournamentType>;
+  description: FormControl<string>;
+  location: FormControl<string | null>;
+  rules: FormControl<string | null>;
+  startDate: FormControl<string | null>;
+  endDate: FormControl<string | null>;
+}
+
+export interface AdminPermissions {
+  admins: FormControl<string[]>;
 }
 
 export const emptyTournament: Tournament = {

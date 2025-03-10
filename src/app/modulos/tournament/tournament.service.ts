@@ -1,11 +1,12 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { AddTournamentResponse, Tournament, BasicInformationTournament, SelectTeamsTournament, Team } from "./interface";
+import { AddTournamentResponse, Tournament, BasicInformationTournament, SelectTeamsTournament, Team, AdminPermissions, User } from "./interface";
 import { Observable } from "rxjs";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { TournamentType } from "./interface";
 import { url } from "src/enviroments/environment.local";
 import { TokenService } from "src/app/services/tokenService/token.service";
+import { minimumTeamsValidator } from "src/app/shared/validators";
 @Injectable({
   providedIn: "root"
 })
@@ -71,12 +72,23 @@ export class TournamentService {
       endDate: new FormControl<string | null>(null),
     });
   }
+
   createSelectTeamsTournamentForm(): FormGroup<SelectTeamsTournament> {
     return new FormGroup<SelectTeamsTournament>({
-      teams: new FormControl<Team[]>([],{
-        nonNullable: true,
-      })
+      teams: new FormControl<Team[]>([{name:"test",id:"23"}], {
+      nonNullable: true,
+        validators: [minimumTeamsValidator(2)],
+      }),
     })
+  }
+
+  createAdminPermissionsForm(): FormGroup<AdminPermissions> {
+    return new FormGroup<AdminPermissions>({
+      admins: new FormControl<string[]>([], {
+        nonNullable: true,
+        validators: [Validators.required,Validators.email],
+      }),
+    });
   }
 
   getContestTypeName = (type: TournamentType): string => {

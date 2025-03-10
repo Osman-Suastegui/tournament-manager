@@ -1,1 +1,37 @@
-<p>create-tournament-admin-permissions works!</p>
+<div class="admin-permissions">
+  <form [formGroup]="adminPermissions" class="create-admin-form">
+    <header>
+      <h2>Admin permissions</h2>
+      <span class="text-gray">Invite other administrators to help you manage this tournament. They will have access to
+        modify matches,
+        teams, and settings.
+      </span>
+    </header>
+
+    <div class="form-inputs">
+      <!-- Name -->
+      <app-input class="input-admin-email" [placeholder]="'Enter admin email'" [control]="adminEmail" />
+      <app-button (click)="addAdmin()" text="Invite" />
+    </div>
+
+    <app-tags [(tags)]="admins" [title]="'Selected admins'" [minTags]="0" [displayTag]="displayTag" />
+    <hr>
+  </form>
+
+  <form [formGroup]="selectTeams" class="create-admin-form">
+    <header>
+      <h2> Team Leaders</h2>
+      <span class="text-gray">Assign team leaders who can manage their own team's players. They will not have general
+        admin privileges.
+      </span>
+    </header>
+
+    <div class="team-leaders-container" *ngFor="let team of selectTeams.value.teams; let i = index">
+        <h2>{{team.name}}</h2>
+
+        <app-input type="email" placeholder="Enter team leader email" />
+    </div>
+
+  </form>
+
+</div>

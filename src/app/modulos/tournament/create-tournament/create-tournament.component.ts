@@ -1,4 +1,4 @@
-import { AddTournamentResponse, BasicInformationTournament, SelectTeamsTournament } from "./../interface";
+import { AddTournamentResponse, AdminPermissions, BasicInformationTournament, SelectTeamsTournament } from "./../interface";
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import {  Tournament, TournamentType } from "../interface";
@@ -22,9 +22,10 @@ export class CreateTournamentComponent implements OnInit {
   tournamentTypes = Object.values(TournamentType); // Extract enum values
   public basicInformation: FormGroup<BasicInformationTournament> = this.tournamentServ.createBasicInformationTournamentForm()
   public selectTeams: FormGroup<SelectTeamsTournament> = this.tournamentServ.createSelectTeamsTournamentForm()
+  public adminPermissions: FormGroup<AdminPermissions> = this.tournamentServ.createAdminPermissionsForm()
 
   public isReadOnly: boolean = false;
-  public stepperOption: number = 2;
+  public stepperOption: number = 3;
   // PRIVATE
 
   constructor(
@@ -75,6 +76,11 @@ export class CreateTournamentComponent implements OnInit {
     // Select teams Component step 2
     if(this.stepperOption === 2 && this.selectTeams.invalid){
       this.selectTeams.markAllAsTouched();
+      return;
+    }
+    // Admin permissions Component step 3
+    if(this.stepperOption === 3 && this.adminPermissions.invalid){
+      this.adminPermissions.markAllAsTouched();
       return;
     }
 

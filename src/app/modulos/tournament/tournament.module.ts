@@ -18,6 +18,7 @@ import { CreateTournamentBasicInformationComponent } from './create-tournament/c
 import { CreateTournamentSelectTeamsComponent } from './create-tournament/create-tournament-select-teams/create-tournament-select-teams.component';
 import { CreateTournamentAdminPermissionsComponent } from './create-tournament/create-tournament-admin-permissions/create-tournament-admin-permissions.component';
 import { CreateTournamentReviewCreateComponent } from './create-tournament/create-tournament-review-create/create-tournament-review-create.component';
+import { TagsComponent } from "src/app/shared/tags/tags.component";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CreateTournamentReviewCreateComponent } from './create-tournament/creat
     DirectiveModule,
     TreeDiagramsModule,
     ButtonComponent,
-    InputComponent
+    InputComponent,
+    TagsComponent
 ],
   exports:[
     CreateTournamentComponent
