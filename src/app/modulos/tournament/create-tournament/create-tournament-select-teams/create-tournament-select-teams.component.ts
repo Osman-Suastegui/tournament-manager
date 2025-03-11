@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
 import { SelectTeamsTournament, Team } from "../../interface";
 import { MatDialog } from "@angular/material/dialog";
 import { AddTeamComponent } from "src/app/modulos/teams/add-team/add-team.component";
@@ -12,7 +12,11 @@ import { Subscription } from "rxjs";
   styleUrls: ["./create-tournament-select-teams.component.css"]
 })
 export class CreateTournamentSelectTeamsComponent implements OnInit, OnDestroy {
-  
+
+  // export interface SelectTeamsTournament {
+  //   teams: FormArray<FormControl<Team>>;
+  // }
+
   @Input() selectTeams!: FormGroup<SelectTeamsTournament>;
   search: FormControl<string | null> = new FormControl("");
   teams: Team[] = [];
@@ -27,10 +31,14 @@ export class CreateTournamentSelectTeamsComponent implements OnInit, OnDestroy {
 
   listenNewTeams() {
     this.teamSubscription = this.teamServ.newTeam$.subscribe((newTeam: Team) => {
-      this.selectTeams.patchValue({
-        teams: [...(this.selectTeams.value.teams || []), newTeam]
-      });
-      this.teams = this.selectTeams.value.teams || [];
+
+      (this.selectTeams.get("teams") as FormArray).push(new FormGroup({
+        id: new FormControl(newTeam.id),
+        name: new FormControl(newTeam.name),
+        leaderEmail: new FormControl(newTeam.leaderEmail,[Validators.email])
+      }));
+
+      this.teams = this.selectTeams.value.teams as Team[]
     }
     );
   }

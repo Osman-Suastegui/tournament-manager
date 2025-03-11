@@ -35,6 +35,7 @@ export class AddTeamComponent {
     const team: Team = {
       id: "",
       name: name ?? "",
+      leaderEmail: "",
     };
     return team;
   }

@@ -26,12 +26,11 @@
       </span>
     </header>
 
-    <div class="team-leaders-container" *ngFor="let team of selectTeams.value.teams; let i = index">
-        <h2>{{team.name}}</h2>
+    <div class="team-leaders-container" *ngFor="let team of selectTeams.controls.teams.controls; let i = index">
+      <h2>{{ team.get('name')?.value }}</h2>
 
-        <app-input type="email" placeholder="Enter team leader email" />
+      <app-input [control]="getLeaderEmailControl(team)" type="text" placeholder="Enter team leader email" />
     </div>
-
   </form>
 
 </div>

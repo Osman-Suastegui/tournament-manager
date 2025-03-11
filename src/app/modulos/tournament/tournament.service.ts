@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { AddTournamentResponse, Tournament, BasicInformationTournament, SelectTeamsTournament, Team, AdminPermissions, User } from "./interface";
+import { AddTournamentResponse, Tournament, BasicInformationTournament, SelectTeamsTournament, Team, AdminPermissions, User, TeamForm } from "./interface";
 import { Observable } from "rxjs";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
 import { TournamentType } from "./interface";
 import { url } from "src/enviroments/environment.local";
 import { TokenService } from "src/app/services/tokenService/token.service";
@@ -75,11 +75,10 @@ export class TournamentService {
 
   createSelectTeamsTournamentForm(): FormGroup<SelectTeamsTournament> {
     return new FormGroup<SelectTeamsTournament>({
-      teams: new FormControl<Team[]>([{name:"test",id:"23"}], {
-      nonNullable: true,
+      teams: new FormArray<FormGroup<TeamForm>>([], { // Validators should be part of the FormArray options object
         validators: [minimumTeamsValidator(2)],
       }),
-    })
+    });
   }
 
   createAdminPermissionsForm(): FormGroup<AdminPermissions> {

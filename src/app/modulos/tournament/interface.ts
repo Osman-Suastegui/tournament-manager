@@ -1,4 +1,5 @@
-import { Form, FormControl } from "@angular/forms";
+import { Form, FormControl, FormGroup } from "@angular/forms";
+import { FormArray } from "@angular/forms";
 
 export enum TournamentType {
   SingleElimination = "SingleElimination",
@@ -9,6 +10,12 @@ export interface Team {
   id:   string;
   name: string;
   leaderEmail?: string;
+}
+
+export interface TeamForm {
+  id:   FormControl<string>;
+  name: FormControl<string>;
+  leaderEmail?: FormControl<string | null>;
 }
 
 export interface Tournament {
@@ -35,7 +42,7 @@ export interface BasicInformationTournament {
 }
 
 export interface SelectTeamsTournament {
-  teams: FormControl<Team[]>;
+  teams: FormArray<FormGroup<TeamForm>>;
 }
 
 

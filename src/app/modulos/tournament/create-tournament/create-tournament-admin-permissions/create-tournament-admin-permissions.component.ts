@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AdminPermissions, SelectTeamsTournament } from "../../interface";
+import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
+import { AdminPermissions, SelectTeamsTournament, Team } from "../../interface";
 import { TournamentService } from "../../tournament.service";
 
 @Component({
@@ -33,6 +33,11 @@ export class CreateTournamentAdminPermissionsComponent {
 
     this.admins = [...this.admins, this.adminEmail.value as string];
     this.adminEmail.setValue("");
+  }
+
+  getLeaderEmailControl(t:any): FormControl<any> {
+    return t.get("leaderEmail") as FormControl<any>;
+
   }
 
   displayTag(admin: string) {
