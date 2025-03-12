@@ -15,6 +15,7 @@
       <app-create-tournament-basic-information *ngIf="stepperOption === 1" [basicInformation]="basicInformation" />
       <app-create-tournament-select-teams *ngIf="stepperOption === 2" [selectTeams]="selectTeams"/>
       <app-create-tournament-admin-permissions *ngIf="stepperOption === 3" [adminPermissions]="adminPermissions" [selectTeams]="selectTeams"/>
+      <app-create-tournament-review-create *ngIf="stepperOption === 4" [adminPermissions]="adminPermissions" [selectTeams]="selectTeams" />
 
       <div class="buttons d-flex justify-content-between mt-5">
         <button type="button" class="cancel-btn" (click)="back()">

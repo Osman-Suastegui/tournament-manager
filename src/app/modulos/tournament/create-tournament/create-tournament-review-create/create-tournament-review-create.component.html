@@ -1,1 +1,69 @@
-<p>create-tournament-review-create works!</p>
+<div class="tournament-container">
+  <h2>Tournament Details</h2>
+  <span class="tournament-type text-gray">{{tournamentType}}</span>
+  <div class="tournament-details mt-4">
+
+    <div class="tournament-section">
+      <p class="section-title text-gray">Category</p>
+      <p class="section-content">{{basicInformation.value.sport}}</p>
+    </div>
+
+    <div class="tournament-section">
+      <p class="section-title text-gray">Location</p>
+      <p class="section-content">{{basicInformation.value.location || "Not specified"}}</p>
+    </div>
+
+    <div class="tournament-section">
+      <p class="section-title text-gray">Start Date</p>
+      <p class="section-content">{{basicInformation.value.startDate || "Not specified"}}</p>
+    </div>
+
+    <div class="tournament-section">
+      <p class="section-title text-gray">End Date</p>
+      <p class="section-content">{{basicInformation.value.endDate || "Not specified"}}</p>
+    </div>
+
+    <div class="tournament-section">
+      <p class="section-title text-gray">Match duration</p>
+      <p class="section-content">60 min</p>
+    </div>
+  </div>
+  <hr>
+
+  <section class="tournament-description-container">
+    <h3 class="tournament-description text-gray">Description</h3>
+    <p class="section-content">{{basicInformation.value.description || "No description provided"}}</p>
+  </section>
+
+  <section class="tournament-teams-container mt-3">
+    <h3 class="tournament-description text-gray">Teams ({{selectTeams.value.teams?.length}})</h3>
+    <div class="teams-list mt-3">
+      <p class="tag" *ngFor="let team of selectTeams.value.teams">{{team.name}}</p>
+      <p *ngIf="!adminPermissions.value.admins?.length" class="section-content">No teams assigned</p>
+
+    </div>
+  </section>
+
+  <hr>
+  <section class="tournament-administrators-container">
+    <h3 class="tournament-description text-gray">Administrators ({{adminPermissions.value.admins?.length}})</h3>
+    <div class="teams-list mt-2">
+      <p *ngIf="!adminPermissions.value.admins?.length" class="section-content">No administrators assigned</p>
+      <p class="tag" *ngFor="let admin of adminPermissions.value.admins">{{admin}}</p>
+    </div>
+  </section>
+
+  <section class="tournament-team-leaders-container mt-3">
+    <h3 class="tournament-description text-gray">Team leaders</h3>
+    <div class="teams-list mt-3">
+      <ng-container *ngFor="let team of selectTeams.value.teams">
+        <p *ngIf="team.leaderEmail">
+          <strong>{{team.name}}</strong> : {{team.leaderEmail}}
+        </p>
+      </ng-container>
+      <p *ngIf="!selectTeams.value.teams?.length" class="section-content">No team leaders assigned</p>
+    </div>
+
+  </section>
+
+</div>

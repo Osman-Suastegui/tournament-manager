@@ -25,7 +25,7 @@ export class CreateTournamentComponent implements OnInit {
   public adminPermissions: FormGroup<AdminPermissions> = this.tournamentServ.createAdminPermissionsForm()
 
   public isReadOnly: boolean = false;
-  public stepperOption: number = 3;
+  public stepperOption: number = 4;
   // PRIVATE
 
   constructor(
@@ -80,6 +80,8 @@ export class CreateTournamentComponent implements OnInit {
     }
     // Admin permissions Component step 3
     if(this.stepperOption === 3 && this.adminPermissions.invalid){
+      // print whats invalid
+      console.log(this.adminPermissions.errors);
       this.adminPermissions.markAllAsTouched();
       return;
     }

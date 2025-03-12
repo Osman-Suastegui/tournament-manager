@@ -85,13 +85,14 @@ export class TournamentService {
     return new FormGroup<AdminPermissions>({
       admins: new FormControl<string[]>([], {
         nonNullable: true,
-        validators: [Validators.required,Validators.email],
+        validators: [Validators.email],
       }),
     });
   }
 
-  getContestTypeName = (type: TournamentType): string => {
+  getContestTypeName = (type: TournamentType | null | undefined): string => {
 
+    if(!type) return "Not specified";
     if (type === TournamentType.SingleElimination) return "Single Elimination";
     if (type === TournamentType.DoubleElimination) return "Double Elimination";
 
