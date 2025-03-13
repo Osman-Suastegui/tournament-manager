@@ -1,7 +1,7 @@
-import { AddTournamentResponse, AdminPermissions, BasicInformationTournament, SelectTeamsTournament } from "./../interface";
+import { AddTournamentResponse, AdminPermissions, BasicInformationTournament, SelectTeamsTournament, Team } from "./../interface";
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import {  Tournament, TournamentType } from "../interface";
+import { Tournament, TournamentType } from "../interface";
 import { getContestTypeName } from "../utils";
 import { TournamentService } from "../tournament.service";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -39,13 +39,13 @@ export class CreateTournamentComponent implements OnInit {
 
     this.route.parent?.data.subscribe((tournamentObj: any) => {
 
-      const tournament: Tournament =  tournamentObj.tournament;
+      const tournament: Tournament = tournamentObj.tournament;
       if (tournament) {
         this.tournament = tournament;
       }
 
       if (this.isEditing()) {
-        this.isReadOnly = !this.tournamentServ.canEditCreateTournamentComponent(this.authServ.getUserId(),this.tournament!);
+        this.isReadOnly = !this.tournamentServ.canEditCreateTournamentComponent(this.authServ.getUserId(), this.tournament!);
         this.patchTournament();
       }
     });
@@ -59,31 +59,36 @@ export class CreateTournamentComponent implements OnInit {
 
   patchTournament(): void {
     if (!this.tournament) return;
-    this.basicInformation.patchValue(this.tournament);
+    // this.basicInformation.patchValue(this.tournament);
   }
 
-  back(){
-    if(this.stepperOption === 1) return;
+  back() {
+    if (this.stepperOption === 1) return;
     this.stepperOption--;
   }
 
-  continue(){
+  continue() {
     // Basic information Component step 1
-    if(this.stepperOption === 1 && this.basicInformation.invalid){
+    if (this.stepperOption === 1 && this.basicInformation.invalid) {
       this.basicInformation.markAllAsTouched();
       return;
     }
     // Select teams Component step 2
-    if(this.stepperOption === 2 && this.selectTeams.invalid){
+    if (this.stepperOption === 2 && this.selectTeams.invalid) {
       this.selectTeams.markAllAsTouched();
       return;
     }
     // Admin permissions Component step 3
-    if(this.stepperOption === 3 && this.adminPermissions.invalid){
+    if (this.stepperOption === 3 && this.adminPermissions.invalid) {
       // print whats invalid
       console.log(this.adminPermissions.errors);
       this.adminPermissions.markAllAsTouched();
       return;
+    }
+
+    if (this.stepperOption === 4) {
+      this.onSubmit();
+      return
     }
 
     this.stepperOption++;
@@ -93,8 +98,13 @@ export class CreateTournamentComponent implements OnInit {
   onSubmit(): void {
 
     console.log("New tournament:");
-
-    const newTournament: Tournament = this.basicInformation.value as Tournament
+    const teams: Team[] = this.selectTeams.value.teams as Team[];
+    const newTournament = {
+      ...this.basicInformation.value,
+      teams,
+      admins: this.adminPermissions.value.admins as string[],
+      users: [],
+    }
 
     if (this.isEditing()) {
       this.editTournament();
@@ -104,7 +114,7 @@ export class CreateTournamentComponent implements OnInit {
 
   }
 
-  addTournament(tournament: Tournament): void {
+  addTournament(tournament:any): void {
     console.log("Adding tournament:", tournament);
     this.tournamentServ.addTournament(tournament).subscribe({
       next: (response: AddTournamentResponse) => {

@@ -27,6 +27,10 @@ export interface Tournament {
   rules:          string;
   users:          User[];
   teams:          Team[];
+  startDate:      string;
+  endDate:        string;
+  location:       string;
+  admins:          string[];
   tournamentType: TournamentType
 }
 
@@ -35,7 +39,7 @@ export interface BasicInformationTournament {
   sport: FormControl<string>;
   tournamentType: FormControl<TournamentType>;
   description: FormControl<string>;
-  location: FormControl<string | null>;
+  location: FormControl<string>;
   rules: FormControl<string | null>;
   startDate: FormControl<string | null>;
   endDate: FormControl<string | null>;
@@ -51,7 +55,7 @@ export interface BasicInformationTournament {
   sport: FormControl<string>;
   tournamentType: FormControl<TournamentType>;
   description: FormControl<string>;
-  location: FormControl<string | null>;
+  location: FormControl<string>;
   rules: FormControl<string | null>;
   startDate: FormControl<string | null>;
   endDate: FormControl<string | null>;
@@ -70,6 +74,10 @@ export const emptyTournament: Tournament = {
   rules:       "",
   users:       [],
   teams:       [],
+  startDate:   "",
+  endDate:     "",
+  location:    "string",
+  admins:      [],
   tournamentType: TournamentType.SingleElimination
 };
 

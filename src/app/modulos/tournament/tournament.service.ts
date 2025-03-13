@@ -60,7 +60,7 @@ export class TournamentService {
         nonNullable: true,
         validators: [Validators.maxLength(500)],
       }),
-      location: new FormControl<string | null>("", {
+      location: new FormControl<string>("", {
         nonNullable: true,
         validators: [Validators.maxLength(500)],
       }),

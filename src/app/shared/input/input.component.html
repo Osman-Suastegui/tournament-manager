@@ -14,6 +14,13 @@
         [formControl]="control"
         [placeholder]="placeholder"
       />
+      <input
+      *ngSwitchCase="'password'"
+      [type]="type"
+      [formControl]="control"
+      [placeholder]="placeholder"
+    />
+
      <input
         *ngSwitchCase="'date'"
         [type]="type"
