@@ -1,124 +1,50 @@
-.app-logo {
-  height: 50px; /* Ajusta el tamaño de la imagen según tus preferencias */
-  width: 50px; /* Ajusta el tamaño de la imagen según tus preferencias */
-  margin: auto;
-  display: block;
-  border-radius: 50%;
-}
-
-.app-logo-button{
-  height: 60px; /* Ajusta el tamaño del botón según tus preferencias */
-  width: 60px; /* Ajusta el tamaño del botón según tus preferencias */
-  border-radius: 50%;
-}
-
-.navegacion {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* Para centrar verticalmente los elementos en la barra */
-  height: 62px;
-  background-color: #48494A; /* Ajusta el color de fondo según tus preferencias */
-  color: #FFF8F0; /* Ajusta el color de la fuente según tus preferencias */
-}
-
-.user-logo {
-  height: 30px; /* Ajusta el tamaño de la imagen según tus preferencias */
-  width: 30px; /* Ajusta el tamaño de la imagen según tus preferencias */
-  margin: auto;
-  display: block;
-  border-radius: 50%;
-}
-
-.user-button {
-  background-color: #48494A; /* Color de fondo del botón */
-  color: #FFF8F0; /* Color del texto del botón */
-}
-.nav-bar-container{
+.title {
   display: flex;
   align-items: center;
-}
-.mat-menu-item {
-  border-bottom: 3px solid #48494A; /* Color de la separación entre elementos */
-  padding: 8px 16px; /* Espacio interno de los elementos del menú */
-  margin: 2px 0; /* Margen entre los elementos del menú (ajusta según tus preferencias) */
+  color: black;
+  gap: 5px;
 }
 
-.mat-menu-item:last-child {
-  border-bottom: none; /* Elimina el borde inferior del último elemento */
+.title h3 {
+  font-weight: 500;
 }
 
-.btn-buscar {
-  background-color: #48494A; /* Color de fondo del botón */
-  color: #FFF8F0; /* Color del texto del botón */
-  border: none;
-  border-radius: 50%;
-  height: 40px; /* Ajusta el tamaño del botón según tus preferencias */
-  width: 40px; /* Ajusta el tamaño del botón según tus preferencias */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 0;
+h3 {
+  margin: 0;
 }
 
-.btn-buscar img.buscar {
-  height: 100%; /* Ajusta el tamaño de la imagen según tus preferencias */
-  width: 100%; /* Ajusta el tamaño de la imagen según tus preferencias */
-  border-radius: 50%;
-  border: none;
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-  margin-left: 100px;
-}
-
-.search-bar input {
-  border: 1px solid #ccc; /* Establece un borde */
-  border-radius: 4px; /* Añade bordes redondeados */
-  padding: 8px; /* Espacio interno */
-  font-size: 16px; /* Tamaño de fuente */
-  outline: none; /* Elimina el contorno predeterminado */
-}
-
-.input-buscar {
-  width: 260px; /* Ajusta el tamaño del campo según tus preferencias */
-}
-
-.search-bar input::placeholder {
-  color: #999; /* Color del marcador de posición */
-}
-
-.search-bar input:focus {
-  border-color: #48494A; /* Cambia el borde al enfocar el campo */
-}
-
-.buscarOpc {
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
-  /* Agrega cualquier otro estilo que desees */
-}
-
-/* Estilo cuando el usuario interactúa con el elemento (hover) */
-.buscarOpc:hover {
-  background-color: #f2f2f2;
+.logo {
+  color: hsl(210 40% 25%);
   cursor: pointer;
 }
 
-/* Estilo cuando el usuario ha seleccionado una opción */
-.buscarOpc:focus {
-  outline: none; /* Elimina el contorno predeterminado del elemento seleccionado */
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 65px;
+  background-color: hsl(0deg 0% 100% / 60%);
+  border-bottom: 1px solid #e7e0e0;
 }
 
-.search-options{
+.nav {
   display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav .icon-img{
+  width: 16px;
+  height: 16px;
+}
+.nav .icon-container {
+  display: flex;
+  align-items: center;
   gap: 10px;
 }
 
-.btn-create-contest{
-  cursor: pointer;
+.nav .icon-container .icon-name {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
 }
