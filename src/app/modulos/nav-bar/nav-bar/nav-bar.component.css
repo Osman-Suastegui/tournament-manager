@@ -4,7 +4,9 @@
   color: black;
   gap: 5px;
 }
-
+.app-title{
+  cursor: pointer;
+}
 .title h3 {
   font-weight: 500;
 }
@@ -33,9 +35,10 @@ h3 {
   gap: 20px;
 }
 
-.nav .icon-img{
+.icon-img{
   width: 16px;
   height: 16px;
+  cursor: pointer;
 }
 .nav .icon-container {
   display: flex;
@@ -47,4 +50,32 @@ h3 {
   font-size: 13px;
   color: #64748b;
   font-weight: 500;
+  cursor: pointer;
+}
+
+.nav .icon-container .icon-name:hover {
+  color: #000;
+}
+
+.tournament-actions{
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+.notifications{
+  position: relative;
+}
+
+.notification-number{
+  display: flex;
+  position: absolute;
+  right: -15px;
+  top: -12px;
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  color: white;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
 }
