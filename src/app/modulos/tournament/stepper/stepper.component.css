@@ -1,0 +1,47 @@
+.stepper-container{
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  width: 100%
+}
+.stepper-container-buttons{
+  display: flex;
+  border-radius:50%;
+  border-radius: 10px;
+  padding: 2px;
+  border: 1px solid #f1f5f9;
+  background-color: #f1f5f9;
+
+}
+.stepper-container-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: transparent;
+  padding: 2px;
+  color: #4a5568;
+  flex:1;
+  font-weight: 500;
+  color: #abb5c3;
+}
+
+.stepper-container-number{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.selected-step{
+  background-color: #f8fafc;
+  color: black;
+}
+.selected-step .stepper-container-number{
+  background-color: #8b9aa9;
+  color: #ecf0f4;
+
+}

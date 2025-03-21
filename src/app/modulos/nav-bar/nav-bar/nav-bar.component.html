@@ -1,55 +1,40 @@
-<nav class="navegacion">
+<header class="header">
 
-  <div class="nav-bar-container">
+  <section class="title">
+    <!-- TOURNAMENT ICON  -->
+    <svg (click)="goHome()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy h-6 w-6 logo" data-lov-id="src/components/Navbar.tsx:42:12" data-lov-name="Trophy" data-component-path="src/components/Navbar.tsx" data-component-line="42" data-component-file="Navbar.tsx" data-component-name="Trophy" data-component-content="%7B%22className%22%3A%22h-6%20w-6%20text-primary%22%7D"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+    <h3 class="app-title" (click)="goHome()">Tourney TreeHouse</h3>
+  </section>
 
-    <button mat-button class="app-logo-button" (click)="goHome()">
-      <img src="../../../../assets/imgs/logo_gris.jpg" alt="Logo" class="app-logo">
-    </button>
-
-    <span routerLink="/tournament" class="btn-create-contest">Create Contest</span>
-  </div>
-    <!-- <mat-menu #menu="matMenu">
-    <ng-container *ngIf="tipoUsuario === 'ANONIMO'; else LogoutMenu">
-      <button mat-menu-item class="mat-menu-item" (click)="login()">Iniciar Sesion</button>
-      <button mat-menu-item class="mat-menu-item" (click)="register()">Registrarse</button>
-    </ng-container>
-
-    <ng-template #LogoutMenu>
-      <button mat-menu-item class="mat-menu-item" (click)="goPerfil()">Ver Perfil</button>
-      <button mat-menu-item class="mat-menu-item" (click)="logout()">Salir</button>
-    </ng-template>
-  </mat-menu> -->
-
-
-  <div class="nav-bar-container">
-    <div class="search-bar">
-      <button class="btn-buscar" *ngIf="!searching" (click)="startSearch()">
-        <img src="../../../../assets/imgs/lupa2.png" alt="Buscar" class="buscar">
-      </button>
-
-      <div *ngIf="searching" class="search-options">
-        <input class="input-buscar" (keyup)="onTyping()" (keyup.enter)="performSearch()"
-          placeholder="Search" [(ngModel)]="searchQuery" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let result of searchResults$ | async" [value]="getValue(result)">
-            {{ getContent(result) }}
-          </mat-option>
-        </mat-autocomplete>
-        <select id="searchCategory" [(ngModel)]="selectedCategory" class="buscarOpc">
-          <option value="usuarios">Usuarios</option>
-          <option value="temporadas">Temporadas</option>
-          <option value="ligas">Ligas</option>
-          <option value="equipos">Equipos</option>
-        </select>
-      </div>
+  <nav class="nav">
+  <!-- home tournaments teams and calendar navigation -->
+   <!-- HOME ICON -->
+    <div class="icon-container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house icon-img mr-2" data-lov-id="src/components/Navbar.tsx:27:38" data-lov-name="Home" data-component-path="src/components/Navbar.tsx" data-component-line="27" data-component-file="Navbar.tsx" data-component-name="Home" data-component-content="%7B%22className%22%3A%22w-4%20h-4%20mr-2%22%7D"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>      <span class="icon-name">Home</span>
     </div>
+    <div class="icon-container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy icon-img mr-2" data-lov-id="src/components/Navbar.tsx:28:56" data-lov-name="Trophy" data-component-path="src/components/Navbar.tsx" data-component-line="28" data-component-file="Navbar.tsx" data-component-name="Trophy" data-component-content="%7B%22className%22%3A%22w-4%20h-4%20mr-2%22%7D"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+      <span class="icon-name">Tournaments</span>
+    </div>
+    <div class="icon-container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users icon-img mr-2" data-lov-id="src/components/Navbar.tsx:29:44" data-lov-name="Users" data-component-path="src/components/Navbar.tsx" data-component-line="29" data-component-file="Navbar.tsx" data-component-name="Users" data-component-content="%7B%22className%22%3A%22w-4%20h-4%20mr-2%22%7D"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+      <span class="icon-name">Teams</span>
+    </div>
+    <div class="icon-container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days icon-img mr-2" data-lov-id="src/components/Navbar.tsx:30:50" data-lov-name="CalendarDays" data-component-path="src/components/Navbar.tsx" data-component-line="30" data-component-file="Navbar.tsx" data-component-name="CalendarDays" data-component-content="%7B%22className%22%3A%22w-4%20h-4%20mr-2%22%7D"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
+      <span class="icon-name">Calendar</span>
+    </div>
+  </nav>
 
-    <button mat-button (click)="openSideNav()" class="app-logo-button user-button">
-      <img src="../../../../assets/imgs/user.png" alt="Icono de menú" class="user-logo">
-    </button>
 
+  <div class="tournament-actions">
+    <div class="icon-container notifications">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell  icon-img" data-lov-id="src/components/Navbar.tsx:69:14" data-lov-name="Bell" data-component-path="src/components/Navbar.tsx" data-component-line="69" data-component-file="Navbar.tsx" data-component-name="Bell" data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+      <span class="notification-number">5</span>
+    </div>
+    <app-button matIcon="add" type="button" (click)="goToCreateTournament()" text="Create Tournament" />
   </div>
 
 
-</nav>
+</header>
 <app-sidebar [isOpen]="isOpenSideNav" />

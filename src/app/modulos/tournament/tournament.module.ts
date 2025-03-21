@@ -11,6 +11,14 @@ import { TournamentManagementComponent } from "./tournament-management/tournamen
 import { TreeDiagramsModule } from "../tree-diagrams/tree-diagrams.module";
 import { MatchesComponent } from './matches/matches.component';
 import { ButtonComponent } from "../../shared/button/button.component";
+import { StepperComponent } from './stepper/stepper.component';
+import { InputComponent } from "../../shared/input/input.component";
+import { TournamentTypeSelectionComponent } from './create-tournament/tournament-type-selection/tournament-type-selection.component';
+import { CreateTournamentBasicInformationComponent } from './create-tournament/create-tournament-basic-information/create-tournament-basic-information.component';
+import { CreateTournamentSelectTeamsComponent } from './create-tournament/create-tournament-select-teams/create-tournament-select-teams.component';
+import { CreateTournamentAdminPermissionsComponent } from './create-tournament/create-tournament-admin-permissions/create-tournament-admin-permissions.component';
+import { CreateTournamentReviewCreateComponent } from './create-tournament/create-tournament-review-create/create-tournament-review-create.component';
+import { TagsComponent } from "src/app/shared/tags/tags.component";
 
 @NgModule({
   declarations: [
@@ -18,6 +26,12 @@ import { ButtonComponent } from "../../shared/button/button.component";
     TournamentManagementComponent,
     SideNavContestManagementComponent,
     MatchesComponent,
+    StepperComponent,
+    TournamentTypeSelectionComponent,
+    CreateTournamentBasicInformationComponent,
+    CreateTournamentSelectTeamsComponent,
+    CreateTournamentAdminPermissionsComponent,
+    CreateTournamentReviewCreateComponent,
   ],
   imports: [
     CommonModule,
@@ -27,7 +41,9 @@ import { ButtonComponent } from "../../shared/button/button.component";
     GoogleMapsModule,
     DirectiveModule,
     TreeDiagramsModule,
-    ButtonComponent
+    ButtonComponent,
+    InputComponent,
+    TagsComponent
 ],
   exports:[
     CreateTournamentComponent

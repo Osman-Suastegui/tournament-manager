@@ -5,8 +5,12 @@
   [tournamentId]="tournament.id"
   [referees]="referees"
   [organizers]="organizers"
-  />
+  [mode]="'push'"
+  [isOpen]="isOpen"
+  >
   <div class="content">
+    <button (click)="toggleSideNav()">open</button>
     <router-outlet></router-outlet>
   </div>
+</app-side-nav-contest-management>
 </div>

@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav mode="side" opened class="sidenav">
+    <mat-sidenav [mode]="'over'" [opened]="isOpen" class="sidenav">
       <mat-toolbar color="primary" class="sidenav-toolbar">Navigation</mat-toolbar>
       <mat-nav-list>
         <mat-list-item class="nav-item" [routerLink]="'overview'" routerLinkActive="active">
@@ -91,4 +91,8 @@
 
     </mat-nav-list>
     </mat-sidenav>
+
+    <mat-sidenav-content >
+      <ng-content></ng-content>
+    </mat-sidenav-content>
   </mat-sidenav-container>

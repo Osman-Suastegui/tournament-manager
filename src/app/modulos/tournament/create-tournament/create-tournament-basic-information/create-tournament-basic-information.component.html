@@ -1,0 +1,36 @@
+<form [formGroup]="basicInformation"  class="create-tournament-form">
+  <div class="container-form-fields">
+    <!-- Name -->
+    <app-input label="Tournament Name" [placeholder]="'Enter tournament name'"
+      [control]="basicInformation.controls.name" />
+    <!-- Category -->
+      <app-input label="Category" [placeholder]="'Category'"  [control]="basicInformation.controls.sport" type="select"
+      [options]="options" />
+  </div>
+
+  <div class="container-form-fields">
+    <!-- Description -->
+    <app-input [textTareaRows]="4" type="textTarea" label="Description" placeholder="Enter tournament desription"
+      [control]="basicInformation.controls.description" />
+  </div>
+  <div class="container-form-fields">
+    <!-- start date -->
+    <app-input label="Start Date" [placeholder]="'Enter start date'" [control]="basicInformation.controls.startDate"
+      type="date" />
+    <!-- end date -->
+    <app-input label="End Date" [placeholder]="'Enter end date'" [control]="basicInformation.controls.endDate"
+      type="date" />
+  </div>
+  <div class="container-form-fields">
+    <!-- Location -->
+    <app-input label="Location" [placeholder]="'Enter location'" [control]="basicInformation.controls.location" />
+  </div>
+
+  <div class="container-form-fields flex-column">
+    <hr>
+    <app-tournament-type-selection/>
+  </div>
+
+  <!-- SAVE BUTTON -->
+  <!-- <button class="save" type="submit" *ngIf="!isReadOnly">{{isEditing() ? "EDIT" : "SAVE"}}</button> -->
+</form>

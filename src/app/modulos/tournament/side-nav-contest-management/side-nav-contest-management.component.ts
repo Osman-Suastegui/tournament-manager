@@ -28,6 +28,8 @@ export class SideNavContestManagementComponent {
   @Input() referees: Referee[] = [];
   @Input() tournamentId: string = "";
   @Input() organizers: string[] = [];
+  @Input() mode: "push" | "over" | "side" = "push";
+  @Input() isOpen: boolean = false;
 
   addTeam($event: Event): void {
     this.dialog.open(AddTeamComponent, {

@@ -12,13 +12,14 @@ import { url } from 'src/enviroments/environment.local';
 })
 export class TeamService {
 
-  private newTeamSubject = new Subject<Team>();
+  public newTeamSubject = new Subject<Team>();
   private newPlayer = new Subject<Player>();
 
   public newTeam$ = this.newTeamSubject.asObservable();
   public newPlayer$ = this.newPlayer.asObservable();
 
   constructor(private http: HttpClient) { }
+
 
   // THIS ENDPOINT ADD A TEAM IN A TOURNAMENT
   addTeam(team: Omit<Team, 'id'>, tournamentId: string, createdById: string): Observable<Team> {
@@ -29,6 +30,10 @@ export class TeamService {
     }).pipe(
       tap((createdTeam: Team) => this.newTeamSubject.next(createdTeam))
     )
+  }
+
+  getTeams(name: string) {
+
   }
 
   addPlayerToTeamInTournament(tournamentId: string, teamId: string, playerName: string): Observable<Player> {
@@ -53,10 +58,11 @@ export class TeamService {
   createAddTeamForm(): FormGroup<AddTeamForm> {
     return new FormGroup<AddTeamForm>({
       name: new FormControl("", { validators: [Validators.required], nonNullable: true }),
-      email: new FormControl("", { validators: [Validators.required], nonNullable: true }),
+
+      // email: new FormControl("", { validators: [Validators.required], nonNullable: true }),
+      logo: new FormControl(""),
     });
   }
-
 
   createAddPlayerToTeamForm(): FormGroup<AddPlayerToTeamForm> {
     return new FormGroup<AddPlayerToTeamForm>({
@@ -65,5 +71,6 @@ export class TeamService {
       position: new FormControl("", { nonNullable: true }),
     });
   }
+
 
 }

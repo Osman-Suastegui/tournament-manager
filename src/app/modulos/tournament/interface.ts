@@ -1,3 +1,6 @@
+import { Form, FormControl, FormGroup } from "@angular/forms";
+import { FormArray } from "@angular/forms";
+
 export enum TournamentType {
   SingleElimination = "SingleElimination",
   DoubleElimination = "DoubleElimination"
@@ -6,6 +9,13 @@ export enum TournamentType {
 export interface Team {
   id:   string;
   name: string;
+  leaderEmail?: string;
+}
+
+export interface TeamForm {
+  id:   FormControl<string>;
+  name: FormControl<string>;
+  leaderEmail?: FormControl<string | null>;
 }
 
 export interface Tournament {
@@ -17,7 +27,42 @@ export interface Tournament {
   rules:          string;
   users:          User[];
   teams:          Team[];
+  startDate:      string;
+  endDate:        string;
+  location:       string;
+  admins:          string[];
   tournamentType: TournamentType
+}
+
+export interface BasicInformationTournament {
+  name: FormControl<string>;
+  sport: FormControl<string>;
+  tournamentType: FormControl<TournamentType>;
+  description: FormControl<string>;
+  location: FormControl<string>;
+  rules: FormControl<string | null>;
+  startDate: FormControl<string | null>;
+  endDate: FormControl<string | null>;
+}
+
+export interface SelectTeamsTournament {
+  teams: FormArray<FormGroup<TeamForm>>;
+}
+
+
+export interface BasicInformationTournament {
+  name: FormControl<string>;
+  sport: FormControl<string>;
+  tournamentType: FormControl<TournamentType>;
+  description: FormControl<string>;
+  location: FormControl<string>;
+  rules: FormControl<string | null>;
+  startDate: FormControl<string | null>;
+  endDate: FormControl<string | null>;
+}
+
+export interface AdminPermissions {
+  admins: FormControl<string[]>;
 }
 
 export const emptyTournament: Tournament = {
@@ -29,6 +74,10 @@ export const emptyTournament: Tournament = {
   rules:       "",
   users:       [],
   teams:       [],
+  startDate:   "",
+  endDate:     "",
+  location:    "string",
+  admins:      [],
   tournamentType: TournamentType.SingleElimination
 };
 
@@ -40,10 +89,6 @@ export interface User {
   lastName: string;
 }
 
-export interface AddTournament {
-  tournament: Tournament
-  userId: string
-}
 
 export interface AddTournamentResponse{
   message: string;

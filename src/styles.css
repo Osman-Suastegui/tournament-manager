@@ -8,7 +8,13 @@ mat-icon {
     font-family: 'Material Icons Outlined' !important;
 }
 *{
-    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    margin: 0;
+    padding: 0;
+}
+
+.full-width {
+  width: 100%;
 }
 
 .mat-expansion-panel-body{
@@ -18,11 +24,35 @@ mat-icon {
 .mat-expansion-indicator{
     display: flex;
 }
+.mat-mdc-dialog-container .mdc-dialog__content{
+  color: #000000  !important; /* Color del texto del contenido */
+}
+
+h1,h2,h3,h4,h5{
+  color: #000000; /* Color del texto del encabezado */
+}
+
+.cancel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 8px;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 9px;
+  white-space: nowrap;
+  min-width: 80px;
+  font-size: 0.9rem;
+  background-color: #fff;
+}
+.cancel-btn:hover{
+  background-color: #eaf0f6;
+}
 
 /* add team dialog */
 .add-team-dialog {
-  width: 50%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
 @media screen and (max-width: 1025px) {
@@ -35,6 +65,25 @@ mat-icon {
     max-width: 90% !important;
     width: 100%;
   }
+}
+.custom-dark-backdrop {
+  background-color: rgba(0, 0, 0, 0.80) !important; /* Darker overlay */
+}
+
+.close-icon {
+  display: flex !important;
+  align-items: center;
+  cursor: pointer;
+  color: #020817;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.text-gray{
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 400;
 }
 
 

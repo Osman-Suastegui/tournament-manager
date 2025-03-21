@@ -26,20 +26,20 @@ export class NavBarComponent implements OnInit {
   ligaId: string = '';
   public isOpenSideNav:boolean = false;
   filteredResults: Observable<any[]>;
-  
+
   categories: string[] = ['usuarios', 'temporadas', 'ligas', 'equipos'];
-  
+
   usuario: string = localStorage.getItem('usuario') || '';
   tipoUsuario: string = '';
-  
+
   constructor(private app: NavbarService, private router: Router, private auth: authService, private elRef: ElementRef, private searchService: NavBarService) {
     this.filteredResults = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value))
     );
-    
+
   }
-  
+
   openSideNav():void {
     this.isOpenSideNav = !this.isOpenSideNav;
   }
@@ -80,6 +80,10 @@ export class NavBarComponent implements OnInit {
       this.router.navigate(['/buscar-equipo', this.searchQuery]);
     }
 
+  }
+
+  goToCreateTournament() {
+    this.router.navigate(['/tournament']);
   }
 
   obtenerTemporadaId(nombreTemp: string): Observable<any> {

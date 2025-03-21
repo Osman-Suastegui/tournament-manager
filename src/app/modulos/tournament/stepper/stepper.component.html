@@ -1,0 +1,26 @@
+
+<div class="stepper-container">
+  <div class="stepper-container-buttons">
+
+  <div class="stepper-container-btn" (click)="onSelectOption(1)" [ngClass]="{'selected-step': selected === 1}">
+    <div class="stepper-container-number">1</div>
+    Basic Information
+  </div>
+
+  <div class="stepper-container-btn" (click)="onSelectOption(2)" [ngClass]="{'selected-step': selected === 2}">
+    <div class="stepper-container-number">2</div>
+    Select Teams
+  </div>
+
+  <div class="stepper-container-btn" (click)="onSelectOption(3)" [ngClass]="{'selected-step': selected === 3}">
+    <div class="stepper-container-number">3</div>
+    Admin & Permissions
+  </div>
+
+  <div class="stepper-container-btn" (click)="onSelectOption(4)" [ngClass]="{'selected-step': selected === 4}">
+    <div class="stepper-container-number">4</div>
+    Review & Create
+  </div>
+</div>
+
+</div>

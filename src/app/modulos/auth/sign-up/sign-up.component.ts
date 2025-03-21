@@ -6,11 +6,11 @@ import { Gender } from "../../../models/Login/Gender";
 import { Role } from "../../../models/Login/Role";
 import {FormGroup, FormControl} from "@angular/forms";
 @Component({
-  selector: "app-register",
-  templateUrl: "./register.component.html",
-  styleUrls: ["./register.component.css"]
+  selector: "app-sign-up",
+  templateUrl: "./sign-up.component.html",
+  styleUrls: ["./sign-up.component.css"]
 })
-export class RegisterComponent {
+export class SignUpComponent {
 
   signupForm = new FormGroup({
     usuario: new FormControl<string>(""),
@@ -20,7 +20,7 @@ export class RegisterComponent {
     password: new FormControl<string>(""),
     rol: new FormControl<Role>(Role.ANONIMO),
   });
-  
+
   error: any;
   repeatedPassword = new FormControl("");
 

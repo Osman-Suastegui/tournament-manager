@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -13,6 +13,8 @@ export class InputComponent {
   @Input() label: string = '';
   @Input() placeholder: string = '';
   @Input() control: FormControl = new FormControl();
-  @Input() type: string = 'text';  // Default input type is text
+  @Input() type: "text" | "select" | "textTarea" | "password" | "date" | "email" = 'text';  // Default input type is text
+  @Input() options: { label: string; value: string }[] = [];  // For select dropdown
+  @Input() textTareaRows: number = 4;
 
 }

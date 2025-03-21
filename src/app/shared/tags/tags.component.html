@@ -1,0 +1,19 @@
+<div class="selected-teams">
+  <div *ngIf="minTags > (tags?.length ?? 0)" class="error-message">
+    <mat-error>
+      {{errorMessage}}
+    </mat-error>
+  </div>
+  <header class="d-flex">
+    <mat-icon>people_alt</mat-icon>
+    <h3>{{title}}</h3>
+  </header>
+  <!-- <span *ngIf="tags.length">No teams selected. Please select at least 2 teams to
+    continue.</span> -->
+  <div class="tags-container">
+    <div class="selected-team-tag" *ngFor="let tag of tags">
+      <p>{{ displayTag(tag) }}</p>
+      <mat-icon class="close-icon" (click)="removeTag(tag)">close</mat-icon>
+    </div>
+  </div>
+</div>

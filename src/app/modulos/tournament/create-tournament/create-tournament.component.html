@@ -1,94 +1,36 @@
 <div class="create-contest-container">
 
   <main class="main">
-    <header>{{isReadOnly ? createTournament.value.name : "Create tournament"}} </header>
 
-    <form [formGroup]="createTournament" (ngSubmit)="onSubmit()">
-      <div class="container-form-fields">
-        <!-- TOURNAMENT NAME -->
-        <div class="form-field">
-          <label for="name">Tournament Name:</label>
-          <div class="input-wrapper">
-            <input [readOnly]="isReadOnly" type="text" id="name" formControlName="name"
-              placeholder="Enter tournament name" />
-            <div *ngIf="name.touched && name.errors" class="errors" id="name-errors">
-              <small *ngIf="name.touched && name.errors?.['required']">name is required.</small>
-              <small *ngIf="name.touched && name.errors?.['minlength']">name must be at least 1 character long.</small>
-            </div>
-          </div>
-        </div>
+    <span class="btn-back"><mat-icon>chevron_left</mat-icon> Back</span>
+    <header>
+      <h1>
+        {{ isReadOnly ? basicInformation.value.name : "Create tournament" }}
+      </h1>
+      <span *ngIf="!isReadOnly"> Set up your tournament details, add teams, and customize settings</span>
+    </header>
 
-        <!-- SPORT NAME -->
-        <div class="form-field">
-          <label for="sport">Sport:</label>
-          <div class="input-wrapper">
-            <select [ngClass]="{'readonly':isReadOnly}" id="sport" formControlName="sport">
-              <option [value]="'football'">Football</option>
-            </select>
-          </div>
-        </div>
+    <app-stepper class="stepper" [(selected)]="stepperOption"></app-stepper>
+    <div class="tournament-forms">
+      <app-create-tournament-basic-information *ngIf="stepperOption === 1" [basicInformation]="basicInformation" />
+      <app-create-tournament-select-teams *ngIf="stepperOption === 2" [selectTeams]="selectTeams"/>
+      <app-create-tournament-admin-permissions *ngIf="stepperOption === 3" [adminPermissions]="adminPermissions" [selectTeams]="selectTeams"/>
+      <app-create-tournament-review-create *ngIf="stepperOption === 4" [adminPermissions]="adminPermissions" [selectTeams]="selectTeams" />
 
+      <div class="buttons d-flex justify-content-between mt-5">
+        <button type="button" class="cancel-btn" (click)="back()">
+        <mat-icon class="close-icon d-flex align-items">chevron_left</mat-icon>
+          Back
+        </button>
+        <app-button  (click)="continue()" [text]="stepperOption === 4 ? 'Create Tournament' : 'Continue'"/>
       </div>
-
-      <div class="container-form-fields">
-        <!-- CONTEST TYPE -->
-        <div class="form-field">
-          <label for="contest-type">Tournament Type:</label>
-          <div class="input-wrapper">
-            <select [ngClass]="{'readonly':isReadOnly}" id="contest-type" formControlName="tournamentType">
-              <option [value]="type" *ngFor="let type of tournamentTypes">{{getTournamentTypeName(type)}}
-              </option>
-            </select>
-          </div>
-        </div>
-
-        <!-- START DATE  -->
-        <div class="form-field">
-          <label for="sport">Start date:</label>
-          <div class="input-wrapper">
-            <input [readOnly]="isReadOnly" type="date" id="startDate" formControlName="startDate" placeholder="Enter start date" />
-          </div>
-        </div>
-
-      </div>
-
-      <div class="container-form-fields">
-        <!-- END DATE  -->
-        <div class="form-field">
-          <label for="sport">End date:</label>
-          <div class="input-wrapper">
-            <input [readOnly]="isReadOnly"  type="date" id="startDate" formControlName="startDate" placeholder="Enter start date" />
-
-          </div>
-        </div>
-
-      </div>
-
-      <!-- About the Tournament -->
-      <div class="container-form-fields">
-        <!-- ABOUT THE TOURNAMENT -->
-        <div class="form-field">
-          <label for="">About the Tournament:</label>
-          <div class="input-wrapper">
-            <textarea [readOnly]="isReadOnly" formControlName="description" class="about-tournament" name=""
-              id=""></textarea>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- RULES -->
-      <div class="container-form-fields">
-        <div class="form-field">
-          <label for="">Rules:</label>
-          <div class="input-wrapper">
-            <textarea [readOnly]="isReadOnly" formControlName="rules" class="rules" name="" id=""></textarea>
-          </div>
-        </div>
-      </div>
-
-      <!-- SAVE BUTTON -->
-      <button class="save" type="submit" *ngIf="!isReadOnly">{{isEditing() ? "EDIT" : "SAVE"}}</button>
-    </form>
+    </div>
   </main>
 </div>
+
+<!-- Tournament Types Explained
+Single Elimination: Teams are immediately eliminated after one loss. Fast-paced and straightforward.
+
+Double Elimination: Teams must lose twice to be eliminated. Gives teams a second chance.
+
+Round Robin: Each team plays against every other team. Best for smaller tournaments where you want maximum participation.| -->

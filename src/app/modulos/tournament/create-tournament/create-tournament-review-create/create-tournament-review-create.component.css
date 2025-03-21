@@ -1,0 +1,26 @@
+h1,h2,h3,h4,p{
+  margin-bottom: 0;
+}
+
+.tournament-details{
+  display: grid;
+  /* 2 columns and if it's too small 1 */
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+.tournament-section{
+  display: flex;
+  flex-direction: column;
+}
+.section-content{
+  font-weight: 600;
+}
+
+.tag{
+  background-color: #e9ebee;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  display: inline-block;
+}

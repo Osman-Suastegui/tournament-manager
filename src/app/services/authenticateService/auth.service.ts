@@ -45,21 +45,15 @@ export class authService {
   }
 
   login(creds: Credential): Observable<any> {
-    return this.http.post(url + '/auth/authenticate', creds, {
+    return this.http.post(url + '/api/users/login', creds, {
       observe: 'response'
     }).pipe(
       map((response: HttpResponse<any>) => {
         const token = response.body.token;
         localStorage.setItem('token', token);
-        this.user = creds.usuario;
-        localStorage.setItem('usuario', creds.usuario);
+        this.user = creds.email;
+        localStorage.setItem('usuario', creds.email);
         return response.body;
-      }),
-      catchError((error: HttpErrorResponse ) => {
-
-        const errorMessage = error.error[0].message;
-
-        return throwError(() => errorMessage); // Retorna el mensaje de error
       })
     );
   }

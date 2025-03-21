@@ -5,7 +5,6 @@ import { AdminLigasModule } from '../admin-ligas/admin-ligas.module';
 import { AdminEquiposModule } from '../admin-equipos/admin-equipos.module';
 import { ArbitrosModule } from '../arbitros/arbitros.module';
 import { JugadoresModule } from '../jugadores/jugadores.module';
-import { AnonimoModule } from '../anonimo/anonimo.module';
 import { NavBarModule } from '../nav-bar/nav-bar.module';
 import { FooterModule } from '../footer/footer.module';
 
@@ -19,7 +18,6 @@ import { FooterModule } from '../footer/footer.module';
     AdminEquiposModule,
     ArbitrosModule,
     JugadoresModule,
-    AnonimoModule,
     NavBarModule,
     FooterModule
   ],

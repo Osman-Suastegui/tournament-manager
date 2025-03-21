@@ -1,7 +1,7 @@
-import { AddTournamentResponse } from "./../interface";
+import { AddTournamentResponse, AdminPermissions, BasicInformationTournament, SelectTeamsTournament, Team } from "./../interface";
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { AddTournament, Tournament, TournamentType } from "../interface";
+import { Tournament, TournamentType } from "../interface";
 import { getContestTypeName } from "../utils";
 import { TournamentService } from "../tournament.service";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -13,14 +13,19 @@ import { authService } from "src/app/services/authenticateService/auth.service";
   styleUrls: ["./create-tournament.component.css"]
 })
 export class CreateTournamentComponent implements OnInit {
+
   // THIS INPUT IS USED BY THE COMPONENT TO DETERMINE IF IT IS IN EDITING MODE.
   // IF UNDEFINED, IT INDICATES A NEW TOURNAMENT; OTHERWISE, IT'S FOR EDITING.
   @Input() tournament?: Tournament;
 
   // PUBLIC
   tournamentTypes = Object.values(TournamentType); // Extract enum values
-  public createTournament!: FormGroup;
+  public basicInformation: FormGroup<BasicInformationTournament> = this.tournamentServ.createBasicInformationTournamentForm()
+  public selectTeams: FormGroup<SelectTeamsTournament> = this.tournamentServ.createSelectTeamsTournamentForm()
+  public adminPermissions: FormGroup<AdminPermissions> = this.tournamentServ.createAdminPermissionsForm()
+
   public isReadOnly: boolean = false;
+  public stepperOption: number = 4;
   // PRIVATE
 
   constructor(
@@ -34,14 +39,13 @@ export class CreateTournamentComponent implements OnInit {
 
     this.route.parent?.data.subscribe((tournamentObj: any) => {
 
-      const tournament: Tournament =  tournamentObj.tournament;
+      const tournament: Tournament = tournamentObj.tournament;
       if (tournament) {
         this.tournament = tournament;
       }
 
-      this.createTournament = this.tournamentServ.createTournamentForm();
       if (this.isEditing()) {
-        this.isReadOnly = !this.tournamentServ.canEditCreateTournamentComponent(this.authServ.getUserId(),this.tournament!);
+        this.isReadOnly = !this.tournamentServ.canEditCreateTournamentComponent(this.authServ.getUserId(), this.tournament!);
         this.patchTournament();
       }
     });
@@ -55,20 +59,53 @@ export class CreateTournamentComponent implements OnInit {
 
   patchTournament(): void {
     if (!this.tournament) return;
-    this.createTournament.patchValue(this.tournament);
+    // this.basicInformation.patchValue(this.tournament);
+  }
+
+  back() {
+    if (this.stepperOption === 1) return;
+    this.stepperOption--;
+  }
+
+  continue() {
+    // Basic information Component step 1
+    if (this.stepperOption === 1 && this.basicInformation.invalid) {
+      this.basicInformation.markAllAsTouched();
+      return;
+    }
+    // Select teams Component step 2
+    if (this.stepperOption === 2 && this.selectTeams.invalid) {
+      this.selectTeams.markAllAsTouched();
+      return;
+    }
+    // Admin permissions Component step 3
+    if (this.stepperOption === 3 && this.adminPermissions.invalid) {
+      // print whats invalid
+      console.log(this.adminPermissions.errors);
+      this.adminPermissions.markAllAsTouched();
+      return;
+    }
+
+    if (this.stepperOption === 4) {
+      this.onSubmit();
+      return
+    }
+
+    this.stepperOption++;
+
   }
 
   onSubmit(): void {
-    if (this.createTournament.invalid) {
-      this.createTournament.markAllAsTouched();
-      return;
-    }
-    console.log("New tournament:");
 
-    const newTournament: AddTournament = {
-      tournament: this.createTournament.value,
-      userId: this.authServ.getUserId()
-    };
+    console.log("New tournament:");
+    const teams: Team[] = this.selectTeams.value.teams as Team[];
+    const newTournament = {
+      ...this.basicInformation.value,
+      teams,
+      admins: this.adminPermissions.value.admins as string[],
+      users: [],
+    }
+
     if (this.isEditing()) {
       this.editTournament();
     } else {
@@ -77,7 +114,7 @@ export class CreateTournamentComponent implements OnInit {
 
   }
 
-  addTournament(tournament: AddTournament): void {
+  addTournament(tournament:any): void {
     console.log("Adding tournament:", tournament);
     this.tournamentServ.addTournament(tournament).subscribe({
       next: (response: AddTournamentResponse) => {
@@ -92,11 +129,14 @@ export class CreateTournamentComponent implements OnInit {
   }
 
   get name() {
-    return this.createTournament.get("name")!;
+    return this.basicInformation.get("name")!;
   }
 
   getTournamentTypeName(tournamentType: TournamentType) {
     return getContestTypeName(tournamentType);
+  }
+  getStepperOption($event: Event) {
+    console.log($event);
   }
 
   editTournament() {
