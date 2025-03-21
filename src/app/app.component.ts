@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   setupNavBarVisibility(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        const noNavBarRoutes = ["/login", "/register"];
+        const noNavBarRoutes = ["/signin", "/register"];
         this.showNavBar = !noNavBarRoutes.includes(event.urlAfterRedirects);
       }
     });

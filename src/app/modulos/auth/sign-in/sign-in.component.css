@@ -5,19 +5,24 @@
   background-color: #FFF8F0;
   width: 40%;
   border-radius: 40px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Agrega una sombra suave */
 }
+
 .contenedorPag {
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% de la altura de la ventana */
+  justify-content: center;
+  /* Centra horizontalmente */
+  align-items: center;
+  /* Centra verticalmente */
+  min-height: 100vh;
+  /* Asegura que el contenedor ocupe al menos el 100% de la altura de la ventana */
+}
+.title{
+  font-weight: 500;
 }
 
-
-
-
-.contenedorLogin{
+.contenedorLogin {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,11 +31,11 @@
   margin: 0 auto;
 }
 
-input{
+input {
   margin-top: 10px;
 }
 
-.contenedorImagen{
+.contenedorImagen {
   display: flex;
   flex-direction: column;
   background-color: #FFF8F0;
@@ -40,36 +45,41 @@ input{
   margin: 0 auto;
 }
 
-img{
+img {
   color: #FFF8F0;
 }
 
 .page-container {
-  background-color: #d9d9d9;
+  background-color: #ffffff;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
 }
 
-.registrarse{
+.registrarse {
   display: flex;
   margin-top: 20px;
   flex-direction: row;
   gap: 10px;
 }
 
-.boton{
+.boton {
   margin-top: 15px;
-  background-color: #F26419; /* Color de fondo */
-  color: #080708; /* Color del texto */
+  background-color: #F26419;
+  /* Color de fondo */
+  color: #080708;
+  /* Color del texto */
   border: none;
   border-radius: 10px;
-  padding: 10px 20px; /* Ajusta el padding para hacerlo más grande */
+  padding: 10px 20px;
+  /* Ajusta el padding para hacerlo más grande */
   cursor: pointer;
   height: 45px;
-  font-size: 1rem; /* Tamaño de fuente más grande */
+  font-size: 1rem;
+  /* Tamaño de fuente más grande */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,7 +90,7 @@ img{
 
 
 
-.inputLogin{
+.inputLogin {
   border-radius: 10px;
   background-color: #d9d9d9;
   padding: 10px;
@@ -89,7 +99,7 @@ img{
   border: none;
 }
 
-.errorif{
+.errorif {
   color: 080708;
   font-size: 1rem;
   margin-top: 5px;
@@ -98,16 +108,14 @@ img{
 }
 
 /* 🔹 Page Container */
-.page-container {
-
-}
+.page-container {}
 
 /* 🔹 Authentication Form */
 .auth-form {
   background: #fff;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   width: 100%;
   max-width: 400px;
   display: flex;
@@ -116,15 +124,15 @@ img{
 }
 
 /* 🔹 Logo Section */
-.auth-form__logo {
+.auth-form__title {
   margin-bottom: 1.5rem;
   text-align: center;
 }
 
-.auth-form__logo-img {
-  max-width: 150px;
-  height: auto;
+.auth-form__title h2 {
+  margin-bottom: 0;
 }
+
 
 /* 🔹 Input Fields */
 .auth-form__input {
@@ -169,14 +177,17 @@ img{
   color: #007bff;
   text-decoration: none;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .auth-form__register-link:hover {
   text-decoration: underline;
 }
-app-button{
+
+app-button {
   width: 100%;
 }
+
 .error-message {
   color: red;
   font-size: 14px;
@@ -190,7 +201,8 @@ app-button{
     height: 100%;
     box-shadow: none;
   }
-  .page-container{
+
+  .page-container {
     background-color: #fff;
   }
 }

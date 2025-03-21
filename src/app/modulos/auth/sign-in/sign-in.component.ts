@@ -10,7 +10,7 @@ import { HttpErrorResponse } from "@angular/common/http";
   selector: "app-sign-in",
 })
 export class SignInComponent {
-  signInForm = createCredentialForm(); // ✅ Uses helper function from the model
+  signInForm = createCredentialForm();
 
   constructor(
     private auth: authService,
@@ -19,12 +19,14 @@ export class SignInComponent {
 
   login() {
     if (this.signInForm.invalid) {
+      this.signInForm.markAllAsTouched();
       return;
     }
     const credentials:Credential = this.signInForm.getRawValue();
 
     this.auth.login(credentials).subscribe({
-      next: () => {
+      next: (data) => {
+        console.log("data ",data)
         this.router.navigate(["/home"]);
       },
       error: (error: HttpErrorResponse) => {

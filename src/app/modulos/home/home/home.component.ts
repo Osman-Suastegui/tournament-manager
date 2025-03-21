@@ -19,22 +19,8 @@ export class HomeComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.getRoleUser(this.usuario);
-
   }
 
-  getRoleUser(usuario: string) {
-    this.auth.obtenerTipoUsuario(usuario).subscribe({
-        next: (tipo: any) => {
-            console.log(tipo); // Imprime el objeto completo en la consola
-            this.tipoUsuario = tipo.Rol;
-            console.log(this.tipoUsuario);
-          },
-        error: (error) => {
-            this.tipoUsuario = "ANONIMO";
-        }
-    });
-}
 
 }
 
