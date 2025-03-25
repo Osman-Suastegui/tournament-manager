@@ -19,6 +19,7 @@ import { CreateTournamentSelectTeamsComponent } from './create-tournament/create
 import { CreateTournamentAdminPermissionsComponent } from './create-tournament/create-tournament-admin-permissions/create-tournament-admin-permissions.component';
 import { CreateTournamentReviewCreateComponent } from './create-tournament/create-tournament-review-create/create-tournament-review-create.component';
 import { TagsComponent } from "src/app/shared/tags/tags.component";
+import { OverviewTournamentComponent } from './overview-tournament/overview-tournament.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { TagsComponent } from "src/app/shared/tags/tags.component";
     CreateTournamentSelectTeamsComponent,
     CreateTournamentAdminPermissionsComponent,
     CreateTournamentReviewCreateComponent,
+    OverviewTournamentComponent,
   ],
   imports: [
     CommonModule,

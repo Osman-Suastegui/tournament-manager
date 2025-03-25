@@ -20,29 +20,29 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
   // PRIVATE
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes["tournament"]){
-      this.updateTournamentUI(this.tournament);
-    }
+  //   if(changes["tournament"]){
+  //     this.updateTournamentUI(this.tournament);
+  //   }
   }
 
   ngOnInit(): void {
-    this.updateTournamentUI(this.tournament);
+    // this.updateTournamentUI(this.tournament);
     this.setListeners();
   }
 
-  private updateTournamentUI(tournament: Tournament) {
-    this.organizers = this.filterOrganizers(tournament);
-    this.referees = this.filterReferees(tournament);
-    this.teams = tournament.teams;
-  }
+  // private updateTournamentUI(tournament: Tournament) {
+  //   this.organizers = this.filterOrganizers(tournament);
+  //   this.referees = this.filterReferees(tournament);
+  //   this.teams = tournament.teams;
+  // }
 
-  private filterOrganizers(tournament: Tournament): string[] {
-    return tournament.users.filter(user => user.role === "ORGANIZER").map(user => user.name + " " + user.lastName);
-  }
+  // private filterOrganizers(tournament: Tournament): string[] {
+  //   return tournament.users.filter(user => user.role === "ORGANIZER").map(user => user.name + " " + user.lastName);
+  // }
 
-  private filterReferees(tournament: Tournament): Referee[] {
-    return tournament.users.filter(user => user.role === "REFEREE").map((user: User) => user as Referee);
-  }
+  // private filterReferees(tournament: Tournament): Referee[] {
+  //   return tournament.users.filter(user => user.role === "REFEREE").map((user: User) => user as Referee);
+  // }
 
   toggleSideNav() {
     this.isOpen = !this.isOpen;

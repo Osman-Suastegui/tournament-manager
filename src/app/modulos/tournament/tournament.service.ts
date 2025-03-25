@@ -18,9 +18,10 @@ export class TournamentService {
 
   public canEditCreateTournamentComponent(userId: string, tournament: Tournament): boolean {
 
-    return tournament.users.some(user => {
-      return user.id == userId && user.role === "ORGANIZER";
-    });
+    // return tournament.users.some(user => {
+    //   return user.id == userId && user.role === "ORGANIZER";
+    // });
+    return true;
 
   }
 

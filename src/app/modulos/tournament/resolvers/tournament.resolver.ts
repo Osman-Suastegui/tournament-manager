@@ -5,6 +5,7 @@ import { TournamentService } from '../tournament.service';
 
 export const tournamentResolver: ResolveFn<Tournament> = (route, state) => {
   const tournamentId = route.paramMap.get('tournamentId');
-  const tournamentServ = inject(TournamentService)
-  return tournamentServ.getTournamentById(tournamentId!)
+  return {} as Tournament;
+  // const tournamentServ = inject(TournamentService)
+  // return tournamentServ.getTournamentById(tournamentId!)
 };

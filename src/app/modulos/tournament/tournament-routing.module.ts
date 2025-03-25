@@ -9,6 +9,7 @@ import { AddPlayerTokenGuard } from "src/app/guards/add-player-token.guard";
 import { ErrorMessageComponent } from "src/app/shared/error-message/error-message.component";
 import { SingleEliminationTreeComponent } from "../tree-diagrams/single-elimination-tree/single-elimination-tree.component";
 import { MatchesComponent } from "./matches/matches.component";
+import { OverviewTournamentComponent } from "./overview-tournament/overview-tournament.component";
 
 const routes: Routes = [
   { path: "", component: CreateTournamentComponent },
@@ -19,7 +20,7 @@ const routes: Routes = [
       tournament: tournamentResolver
     },
     children: [
-      { path: "overview", component: CreateTournamentComponent },
+      { path: "overview", component: OverviewTournamentComponent },
       { path: "matches", component: MatchesComponent },
       { path: "team/:teamId/:token", component: TeamPlayersComponent, canActivate: [AddPlayerTokenGuard] },
       { path: "team/:teamId", component: TeamPlayersComponent },
