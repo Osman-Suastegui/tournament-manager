@@ -62,6 +62,7 @@ h3 {
   align-items: center;
   gap: 35px;
 }
+
 .notifications{
   position: relative;
 }
@@ -79,3 +80,4 @@ h3 {
   align-items: center;
   justify-content: center;
 }
+

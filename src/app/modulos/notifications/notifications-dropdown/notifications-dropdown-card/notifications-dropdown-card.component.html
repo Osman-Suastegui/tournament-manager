@@ -1,0 +1,29 @@
+
+<div class="notification-card">
+
+  <!-- NOTIFICATION ICON -->
+  <div *ngIf="notification.type === 'request'" class="icon container-icon-request">
+    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-check h-4 w-4" data-lov-id="src/components/notifications/NotificationItem.tsx:111:10" data-lov-name="Icon" data-component-path="src/components/notifications/NotificationItem.tsx" data-component-line="111" data-component-file="NotificationItem.tsx" data-component-name="Icon" data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
+  </div>
+  <div *ngIf="notification.type === 'soon'" class="icon container-icon-soon">
+    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock h-4 w-4" data-lov-id="src/components/notifications/NotificationItem.tsx:111:10" data-lov-name="Icon" data-component-path="src/components/notifications/NotificationItem.tsx" data-component-line="111" data-component-file="NotificationItem.tsx" data-component-name="Icon" data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+
+  <!-- NOTIFICATION CONTENT -->
+  <div class="content">
+    <h4 class="title">{{notification.title}}</h4>
+    <p class="description"> {{ notification.description }}</p>
+    <!-- date -->
+    <p class="time-ago">{{distanceToNow}}</p>
+    <div class="actions" *ngIf="notification.type === 'request'">
+      <button class="accept" (click)="acceptRequest(notification.id)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check h-3.5 w-3.5 mr-1" data-lov-id="src/components/notifications/NotificationItem.tsx:136:16" data-lov-name="Check" data-component-path="src/components/notifications/NotificationItem.tsx" data-component-line="136" data-component-file="NotificationItem.tsx" data-component-name="Check" data-component-content="%7B%22className%22%3A%22h-3.5%20w-3.5%20mr-1%22%7D"><path d="M20 6 9 17l-5-5"></path></svg>
+        Accept
+      </button>
+      <button class="decline" (click)="rejectRequest(notification.id)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x h-3.5 w-3.5 mr-1" data-lov-id="src/components/notifications/NotificationItem.tsx:146:16" data-lov-name="X" data-component-path="src/components/notifications/NotificationItem.tsx" data-component-line="146" data-component-file="NotificationItem.tsx" data-component-name="X" data-component-content="%7B%22className%22%3A%22h-3.5%20w-3.5%20mr-1%22%7D"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        Decline
+      </button>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,7 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { ButtonComponent } from "../../shared/button/button.component";
+import { NotificationsModule } from '../notifications/notifications.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ButtonComponent } from "../../shared/button/button.component";
     AngularMaterialModule,
     CommonModule,
     RouterModule,
-    ButtonComponent
+    ButtonComponent,
+    NotificationsModule
 ],
   exports: [
     NavBarComponent

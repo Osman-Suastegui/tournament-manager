@@ -1,0 +1,46 @@
+.notification-container-dropdown{
+  height: 367px;
+  display: flex;
+  flex-direction: column;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #e7e0e0;
+  gap: 20px;
+}
+.header > *{
+  font-weight: 500;
+}
+.header > h4 {
+  font-size: 14px;
+}
+.header > h5{
+  font-size: 12px;
+}
+
+.main{
+  overflow-y: scroll;
+}
+/* change scroll bar design */
+
+.main {
+  overflow-y: scroll;
+  max-height: 100%;
+}
+
+/* Scrollbar track (background) */
+
+/* Scrollbar thumb (the draggable part) */
+.main::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  border: 2px solid transparent; /* Optional: creates padding around thumb */
+}
+
+/* Scrollbar thumb on hover */
+.main::-webkit-scrollbar-thumb:hover {
+  background-color: #ffffff;
+}
+

@@ -1,14 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
-
+@import './styles/_menu.scss';
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-icon {
     font-family: 'Material Icons Outlined' !important;
 }
 *{
-    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: system-ui;
     margin: 0;
     padding: 0;
 }
@@ -85,5 +85,7 @@ h1,h2,h3,h4,h5{
   color: #64748b;
   font-weight: 400;
 }
-
+h1,h2,h3,h4,h5{
+  margin: 0 !important;
+}
 

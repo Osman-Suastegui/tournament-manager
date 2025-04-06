@@ -1,0 +1,8 @@
+<div class="notification-container-dropdown" (click)="$event.stopPropagation()">
+  <header class="header">
+    <h4>Notifications</h4>
+  </header>
+  <main class="main">
+      <app-notifications-dropdown-card *ngFor="let notification of notifications" [notification]="notification"/>
+  </main>
+</div>
