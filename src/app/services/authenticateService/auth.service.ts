@@ -62,6 +62,10 @@ export class authService {
     return this.http.get<string>(url + "/usuarios/obtenerTipoUser?usuario="+usuario)
   }
 
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
   getUserId():string{
     return "1"
   }

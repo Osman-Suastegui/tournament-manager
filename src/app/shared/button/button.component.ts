@@ -14,6 +14,8 @@ export class ButtonComponent {
   @Input() type: 'button' | 'submit' = 'button';
   @Input() customClass: string = '';
   @Input() isFullWidth: boolean = false;
-  @Input() matIcon: string = '';
+  @Input() matIconLeft: string = '';
+  @Input() matIconRight: string = '';
+
   @Input() isDisabled:boolean = false;
 }

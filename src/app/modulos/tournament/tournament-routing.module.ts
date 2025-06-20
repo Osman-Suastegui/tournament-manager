@@ -10,9 +10,10 @@ import { ErrorMessageComponent } from "src/app/shared/error-message/error-messag
 import { SingleEliminationTreeComponent } from "../tree-diagrams/single-elimination-tree/single-elimination-tree.component";
 import { MatchesComponent } from "./matches/matches.component";
 import { OverviewTournamentComponent } from "./overview-tournament/overview-tournament.component";
+import { authGuard } from "src/app/guards/auth.guard";
 
 const routes: Routes = [
-  { path: "", component: CreateTournamentComponent },
+  { path: "", component: CreateTournamentComponent, canActivate:[authGuard]},
   {
     path: ":tournamentId",
     component: TournamentManagementComponent,

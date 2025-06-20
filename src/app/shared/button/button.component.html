@@ -1,9 +1,6 @@
-<button
-[type]="type"
-class="default-styles d-flex align-items-center justify-content-center"
-[ngClass]="{ 'full-width': isFullWidth,'disabled': isDisabled }"
-[disabled]="isDisabled"
->
-<mat-icon *ngIf="matIcon" class="mat-icon">{{ matIcon }}</mat-icon>
+<button [type]="type" class="default-styles d-flex align-items-center justify-content-center"
+  [ngClass]="{ 'full-width': isFullWidth,'disabled': isDisabled }" [disabled]="isDisabled">
+  <mat-icon *ngIf="matIconLeft" class="mat-icon">{{ matIconLeft }}</mat-icon>
   {{ text }}
+  <mat-icon *ngIf="matIconRight" class="mat-icon">{{ matIconRight }}</mat-icon>
 </button>

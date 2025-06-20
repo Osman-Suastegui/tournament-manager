@@ -7,10 +7,16 @@ import { ArbitrosModule } from '../arbitros/arbitros.module';
 import { JugadoresModule } from '../jugadores/jugadores.module';
 import { NavBarModule } from '../nav-bar/nav-bar.module';
 import { FooterModule } from '../footer/footer.module';
+import { ButtonComponent } from 'src/app/shared/button/button.component';
+import { TournamentCardComponent } from './tournament-card/tournament-card.component';
+import { TournamentListComponent } from './tournament-list/tournament-list.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    TournamentCardComponent,
+    TournamentListComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +25,9 @@ import { FooterModule } from '../footer/footer.module';
     ArbitrosModule,
     JugadoresModule,
     NavBarModule,
-    FooterModule
+    FooterModule,
+    ButtonComponent,
+    FormsModule
   ],
   exports: [
     HomeComponent

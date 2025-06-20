@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { authService } from "../../../services/authenticateService/auth.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { createCredentialForm, Credential } from "../../../models/Login/Credential";
 import { HttpErrorResponse } from "@angular/common/http";
 
@@ -14,7 +14,8 @@ export class SignInComponent {
 
   constructor(
     private auth: authService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ){}
 
   login() {
@@ -26,8 +27,8 @@ export class SignInComponent {
 
     this.auth.login(credentials).subscribe({
       next: (data) => {
-        console.log("data ",data)
-        this.router.navigate(["/home"]);
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+        this.router.navigate([returnUrl]);
       },
       error: (error: HttpErrorResponse) => {
         if(error.status === 400){
