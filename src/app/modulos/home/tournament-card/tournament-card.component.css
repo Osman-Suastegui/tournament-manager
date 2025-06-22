@@ -1,0 +1,25 @@
+.tournament-card{
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tournament-card-img{
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.tournament-card-details{
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+.tournament-card-name{
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.view-details{
+  text-align: right;
+}

@@ -80,8 +80,6 @@ export class CreateTournamentComponent implements OnInit {
     }
     // Admin permissions Component step 3
     if (this.stepperOption === 3 && this.adminPermissions.invalid) {
-      // print whats invalid
-      console.log(this.adminPermissions.errors);
       this.adminPermissions.markAllAsTouched();
       return;
     }
@@ -97,7 +95,6 @@ export class CreateTournamentComponent implements OnInit {
 
   onSubmit(): void {
 
-    console.log("New tournament:");
     const teams: Team[] = this.selectTeams.value.teams as Team[];
     const newTournament = {
       ...this.basicInformation.value,

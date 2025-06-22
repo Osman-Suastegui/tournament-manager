@@ -99,6 +99,7 @@ export class TournamentService {
 
     return "No Match";
   };
+  
   getContestTypeDescription = (type: TournamentType): string => {
 
     if (type === TournamentType.SingleElimination) return "Teams are eliminated after a single loss";

@@ -1,1 +1,35 @@
-<p>tournament-card works!</p>
+<div class="tournament-card">
+  <div class="tournament-card-container-img">
+    <!-- your image… -->
+     <img class="tournament-card-img" src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80&quot" alt=""/>
+  </div>
+  <div class="tournament-card-details">
+
+    <h2 class="tournament-card-name">{{ tournament.name }}</h2>
+
+
+
+    <!-- Type with a “tag” icon -->
+    <span class="text-gray">
+      <i class="fa fa-tag mr-1" aria-hidden="true"></i>
+      Single Elimination
+    </span>
+
+    <!-- Dates with a “calendar” icon -->
+    <span class="text-gray">
+      <i class="fa fa-calendar-alt mr-1" aria-hidden="true"></i>
+      {{ tournament.startDate }} – {{ tournament.endDate }}
+    </span>
+
+    <!-- Sport with a “ball” icon -->
+    <span class="text-gray">
+      <i class="fa fa-futbol mr-1" aria-hidden="true"></i>
+      {{ tournament.sport }}
+    </span>
+
+    <p class="view-details ">
+      <i class="fa fa-arrow-right mr-1"></i> View Details
+    </p>
+  </div>
+
+</div>

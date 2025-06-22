@@ -19,7 +19,7 @@ export class TournamentListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.tournamentService.getTournaments("", 10, 0).subscribe({
+    this.tournamentService.getTournaments("", 20, 0).subscribe({
       next: (data) => {
         this.tournaments = data;
         console.log('Tournaments fetched successfully:', this.tournaments);
