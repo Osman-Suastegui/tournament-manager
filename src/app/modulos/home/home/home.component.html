@@ -20,8 +20,9 @@
   <div class="list-header">
     <h2 class="list-title">Tournaments</h2>
     <div class="list-controls">
-      <input type="text" class="search-input" [(ngModel)]="search"  placeholder="🔍 Search tournaments…" />
-      <a class="view-all" routerLink="/tournaments">View all</a>
+      <div class="search-container">
+        <app-input type="text" [control]="search" placeholder="Search tournaments…" />
+      </div>
       <button class="btn btn-outline">Filters ⚙️</button>
     </div>
   </div>
@@ -34,6 +35,6 @@
     <button class="tab">Completed</button>
   </nav>
   <!-- LIST OF THE TOURNAMENTS AVAILABLE IN THE PLATFORM -->
-   <app-tournament-list [search]="search" />
+  <app-tournament-list [search]="search.value" />
   <app-footer-component></app-footer-component>
 </div>

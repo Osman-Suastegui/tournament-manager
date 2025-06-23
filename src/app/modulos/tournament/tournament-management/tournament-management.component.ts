@@ -1,7 +1,11 @@
 import { TeamService } from "./../../teams/teamService/team.service";
 import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import { Referee } from "../../admin-ligas/temporada-caracteriticas/interfaces";
-import { emptyTournament, Team, Tournament, User } from "../interface";
+import { BasicInformationTournament, emptyTournament, Team, Tournament, User } from "../interface";
+import { MatDialog } from "@angular/material/dialog";
+import { CreateTournamentBasicInformationComponent } from "../create-tournament/create-tournament-basic-information/create-tournament-basic-information.component";
+import { FormGroup } from "@angular/forms";
+import { TournamentService } from "../tournament.service";
 
 @Component({
   selector: "app-tournament-management",
@@ -10,6 +14,7 @@ import { emptyTournament, Team, Tournament, User } from "../interface";
 })
 export class TournamentManagementComponent implements OnInit,OnChanges {
   private teamServ = inject(TeamService);
+
   public isOpen: boolean = false;
 
   // PUBLIC
@@ -19,6 +24,7 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
   @Input() tournament: Tournament = emptyTournament;
   // PRIVATE
 
+  constructor(private dialog:MatDialog,private tournamentServ:TournamentService){}
   ngOnChanges(changes: SimpleChanges): void {
   //   if(changes["tournament"]){
   //     this.updateTournamentUI(this.tournament);
@@ -26,6 +32,7 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
   }
 
   ngOnInit(): void {
+    console.log("Tournament Management Component Initialized", this.tournament);
     // this.updateTournamentUI(this.tournament);
     this.setListeners();
   }
@@ -76,5 +83,15 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
     //   this.getReferees(this.tournamentId);
     // });
   }
+
+  openEditTournamentModal() {
+
+    this.dialog.open(CreateTournamentBasicInformationComponent,{
+      width: '800px',
+      panelClass: 'custom-dialog-edit-tournament',
+      data: this.tournamentServ.patchBasicInformationTournamentForm(this.tournament)
+    })
+  }
+
 
 }

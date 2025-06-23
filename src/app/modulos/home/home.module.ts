@@ -11,6 +11,8 @@ import { ButtonComponent } from 'src/app/shared/button/button.component';
 import { TournamentCardComponent } from './tournament-card/tournament-card.component';
 import { TournamentListComponent } from './tournament-list/tournament-list.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { InputComponent } from "../../shared/input/input.component";
 
 @NgModule({
   declarations: [
@@ -27,8 +29,10 @@ import { FormsModule } from '@angular/forms';
     NavBarModule,
     FooterModule,
     ButtonComponent,
-    FormsModule
-  ],
+    FormsModule,
+    RouterModule,
+    InputComponent
+],
   exports: [
     HomeComponent
   ]

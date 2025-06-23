@@ -28,3 +28,24 @@ app-side-nav-contest-management {
   background-color: rgba(0, 0, 0, 0.4); /* <- cambia el color y la opacidad aquí */
 }
 
+.btn-edit-tournament{
+  display:flex;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: #ffffff;
+  z-index: 100;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.btn-edit-tournament:hover {
+  background-color: #f0f0f0;
+}
+
+.btn-edit-tournament img {
+  margin-right:5px;
+}
+
+

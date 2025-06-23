@@ -1,7 +1,10 @@
-
 <div class="contest-management-container">
   <header class="banner">
     test
+    <button (click)="openEditTournamentModal()" class="btn-edit-tournament">
+      <img src="assets/icons/edit.svg" alt="My Icon" width="16" height="16">
+      Edit Tournament
+    </button>
   </header>
   <div class="content">
     <router-outlet></router-outlet>

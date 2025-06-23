@@ -35,6 +35,7 @@ export interface Tournament {
 }
 
 export interface BasicInformationTournament {
+  id?: FormControl<string | undefined>;
   name: FormControl<string>;
   sport: FormControl<string>;
   tournamentType: FormControl<TournamentType>;
@@ -50,16 +51,6 @@ export interface SelectTeamsTournament {
 }
 
 
-export interface BasicInformationTournament {
-  name: FormControl<string>;
-  sport: FormControl<string>;
-  tournamentType: FormControl<TournamentType>;
-  description: FormControl<string>;
-  location: FormControl<string>;
-  rules: FormControl<string | null>;
-  startDate: FormControl<string | null>;
-  endDate: FormControl<string | null>;
-}
 
 export interface AdminPermissions {
   admins: FormControl<string[]>;

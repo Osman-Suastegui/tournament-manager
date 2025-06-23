@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AddTournamentResponse, Tournament, BasicInformationTournament, SelectTeamsTournament, Team, AdminPermissions, User, TeamForm } from "./interface";
 import { Observable } from "rxjs";
@@ -12,6 +12,7 @@ import { minimumTeamsValidator } from "src/app/shared/validators";
 })
 export class TournamentService {
 
+  private model: string = "Tournament";
   constructor(private http: HttpClient,
     private tokenService: TokenService
   ) { }
@@ -36,7 +37,7 @@ export class TournamentService {
 
   getTournamentById(id: string): Observable<Tournament> {
 
-    return this.http.get<Tournament>(`${url}/tournaments/getTournament?tournamentId=${id}`);
+    return this.http.get<Tournament>(`${url}/${this.model}/getTournamentById?id=${id}`);
   }
 
   getTournaments(search: string, limit: number = 20, skip: number = 0): Observable<Tournament[]> {
@@ -45,6 +46,10 @@ export class TournamentService {
 
   createBasicInformationTournamentForm(): FormGroup<BasicInformationTournament> {
     return new FormGroup<BasicInformationTournament>({
+      id: new FormControl<string | undefined>("", {
+        nonNullable: true,
+        validators: [Validators.required],
+      }),
       name: new FormControl<string>("", {
         nonNullable: true,
         validators: [Validators.required, Validators.minLength(1)],
@@ -74,6 +79,22 @@ export class TournamentService {
     });
   }
 
+  patchBasicInformationTournamentForm(data: any): FormGroup<BasicInformationTournament> {
+    const form = this.createBasicInformationTournamentForm();
+    form.patchValue({
+      id: data.id,
+      name: data.name,
+      sport: data.sport,
+      tournamentType: data.tournamentType,
+      description: data.description,
+      location: data.location,
+      rules: data.rules,
+      startDate: data.startDate ? new Date(data.startDate).toISOString().split('T')[0] : null,
+      endDate: data.endDate ? new Date(data.endDate).toISOString().split('T')[0] : null
+    });
+    return form;
+  }
+
   createSelectTeamsTournamentForm(): FormGroup<SelectTeamsTournament> {
     return new FormGroup<SelectTeamsTournament>({
       teams: new FormArray<FormGroup<TeamForm>>([], { // Validators should be part of the FormArray options object
@@ -93,19 +114,23 @@ export class TournamentService {
 
   getContestTypeName = (type: TournamentType | null | undefined): string => {
 
-    if(!type) return "Not specified";
+    if (!type) return "Not specified";
     if (type === TournamentType.SingleElimination) return "Single Elimination";
     if (type === TournamentType.DoubleElimination) return "Double Elimination";
 
     return "No Match";
   };
-  
+
   getContestTypeDescription = (type: TournamentType): string => {
 
     if (type === TournamentType.SingleElimination) return "Teams are eliminated after a single loss";
     if (type === TournamentType.DoubleElimination) return "Teams must lose twice to be eliminated";
 
     return "No Match";
+  }
+
+  editTournament(tournament: any):Observable<Tournament> {
+    return this.http.put<Tournament>(`${url}/${this.model}/editTournament`, tournament)
   }
 
 
