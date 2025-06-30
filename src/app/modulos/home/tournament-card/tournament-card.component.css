@@ -23,3 +23,29 @@
 .view-details{
   text-align: right;
 }
+
+.tournament-card-container-img{
+  position: relative;
+}
+.tournament-status{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.tournament-status-ongoing{
+  background-color: #dcfce7; /* Default color */
+}
+.tournament-status-upcoming{
+  background-color: #dbeafe; /* Default color */
+}
+.tournament-status-completed{
+  background-color: #f3f4f6; /* Default color */
+}
+
+.mat-icon{
+  font-size: 1.2rem;
+}

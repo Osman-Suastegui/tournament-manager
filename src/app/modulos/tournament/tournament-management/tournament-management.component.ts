@@ -85,7 +85,7 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
   }
 
   openEditTournamentModal() {
-
+    console.log("Opening Edit Tournament Modal", this.tournament);
     this.dialog.open(CreateTournamentBasicInformationComponent,{
       width: '800px',
       panelClass: 'custom-dialog-edit-tournament',

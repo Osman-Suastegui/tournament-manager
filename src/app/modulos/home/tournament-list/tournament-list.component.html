@@ -1,4 +1,3 @@
-<p>tournament-list works!</p>
 <div class="tournament-card-container">
   <div class="tournament-card" [routerLink]="['/tournament', tournament.id]" *ngFor="let tournament of tournaments" >
     <app-tournament-card [tournament]="tournament" />

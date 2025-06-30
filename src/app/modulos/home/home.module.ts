@@ -13,6 +13,7 @@ import { TournamentListComponent } from './tournament-list/tournament-list.compo
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { InputComponent } from "../../shared/input/input.component";
+import { AngularMaterialModule } from '../angular-material/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { InputComponent } from "../../shared/input/input.component";
     ButtonComponent,
     FormsModule,
     RouterModule,
-    InputComponent
+    InputComponent,
+    AngularMaterialModule
 ],
   exports: [
     HomeComponent

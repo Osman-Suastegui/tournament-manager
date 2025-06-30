@@ -29,12 +29,34 @@
 
   <!-- Tabs -->
   <nav class="tabs">
-    <button class="tab active">All</button>
-    <button class="tab">Upcoming</button>
-    <button class="tab">Ongoing</button>
-    <button class="tab">Completed</button>
+
+    <!-- ALL -->
+    <button class="tab" type="button" routerLink="." [queryParams]="{ status: null }"
+      routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true, queryParams: 'exact' }" (click)="onStatusClick('')">
+      All
+    </button>
+
+    <!-- UPCOMING -->
+    <button class="tab" type="button" routerLink="." [queryParams]="{ status: 'upcoming' }"
+      routerLinkActive="active" (click)="onStatusClick('upcoming')">
+      Upcoming
+    </button>
+
+    <!-- ONGOING -->
+    <button class="tab" type="button" routerLink="." [queryParams]="{ status: 'ongoing' }"
+      routerLinkActive="active" (click)="onStatusClick('ongoing')">
+      Ongoing
+    </button>
+
+    <!-- COMPLETED -->
+    <button class="tab" type="button" routerLink="." [queryParams]="{ status: 'completed' }"
+      routerLinkActive="active" (click)="onStatusClick('completed')">
+      Completed
+    </button>
+
   </nav>
+
   <!-- LIST OF THE TOURNAMENTS AVAILABLE IN THE PLATFORM -->
-  <app-tournament-list [search]="search.value" />
+  <app-tournament-list [search]="search.value" [status]="status" />
   <app-footer-component></app-footer-component>
 </div>

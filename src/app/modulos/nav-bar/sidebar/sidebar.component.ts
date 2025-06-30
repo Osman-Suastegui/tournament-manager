@@ -20,13 +20,13 @@ export class SidebarComponent implements OnInit {
   private router = inject(Router)
 
   ngOnInit(): void {
-    this.tournamentServ.getTournaments(this.authService.getUserId(),0,30).subscribe({
-      next:(tournaments:Tournament[]) => {
-        this.tournaments = tournaments
-        console.log("tournaments",tournaments)
-      }
+    // this.tournamentServ.getTournaments(this.authService.getUserId(),0,30).subscribe({
+    //   next:(tournaments:Tournament[]) => {
+    //     this.tournaments = tournaments
+    //     console.log("tournaments",tournaments)
+    //   }
 
-    })
+    // })
   }
 
   visitTournament(id:string):void{

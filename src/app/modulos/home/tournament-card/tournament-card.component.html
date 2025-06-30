@@ -1,12 +1,22 @@
 <div class="tournament-card">
   <div class="tournament-card-container-img">
     <!-- your image… -->
-     <img class="tournament-card-img" src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80&quot" alt=""/>
+    <img class="tournament-card-img"
+      src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80&quot"
+      alt="" />
+
+    <span class="tournament-status" [ngClass]="{
+        'tournament-status-ongoing': tournamentStatus === 'Ongoing',
+        'tournament-status-upcoming': tournamentStatus === 'Upcoming',
+        'tournament-status-completed': tournamentStatus === 'Completed'
+      }">
+      {{tournamentStatus}}
+    </span>
+
   </div>
   <div class="tournament-card-details">
 
     <h2 class="tournament-card-name">{{ tournament.name }}</h2>
-
 
 
     <!-- Type with a “tag” icon -->
@@ -15,17 +25,35 @@
       Single Elimination
     </span>
 
-    <!-- Dates with a “calendar” icon -->
-    <span class="text-gray">
-      <i class="fa fa-calendar-alt mr-1" aria-hidden="true"></i>
-      {{ tournament.startDate }} – {{ tournament.endDate }}
-    </span>
+    <div class="d-flex  align-items-center mt-2 mb-2">
 
-    <!-- Sport with a “ball” icon -->
-    <span class="text-gray">
-      <i class="fa fa-futbol mr-1" aria-hidden="true"></i>
-      {{ tournament.sport }}
-    </span>
+      <!-- Dates with a “calendar” icon -->
+      <span class="text-gray d-flex align-items-center">
+        <mat-icon>calendar_today</mat-icon>
+        {{ tournament.startDate | date:'MMM d, y' }} to {{ tournament.endDate | date:'MMM d, y' }}
+      </span>
+
+      <span class="text-gray d-flex align-items-center ml-3">
+        <mat-icon>location_on</mat-icon>
+        {{tournament.location }}
+      </span>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between">
+
+      <!-- Sport with a “ball” icon -->
+      <span class="text-gray">
+        <i class="fa fa-futbol mr-1" aria-hidden="true"></i>
+        {{ tournament.sport }}
+      </span>
+
+
+      <!-- Sport with a “ball” icon -->
+      <span class="text-gray">
+        <i class="fa fa-futbol mr-1" aria-hidden="true"></i>
+        {{ tournament.sport }}
+      </span>
+    </div>
 
     <p class="view-details ">
       <i class="fa fa-arrow-right mr-1"></i> View Details

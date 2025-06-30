@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { Tournament } from '../../tournament/interface';
 import { TournamentService } from '../../tournament/tournament.service';
 import { Router } from '@angular/router';
-import { debounceTime } from 'rxjs';
+import { debounceTime, startWith, Subject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-tournament-list',
@@ -12,31 +12,40 @@ import { debounceTime } from 'rxjs';
 export class TournamentListComponent implements OnInit, OnChanges {
 
   @Input() search: string = '';
+  @Input() status: 'ongoing' | "upcoming" | "completed" | "" = "";
+  private search$ = new Subject<string>();
   tournaments: Tournament[] = []
 
   constructor(private tournamentService: TournamentService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['search']) {
-      this.handleSearchInputChange(changes['search'].currentValue);
+    if (changes['search'] || changes['status']) {
+      this.search$.next(changes['search']?.currentValue || '');
     }
-    console.log('Search input changed:', changes);
   }
 
   ngOnInit(): void {
+    this.initSearchListener();
   }
 
-  handleSearchInputChange(search: string): void {
-    this.tournamentService.getTournaments(search, 21, 0).pipe(debounceTime(200)).subscribe({
-      next: (data) => {
-        this.tournaments = data;
-        console.log('Filtered tournaments:', this.tournaments);
-      },
-      error: (error) => {
-        console.error('Error filtering tournaments:', error);
-      }
-    });
-
+  initSearchListener(): void {
+    this.search$
+      .pipe(
+        debounceTime(300),
+        startWith(''),
+        switchMap(q =>
+          this.tournamentService.getTournaments({
+            limit: 20,
+            skip: 0,
+            q: q,
+            status: this.status
+          })
+        )
+      )
+      .subscribe({
+        next: data => (this.tournaments = data),
+        error: err => console.error('Error fetching tournaments', err)
+      });
   }
 
 }

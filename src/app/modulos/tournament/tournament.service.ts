@@ -40,8 +40,15 @@ export class TournamentService {
     return this.http.get<Tournament>(`${url}/${this.model}/getTournamentById?id=${id}`);
   }
 
-  getTournaments(search: string, limit: number = 20, skip: number = 0): Observable<Tournament[]> {
-    return this.http.get<Tournament[]>(`${url}/Tournament/?search=${search}&limit=${limit}&skip=${skip}`);
+  getTournaments(filters: { limit?: number; skip?: number; q?: string,status?:string } = {}): Observable<Tournament[]> {
+    const { limit = 20, skip = 0, q = '',status = '' } = filters;
+    const params = new URLSearchParams({
+      limit: limit.toString(),
+      skip: skip.toString(),
+      q: q,
+      status:status
+    });
+    return this.http.get<Tournament[]>(`${url}/Tournament/?${params.toString()}`);
   }
 
   createBasicInformationTournamentForm(): FormGroup<BasicInformationTournament> {
