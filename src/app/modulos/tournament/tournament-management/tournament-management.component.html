@@ -1,10 +1,37 @@
 <div class="contest-management-container">
   <header class="banner">
-    test
+    <a routerLink="/home" class="back-to-home">
+      <span>&lt;</span> Back to Home
+    </a>
+
     <button (click)="openEditTournamentModal()" class="btn-edit-tournament">
       <img src="assets/icons/edit.svg" alt="My Icon" width="16" height="16">
       Edit Tournament
     </button>
+
+    <div class="banner-content">
+      <div class="banner-tags">
+        <span class="tournament-status" [ngClass]="{
+          'tournament-status-ongoing': tournamentStatus === 'Ongoing',
+          'tournament-status-upcoming': tournamentStatus === 'Upcoming',
+          'tournament-status-completed': tournamentStatus === 'Completed'
+        }">
+          {{tournamentStatus}}
+        </span>
+        <span class="tournament-sport-tag">
+          {{tournament.sport}}
+        </span>
+      </div>
+
+      <h1 class="tournament-title">{{tournament.name}}</h1>
+
+      <div class="tournament-dates">
+        <span class="date-info">
+          <mat-icon>calendar_today</mat-icon>
+          {{tournament.startDate | date:'MMM d, y'}} - {{tournament.endDate | date:'MMM d, y'}}
+        </span>
+      </div>
+    </div>
   </header>
 
 

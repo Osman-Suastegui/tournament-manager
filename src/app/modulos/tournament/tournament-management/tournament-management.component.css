@@ -29,6 +29,30 @@ app-side-nav-contest-management {
   background-color: rgba(0, 0, 0, 0.4); /* <- cambia el color y la opacidad aquí */
 }
 
+.back-to-home {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.back-to-home:hover {
+  opacity: 0.8;
+}
+
+.back-to-home span {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
 .btn-edit-tournament{
   display:flex;
   align-items: center;
@@ -47,6 +71,88 @@ app-side-nav-contest-management {
 
 .btn-edit-tournament img {
   margin-right:5px;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 10;
+  padding: 80px 20px 20px 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #ffffff;
+}
+
+.banner-tags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.tournament-status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.tournament-status-ongoing {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.tournament-status-upcoming {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.tournament-status-completed {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.tournament-sport-tag {
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.tournament-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0 0 15px 0;
+  color: #ffffff;
+}
+
+.tournament-dates {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.date-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.date-info mat-icon {
+  font-size: 1.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 

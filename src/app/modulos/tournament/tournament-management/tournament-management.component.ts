@@ -1,10 +1,8 @@
 import { TeamService } from "./../../teams/teamService/team.service";
 import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import { Referee } from "../../admin-ligas/temporada-caracteriticas/interfaces";
-import { BasicInformationTournament, emptyTournament, Team, Tournament, TournamentType, User } from "../interface";
+import { emptyTournament, Team, Tournament } from "../interface";
 import { MatDialog } from "@angular/material/dialog";
-import { CreateTournamentBasicInformationComponent } from "../create-tournament/create-tournament-basic-information/create-tournament-basic-information.component";
-import { FormGroup } from "@angular/forms";
 import { TournamentService } from "../tournament.service";
 import { CreateTournamentBasicInformationModalComponent } from "../create-tournament/create-tournament-basic-information/create-tournament-basic-information-modal/create-tournament-basic-information-modal.component";
 
@@ -23,19 +21,36 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
   public referees: Referee[] = [];
   public organizers: string[] = [];
   @Input() tournament: Tournament = emptyTournament;
+  public tournamentStatus: 'Upcoming' | 'Ongoing' | "Completed" = 'Upcoming';
   // PRIVATE
 
   constructor(private dialog:MatDialog,private tournamentServ:TournamentService){}
   ngOnChanges(changes: SimpleChanges): void {
-  //   if(changes["tournament"]){
-  //     this.updateTournamentUI(this.tournament);
-  //   }
+    if(changes["tournament"]){
+      this.setTournamentStatus();
+    }
   }
 
   ngOnInit(): void {
     console.log("Tournament Management Component Initialized", this.tournament);
-    // this.updateTournamentUI(this.tournament);
+    this.setTournamentStatus();
     this.setListeners();
+  }
+
+  setTournamentStatus(): void {
+    if (this.tournament && this.tournament.startDate && this.tournament.endDate) {
+      const now = new Date();
+      const start = new Date(this.tournament.startDate);
+      const end = new Date(this.tournament.endDate);
+
+      if (now < start) {
+        this.tournamentStatus = 'Ongoing';
+      } else if (now >= start && now <= end) {
+        this.tournamentStatus = 'Ongoing';
+      } else {
+        this.tournamentStatus = 'Ongoing';
+      }
+    }
   }
 
   // private updateTournamentUI(tournament: Tournament) {
