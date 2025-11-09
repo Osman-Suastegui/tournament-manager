@@ -1,0 +1,72 @@
+<div class="brackets-container">
+  <div class="brackets-header">
+    <h1 class="brackets-title">Tournament Bracket</h1>
+    <div class="brackets-view-selector">
+      <select class="view-dropdown">
+        <option>Vertical View</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="brackets-content" *ngIf="rounds.length > 0">
+    <div class="round-column" *ngFor="let round of rounds">
+      <h2 class="round-title">{{ round.name }}</h2>
+      <div class="matches-list">
+        <div class="match-card" *ngFor="let match of round.matches">
+          <!-- Status Tag -->
+          <div class="match-status" [ngClass]="{
+            'status-completed': match.status === 'Completed',
+            'status-live': match.status === 'Live',
+            'status-scheduled': match.status === 'Scheduled',
+            'status-pending': match.status === 'Pending'
+          }">
+            {{ match.status }}
+          </div>
+
+
+          <!-- Teams -->
+          <div class="match-teams">
+            <!-- Team 1 -->
+            <div class="team-row">
+              <div class="team-avatar">
+                <img *ngIf="match.team1 && match.team1.name !== 'TBD'"
+                     src="assets/imgs/user.png"
+                     alt="Team avatar" />
+                <div *ngIf="!match.team1 || match.team1.name === 'TBD'"
+                     class="avatar-placeholder"></div>
+              </div>
+              <span class="team-name">{{ getTeamName(match.team1) }}</span>
+              <span class="team-score" *ngIf="match.status !== 'Pending'">
+                {{ getTeamScore(match, 1) }}
+              </span>
+            </div>
+
+            <!-- Team 2 -->
+            <div class="team-row">
+              <div class="team-avatar">
+                <img *ngIf="match.team2 && match.team2.name !== 'TBD'"
+                     src="assets/imgs/user.png"
+                     alt="Team avatar" />
+                <div *ngIf="!match.team2 || match.team2.name === 'TBD'"
+                     class="avatar-placeholder"></div>
+              </div>
+              <span class="team-name">{{ getTeamName(match.team2) }}</span>
+              <span class="team-score" *ngIf="match.status !== 'Pending'">
+                {{ getTeamScore(match, 2) }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Date -->
+          <div class="match-date">
+            {{ formatDate(match.date) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="brackets-empty" *ngIf="rounds.length === 0">
+    <p>No matches available</p>
+  </div>
+</div>

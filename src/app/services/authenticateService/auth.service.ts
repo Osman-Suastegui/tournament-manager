@@ -45,7 +45,7 @@ export class authService {
   }
 
   login(creds: Credential): Observable<any> {
-    return this.http.post(url + '/api/users/login', creds, {
+    return this.http.post(url + '/users/login', creds, {
       observe: 'response'
     }).pipe(
       map((response: HttpResponse<any>) => {

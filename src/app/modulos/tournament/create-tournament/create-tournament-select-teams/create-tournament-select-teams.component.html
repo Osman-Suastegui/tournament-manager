@@ -1,48 +1,35 @@
 <div class="select-teams-container">
   <header class="header">
     <div class="title">
-      <h2>Select teams</h2>
-      <span>Add teams to your tournament. You can invite new teams or select from existing ones.</span>
+      <h2>Add teams</h2>
+      <span>Add teams to your tournament.</span>
     </div>
   </header>
-  <div class="search-container">
-    <app-input class="search-input" [control]="search" placeholder="Search teams..." />
+  <div class="search-container d-flex justify-content-end">
+
+    <!-- <app-input class="search-input" [control]="search" placeholder="Search teams..." /> -->
     <app-button matIconLeft="add" (click)="addTeam()" text="New Team" />
   </div>
 
-  <section class="teams">
-    <div class="team-card-container" *ngFor="let team of selectTeams.value.teams">
+  <section class="teams" *ngIf="(selectTeams.value.teams?.length ?? 0) > 0">
+    <div class="team-card-container" *ngFor="let team of selectTeams.value.teams;let i = index">
       <img src="https://i.pravatar.cc/150?u=team1" class="team-image" width="56px" height="56px" />
-      <div class="team-info">
+      <div class="team-info d-flex align-items-center justify-content-between">
         <p class="team-name">{{team.name}}</p>
-        <span class="team-members">12 members</span>
-        <section class="stats-container">
-          <div class="stat">
-            <span>Wins</span>
-            <p>8</p>
+        <section class="actions-container">
+          <div class="action">
+            <button mat-icon-button (click)="editTeam(team)" title="Edit Team">
+              <mat-icon>edit</mat-icon>
+            </button>
           </div>
-          <div class="stat">
-            <span>Losses</span>
-            <p>2</p>
-          </div>
-          <div class="stat">
-            <span>Win Rate</span>
-            <p>80%</p>
+          <div class="action">
+            <button mat-icon-button (click)="removeTeam(i)" title="Remove Team">
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
         </section>
       </div>
     </div>
   </section>
-
-  <!-- show error minTeams -->
-  <app-tags [tags]="teams"
-            (tagsChange)="tagsChange($event)"
-            [title]="'Selected teams'"
-            [errorMessage]="'You must select 2 teams to continue.'"
-            [minTags]="2"
-            [displayTag]="displayTag"
-            >
-    </app-tags>
-
 
 </div>

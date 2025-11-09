@@ -13,10 +13,6 @@ import { Subscription } from "rxjs";
 })
 export class CreateTournamentSelectTeamsComponent implements OnInit, OnDestroy {
 
-  // export interface SelectTeamsTournament {
-  //   teams: FormArray<FormControl<Team>>;
-  // }
-
   @Input() selectTeams!: FormGroup<SelectTeamsTournament>;
   search: FormControl<string | null> = new FormControl("");
   teams: Team[] = [];
@@ -35,10 +31,10 @@ export class CreateTournamentSelectTeamsComponent implements OnInit, OnDestroy {
       (this.selectTeams.get("teams") as FormArray).push(new FormGroup({
         id: new FormControl(newTeam.id),
         name: new FormControl(newTeam.name),
-        leaderEmail: new FormControl(newTeam.leaderEmail,[Validators.email])
+        leaderEmail: new FormControl(newTeam.leaderEmail, [Validators.email])
       }));
 
-      this.teams = this.selectTeams.value.teams as Team[]
+      this.teams = this.selectTeams.value.teams as Team[];
     }
     );
   }
@@ -53,17 +49,19 @@ export class CreateTournamentSelectTeamsComponent implements OnInit, OnDestroy {
     });
   }
 
-  tagsChange(teams: Team[]) {
-    this.teams = teams;
-    this.selectTeams.patchValue({ teams });
-  }
-
-  displayTag(team: Team) {
-    return team.name;
-  }
-
   ngOnDestroy(): void {
     this.teamSubscription.unsubscribe();
+  }
+
+  removeTeam(index: number) {
+    const teamsArray = this.selectTeams.get("teams") as FormArray;
+    if (index >= 0 && index < teamsArray.length) {
+      teamsArray.removeAt(index);
+      this.teams = teamsArray.value as Team[];
+    }
+  }
+
+  editTeam(team: any) {
   }
 
 }

@@ -1,11 +1,12 @@
 import { TeamService } from "./../../teams/teamService/team.service";
 import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import { Referee } from "../../admin-ligas/temporada-caracteriticas/interfaces";
-import { BasicInformationTournament, emptyTournament, Team, Tournament, User } from "../interface";
+import { BasicInformationTournament, emptyTournament, Team, Tournament, TournamentType, User } from "../interface";
 import { MatDialog } from "@angular/material/dialog";
 import { CreateTournamentBasicInformationComponent } from "../create-tournament/create-tournament-basic-information/create-tournament-basic-information.component";
 import { FormGroup } from "@angular/forms";
 import { TournamentService } from "../tournament.service";
+import { CreateTournamentBasicInformationModalComponent } from "../create-tournament/create-tournament-basic-information/create-tournament-basic-information-modal/create-tournament-basic-information-modal.component";
 
 @Component({
   selector: "app-tournament-management",
@@ -86,11 +87,17 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
 
   openEditTournamentModal() {
     console.log("Opening Edit Tournament Modal", this.tournament);
-    this.dialog.open(CreateTournamentBasicInformationComponent,{
+    this.dialog.open(CreateTournamentBasicInformationModalComponent,{
       width: '800px',
       panelClass: 'custom-dialog-edit-tournament',
-      data: this.tournamentServ.patchBasicInformationTournamentForm(this.tournament)
+      data: {
+        ...this.tournamentServ.patchBasicInformationTournamentForm(this.tournament),
+      }
     })
+  }
+
+  onTabClick(arg0: string) {
+
   }
 
 

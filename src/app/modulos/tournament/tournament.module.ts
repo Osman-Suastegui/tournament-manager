@@ -20,6 +20,9 @@ import { CreateTournamentAdminPermissionsComponent } from './create-tournament/c
 import { CreateTournamentReviewCreateComponent } from './create-tournament/create-tournament-review-create/create-tournament-review-create.component';
 import { TagsComponent } from "src/app/shared/tags/tags.component";
 import { OverviewTournamentComponent } from './overview-tournament/overview-tournament.component';
+import { AdminComponent } from './admin/admin.component';
+import { CreateTournamentBasicInformationModalComponent } from './create-tournament/create-tournament-basic-information/create-tournament-basic-information-modal/create-tournament-basic-information-modal.component';
+import { BracketsComponent } from './brackets/brackets.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { OverviewTournamentComponent } from './overview-tournament/overview-tour
     CreateTournamentAdminPermissionsComponent,
     CreateTournamentReviewCreateComponent,
     OverviewTournamentComponent,
+    AdminComponent,
+    CreateTournamentBasicInformationModalComponent,
+    BracketsComponent,
   ],
   imports: [
     CommonModule,

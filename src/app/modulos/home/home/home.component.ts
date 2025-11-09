@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   tipoUsuario: any = '';
 
   ngOnInit(): void {
-    this.syncBoxWithUrl();
+    this.syncStateWithUrl();
     this.initSearchListener();
 
   }
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   private initSearchListener(): void {
     this.search.valueChanges
       .pipe(
-        debounceTime(400),
+        debounceTime(300),
       )
       .subscribe(term => {
         this.router.navigate([], {
@@ -52,10 +52,16 @@ export class HomeComponent implements OnInit {
         });
       });
   }
+  
 
-  private syncBoxWithUrl(): void {
+  private syncStateWithUrl(): void {
     const initialQ = this.route.snapshot.queryParamMap.get('q') ?? '';
     this.search.setValue(initialQ, { emitEvent: false });
+
+    const initialStatus = this.route.snapshot.queryParamMap.get('status') as "upcoming" | "ongoing" | "completed" | "" | null;
+    if (initialStatus === "upcoming" || initialStatus === "ongoing" || initialStatus === "completed" || initialStatus === "") {
+      this.status = initialStatus;
+    }
   }
 
 }

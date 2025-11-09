@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TournamentType } from '../../interface';
 import { TournamentService } from '../../tournament.service';
 
@@ -9,18 +9,15 @@ import { TournamentService } from '../../tournament.service';
 })
 export class TournamentTypeSelectionComponent {
   tournamentTypes = Object.values(TournamentType); // Extract enum values
-  tournamentTypeSelected: TournamentType = TournamentType.SingleElimination;
-  @Output() selectedType = new EventEmitter<TournamentType>();
+  @Input() tournamentTypeSelected: TournamentType = TournamentType.DoubleElimination;
+  @Output() tournamentTypeSelectedChange = new EventEmitter<TournamentType>();
   constructor(
     public tournamentServ: TournamentService,
-  ) {
-    this.tournamentServ = tournamentServ;
-  }
+  ) { }
 
   onSelectTypeTournament(type: TournamentType) {
     this.tournamentTypeSelected = type;
-    console.log(this.tournamentTypeSelected);
-    this.selectedType.emit(this.tournamentTypeSelected);
+    this.tournamentTypeSelectedChange.emit(this.tournamentTypeSelected);
   }
 
 }

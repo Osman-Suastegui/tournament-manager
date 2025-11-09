@@ -11,7 +11,7 @@ export class StepperComponent {
   @Input() selected: number = 1;
   @Output() selectedChange = new EventEmitter<number>();
   onSelectOption(option: number): void {
-    this.selected = option;
-    this.selectedChange.emit(option);
+    // this.selected = option;
+    // this.selectedChange.emit(option);
   }
 }

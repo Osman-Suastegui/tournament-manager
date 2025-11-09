@@ -6,7 +6,56 @@
       Edit Tournament
     </button>
   </header>
+
+
   <div class="content">
+    <!-- Tabs -->
+    <nav class="tabs">
+
+      <!-- OVERVIEW -->
+      <button class="tab" type="button" routerLink="overview" routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }" (click)="onTabClick('overview')">
+        Overview
+      </button>
+
+      <!-- BRACKET -->
+      <button class="tab" type="button" routerLink="brackets" routerLinkActive="active"
+        (click)="onTabClick('bracket')">
+        Bracket
+      </button>
+
+      <!-- TEAMS -->
+      <button class="tab" type="button" routerLink="teams" routerLinkActive="active"
+        (click)="onTabClick('teams')">
+        Teams
+      </button>
+
+      <!-- MATCHES -->
+      <button class="tab" type="button" routerLink="matches" routerLinkActive="active"
+        (click)="onTabClick('matches')">
+        Matches
+      </button>
+
+      <!-- STATISTICS -->
+      <button class="tab" type="button" routerLink="statistics" routerLinkActive="active"
+        (click)="onTabClick('statistics')">
+        Statistics
+      </button>
+
+      <!-- REGISTRATION -->
+      <button class="tab" type="button" routerLink="registration" routerLinkActive="active"
+        (click)="onTabClick('registration')">
+        Registration
+      </button>
+
+      <!-- ADMIN -->
+      <button class="tab" type="button" routerLink="admin" routerLinkActive="active"
+        (click)="onTabClick('admin')">
+        Admin
+      </button>
+
+    </nav>
+
     <router-outlet></router-outlet>
   </div>
 </div>

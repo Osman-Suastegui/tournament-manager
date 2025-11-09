@@ -1,18 +1,20 @@
-import { Component, Inject, Input, OnInit, Optional } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BasicInformationTournament } from '../../interface';
 import { FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { TournamentService } from '../../tournament.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DateTimeService } from 'src/app/shared/services/date-time.service';
+import { CreateTournamentBasicInformationModalComponent } from './create-tournament-basic-information-modal/create-tournament-basic-information-modal.component';
 
 @Component({
   selector: 'app-create-tournament-basic-information',
   templateUrl: './create-tournament-basic-information.component.html',
   styleUrls: ['./create-tournament-basic-information.component.css']
 })
-export class CreateTournamentBasicInformationComponent implements OnInit {
+export class CreateTournamentBasicInformationComponent {
   @Input() basicInformation!: FormGroup<BasicInformationTournament>;
+  @Input() isEditing: boolean = false;
   options = [
     { label: "Soccer", value: "football" },
     { label: "Basket", value: "Basketball" },
@@ -21,15 +23,10 @@ export class CreateTournamentBasicInformationComponent implements OnInit {
   constructor(
     private tournamentServ: TournamentService,
     private dateTimeService:DateTimeService,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data?: FormGroup<BasicInformationTournament>,
-    @Optional() private dialogRef?: MatDialogRef<CreateTournamentBasicInformationComponent>,
+    // private dialogRef?: MatDialogRef<CreateTournamentBasicInformationModalComponent>
+
   ) { }
 
-  ngOnInit(): void {
-    if (this.data?.value) {
-      this.basicInformation = this.data;
-    }
-  }
 
   onSubmit(): void {
     console.log('Form submitted:', this.basicInformation.value);
@@ -50,7 +47,7 @@ export class CreateTournamentBasicInformationComponent implements OnInit {
     this.tournamentServ.editTournament(payload).subscribe({
       next: (data) => {
         console.log('Tournament updated successfully:', data);
-        this.dialogRef?.close(payload)
+        // this.dialogRef?.close(payload)
       },
       error: (error: HttpErrorResponse) => {
         console.error('Error updating tournament:', error);

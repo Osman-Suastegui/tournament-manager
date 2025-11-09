@@ -29,4 +29,5 @@
 
 .type.selected-type {
   border: 2px solid #3182ce;
+  font-size: 35px;
 }

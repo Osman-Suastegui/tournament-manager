@@ -28,9 +28,13 @@
 
   <div class="container-form-fields flex-column">
     <hr>
-    <app-tournament-type-selection/>
+    <app-tournament-type-selection
+    [tournamentTypeSelected]="basicInformation.controls.tournamentType.value"
+    (tournamentTypeSelectedChange)="basicInformation.controls.tournamentType.setValue($event)">
+  </app-tournament-type-selection>
+
   </div>
 
   <!-- SAVE BUTTON -->
-  <button class="save" type="submit" *ngIf="data?.value">EDIT</button>
+  <button class="save" type="submit" *ngIf="isEditing">EDIT</button>
 </form>

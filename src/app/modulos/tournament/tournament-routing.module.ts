@@ -11,6 +11,7 @@ import { SingleEliminationTreeComponent } from "../tree-diagrams/single-eliminat
 import { MatchesComponent } from "./matches/matches.component";
 import { OverviewTournamentComponent } from "./overview-tournament/overview-tournament.component";
 import { authGuard } from "src/app/guards/auth.guard";
+import { BracketsComponent } from "./brackets/brackets.component";
 
 const routes: Routes = [
   { path: "", component: CreateTournamentComponent, canActivate:[authGuard]},
@@ -22,6 +23,10 @@ const routes: Routes = [
     },
     children: [
       { path: "overview", component: OverviewTournamentComponent },
+      { path: "brackets", component: BracketsComponent },
+      { path: "admin", component: MatchesComponent },
+      { path: "registration", component: MatchesComponent },
+
       { path: "matches", component: MatchesComponent },
       { path: "team/:teamId/:token", component: TeamPlayersComponent, canActivate: [AddPlayerTokenGuard] },
       { path: "team/:teamId", component: TeamPlayersComponent },

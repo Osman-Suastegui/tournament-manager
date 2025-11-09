@@ -16,6 +16,7 @@ app-side-nav-contest-management {
   height: 320px;
   width: 100%;
   overflow: hidden;
+  margin-bottom: 20px;
 }
 
 .banner::after {
@@ -49,3 +50,37 @@ app-side-nav-contest-management {
 }
 
 
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  background-color: #f1f5f9;
+  width: max-content;
+  border-radius: 10px;
+  padding: 0.5rem ;
+}
+
+.tab {
+  border: none;
+  background: transparent;
+  font-size: 0.9rem;
+  color: #555;
+  cursor: pointer;
+  padding: 0px 0.5rem;
+  font-weight: 500;
+}
+
+.active {
+  font-weight: 600;
+  color: black;
+  box-shadow: 0 2px 4px rgb(255, 255, 255);
+  background-color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+}
+
+.content{
+  width: 80%;
+  margin: 0 auto;
+}

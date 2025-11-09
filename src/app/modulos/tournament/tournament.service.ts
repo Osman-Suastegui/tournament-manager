@@ -1,12 +1,11 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { AddTournamentResponse, Tournament, BasicInformationTournament, SelectTeamsTournament, Team, AdminPermissions, User, TeamForm } from "./interface";
+import {  Tournament, BasicInformationTournament, SelectTeamsTournament, AdminPermissions, TeamForm } from "./interface";
 import { Observable } from "rxjs";
 import { FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
 import { TournamentType } from "./interface";
 import { url } from "src/enviroments/environment.local";
 import { TokenService } from "src/app/services/tokenService/token.service";
-import { minimumTeamsValidator } from "src/app/shared/validators";
 @Injectable({
   providedIn: "root"
 })
@@ -26,11 +25,11 @@ export class TournamentService {
 
   }
 
-  addTournament(tournament: Tournament): Observable<AddTournamentResponse> {
+  addTournament(tournament: Tournament): Observable<Tournament> {
 
     const headers = this.tokenService.createHeaders();
 
-    return this.http.post<AddTournamentResponse>(`${url}/tournaments/createTournament`,
+    return this.http.post<Tournament>(`${url}/${this.model}`,
       tournament, { headers }
     );
   }
@@ -53,9 +52,8 @@ export class TournamentService {
 
   createBasicInformationTournamentForm(): FormGroup<BasicInformationTournament> {
     return new FormGroup<BasicInformationTournament>({
-      id: new FormControl<string | undefined>("", {
-        nonNullable: true,
-        validators: [Validators.required],
+      id: new FormControl<string | undefined >(undefined,{
+       nonNullable: true
       }),
       name: new FormControl<string>("", {
         nonNullable: true,
@@ -81,8 +79,8 @@ export class TournamentService {
         nonNullable: false,
         validators: [Validators.maxLength(500)],
       }),
-      startDate: new FormControl<string | null>(null),
-      endDate: new FormControl<string | null>(null),
+      startDate: new FormControl<string | null>(null,[Validators.required]),
+      endDate: new FormControl<string | null>(null,[Validators.required]),
     });
   }
 
@@ -92,7 +90,7 @@ export class TournamentService {
       id: data.id,
       name: data.name,
       sport: data.sport,
-      tournamentType: data.tournamentType,
+      tournamentType: TournamentType.SingleElimination,
       description: data.description,
       location: data.location,
       rules: data.rules,
@@ -104,9 +102,7 @@ export class TournamentService {
 
   createSelectTeamsTournamentForm(): FormGroup<SelectTeamsTournament> {
     return new FormGroup<SelectTeamsTournament>({
-      teams: new FormArray<FormGroup<TeamForm>>([], { // Validators should be part of the FormArray options object
-        validators: [minimumTeamsValidator(2)],
-      }),
+      teams: new FormArray<FormGroup<TeamForm>>([]),
     });
   }
 

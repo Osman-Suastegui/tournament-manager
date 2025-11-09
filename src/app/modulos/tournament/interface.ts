@@ -81,7 +81,3 @@ export interface User {
 }
 
 
-export interface AddTournamentResponse{
-  message: string;
-  tournament: Tournament
-}

@@ -1,4 +1,4 @@
-import { AddTournamentResponse, AdminPermissions, BasicInformationTournament, SelectTeamsTournament, Team } from "./../interface";
+import { AdminPermissions, BasicInformationTournament, SelectTeamsTournament, Team } from "./../interface";
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Tournament, TournamentType } from "../interface";
@@ -25,7 +25,7 @@ export class CreateTournamentComponent implements OnInit {
   public adminPermissions: FormGroup<AdminPermissions> = this.tournamentServ.createAdminPermissionsForm()
 
   public isReadOnly: boolean = false;
-  public stepperOption: number = 4;
+  public stepperOption: number = 2;
   // PRIVATE
 
   constructor(
@@ -114,9 +114,8 @@ export class CreateTournamentComponent implements OnInit {
   addTournament(tournament:any): void {
     console.log("Adding tournament:", tournament);
     this.tournamentServ.addTournament(tournament).subscribe({
-      next: (response: AddTournamentResponse) => {
+      next: (response: Tournament) => {
         console.log("Response:", response);
-        const { tournament } = response;
         this.router.navigate(["/tournament", tournament.id]);
       },
       error: ({ error }) => {
