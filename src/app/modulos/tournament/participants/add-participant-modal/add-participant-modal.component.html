@@ -1,0 +1,31 @@
+<div class="add-participant-modal-container">
+  <div class="modal-header">
+    <h3>{{ isEditMode ? 'Edit Participant' : 'Add Participant' }}</h3>
+    <mat-icon class="close-icon" (click)="onCancel()">close</mat-icon>
+  </div>
+
+  <form [formGroup]="participantForm" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <label for="participant-name">Participant Name</label>
+      <input
+        id="participant-name"
+        type="text"
+        formControlName="name"
+        placeholder="Enter participant name"
+        class="form-input"
+      />
+      <div *ngIf="participantForm.controls.name.invalid && participantForm.controls.name.touched" class="error-message">
+        Participant name is required
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="cancel-btn" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="submit-btn" [disabled]="participantForm.invalid">
+        {{ isEditMode ? 'Update' : 'Add' }}
+      </button>
+    </div>
+  </form>
+</div>
+
+

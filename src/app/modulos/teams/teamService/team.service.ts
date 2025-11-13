@@ -32,6 +32,15 @@ export class TeamService {
     )
   }
 
+  // THIS ENDPOINT UPDATES A TEAM IN A TOURNAMENT
+  updateTeam(teamId: string, name: string, tournamentId: string): Observable<Team> {
+    return this.http.put<Team>(`${url}/teams/updateTeamInTournament`, {
+      teamId,
+      name,
+      tournamentId
+    })
+  }
+
   getTeams(name: string) {
 
   }

@@ -1,0 +1,37 @@
+<div class="participants-container">
+  <div class="table-container">
+    <table class="participants-table" *ngIf="participants.length > 0">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Participant Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let participant of participants; let i = index">
+          <td class="row-number">{{ i + 1 }}</td>
+          <td class="participant-name">{{ participant.name }}</td>
+          <td class="actions">
+            <span (click)="editParticipant(participant)" class="action-btn edit-btn" title="Edit">
+              <mat-icon>edit</mat-icon>
+            </span>
+            <span  (click)="removeParticipant(participant)" class="action-btn remove-btn" title="Remove">
+              <mat-icon>delete</mat-icon>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="empty-state" *ngIf="participants.length === 0">
+      <mat-icon class="empty-icon">people_outline</mat-icon>
+      <p>No participants yet</p>
+      <p class="empty-subtitle">Add participants to get started</p>
+    </div>
+  </div>
+
+  <button class="floating-add-btn" (click)="openAddParticipantModal()" mat-fab color="primary" title="Add Participant">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

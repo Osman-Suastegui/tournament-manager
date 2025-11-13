@@ -12,6 +12,7 @@ import { MatchesComponent } from "./matches/matches.component";
 import { OverviewTournamentComponent } from "./overview-tournament/overview-tournament.component";
 import { authGuard } from "src/app/guards/auth.guard";
 import { BracketsComponent } from "./brackets/brackets.component";
+import { ParticipantsComponent } from "./participants/participants.component";
 
 const routes: Routes = [
   { path: "", component: CreateTournamentComponent, canActivate:[authGuard]},
@@ -30,6 +31,7 @@ const routes: Routes = [
       { path: "matches", component: MatchesComponent },
       { path: "team/:teamId/:token", component: TeamPlayersComponent, canActivate: [AddPlayerTokenGuard] },
       { path: "team/:teamId", component: TeamPlayersComponent },
+      { path:"participants", component: ParticipantsComponent },
       { path: "invalid", component: ErrorMessageComponent },
       { path: "tree", component: SingleEliminationTreeComponent },
       { path: "", redirectTo: "overview", pathMatch: "full" }
