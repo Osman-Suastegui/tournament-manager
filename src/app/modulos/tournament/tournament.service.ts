@@ -133,8 +133,12 @@ export class TournamentService {
   }
 
   editTournament(tournament: any):Observable<Tournament> {
+    // const headers = this.tokenService.createHeaders();
     return this.http.put<Tournament>(`${url}/${this.model}/editTournament`, tournament)
   }
 
+  startTournament(tournamentId: string): Observable<Tournament> {
+    return this.http.post<Tournament>(`${url}/${this.model}/${tournamentId}/start`, {})
+  }
 
 }

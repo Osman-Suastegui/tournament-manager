@@ -23,6 +23,7 @@ import { OverviewTournamentComponent } from './overview-tournament/overview-tour
 import { AdminComponent } from './admin/admin.component';
 import { CreateTournamentBasicInformationModalComponent } from './create-tournament/create-tournament-basic-information/create-tournament-basic-information-modal/create-tournament-basic-information-modal.component';
 import { BracketsComponent } from './brackets/brackets.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { BracketsComponent } from './brackets/brackets.component';
     AdminComponent,
     CreateTournamentBasicInformationModalComponent,
     BracketsComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     CommonModule,

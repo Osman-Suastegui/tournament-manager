@@ -53,16 +53,42 @@ app-side-nav-contest-management {
   font-weight: bold;
 }
 
-.btn-edit-tournament{
-  display:flex;
-  align-items: center;
+.banner-actions {
   position: absolute;
   right: 10px;
   top: 10px;
-  background-color: #ffffff;
   z-index: 100;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-start-tournament {
+  display: flex;
+  align-items: center;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.btn-start-tournament:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-edit-tournament{
+  display:flex;
+  align-items: center;
+  background-color: #ffffff;
   padding: 8px;
   border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
 }
 
 .btn-edit-tournament:hover {

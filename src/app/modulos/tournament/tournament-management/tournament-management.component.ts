@@ -5,6 +5,8 @@ import { emptyTournament, Team, Tournament } from "../interface";
 import { MatDialog } from "@angular/material/dialog";
 import { TournamentService } from "../tournament.service";
 import { CreateTournamentBasicInformationModalComponent } from "../create-tournament/create-tournament-basic-information/create-tournament-basic-information-modal/create-tournament-basic-information-modal.component";
+import { ConfirmationDialogComponent } from "../confirmation-dialog/confirmation-dialog.component";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-tournament-management",
@@ -24,7 +26,11 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
   public tournamentStatus: 'Upcoming' | 'Ongoing' | "Completed" = 'Upcoming';
   // PRIVATE
 
-  constructor(private dialog:MatDialog,private tournamentServ:TournamentService){}
+  constructor(
+    private dialog: MatDialog,
+    private tournamentServ: TournamentService,
+    private snackBar: MatSnackBar
+  ) {}
   ngOnChanges(changes: SimpleChanges): void {
     if(changes["tournament"]){
       this.setTournamentStatus();
@@ -109,6 +115,43 @@ export class TournamentManagementComponent implements OnInit,OnChanges {
         ...this.tournamentServ.patchBasicInformationTournamentForm(this.tournament),
       }
     })
+  }
+
+  openStartTournamentDialog() {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '400px',
+      data: {
+        title: 'Start Tournament',
+        message: 'Are you sure you want to start this tournament?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.startTournament();
+      }
+    });
+  }
+
+  startTournament() {
+    this.tournamentServ.startTournament(this.tournament.id).subscribe({
+      next: (tournament) => {
+        this.tournament = tournament;
+        this.showSnackBar('Tournament started successfully!', 'Close');
+      },
+      error: (error) => {
+        const errorMessage = 'Error starting tournament. Please try again.';
+        this.showSnackBar(errorMessage, 'Close');
+      }
+    });
+  }
+
+  showSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+    });
   }
 
   onTabClick(arg0: string) {

@@ -4,10 +4,15 @@
       <span>&lt;</span> Back to Home
     </a>
 
-    <button (click)="openEditTournamentModal()" class="btn-edit-tournament">
-      <img src="assets/icons/edit.svg" alt="My Icon" width="16" height="16">
-      Edit Tournament
-    </button>
+    <div class="banner-actions">
+      <button (click)="openStartTournamentDialog()" class="btn-start-tournament" *ngIf="tournament.estado === 'INACTIVA'" >
+        Start Tournament
+      </button>
+      <button (click)="openEditTournamentModal()" class="btn-edit-tournament">
+        <img src="assets/icons/edit.svg" alt="My Icon" width="16" height="16">
+        Edit Tournament
+      </button>
+    </div>
 
     <div class="banner-content">
       <div class="banner-tags">
