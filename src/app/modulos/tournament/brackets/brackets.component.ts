@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { Team } from '../interface';
+import { Match } from '../../tree-diagrams/single-elimination-tree/test';
 
 export interface BracketMatch {
   id: string;
@@ -10,6 +11,7 @@ export interface BracketMatch {
   date: Date | string;
   status: 'Completed' | 'Live' | 'Scheduled' | 'Pending';
   round: number;
+  next: string | null;
 }
 
 @Component({
@@ -19,7 +21,7 @@ export interface BracketMatch {
 })
 export class BracketsComponent implements OnInit, OnChanges {
    matches: BracketMatch[] = [];
-
+  matchesTree: Match[] = [];
   rounds: { name: string; matches: BracketMatch[] }[] = [];
 
   ngOnInit(): void {
@@ -49,7 +51,8 @@ export class BracketsComponent implements OnInit, OnChanges {
         score2: 65,
         date: new Date('2023-08-10T14:00:00'),
         status: 'Completed',
-        round: 4
+        round: 3,
+        next: 'M5'
       },
       {
         id: 'M2',
@@ -59,7 +62,8 @@ export class BracketsComponent implements OnInit, OnChanges {
         score2: 54,
         date: new Date('2023-08-10T16:00:00'),
         status: 'Completed',
-        round: 4
+        round: 3,
+        next: 'M5'
       },
       {
         id: 'M3',
@@ -69,7 +73,8 @@ export class BracketsComponent implements OnInit, OnChanges {
         score2: 73,
         date: new Date('2023-08-11T14:00:00'),
         status: 'Completed',
-        round: 4
+        round: 3,
+        next: 'M6'
       },
       // Round 2 (round 3) - Completed matches
       {
@@ -80,7 +85,8 @@ export class BracketsComponent implements OnInit, OnChanges {
         score2: 68,
         date: new Date('2023-08-13T15:00:00'),
         status: 'Completed',
-        round: 3
+        round: 3,
+        next: 'M6'
       },
       {
         id: 'M5',
@@ -90,7 +96,8 @@ export class BracketsComponent implements OnInit, OnChanges {
         score2: 65,
         date: new Date('2023-08-13T18:00:00'),
         status: 'Completed',
-        round: 3
+        round: 2,
+        next: 'M7'
       },
       // Round 3 (round 2) - Live and Scheduled matches
       {
@@ -101,7 +108,8 @@ export class BracketsComponent implements OnInit, OnChanges {
         score2: 82,
         date: new Date('2023-08-15T19:00:00'),
         status: 'Live',
-        round: 2
+        round: 2,
+        next: 'M7'
       },
       {
         id: 'M7',
@@ -111,18 +119,28 @@ export class BracketsComponent implements OnInit, OnChanges {
         score2: 0,
         date: new Date('2023-08-16T15:00:00'),
         status: 'Scheduled',
-        round: 2
+        round: 1,
+        next: null
       },
-      // Final (round 1) - Pending match
-      {
-        id: 'M8',
-        team1: null,
-        team2: null,
-        date: new Date('2023-08-17T19:00:00'),
-        status: 'Pending',
-        round: 1
-      }
+      // // Final (round 1) - Pending match
+      // {
+      //   id: 'M8',
+      //   team1: {id: "M9"} as Team,
+      //   team2: {id: "M10"} as Team,
+      //   date: new Date('2023-08-17T19:00:00'),
+      //   status: 'Pending',
+      //   round: 4
+      // }
     ];
+    this.matchesTree = this.matches.map(match => ({
+      id: match.id,
+      team1: match.team1 as Team,
+      team2: match.team2 as Team,
+      winner: undefined as Team | undefined,
+      round: match.round,
+      next: match.id === 'M7' ? null : match.next
+    }));
+    console.table(this.matchesTree);
   }
 
   ngOnChanges(): void {

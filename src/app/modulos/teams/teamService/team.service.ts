@@ -17,13 +17,13 @@ export class TeamService {
 
   public newTeam$ = this.newTeamSubject.asObservable();
   public newPlayer$ = this.newPlayer.asObservable();
-
+  private MODEL:string = 'participants';
   constructor(private http: HttpClient) { }
 
 
   // THIS ENDPOINT ADD A TEAM IN A TOURNAMENT
   addTeam(team: Omit<Team, 'id'>, tournamentId: string, createdById: string): Observable<Team> {
-    return this.http.post<Team>(`${url}/teams/createTeamInTournament`, {
+    return this.http.post<Team>(`${url}/participants`, {
       name: team.name,
       tournamentId,
       createdById
@@ -34,13 +34,19 @@ export class TeamService {
 
   // THIS ENDPOINT UPDATES A TEAM IN A TOURNAMENT
   updateTeam(teamId: string, name: string, tournamentId: string): Observable<Team> {
-    return this.http.put<Team>(`${url}/teams/updateTeamInTournament`, {
+    return this.http.patch<{
+      id: string;
+      name: string;
+    }>(`${url}/participants/updateTeamInTournament`, {
       teamId,
       name,
       tournamentId
     })
   }
 
+  deleteParticipant(participantId: string, tournamentId: string): Observable<void> {
+    return this.http.delete<void>(`${url}/${this.MODEL}/${participantId}/${tournamentId}`)
+  }
   getTeams(name: string) {
 
   }

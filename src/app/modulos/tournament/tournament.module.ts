@@ -57,7 +57,8 @@ import { ParticipantsComponent } from './participants/participants.component';
     TreeDiagramsModule,
     ButtonComponent,
     InputComponent,
-    TagsComponent
+    TagsComponent,
+    TreeDiagramsModule,
 ],
   exports:[
     CreateTournamentComponent

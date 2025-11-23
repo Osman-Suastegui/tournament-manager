@@ -1,3 +1,4 @@
+import { TeamsModule } from './../../teams/teams.module';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -102,7 +103,13 @@ export class ParticipantsComponent implements OnInit {
     const userId = this.authService.getUserId();
     this.teamService.addTeam({ name }, this.tournament.id, userId).subscribe({
       next: (newTeam: Team) => {
-        this.participants.push(newTeam);
+        // Map the response to Team format (id might be string or number)
+        const participant: Team = {
+          id: String(newTeam.id),
+          name: newTeam.name,
+          leaderEmail: newTeam.leaderEmail
+        };
+        this.participants.push(participant);
         this.showSnackBar('Participant added successfully!', 'Close');
       },
       error: (error) => {
@@ -114,7 +121,7 @@ export class ParticipantsComponent implements OnInit {
 
   updateParticipant(teamId: string, name: string): void {
     this.teamService.updateTeam(teamId, name, this.tournament.id).subscribe({
-      next: (updatedTeam: Team) => {
+      next: (updatedTeam: { id: string; name: string }) => {
         const index = this.participants.findIndex(p => p.id === teamId);
         if (index !== -1) {
           this.participants[index] = updatedTeam;
@@ -129,7 +136,7 @@ export class ParticipantsComponent implements OnInit {
   }
 
   deleteParticipant(teamId: string): void {
-    this.temporadasService.deleteTeamInTournament(this.tournament.id, teamId).subscribe({
+    this.teamService.deleteParticipant(teamId, this.tournament.id).subscribe({
       next: () => {
         this.participants = this.participants.filter(p => p.id !== teamId);
         this.showSnackBar('Participant removed successfully!', 'Close');
